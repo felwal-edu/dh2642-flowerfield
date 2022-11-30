@@ -1,4 +1,5 @@
-# dh2642-flowerfield
+# Flowerfield
+
 Kursmomentet PRO1 i kursen DH2642 Interaktionsprogrammering och dynamiska webben
 
 ## Project setup

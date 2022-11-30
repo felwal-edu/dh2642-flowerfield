@@ -1,0 +1,16 @@
+{
+    "editor.formatOnSave": true,
+    "editor.tabSize": 4,
+    "editor.trimAutoWhitespace": true,
+
+    "files.trimTrailingWhitespace": true,
+    "files.insertFinalNewline": true,
+
+    "prettier.arrowParens": "avoid",
+    "prettier.bracketSameLine": true,
+    "prettier.trailingComma": "none",
+    "prettier.vueIndentScriptAndStyle": true,
+    "prettier.jsxSingleQuote": false,
+    "prettier.singleQuote": false,
+    "prettier.useTabs": false,
+}

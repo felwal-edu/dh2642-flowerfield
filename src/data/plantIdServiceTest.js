@@ -9,9 +9,6 @@ function notifyACB() {
   console.log(promiseState)
 }
 
-console.log("hej")
-console.log("temp: " + getPlantByImage + exampleBase64Image + exampleResponse + resolvePromise);
-
 // mock api calls to not waste quota
 //resolvePromise(getPlantByImage(exampleBase64Image), promiseState, notifyACB);
 resolvePromiseMock(exampleResponse, promiseState, notifyACB);

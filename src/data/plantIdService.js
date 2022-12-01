@@ -3,7 +3,6 @@ import { PLANTID_KEY } from "./plantIdSecrets";
 const BASE_URL = "https://api.plant.id/v2/identify";
 
 export function getPlantByImage(base64ImageStr) {
-
   return callAPI({
     api_key: PLANTID_KEY,
     images: [base64ImageStr]

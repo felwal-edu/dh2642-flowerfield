@@ -6,6 +6,8 @@
 <script>
 import HelloWorld from "./components/HelloWorld.vue"
 
+import "./data/plantIdServiceTest"
+
 export default {
   name: "App",
   components: {

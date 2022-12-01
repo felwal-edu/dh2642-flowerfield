@@ -1,6 +1,87 @@
 import { treatHTTPResponseACB } from "./plantIdService";
 
-export const exampleResponse = {id: 67146766, custom_id: null, meta_data: {latitude: null, longitude: null, date: '2022-11-30', datetime: '2022-11-30'}, uploaded_datetime: 1669806264.045608, finished_datetime: 1669806264.408709, images: [{file_name: '2bb55d367a9d45a4a1b9d27832848283.jpg', url: 'https://plant.id/media/images/2bb55d367a9d45a4a1b9d27832848283.jpg'}], suggestions: [{id: 381142728, plant_name: 'Rubus idaeus', plant_details: {language: 'en', scientific_name: 'Rubus idaeus', structured_name: {genus: 'rubus', species: 'idaeus'}}, probability: 0.6790917379235648, confirmed: false}, {id: 381142729, plant_name: 'Rubus occidentalis', plant_details: {language: 'en', scientific_name: 'Rubus occidentalis', structured_name: {genus: 'rubus', species: 'occidentalis'}}, probability: 0.14911929028901205, confirmed: false}, {id: 381142730, plant_name: 'Rubus', plant_details: {language: 'en', scientific_name: 'Rubus', structured_name: {genus: 'rubus'}}, probability: 0.05850814133263308, confirmed: false}, {id: 381142731, plant_name: 'Rubus fruticosus', plant_details: {language: 'en', scientific_name: 'Rubus fruticosus', structured_name: {genus: 'rubus', species: 'fruticosus'}}, probability: 0.015522421232925378, confirmed: false}], modifiers: [], secret: 'IamUEU0kGtV1AV7', fail_cause: null, countable: true, feedback: null, is_plant_probability: 0.9948156954, is_plant: true}
+export const exampleResponse = {
+  "id": 67187515,
+  "custom_id": null,
+  "meta_data": {
+    "latitude": null,
+    "longitude": null,
+    "date": "2022-12-01",
+    "datetime": "2022-12-01"
+  },
+  "uploaded_datetime": 1669902031.132756,
+  "finished_datetime": 1669902031.418068,
+  "images": [
+    {
+      "file_name": "e45f2ea386694230b908a191a6fbdfd0.jpg",
+      "url": "https://plant.id/media/images/e45f2ea386694230b908a191a6fbdfd0.jpg"
+    }
+  ],
+  "suggestions": [
+    {
+      "id": 381333016,
+      "plant_name": "Rubus idaeus",
+      "plant_details": {
+        "language": "en",
+        "scientific_name": "Rubus idaeus",
+        "structured_name": {
+          "genus": "rubus",
+          "species": "idaeus"
+        }
+      },
+      "probability": 0.6790916769666091,
+      "confirmed": false
+    },
+    {
+      "id": 381333017,
+      "plant_name": "Rubus occidentalis",
+      "plant_details": {
+        "language": "en",
+        "scientific_name": "Rubus occidentalis",
+        "structured_name": {
+          "genus": "rubus",
+          "species": "occidentalis"
+        }
+      },
+      "probability": 0.1491193592838876,
+      "confirmed": false
+    },
+    {
+      "id": 381333018,
+      "plant_name": "Rubus",
+      "plant_details": {
+        "language": "en",
+        "scientific_name": "Rubus",
+        "structured_name": {
+          "genus": "rubus"
+        }
+      },
+      "probability": 0.058508126559194885,
+      "confirmed": false
+    },
+    {
+      "id": 381333019,
+      "plant_name": "Rubus fruticosus",
+      "plant_details": {
+        "language": "en",
+        "scientific_name": "Rubus fruticosus",
+        "structured_name": {
+          "genus": "rubus",
+          "species": "fruticosus"
+        }
+      },
+      "probability": 0.015522426598245482,
+      "confirmed": false
+    }
+  ],
+  "modifiers": [],
+  "secret": "POPqesFLsC44r6R",
+  "fail_cause": null,
+  "countable": true,
+  "feedback": null,
+  "is_plant_probability": 0.9948156954,
+  "is_plant": true
+}
 
 export function getPlantByImageMock(_) {
   console.log("temp: " + _)

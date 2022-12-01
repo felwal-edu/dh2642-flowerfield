@@ -1,5 +1,3 @@
-import { treatHTTPResponseACB } from "./plantIdService";
-
 export const exampleResponse = {
   "id": 67187515,
   "custom_id": null,
@@ -81,16 +79,6 @@ export const exampleResponse = {
   "feedback": null,
   "is_plant_probability": 0.9948156954,
   "is_plant": true
-}
-
-export function getPlantByImageMock(_) {
-  console.log("temp: " + _)
-
-  // TODO: SyntaxError: JSON.parse: unexpected character at line 1 column 2 of the JSON data
-
-  const response = new Response(exampleResponse);
-  const promise = Promise.resolve(response);
-  return promise.then(treatHTTPResponseACB);
 }
 
 export const exampleBase64Image = (

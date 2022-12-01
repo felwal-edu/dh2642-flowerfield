@@ -1,15 +1,17 @@
 import { getPlantByImage } from "./plantIdService.js"
-import { exampleBase64Image, getPlantByImageMock } from "./plantIdServiceMock.js"
-import resolvePromise from "./resolvePromise.js"
+import { exampleBase64Image, exampleResponse } from "./plantIdServiceMock.js"
+import resolvePromise, { resolvePromiseMock } from "./resolvePromise.js"
 
 const promiseState = {}
 
-function notify() {
-  console.log("promise state: ")
+function notifyACB() {
+  console.log("promise state:")
   console.log(promiseState)
 }
 
 console.log("hej")
-console.log("temp: " + getPlantByImage + getPlantByImageMock);
+console.log("temp: " + getPlantByImage + exampleBase64Image + exampleResponse + resolvePromise);
 
-resolvePromise(getPlantByImageMock(exampleBase64Image), promiseState, notify);
+// mock api calls to not waste quota
+//resolvePromise(getPlantByImage(exampleBase64Image), promiseState, notifyACB);
+resolvePromiseMock(exampleResponse, promiseState, notifyACB);

@@ -28,3 +28,11 @@ export default function resolvePromise(promise, promiseState, notifyACB) {
 
   promise.then(saveDataACB).catch(saveErrorACB);
 }
+
+export function resolvePromiseMock(response, promiseState, notifyACB) {
+  promiseState.promise = null;
+  promiseState.data = response;
+  promiseState.error = null;
+
+  if (notifyACB) notifyACB();
+}

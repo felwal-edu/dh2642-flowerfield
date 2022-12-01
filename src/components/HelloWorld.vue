@@ -1,3 +1,4 @@
+
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
@@ -27,7 +28,22 @@
       <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
       <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
     </ul>
+
+    <div class="upload-page">
+      <div class="upload-container">
+        <h3>Upload your File</h3>
+        <div class="drag-area">
+          <div class="icon">
+            <i class="fas"></i>
+          </div>
+          <span class="header">Drag & Drop</span>
+          <span class="tip-support">PNG, JPG, JPEG</span>
+        </div>
+      </div>
+    </div>
+
   </div>
+
 </template>
 
 <script>
@@ -37,6 +53,8 @@ export default {
     msg: String
   }
 }
+
+import "../data/uploadTemp.js"
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -54,5 +72,49 @@ li {
 }
 a {
   color: #42b983;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+.upload-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background: #e0eafc;
+}
+.upload-container {
+  max-width: 650px;
+  width: 100%;
+  padding: 30px;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+.drag-area {
+  height: 400px;
+  border: 3px dashed #e0eafc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin: 10px auto;
+}
+.upload-container h3 {
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+.drag-area .header {
+  font-size: 20px;
+  font-weight: 500;
+  color: #34495e;
+}
+.drag-area .tip-support{
+  font-size: 12px;
+  color: gray;
+  margin: 10px 0 15px 0;
 }
 </style>

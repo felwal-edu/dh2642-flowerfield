@@ -1,22 +1,22 @@
 import { PLANTID_KEY } from "./plantIdSecrets";
 
-const BASE_URL = "https://plant.id/api/v2/identify";
+const BASE_URL = "https://api.plant.id/v2/identify";
 
 export function getPlantByImage(base64ImageStr) {
-  // TODO:
-  // Firefox: Cross-Origin Request Blocked: The Same Origin Policy disallows reading the remote resource
-  // Edge: Failed to load resource: net::ERR_CONNECTION_CLOSED
 
-  return callAPI("?" + new URLSearchParams({images: [base64ImageStr]}));
+  return callAPI({
+    api_key: PLANTID_KEY,
+    images: [base64ImageStr]
+  });
 }
 
-function callAPI(params) {
-  return fetch(BASE_URL + params, {
-    "method": "POST",
-    "headers": {
-      "Content-Type": "application/json",
-      "Api-Key": PLANTID_KEY,
-    }
+function callAPI(data) {
+  return fetch(BASE_URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(data),
   }).then(treatHTTPResponseACB);
 }
 

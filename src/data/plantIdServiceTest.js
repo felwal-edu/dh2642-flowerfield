@@ -12,4 +12,4 @@ function notify() {
 console.log("hej")
 console.log("temp: " + getPlantByImage + getPlantByImageMock);
 
-resolvePromise(getPlantByImage(exampleBase64Image), promiseState, notify);
+resolvePromise(getPlantByImageMock(exampleBase64Image), promiseState, notify);

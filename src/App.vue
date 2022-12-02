@@ -1,18 +1,13 @@
 <template>
-  <v-app>
-    <v-main>
-      <router-view/>
-    </v-main>
-  </v-app>
+  <div>
+    <router-link to="/">Home</router-link>
+    <router-link to="/about">About</router-link>
+  </div>
+  <div>
+    <router-view></router-view>
+  </div>
 </template>
 
 <script>
 
-export default {
-  name: 'App',
-
-  data: () => ({
-    //
-  }),
-}
 </script>

@@ -10,3 +10,10 @@ export const useFlowerStore = defineStore( id: "FlowerStore", options: {
     }
 })
 */
+
+export const userCounterStore = defineStore({
+    id: "counter",
+    state: () =>({
+        count: 0
+    })
+})

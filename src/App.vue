@@ -7,7 +7,13 @@
 import HelloWorld from "./components/HelloWorld.vue"
 
 import "./data/network/plantIdServiceTest"
+import { examplePlant } from "./data/network/plantIdServiceMock"
 import "./data/persistence/firebaseModel"
+import FlowerModel from "./data/FlowerModel"
+
+const model = new FlowerModel()
+model.addPlant(examplePlant)
+console.log(model)
 
 export default {
   name: "App",

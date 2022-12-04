@@ -1,3 +1,12 @@
+export const examplePlant = {
+  "id": 381333016,
+  "scientificName": "Rubus idaeus",
+  "genus": "rubus",
+  "species": "idaeus",
+  "date": "2022-12-01",
+  "url": "https://plant.id/media/images/e45f2ea386694230b908a191a6fbdfd0.jpg",
+}
+
 export const exampleResponse = {
   "id": 67187515,
   "custom_id": null,

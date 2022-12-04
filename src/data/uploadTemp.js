@@ -3,7 +3,7 @@ function delay(time) {
 }
 
 delay(1000).then(() => {
-    console.log('ran after 1 second1 passed');
+    console.log('ran after 1 second passed');
     let file;
     let fileURL;
 
@@ -11,8 +11,8 @@ delay(1000).then(() => {
     const dragHeader = document.querySelector('.header');
 
     let browseButton = document.querySelector('.browse-button');
-    let uploadButton = document.querySelectorAll('.btn.upload');    // querySelectorAll for 2-classes (must have both)
-    let cancleButton = document.querySelectorAll('.btn.cancle');
+    let uploadButton = document.querySelectorAll('.btn.upload').item(0);    // querySelectorAll for 2-classes (must have both)
+    let cancleButton = document.querySelectorAll('.btn.cancle').item(0);
     let input = document.querySelector('input');
 
     // link click from browse button to input file browser
@@ -23,6 +23,10 @@ delay(1000).then(() => {
     uploadButton.onclick = () => {
         uploadImageToAPI();
     };
+
+    cancleButton.onclick = () => {
+
+    }
 
     input.addEventListener('change', function () {
         file = this.files[0];
@@ -46,7 +50,7 @@ delay(1000).then(() => {
 
     dragArea.addEventListener('drop', (event) => {
         event.preventDefault();
-        console.log("File is dropped in drag area");
+        //console.log("File is dropped in drag area");
 
         file = event.dataTransfer.files[0];
         loadAndDisplayFile();
@@ -63,11 +67,13 @@ delay(1000).then(() => {
             let fileReader = new FileReader();
 
             fileReader.onload = () => {
-                let fileURL = fileReader.result;
+                fileURL = fileReader.result;
                 let imgTag = `<img src="${fileURL}" alt="">`;
+                // TODO: find better solution than just replacing..
+                // append and hide?
                 dragArea.innerHTML = imgTag;
             };
-            fileURL = fileReader.readAsDataURL(file);
+            fileReader.readAsDataURL(file);
 
             // reveal buttons
             uploadButton.hidden = false;
@@ -83,11 +89,14 @@ delay(1000).then(() => {
         }
     }
 
-    function displayScanButton() {
-
-    }
-
     function uploadImageToAPI() {
         console.log("uploading to API...");
+        let base64 = fileURL.replace('data:', '').replace(/^.+,/, '');
+
+        console.log(base64);
+    }
+
+    function abortUpload() {
+
     }
 });

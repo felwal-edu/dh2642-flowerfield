@@ -55,48 +55,48 @@ delay(1000).then(() => {
         file = event.dataTransfer.files[0];
         loadAndDisplayFile();
     });
-
-    function loadAndDisplayFile() {
-        // TODO: remove metadata?
-        let fileType = file.type;
-
-        let validExtensions = ["image/png", "image/jpg", "image/jpeg"];
-
-        // TODO: expand error to more then alert?
-        if (validExtensions.includes(fileType)) {
-            let fileReader = new FileReader();
-
-            fileReader.onload = () => {
-                fileURL = fileReader.result;
-                let imgTag = `<img src="${fileURL}" alt="">`;
-                // TODO: find better solution than just replacing..
-                // append and hide?
-                dragArea.innerHTML = imgTag;
-            };
-            fileReader.readAsDataURL(file);
-
-            // reveal buttons
-            uploadButton.hidden = false;
-            cancleButton.hidden = false;
-        }
-        else {
-            alert('File format is not supported.');
-
-            // reset HTML elements
-            dragArea.classList.remove("active");
-            uploadButton.hidden = true;
-            cancleButton.hidden = true;
-        }
-    }
-
-    function uploadImageToAPI() {
-        console.log("uploading to API...");
-        let base64 = fileURL.replace('data:', '').replace(/^.+,/, '');
-
-        console.log(base64);
-    }
-
-    function abortUpload() {
-
-    }
 });
+
+function loadAndDisplayFile() {
+    // TODO: remove metadata?
+    let fileType = file.type;
+
+    let validExtensions = ["image/png", "image/jpg", "image/jpeg"];
+
+    // TODO: expand error to more then alert?
+    if (validExtensions.includes(fileType)) {
+        let fileReader = new FileReader();
+
+        fileReader.onload = () => {
+            fileURL = fileReader.result;
+            let imgTag = `<img src="${fileURL}" alt="">`;
+            // TODO: find better solution than just replacing..
+            // append and hide?
+            dragArea.innerHTML = imgTag;
+        };
+        fileReader.readAsDataURL(file);
+
+        // reveal buttons
+        uploadButton.hidden = false;
+        cancleButton.hidden = false;
+    }
+    else {
+        alert('File format is not supported.');
+
+        // reset HTML elements
+        dragArea.classList.remove("active");
+        uploadButton.hidden = true;
+        cancleButton.hidden = true;
+    }
+}
+
+function uploadImageToAPI() {
+    console.log("uploading to API...");
+    let base64 = fileURL.replace('data:', '').replace(/^.+,/, '');
+
+    console.log(base64);
+}
+
+function abortUpload() {
+
+}

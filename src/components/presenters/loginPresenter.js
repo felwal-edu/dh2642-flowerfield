@@ -1,7 +1,7 @@
 import resolvePromise from "../network/resolvePromise";
 import LoginView from "../views/loginView";
 import { observeAuthState, signInUser, signOutUser, signUpUser } from "./firebaseAuth";
-import { createUser } from "./firebaseModel";
+import { updateUserData } from "./firebaseModel";
 
 const LoginPresenter = {
   props: ["model"],
@@ -19,8 +19,8 @@ const LoginPresenter = {
 
       this.currentUser = user;
 
-      // TODO: create firebase entry if first time
-      createUser(user);
+      // TODO: only if first time?
+      updateUserData(user);
 
       // TODO: load data firebase -> model
     }
@@ -28,9 +28,10 @@ const LoginPresenter = {
     function signedOutACB() {
       this.currentUser = null;
 
-      // TODO: empty model
+      // TODO: empty model? unsubscribe from firebases changes?
     }
 
+    // this observes any changes to "signed in / signed out" state
     observeAuthState(signedInACB, signedOutACB);
   },
 

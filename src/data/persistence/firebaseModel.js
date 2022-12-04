@@ -1,7 +1,6 @@
 import firebaseConfig from "./firebaseSecrets";
 import { initializeApp } from "firebase/app";
-import { getDatabase, ref, set } from "firebase/database";
-import { examplePlant } from "../network/plantIdServiceMock";
+import { getDatabase, ref, set, onValue, onChildAdded, onChildRemoved } from "firebase/database";
 
 // init
 
@@ -12,23 +11,23 @@ const db = getDatabase();
 
 const REF = "flowerModel";
 
-// (temp) check that the database is correctly initialized
-set(ref(db, REF + "/test"), "dummy");
-set(ref(db, REF + "/users/0"), "test");
-
 //
 
-export function createUser(user) {
-  // TODO: temp
+export function updateUserData(user) {
+  // TODO: temp?
   set(ref(db, REF + "/users/" + user.uid + "/email"), user.email);
-  set(ref(db, REF + "/users/" + user.uid + "/plants"), [examplePlant]);
 }
 
-export function updateFirebaseFromModel(model) {
+export function updateFirebaseFromModel(model, uid) {
   function observeACB(payload) {
     if (!payload) return;
 
-    // TODO
+    if (payload.addPlant) {
+      set(ref(db, REF + "/users/" + uid + "/plants/" + payload.addPlant.id), payload.addPlant);
+    }
+    else if (payload.removePlantId) {
+      set(ref(db, REF + "/users/" + uid + "/plants/" + payload.removePlantId), null);
+    }
   }
 
   model.addObserver(observeACB);
@@ -36,10 +35,17 @@ export function updateFirebaseFromModel(model) {
   return;
 }
 
-export function updateModelFromFirebase(model) {
-  // TODO
+export function updateModelFromFirebase(model, uid) {
+  function plantAddedInFirebase(data) {
+    model.addPlant(data.val());
+  }
 
-  //firebase.database().ref(REF + "/TODO").on("child_removed", TODO);
+  function plantRemovedInFirebase(data) {
+    model.removePlant(+data.key);
+  }
+
+  onChildAdded(ref(db, REF + "/users/" + uid + "/plants"), plantAddedInFirebase);
+  onChildRemoved(ref(db, REF + "/users/" + uid + "/plants"), plantRemovedInFirebase);
 
   return;
 }

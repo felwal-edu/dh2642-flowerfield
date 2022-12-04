@@ -9,10 +9,13 @@ import HelloWorld from "./components/HelloWorld.vue"
 import "./data/network/plantIdServiceTest"
 import { examplePlant } from "./data/network/plantIdServiceMock"
 import "./data/persistence/firebaseModel"
+import { updateFirebaseFromModel, updateModelFromFirebase } from "./data/persistence/firebaseModel"
 import FlowerModel from "./data/FlowerModel"
 
 const model = new FlowerModel()
-model.addPlant(examplePlant)
+updateFirebaseFromModel(model, 0)
+updateModelFromFirebase(model, 0)
+//model.addPlant(examplePlant)
 console.log(model)
 
 export default {

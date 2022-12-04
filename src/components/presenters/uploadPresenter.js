@@ -1,6 +1,6 @@
 import resolvePromise from "../network/resolvePromise";
 import UploadView from "../views/uploadView";
-import "../data/uploadTemp.js";
+import {loadAndDisplayFile, uploadImageToAPI} from "../data/uploadTemp.js";
 import "../../css/upload.css";
 
 const UploadPresenter = {
@@ -15,59 +15,99 @@ const UploadPresenter = {
     },
 
     created () {
+        this.dragArea = document.querySelector(".drag-area");
+        this.input = document.querySelector('input');
+
         function dragoverListenerACB(event) {
             event.preventDefault();
             //dragHeader.textContent = 'Release to Upload'
-            //dragArea.classList.add('active');
+            this.dragArea.classList.add('active');
         }
 
         function dragleaveListenerACB() {
             //event.preventDefault();
             //dragHeader.textContent = 'Drag & Drop';
-            //dragArea.classList.remove('active');
+            this.dragArea.classList.remove('active');
         }
 
         function dropListenerACB(event) {
             event.preventDefault();
 
             this.file = event.dataTransfer.files[0];
-            //loadAndDisplayFile();
+            commitFile();   // commit selected file
         }
 
-        function changeListenerACB() {
+        function inputChangeListenerACB() {
             this.file = this.files[0];
             // add so the border is 'active'
-            //dragArea.classList.add("active");
-            //loadAndDisplayFile();
+            this.dragArea.classList.add("active");
+            commitFile();   // commit selected file
+        }
+
+        // TODO: add to methods?
+        function commitFile(){
+            // check result from loadFile
+            let result = loadAndDisplayFile(this.file);
+
+            let success = result[0];
+            this.FILE_URL = result[1];
+
+            if (success == true) {
+                // reveal buttons
+                uploadButton.hidden = false;
+                cancleButton.hidden = false;
+            }
+            else {
+                // reset HTML elements
+                this.dragArea.classList.remove("active");
+                uploadButton.hidden = true;
+                cancleButton.hidden = true;
+            }
         }
 
         // create listeners
         this.dragoverListener = dragoverListenerACB.bind(this);
         this.dragleaveListener = dragleaveListenerACB.bind(this);
         this.dropListener = dropListenerACB.bind(this);
-        this.inputChangeListener = changeListenerACB.bind(this);
+        this.inputChangeListener = inputChangeListenerACB.bind(this);
 
         // TODO: maybe works...
-        this.$el.querySelector(".drag-area").addEventListener("dragover", this.dragoverListener);
+        //this.$el.querySelector(".drag-area").addEventListener("dragover", this.dragoverListener);
 
         // add events TODO: change from window to the objects...
-        window.addEventListener("dragover", this.dragoverListener);
-        window.addEventListener("dragleave", this.dragleaveListenerACB);
-        window.addEventListener("drop", this.dropListener);
-        window.addEventListener("change", this.inputChangeListener);
+        this.dragArea.addEventListener("dragover", this.dragoverListener);
+        this.dragArea.addEventListener("dragleave", this.dragleaveListenerACB);
+        this.dragArea.addEventListener("drop", this.dropListener);
+        this.input.addEventListener("change", this.inputChangeListener);
     },
 
     unmounted() {
         // remove event at teardown
-        window.removeEventListener("dragover", this.dragoverListener);
-        window.removeEventListener("dragleave", this.dragleaveListenerACB);
-        window.removeEventListener("drop", this.dropListener);
-        window.removeEventListener("change", this.inputChangeListener);
+        this.dragArea.removeEventListener("dragover", this.dragoverListener);
+        this.dragArea.removeEventListener("dragleave", this.dragleaveListenerACB);
+        this.dragArea.removeEventListener("drop", this.dropListener);
+        this.input.removeEventListener("change", this.inputChangeListener);
     },
 
     render() {
+        function onAbortUpload() {
+            // reset data
+            this.file = null;
+            this.FILE_URL = "";
+            this.dragArea.classList.remove("active");
+            uploadButton.hidden = true;
+            cancleButton.hidden = true;
+
+            abortUpload();
+        }
+
+        function browseSpanClickACB() {
+            this.input.click();
+        }
+
         return (
-        <UploadView />
+            <UploadView onUploadImageToAPI={uploadImageToAPI(this.FILE_URL).bind(this)} onAbortUpload={onAbortUpload}
+                onBrowseSpanClick={browseSpanClickACB}/>
         );
     }
 }

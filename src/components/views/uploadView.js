@@ -1,7 +1,7 @@
 function UploadView(props) {
 
-    function browseSpanClickACB(evt) {
-        //props.onDishChoice(dishResult);
+    function browseSpanClickACB() {
+        props.onBrowseSpanClick();
     }
 
     function uploadButtonClickACB() {

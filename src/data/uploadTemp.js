@@ -7,7 +7,6 @@ delay(1000).then(() => {
     let file;
     let fileURL;
 
-    const dragArea = document.querySelector('.drag-area');
     const dragHeader = document.querySelector('.header');
 
     let browseButton = document.querySelector('.browse-button');
@@ -27,37 +26,16 @@ delay(1000).then(() => {
     cancleButton.onclick = () => {
 
     }
-
-    input.addEventListener('change', function () {
-        file = this.files[0];
-        // add so the border is 'active'
-        dragArea.classList.add("active");
-        loadAndDisplayFile();
-    });
-
-    dragArea.addEventListener('dragover', (event) => {
-        event.preventDefault();
-        dragHeader.textContent = 'Release to Upload'
-        dragArea.classList.add('active');
-        //console.log("File is in drag area");
-    });
-
-    dragArea.addEventListener('dragleave', () => {
-        //console.log("File left drag area");
-        dragHeader.textContent = 'Drag & Drop';
-        dragArea.classList.remove('active');
-    });
-
-    dragArea.addEventListener('drop', (event) => {
-        event.preventDefault();
-        //console.log("File is dropped in drag area");
-
-        file = event.dataTransfer.files[0];
-        loadAndDisplayFile();
-    });
 });
 
-function loadAndDisplayFile() {
+export function loadAndDisplayFile(file) {
+    let fileURL;
+
+    if (file == null) {
+        alert('No file selected.');
+        return [false, ""]
+    }
+
     // TODO: remove metadata?
     let fileType = file.type;
 
@@ -72,31 +50,29 @@ function loadAndDisplayFile() {
             let imgTag = `<img src="${fileURL}" alt="">`;
             // TODO: find better solution than just replacing..
             // append and hide?
-            dragArea.innerHTML = imgTag;
+            //dragArea.innerHTML = imgTag;
         };
         fileReader.readAsDataURL(file);
 
-        // reveal buttons
-        uploadButton.hidden = false;
-        cancleButton.hidden = false;
+        return [true, fileURL]
     }
     else {
         alert('File format is not supported.');
 
-        // reset HTML elements
-        dragArea.classList.remove("active");
-        uploadButton.hidden = true;
-        cancleButton.hidden = true;
+        return [false, ""]
     }
 }
 
-function uploadImageToAPI() {
+export function uploadImageToAPI(fileURL) {
     console.log("uploading to API...");
     let base64 = fileURL.replace('data:', '').replace(/^.+,/, '');
 
     console.log(base64);
+    //return base64;
 }
 
-function abortUpload() {
+export function abortUpload() {
 
 }
+
+//export {loadAndDisplayFile, uploadImageToAPI, abortUpload}

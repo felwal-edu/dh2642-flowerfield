@@ -7,6 +7,7 @@
 import HelloWorld from "./components/HelloWorld.vue"
 
 import "./data/network/plantIdServiceTest"
+import "./data/persistence/firebaseModel"
 
 export default {
   name: "App",

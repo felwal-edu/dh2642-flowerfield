@@ -1,4 +1,3 @@
-import "../../plugins/vuetify";
 import "../../main.css";
 
 export default

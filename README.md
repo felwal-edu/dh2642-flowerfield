@@ -7,7 +7,7 @@
 
 ## Project description
 
-##### Flowerfield is an application where the user is able to collect <em>flowers</em> by taking pictures of them.
+### Flowerfield is an application where the user is able to collect <em>flowers</em> by taking pictures of them.
 
 When a picture is taken, it can then be uploaded to the app, where the picture is processed and identified by an external image-identification API - [plant.id ](https://web.plant.id/plant-identification-api/).
 If the picture is successfully identified, it will add the flower to the user's collection.
@@ -16,15 +16,20 @@ Xp is gained for collecting flowers as well as completing entire sets, leveling 
 
 The app targets towards users intressted in botany, outside exploration or general gardenkeeping - encouraging slowing down, and appreciating one's own surroundings.
 
-## What you have done
+## What we have done
 
 TODO
 
-## What you still plan to do
+## What we still plan to do
 
 TODO
 
-## Your project file structure (short description/purpose of each file)
+## Project file structure (short description/purpose of each file)
+
+### Framework Used
+- Vue
+
+### File strucutre
 
 TODO
 

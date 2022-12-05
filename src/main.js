@@ -3,10 +3,16 @@ import App from './components/views/app.js'
 import router from './router'
 import vuetify from './plugins/vuetify'
 import { loadFonts } from './plugins/webfontloader'
+import { createPinia } from 'pinia'
+import useFlowerStore from './data/flowerStore.js'
 
 loadFonts()
 
-createApp(App)
+const app = createApp(App)
   .use(router)
-  .use(vuetify)
-  .mount('#app')
+  .use(createPinia())
+  .use(vuetify);
+
+app.mount("#app");
+
+useFlowerStore().initUser();

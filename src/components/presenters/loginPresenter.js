@@ -3,7 +3,7 @@ import LoginView from "../views/loginView";
 import { observeAuthState, signInUser, signOutUser, signUpUser } from "./firebaseAuth";
 import { updateUserData } from "./firebaseModel";
 
-const LoginPresenter = {
+const Login = {
   props: ["model"],
 
   data() {
@@ -64,4 +64,4 @@ const LoginPresenter = {
   }
 }
 
-export default LoginPresenter;
+export default Login;

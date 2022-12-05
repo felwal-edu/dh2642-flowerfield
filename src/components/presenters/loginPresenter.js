@@ -1,4 +1,4 @@
-import resolvePromise from "../network/resolvePromise";
+/*import resolvePromise from "../network/resolvePromise";
 import LoginView from "../views/loginView";
 import { observeAuthState, signInUser, signOutUser, signUpUser } from "./firebaseAuth";
 import { updateUserData } from "./firebaseModel";
@@ -66,3 +66,4 @@ const Login = {
 }
 
 export default Login;
+*/

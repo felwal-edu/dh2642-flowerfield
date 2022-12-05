@@ -2,7 +2,7 @@
 
 import { defineStore } from "pinia";
 import { observeAuthState } from "./persistence/firebaseAuth";
-import { updateUserData } from "./persistence/firebaseModel";
+import { disableFirebaseSync, enableFirebaseSync, createUser } from "./persistence/firebaseModel";
 
 export const useUserStore = defineStore({
   id: "user",
@@ -15,20 +15,17 @@ export const useUserStore = defineStore({
   actions: {
     initUser() {
       function signedInACB(user) {
-        console.log(user);
-
         this.currentUser = user;
 
-        // TODO: only if first time?
-        updateUserData(user);
-
-        // TODO: load data firebase -> model
+        createUser(user); // TODO: only if just signed up?
+        enableFirebaseSync(this); // TODO: should we pass store like this?
       }
 
       function signedOutACB() {
-        this.currentUser = null;
+        disableFirebaseSync();
 
-        // TODO: empty model? unsubscribe from firebases changes?
+        this.currentUser = null;
+        this.plants = [];
       }
 
       // this observes any changes to "signed in / signed out" state
@@ -43,7 +40,7 @@ export const useUserStore = defineStore({
       return this.plants.find(hasSamePlantIdCB);
     },
 
-    addplant(plant) {
+    addPlant(plant) {
       if (this.hasPlant(plant.id)) {
         console.log("plant already exists");
         return;

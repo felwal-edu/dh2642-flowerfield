@@ -1,12 +1,13 @@
 
 import { useUserStore } from "@/data/flowerStore";
+import { examplePlant } from "@/data/network/plantIdServiceMock";
 
 
 function HomeView() {
     const store = useUserStore()
 
     function plantInfoACB(evt) {
-        store.addplant("erere")
+        store.addPlant(examplePlant)
     }
 
     return (

@@ -1,6 +1,8 @@
 //the data container for the flower information gathered from the API
 
 import { defineStore } from "pinia";
+import { observeAuthState } from "./persistence/firebaseAuth";
+import { updateUserData } from "./persistence/firebaseModel";
 
 
 
@@ -8,10 +10,31 @@ export const UserInfoStore = defineStore(
     {
         id: 'user',
         state: () => ({
-            username: "test",
+            currentUser: undefined, // undefined if not loaded, null if not logged in
             plants: []
         }),
         actions: {
+            initUser() {
+                function signedInACB(user) {
+                    console.log(user);
+
+                    this.currentUser = user;
+
+                    // TODO: only if first time?
+                    updateUserData(user);
+
+                    // TODO: load data firebase -> model
+                }
+
+                function signedOutACB() {
+                    this.currentUser = null;
+
+                    // TODO: empty model? unsubscribe from firebases changes?
+                }
+
+                // this observes any changes to "signed in / signed out" state
+                observeAuthState(signedInACB.bind(this), signedOutACB.bind(this));
+            },
 
             /*
                         hasPlant(plantId) {

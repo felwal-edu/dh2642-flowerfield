@@ -1,46 +1,22 @@
 import resolvePromise from "../../data/network/resolvePromise.js";
 import LoginView from "../views/loginView";
-import { observeAuthState, signInUser, signOutUser, signUpUser } from "../../data/persistence/firebaseAuth";
-import { updateUserData } from "../../data/persistence/firebaseModel";
+import { signInUser, signOutUser, signUpUser } from "../../data/persistence/firebaseAuth";
+import { UserInfoStore } from "@/data/flowerStore.js";
 
 const Login = {
   props: ["model"],
 
   data() {
     return {
-        authPromiseState: {},
-        currentUser: undefined
+        authPromiseState: {}
     };
-  },
-
-  created() {
-    // TODO: probably move this to Pinia?
-
-    function signedInACB(user) {
-      console.log(user);
-
-      this.currentUser = user;
-
-      // TODO: only if first time?
-      updateUserData(user);
-
-      // TODO: load data firebase -> model
-    }
-
-    function signedOutACB() {
-      this.currentUser = null;
-
-      // TODO: empty model? unsubscribe from firebases changes?
-    }
-
-    // this observes any changes to "signed in / signed out" state
-    observeAuthState(signedInACB.bind(this), signedOutACB.bind(this));
   },
 
   render() {
     function authResultACB() {
-      console.log("promise state:");
-      console.log(this.authPromiseState);
+      if (this.authPromiseState.error) {
+        console.error(this.authPromiseState.error.message);
+      }
 
       // we probably dont need to do anything here
     }
@@ -59,7 +35,7 @@ const Login = {
 
     return (
       <LoginView
-        currentUser={this.currentUser}
+        currentUser={UserInfoStore().currentUser}
         onSignUp={signUpACB.bind(this)}
         onSignIn={signInACB.bind(this)}
         onSignOut={signOutACB} />

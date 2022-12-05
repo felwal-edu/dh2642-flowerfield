@@ -1,19 +1,27 @@
 function LoginView(props) {
   function signUpClickACB(evt) {
-    console.log(props);
-    if (props.currentUser !== null || props.currentUser === undefined) return;
+    if (props.currentUser !== null || props.currentUser === undefined) {
+      console.log("already signed up");
+      return;
+    }
 
     props.onSignUp("nils.felix@gmail.com", "Hejhej1");
   }
 
   function signInClickACB(evt) {
-    if (props.currentUser !== null || props.currentUser === undefined) return;
+    if (props.currentUser !== null || props.currentUser === undefined) {
+      console.log("already signed in");
+      return;
+    }
 
     props.onSignIn("nils.felix@gmail.com", "Hejhej1");
   }
 
   function signOutClickACB(evt) {
-    if (!props.currentUser) return;
+    if (!props.currentUser) {
+      console.log("already signed out");
+      return;
+    }
 
     props.onSignOut();
   }

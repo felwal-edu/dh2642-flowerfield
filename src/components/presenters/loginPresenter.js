@@ -14,6 +14,8 @@ const Login = {
   },
 
   created() {
+    // TODO: probably move this to Pinia?
+
     function signedInACB(user) {
       console.log(user);
 
@@ -32,7 +34,7 @@ const Login = {
     }
 
     // this observes any changes to "signed in / signed out" state
-    observeAuthState(signedInACB, signedOutACB);
+    observeAuthState(signedInACB.bind(this), signedOutACB.bind(this));
   },
 
   render() {
@@ -44,11 +46,11 @@ const Login = {
     }
 
     function signUpACB(email, password) {
-      resolvePromise(signUpUser(email, password), this.authPromiseState, authResultACB);
+      resolvePromise(signUpUser(email, password), this.authPromiseState, authResultACB.bind(this));
     }
 
     function signInACB(email, password) {
-      resolvePromise(signInUser(email, password), this.authPromiseState, authResultACB);
+      resolvePromise(signInUser(email, password), this.authPromiseState, authResultACB.bind(this));
     }
 
     function signOutACB() {
@@ -58,8 +60,8 @@ const Login = {
     return (
       <LoginView
         currentUser={this.currentUser}
-        onSignUp={signUpACB}
-        onSignIn={signInACB}
+        onSignUp={signUpACB.bind(this)}
+        onSignIn={signInACB.bind(this)}
         onSignOut={signOutACB} />
     );
   }

@@ -1,7 +1,7 @@
-/*import resolvePromise from "../network/resolvePromise";
+import resolvePromise from "../../data/network/resolvePromise.js";
 import LoginView from "../views/loginView";
-import { observeAuthState, signInUser, signOutUser, signUpUser } from "./firebaseAuth";
-import { updateUserData } from "./firebaseModel";
+import { observeAuthState, signInUser, signOutUser, signUpUser } from "../../data/persistence/firebaseAuth";
+import { updateUserData } from "../../data/persistence/firebaseModel";
 
 const Login = {
   props: ["model"],
@@ -66,4 +66,3 @@ const Login = {
 }
 
 export default Login;
-*/

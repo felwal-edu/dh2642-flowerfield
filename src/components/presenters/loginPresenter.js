@@ -57,6 +57,7 @@ const Login = {
 
     return (
       <LoginView
+        currentUser={this.currentUser}
         onSignUp={signUpACB}
         onSignIn={signInACB}
         onSignOut={signOutACB} />

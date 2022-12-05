@@ -24,7 +24,7 @@ const routes = [
   {
     path: '/collection',
     name: 'collection',
-    copmonent: Collection
+    component: Collection
   }
 ]
 

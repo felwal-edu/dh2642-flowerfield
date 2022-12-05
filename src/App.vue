@@ -1,7 +1,7 @@
 <template>
   <div>
     <nav>
-      <router-link to="/homeView">Home</router-link> <!--lin in to is the path link in index.js-->
+      <router-link to="/homeView">Home</router-link>
       <router-link to="/aboutView">About</router-link>
     </nav>
   </div>

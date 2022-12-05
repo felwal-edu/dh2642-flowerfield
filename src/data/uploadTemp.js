@@ -52,9 +52,12 @@ export function loadAndDisplayFile(file) {
             // TODO: find better solution than just replacing..
             // append and hide?
             //dragArea.innerHTML = imgTag;
-        };
-        fileReader.readAsDataURL(file);
 
+            fileReader.readAsDataURL(file);
+            return fileURL;
+        };
+
+        //console.log(fileURL);
         return [true, fileURL]
     }
     else {

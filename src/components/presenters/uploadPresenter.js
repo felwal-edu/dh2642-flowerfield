@@ -10,6 +10,7 @@ const UploadPresenter = {
             authPromiseState: {},
             currentUser: undefined,
             file: null,
+            fileURL: "",    // This is always undefined for some reason...
             isActive: false
         };
     },
@@ -34,20 +35,18 @@ const UploadPresenter = {
 
     unmounted() {
         // remove event at teardown
-        this.dragArea.removeEventListener("dragover", this.dragoverListener);
-        this.dragArea.removeEventListener("dragleave", this.dragleaveListenerACB);
-        this.dragArea.removeEventListener("drop", this.dropListener);
-        this.input.removeEventListener("change", this.inputChangeListener);
+        //this.dragArea.removeEventListener("dragover", this.dragoverListener);
+        //this.dragArea.removeEventListener("dragleave", this.dragleaveListenerACB);
+        //this.dragArea.removeEventListener("drop", this.dropListener);
+        //this.input.removeEventListener("change", this.inputChangeListener);
     },
 
     render() {
-        this.dragArea = document.querySelector(".drag-area");
-
         function onAbortUpload(event) {
             // reset data
             this.file = null;
-            this.FILE_URL = "";
             this.dragArea.classList.remove("active");
+
             //uploadButton.hidden = true;
             //cancleButton.hidden = true;
 
@@ -61,54 +60,79 @@ const UploadPresenter = {
 
         function dragoverListenerACB(event) {
             //dragHeader.textContent = 'Release to Upload'
-            //let dragArea = document.querySelector(".drag-area");
             this.isActive = true;
-            //console.log(this.isActive);
-            //dragArea.classList.add('active');
+
+            let dragArea = document.querySelector(".drag-area");
+            dragArea.classList.add('active');
         }
 
         function dragleaveListenerACB(event) {
-            //event.preventDefault();
             //dragHeader.textContent = 'Drag & Drop';
             this.isActive = false;
-            //this.dragArea.classList.remove('active');
+
+            let dragArea = document.querySelector(".drag-area");
+            dragArea.classList.remove('active');
         }
 
         function dropListenerACB(event) {
-            console.log("test");
             this.file = event.dataTransfer.files[0];
-            commitFile();   // commit selected file
+            commitFile(this.file);   // commit selected file
         }
 
         function inputChangeListenerACB(event) {
-            this.file = this.files[0];
+            this.file = event.files[0];
             // add so the border is 'active'
-            //this.dragArea.classList.add("active");
-            commitFile();   // commit selected file
+            let dragArea = document.querySelector(".drag-area");
+            dragArea.classList.add('active');
+
+            commitFile(this.file);   // commit selected file
         }
 
-        function commitFile(){
-            // check result from loadFile
-            let result = loadAndDisplayFile(this.file);
+        function addImageProcess(file) {
+            return new Promise((resolve, reject) => {
+                let fileReader = new FileReader()
+                fileReader.readAsDataURL(file);
+                fileReader.onload = () => resolve(fileReader.result)
+                fileReader.onerror = reject
+            })
+        }
 
-            let success = result[0];
-            this.FILE_URL = result[1];
+        function commitFile(file){
+            let fileURL;
 
-            if (success == true) {
-                // reveal buttons
-                //uploadButton.hidden = false;
-                //cancleButton.hidden = false;
-            }
-            else {
-                // reset HTML elements
-                this.dragArea.classList.remove("active");
+            if (file == null) {
+                alert('No file selected.');
+
                 //uploadButton.hidden = true;
                 //cancleButton.hidden = true;
+                return;
+            }
+
+            // TODO: remove metadata?
+            let fileType = file.type;
+
+            let validExtensions = ["image/png", "image/jpg", "image/jpeg"];
+
+            // TODO: expand error to more then alert?
+            if (validExtensions.includes(fileType)) {
+                addImageProcess(file).then(url => {
+                    console.log(url);
+
+                    //uploadButton.hidden = true;
+                    //cancleButton.hidden = true;
+                });
+            }
+            else {
+                alert('File format is not supported.');
+
+                //uploadButton.hidden = true;
+                //cancleButton.hidden = true;
+                return;
             }
         }
 
         return (
-            <UploadView onUploadImageToAPI={uploadImageToAPI(this.FILE_URL)} onAbortUpload={onAbortUpload}
+            <UploadView onUploadImageToAPI={uploadImageToAPI} onAbortUpload={onAbortUpload}
                 onBrowseSpanClick={browseSpanClickACB} onDragenterFile={dragoverListenerACB} onDragleaveFile={dragleaveListenerACB}
                 onDropFile={dropListenerACB} onInputFileChange={inputChangeListenerACB} dragareaActive={this.isActive}/>
         );

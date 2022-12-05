@@ -24,7 +24,7 @@ export function signOutUser() {
 export function observeAuthState(signedInACB, signedOutACB) {
   function stateChangedACB(credentialUser) {
     if (credentialUser) {
-      console.log("signed in");
+      console.log("signed in as: " + credentialUser.email);
 
       const user = {
         uid: credentialUser.uid,

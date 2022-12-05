@@ -1,0 +1,28 @@
+#nav {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 20px;
+  background: #2e4f4a;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-bottom: 5px solid #a4afb1;
+  border-left: 5px solid #a4afb1;
+}
+#nav a {
+  margin-right: 15px;
+  color: rgb(47, 255, 71);
+  opacity: 0.7;
+  text-decoration: none;
+  font-weight: bold;
+}
+#nav a.router-link-active,
+#nav a:hover {
+  opacity: 1;
+}
+
+
+body{
+  margin-top: 90px;
+}

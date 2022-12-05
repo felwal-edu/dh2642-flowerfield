@@ -1,33 +1,50 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '@/components/views/homeView.js'
-import AboutView from '@/components/views/aboutView.js'
-import UploadView from '@/components/views/uploadView'
-import UploadPresenter from '@/components/presenters/uploadPresenter'
+
+import Home from '@/components/presenters/homePresenter.js'
+import About from '@/components/presenters/aboutPresenter.js'
+import Collection from '@/components/presenters/collectionPresenter.js'
+import Login from '@/components/presenters/loginPresenter.js'
+import Profile from '@/components/presenters/profilePresenter'
+import Upload from '@/components/presenters/uploadPresenter'
 
 const routes = [
   {
     path: '/',
     name: 'home',
-    component: HomeView
+    component: Home
   },
   {
     path: '/about',
     name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: AboutView
+    component: About
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: Login
+  },
+  {
+    path: '/collection',
+    name: 'collection',
+    component: Collection
+  },
+  {
+    path: '/profile',
+    name: 'profile',
+    component: Profile
   },
   {
     path: '/upload',
     name: 'upload',
-    component: UploadPresenter
+    component: Upload
   }
+
 ]
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
-  routes
-})
+  routes,
+  linkActiveClass: "active-route"
+});
 
-export default router
+export default router;

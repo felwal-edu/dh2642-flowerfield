@@ -1,27 +1,38 @@
 function LoginView(props) {
   function signUpClickACB(evt) {
-    if (currentUser !== null || currentUser === undefined) return;
+    if (props.currentUser !== null || props.currentUser === undefined) {
+      console.log("already signed up");
+      return;
+    }
 
-    props.onSignUp("nils.felix@gmail.com", "Hejhej1");
+    props.onSignUp();
   }
 
   function signInClickACB(evt) {
-    if (currentUser !== null || currentUser === undefined) return;
+    if (props.currentUser !== null || props.currentUser === undefined) {
+      console.log("already signed in");
+      return;
+    }
 
-    props.onSignIn("nils.felix@gmail.com", "Hejhej1");
+    props.onSignIn();
   }
 
-  function signOutClickACB(evt) {
-    if (!currentUser) return;
+  function emailInputChangeACB(evt) {
+    props.onEmailChange(evt.target.value);
+  }
 
-    props.onSignOut();
+  function passwordInputChangeACB(evt) {
+    props.onPasswordChange(evt.target.value);
   }
 
   return (
     <div>
+      Email:
+      <input onChange={emailInputChangeACB} value="nils.felix@gmail.com"></input>
+      Password:
+      <input onChange={passwordInputChangeACB} value="Hejhej1"></input>
       <button onClick={signUpClickACB}>Sign up</button>
       <button onClick={signInClickACB}>Sign in</button>
-      <button onClick={signOutClickACB}>Sign out</button>
     </div>
   );
 }

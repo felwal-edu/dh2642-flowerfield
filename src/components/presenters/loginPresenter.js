@@ -1,67 +1,51 @@
-import resolvePromise from "../network/resolvePromise";
+import resolvePromise from "../../data/network/resolvePromise.js";
 import LoginView from "../views/loginView";
-import { observeAuthState, signInUser, signOutUser, signUpUser } from "./firebaseAuth";
-import { updateUserData } from "./firebaseModel";
+import { signInUser, signOutUser, signUpUser } from "../../data/persistence/firebaseAuth";
+import useFlowerStore  from "@/data/flowerStore.js";
 
-const LoginPresenter = {
-  props: ["model"],
-
+const Login = {
   data() {
     return {
         authPromiseState: {},
-        currentUser: undefined
+        email: "nils.felix@gmail.com",
+        password: "Hejhej1"
     };
-  },
-
-  created() {
-    function signedInACB(user) {
-      console.log(user);
-
-      this.currentUser = user;
-
-      // TODO: only if first time?
-      updateUserData(user);
-
-      // TODO: load data firebase -> model
-    }
-
-    function signedOutACB() {
-      this.currentUser = null;
-
-      // TODO: empty model? unsubscribe from firebases changes?
-    }
-
-    // this observes any changes to "signed in / signed out" state
-    observeAuthState(signedInACB, signedOutACB);
   },
 
   render() {
     function authResultACB() {
-      console.log("promise state:");
-      console.log(this.authPromiseState);
+      if (this.authPromiseState.error) {
+        console.error(this.authPromiseState.error.message);
+      }
 
       // we probably dont need to do anything here
     }
 
-    function signUpACB(email, password) {
-      resolvePromise(signUpUser(email, password), this.authPromiseState, authResultACB);
+    function signUpACB() {
+      resolvePromise(signUpUser(this.email, this.password), this.authPromiseState, authResultACB.bind(this));
     }
 
-    function signInACB(email, password) {
-      resolvePromise(signInUser(email, password), this.authPromiseState, authResultACB);
+    function signInACB() {
+      resolvePromise(signInUser(this.email, this.password), this.authPromiseState, authResultACB.bind(this));
     }
 
-    function signOutACB() {
-      signOutUser();
+    function emailChangeACB(email) {
+      this.email = email;
+    }
+
+    function passwordChangeACB(password) {
+      this.password = password;
     }
 
     return (
       <LoginView
-        onSignUp={signUpACB}
-        onSignIn={signInACB}
-        onSignOut={signOutACB} />
+        currentUser={useFlowerStore().currentUser}
+        onEmailChange={emailChangeACB.bind(this)}
+        onPasswordChange={passwordChangeACB.bind(this)}
+        onSignUp={signUpACB.bind(this)}
+        onSignIn={signInACB.bind(this)} />
     );
   }
 }
 
-export default LoginPresenter;
+export default Login;

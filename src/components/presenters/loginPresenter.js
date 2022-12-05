@@ -4,8 +4,6 @@ import { signInUser, signOutUser, signUpUser } from "../../data/persistence/fire
 import { useUserStore } from "@/data/flowerStore.js";
 
 const Login = {
-  props: ["model"],
-
   data() {
     return {
         authPromiseState: {},
@@ -31,10 +29,6 @@ const Login = {
       resolvePromise(signInUser(this.email, this.password), this.authPromiseState, authResultACB.bind(this));
     }
 
-    function signOutACB() {
-      signOutUser();
-    }
-
     function emailChangeACB(email) {
       this.email = email;
     }
@@ -49,8 +43,7 @@ const Login = {
         onEmailChange={emailChangeACB.bind(this)}
         onPasswordChange={passwordChangeACB.bind(this)}
         onSignUp={signUpACB.bind(this)}
-        onSignIn={signInACB.bind(this)}
-        onSignOut={signOutACB} />
+        onSignIn={signInACB.bind(this)} />
     );
   }
 }

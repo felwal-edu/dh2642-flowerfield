@@ -28,7 +28,7 @@ function UploadView(props) {
     }
 
     function uploadButtonClickACB() {
-        props.onUploadImageToAPI();
+        props.onUploadImageToAPI(props.fileURL)
     }
 
     function cancleButtonClickACB() {
@@ -44,7 +44,7 @@ function UploadView(props) {
                 }
             </div>
             <div class="buttons-container">
-                <button class="btn upload" hidden onClick={props.onUploadImageToAPI(props.fileURL)}>Upload</button>
+                <button class="btn upload" hidden onClick={uploadButtonClickACB}>Upload</button>
                 <button class="btn cancle" hidden onClick={cancleButtonClickACB}>Cancle</button>
             </div>
         </div>

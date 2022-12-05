@@ -34,6 +34,7 @@ const UploadPresenter = {
             commitFile(this.file, function(f, success) {
                 this.fileURL = f;
                 this.isFileLoaded = success;
+                this.isActive = success; // usefull if we fail
             }.bind(this));
         }
 
@@ -45,6 +46,7 @@ const UploadPresenter = {
             commitFile(this.file, function(f, success) {
                 this.fileURL = f;
                 this.isFileLoaded = success;
+                this.isActive = success;
             }.bind(this));
         }
 
@@ -66,15 +68,20 @@ const UploadPresenter = {
     },
 
     beforeUnmount () {
+        let dragArea = document.querySelector(".drag-area");
+        let input = document.querySelector('input');
 
-        this.dragArea = document.querySelector(".drag-area");
-        this.input = document.querySelector('input');
+        // if we render the image, drag-area is null
+        if (dragArea != null) {
+            // remove event at teardown
+            dragArea.removeEventListener("dragover", this.dragoverListener);
+            dragArea.removeEventListener("dragleave", this.dragleaveListenerACB);
+            dragArea.removeEventListener("drop", this.dropListener);
+        }
 
-        // remove event at teardown
-        this.dragArea.removeEventListener("dragover", this.dragoverListener);
-        this.dragArea.removeEventListener("dragleave", this.dragleaveListenerACB);
-        this.dragArea.removeEventListener("drop", this.dropListener);
-        this.input.removeEventListener("change", this.inputChangeListener);
+        if (input != null) {
+            input.removeEventListener("change", this.inputChangeListener);
+        }
     },
 
     render() {
@@ -95,7 +102,7 @@ const UploadPresenter = {
         }
 
         return (
-            <UploadView onUploadImageToAPI={uploadImageToAPI.bind(this)} onAbortUpload={onAbortUpload.bind(this)}
+            <UploadView onUploadImageToAPI={uploadImageToAPI} onAbortUpload={onAbortUpload.bind(this)}
                 onBrowseSpanClick={browseSpanClickACB.bind(this)} dragareaActive={this.isActive}
                 imageLoaded={this.isFileLoaded} fileURL={this.fileURL}/>
         );

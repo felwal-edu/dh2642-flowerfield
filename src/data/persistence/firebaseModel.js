@@ -4,7 +4,7 @@ import { getDatabase, ref, set, onChildAdded, onChildRemoved, get, child } from 
 
 // init
 
-//console.log("initializing firebase ...")
+console.log("initializing firebase ...")
 
 export const app = initializeApp(firebaseConfig);
 const db = getDatabase();

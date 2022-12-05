@@ -1,5 +1,6 @@
 function LoginView(props) {
   function signUpClickACB(evt) {
+    console.log(props);
     if (props.currentUser !== null || props.currentUser === undefined) return;
 
     props.onSignUp("***REMOVED***", "***REMOVED***");

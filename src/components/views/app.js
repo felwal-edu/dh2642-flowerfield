@@ -1,9 +1,11 @@
+import "../../plugins/vuetify";
+import "../../main.css";
 
 export default
 function App(){
     return (
         <div>
-            <div>
+            <div id="nav">
                 <router-link to="/">Home</router-link>
                 <router-link to="/about">About</router-link>
                 <router-link to="/collection">Collection</router-link>

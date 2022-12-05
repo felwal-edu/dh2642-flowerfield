@@ -1,4 +1,4 @@
-function delay(time) {
+/*'function delay(time) {
     return new Promise(resolve => setTimeout(resolve, time));
 }
 
@@ -27,6 +27,7 @@ delay(1000).then(() => {
 
     }
 });
+*/
 
 export function loadAndDisplayFile(file) {
     let fileURL;
@@ -65,10 +66,9 @@ export function loadAndDisplayFile(file) {
 
 export function uploadImageToAPI(fileURL) {
     console.log("uploading to API...");
-    let base64 = fileURL.replace('data:', '').replace(/^.+,/, '');
+    //let base64 = fileURL.replace('data:', '').replace(/^.+,/, '');
 
-    console.log(base64);
-    //return base64;
+    //console.log(base64);
 }
 
 export function abortUpload() {

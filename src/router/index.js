@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '@/components/views/homeView.js'
-import AboutView from '@/components/views/aboutView.js'
+import HomeView from '@/components/presenters/homePresenter.js'
+import AboutView from '@/components/presenters/aboutPresenter.js'
 
 const routes = [
   {

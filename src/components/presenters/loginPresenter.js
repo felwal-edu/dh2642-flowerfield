@@ -1,7 +1,7 @@
 import resolvePromise from "../../data/network/resolvePromise.js";
 import LoginView from "../views/loginView";
 import { signInUser, signOutUser, signUpUser } from "../../data/persistence/firebaseAuth";
-import { UserInfoStore } from "@/data/flowerStore.js";
+import { useUserStore } from "@/data/flowerStore.js";
 
 const Login = {
   props: ["model"],
@@ -35,7 +35,7 @@ const Login = {
 
     return (
       <LoginView
-        currentUser={UserInfoStore().currentUser}
+        currentUser={useUserStore().currentUser}
         onSignUp={signUpACB.bind(this)}
         onSignIn={signInACB.bind(this)}
         onSignOut={signOutACB} />

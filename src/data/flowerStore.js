@@ -35,24 +35,37 @@ export const useUserStore = defineStore({
       observeAuthState(signedInACB.bind(this), signedOutACB.bind(this));
     },
 
-    /*
     hasPlant(plantId) {
       function hasSamePlantIdCB(plant) {
         return plant.id === plantId;
       }
 
       return this.plants.find(hasSamePlantIdCB);
-    },*/
+    },
 
     addplant(plant) {
-      /*if (this.hasPlant(plant.id)) {
+      if (this.hasPlant(plant.id)) {
         console.log("plant already exists");
         return;
-      }*/
+      }
 
       this.plants = [...this.plants, plant];
       console.log(plant + " has been added");
     },
+
+    removePlant(plantId) {
+      if (!this.hasPlant(plantId)) {
+        console.log("plant does not exist");
+        return;
+      }
+
+      function hasDifferentIdCB(plant) {
+        plant.id !== plantId;
+      }
+
+      this.plants = this.plants.filter(hasDifferentIdCB);
+      console.log(plantId + " has been removed");
+    }
 
     /*
     addPlant(plant_id, plant_name, plant_details, scientific_name, plant_genus, plant_species) {

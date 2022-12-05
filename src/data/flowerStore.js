@@ -4,7 +4,7 @@ import { defineStore } from "pinia";
 import { observeAuthState } from "./persistence/firebaseAuth";
 import { disableFirebaseSync, enableFirebaseSync, createUser } from "./persistence/firebaseModel";
 
-export const useUserStore = defineStore({
+const useFlowerStore = defineStore({
   id: "user",
 
   state: () => ({
@@ -88,3 +88,5 @@ export const useUserStore = defineStore({
     }*/
   }
 })
+
+export default useFlowerStore;

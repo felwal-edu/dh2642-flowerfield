@@ -4,7 +4,7 @@ import router from './router'
 import vuetify from './plugins/vuetify'
 import { loadFonts } from './plugins/webfontloader'
 import { createPinia } from 'pinia'
-import { useUserStore } from './data/flowerStore.js'
+import useFlowerStore from './data/flowerStore.js'
 
 loadFonts()
 
@@ -15,4 +15,4 @@ const app = createApp(App)
 
 app.mount("#app");
 
-useUserStore().initUser();
+useFlowerStore().initUser();

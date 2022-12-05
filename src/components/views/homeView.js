@@ -1,9 +1,9 @@
 
-import { UserInfoStore } from "@/data/flowerStore";
+import { useUserStore } from "@/data/flowerStore";
 
 
 function HomeView() {
-    const store = UserInfoStore()
+    const store = useUserStore()
 
     function plantInfoACB(evt) {
         store.addplant("erere")

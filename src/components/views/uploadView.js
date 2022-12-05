@@ -1,25 +1,30 @@
 function UploadView(props) {
 
-    function dragenterFileACB(evt) {
-        evt.preventDefault();
-        props.onDragenterFile();
-    }
+    function renderUploadView() {
 
-    function dragleaveFileACB(evt) {
-        props.onDragleaveFile();
-    }
+        if (!props.imageLoaded) {
+            return <div class={props.dragareaActive == true ? "drag-area active" : "drag-area"} >
+                <div class="icon">
 
-    function dropFileACB(evt) {
-        evt.preventDefault();
-        props.onDropFile(evt);
+                    <i class="fas"></i>
+
+                </div>
+                <span class="header">{props.dragareaActive == true ? "Release to Upload" : "Drag & Drop"}</span>
+                <span class="header">or <span class="browse-button" onClick={browseSpanClickACB}>browse</span></span>
+                <input type="file" hidden />
+
+                <span class="tip-support">PNG, JPG, JPEG</span>
+            </div>;
+        }
+        else {
+            return <div class="image-container">
+                <img src={props.fileURL} alt=""></img>
+            </div>
+        }
     }
 
     function browseSpanClickACB() {
         props.onBrowseSpanClick();
-    }
-
-    function inputFileChangeACB(evt) {
-        props.onInputFileChange(evt.target);
     }
 
     function uploadButtonClickACB() {
@@ -30,25 +35,16 @@ function UploadView(props) {
         props.onAbortUpload();
     }
 
-
     return (
         <div class="upload-page">
             <div class="upload-container">
                 <h3>Upload your flower image</h3>
-                <div class={props.dragareaActive === true ? "drag-area active" : "drag-area"}
-                    onDragover={dragenterFileACB} onDragleave={dragleaveFileACB} onDrop={dropFileACB} >
-                    <div class="icon">
-                    <i class="fas"></i>
-                    </div>
-                    <span class="header">Drag & Drop</span>
-                    <span class="header">or <span class="browse-button" onClick={browseSpanClickACB}>browse</span></span>
-                    <input type="file" hidden onChange={inputFileChangeACB}/>
-
-                    <span class="tip-support">PNG, JPG, JPEG</span>
-                </div>
+                {
+                    renderUploadView()
+                }
             </div>
             <div class="buttons-container">
-                <button class="btn upload" hidden onClick={uploadButtonClickACB}>Upload</button>
+                <button class="btn upload" hidden onClick={props.onUploadImageToAPI(props.fileURL)}>Upload</button>
                 <button class="btn cancle" hidden onClick={cancleButtonClickACB}>Cancle</button>
             </div>
         </div>

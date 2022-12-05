@@ -1,18 +1,18 @@
 function LoginView(props) {
   function signUpClickACB(evt) {
-    if (currentUser !== null || currentUser === undefined) return;
+    if (props.currentUser !== null || props.currentUser === undefined) return;
 
     props.onSignUp("***REMOVED***", "***REMOVED***");
   }
 
   function signInClickACB(evt) {
-    if (currentUser !== null || currentUser === undefined) return;
+    if (props.currentUser !== null || props.currentUser === undefined) return;
 
     props.onSignIn("***REMOVED***", "***REMOVED***");
   }
 
   function signOutClickACB(evt) {
-    if (!currentUser) return;
+    if (!props.currentUser) return;
 
     props.onSignOut();
   }

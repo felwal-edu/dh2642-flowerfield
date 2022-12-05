@@ -1,6 +1,5 @@
-import resolvePromise from "../network/resolvePromise";
 import UploadView from "../views/uploadView";
-import {loadAndDisplayFile, uploadImageToAPI} from "../data/uploadTemp.js";
+import {loadAndDisplayFile, uploadImageToAPI, abortUpload} from "../data/uploadTemp.js";
 import "../../css/upload.css";
 
 const UploadPresenter = {

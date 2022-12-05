@@ -5,7 +5,7 @@ function LoginView(props) {
       return;
     }
 
-    props.onSignUp("nils.felix@gmail.com", "Hejhej1");
+    props.onSignUp();
   }
 
   function signInClickACB(evt) {
@@ -14,7 +14,7 @@ function LoginView(props) {
       return;
     }
 
-    props.onSignIn("nils.felix@gmail.com", "Hejhej1");
+    props.onSignIn();
   }
 
   function signOutClickACB(evt) {
@@ -26,8 +26,20 @@ function LoginView(props) {
     props.onSignOut();
   }
 
+  function emailInputChangeACB(evt) {
+    props.onEmailChange(evt.target.value);
+  }
+
+  function passwordInputChangeACB(evt) {
+    props.onPasswordChange(evt.target.value);
+  }
+
   return (
     <div>
+      Email:
+      <input onChange={emailInputChangeACB} value="nils.felix@gmail.com"></input>
+      Password:
+      <input onChange={passwordInputChangeACB} value="Hejhej1"></input>
       <button onClick={signUpClickACB}>Sign up</button>
       <button onClick={signInClickACB}>Sign in</button>
       <button onClick={signOutClickACB}>Sign out</button>

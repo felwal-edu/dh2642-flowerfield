@@ -2,7 +2,7 @@ import useFlowerStore  from "@/data/flowerStore";
 import { signOutUser } from "@/data/persistence/firebaseAuth";
 import ProfileView from "../views/profileView";
 
-const Profile = {
+const ProfilePresenter = {
   data() {
     return {
     };
@@ -21,4 +21,4 @@ const Profile = {
   }
 }
 
-export default Profile
+export default ProfilePresenter

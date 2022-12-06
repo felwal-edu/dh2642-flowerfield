@@ -17,14 +17,18 @@ function renderCollection(plants) {
   }
 
   function createCollectionColCB(plant) {
-    return <td><img src={plant.url} width="100"></img></td>;
+    return (
+      <td>
+        <img src={plant.url} width="100" />
+      </td>
+    );
   }
 
   return (
     <div>
-    <table>
-      <tbody>{Object.entries(sortPlants(plants)).map(createRowsCB)}</tbody>
-    </table>
+      <table>
+        <tbody>{Object.entries(sortPlants(plants)).map(createRowsCB)}</tbody>
+      </table>
     </div>
   );
 }

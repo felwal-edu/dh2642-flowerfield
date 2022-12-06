@@ -77,7 +77,7 @@ const useFlowerStore = defineStore({
       });
     },
 
-    acquirePlant(plant_id){
+    acquirePlant(plant_id) {
       //if id exists, set the objects acquired to true
       //if id doesn't exist, do nothing.
       idFinderCB(plant_id) {}

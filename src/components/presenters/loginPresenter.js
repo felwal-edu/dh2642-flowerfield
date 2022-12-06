@@ -3,7 +3,7 @@ import LoginView from "../views/loginView";
 import { signInUser, signOutUser, signUpUser } from "../../data/persistence/firebaseAuth";
 import useFlowerStore  from "@/data/flowerStore.js";
 
-const Login = {
+const LoginPresenter = {
   data() {
     return {
         authPromiseState: {},
@@ -48,4 +48,4 @@ const Login = {
   }
 }
 
-export default Login;
+export default LoginPresenter;

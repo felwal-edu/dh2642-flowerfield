@@ -1,9 +1,9 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import Home from '@/components/presenters/homePresenter.js'
-import Collection from '@/components/presenters/collectionPresenter.js'
-import Login from '@/components/presenters/loginPresenter.js'
-import Profile from '@/components/presenters/profilePresenter'
-import Upload from '@/components/presenters/uploadPresenter'
+import { createRouter, createWebHistory } from 'vue-router';
+import Home from '@/components/presenters/homePresenter.js';
+import Collection from '@/components/presenters/collectionPresenter.js';
+import LoginPresenter from '@/components/presenters/loginPresenter.js';
+import ProfilePresenter from '@/components/presenters/profilePresenter';
+import Upload from '@/components/presenters/uploadPresenter';
 
 const routes = [
   {
@@ -14,7 +14,7 @@ const routes = [
   {
     path: '/login',
     name: 'login',
-    component: Login
+    component: LoginPresenter
   },
   {
     path: '/collection',
@@ -24,7 +24,7 @@ const routes = [
   {
     path: '/profile',
     name: 'profile',
-    component: Profile
+    component: ProfilePresenter
   },
   {
     path: '/upload',

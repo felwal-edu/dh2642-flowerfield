@@ -50,9 +50,15 @@ Framework used: Vue
 
 - _css_
 
-- **main.js**. Creates the app and sets up router, Pinia and Vuetify.
+- **main.js**. Creates the app and sets up router, Pinia, Vuetify, and loads fonts.
 
 - **utilities.js**. Some utility functions.
+
+- _plugins_
+
+  - **veutify.js**. Creates a Veutify instance.
+
+  - **webfontloader.js**. Defines a function for loading web fonts.
 
 - _router_
 

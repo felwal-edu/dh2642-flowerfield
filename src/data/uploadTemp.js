@@ -37,31 +37,6 @@ export function commitFile(file, _callback) {
     }
 }
 
-// COPY-PASTED FROM PLANTIDSERVICETEST
-import { exampleBase64Image, exampleResponse } from "./network/plantIdServiceMock.js"
-import resolvePromise, { resolvePromiseMock } from "./network/resolvePromise.js"
-
-const promiseState = {}
-
-function notifyACB() {
-  console.log(promiseState)
-}
-
-export function uploadImageToAPI(fileURL) {
-    if (fileURL == null || fileURL == "")
-        return;
-
-    let base64 = fileURL.replace('data:', '').replace(/^.+,/, '');
-
-    // REAL CALL:
-    //resolvePromise(getPlantByImage(exampleBase64Image), promiseState, notifyACB);
-
-    // FAKE CALL:
-    resolvePromiseMock(exampleResponse, promiseState, notifyACB);
-    console.log(promiseState.data.suggestions[0]);
-    //console.log(base64);
-}
-
 export function abortUpload() {
 
 }

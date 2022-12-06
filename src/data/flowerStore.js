@@ -32,16 +32,16 @@ const useFlowerStore = defineStore({
       observeAuthState(signedInACB.bind(this), signedOutACB.bind(this));
     },
 
-    hasPlant(plantId) {
+    hasPlant(plantName) {
       function hasSamePlantIdCB(plant) {
-        return plant.id === plantId;
+        return plant.scientificName === plantName;
       }
 
       return this.plants.find(hasSamePlantIdCB);
     },
 
     addPlant(plant) {
-      if (this.hasPlant(plant.id)) {
+      if (this.hasPlant(plant.scientificName)) {
         console.log("plant already exists");
         return;
       }

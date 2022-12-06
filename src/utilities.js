@@ -1,11 +1,11 @@
 function compareGenusCB(plantA, plantB) {
-  return plantA.sub === plantB.sub
-    ? plantA.name === plantB.name
+  return plantA.genus === plantB.genus
+    ? plantA.scientificName === plantB.scientificName
       ? 0
-      : plantA.name < plantB.name
+      : plantA.scientificName < plantB.scientificName
       ? -1
       : 1
-    : plantA.sub < plantB.sub
+    : plantA.genus < plantB.genus
     ? -1
     : 1;
 }

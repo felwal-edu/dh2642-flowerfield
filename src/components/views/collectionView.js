@@ -17,7 +17,7 @@ function renderCollection(plants) {
   }
 
   function createCollectionColCB(plant) {
-    return <td> {plant} </td>;
+    return <td><v-img src={plant.url}></v-img></td>;
   }
 
   return (

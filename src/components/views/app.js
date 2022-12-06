@@ -14,32 +14,39 @@ function App() {
         }.bind(this));
 
         if (userStatus == undefined) {
-            return <div id="nav">
-                <router-link to="/">Home</router-link>
-                <router-link to="/about">About</router-link>
-                <router-link to="/login">Login</router-link>
-            </div>
+
+            return <v-toolbar-items class="hidden-sm-and-down">
+                <router-link to="/"><v-btn text>Home</v-btn></router-link>
+                <router-link to="/about"><v-btn text>About</v-btn></router-link>
+                <router-link to="/login"><v-btn text>Login</v-btn></router-link>
+            </v-toolbar-items>
         }
         else {
-            return <div id="nav">
-                <router-link to="/">Home</router-link>
-                <router-link to="/about">About</router-link>
-                <router-link to="/upload">Upload</router-link>
-                <router-link to="/collection">Collection</router-link>
-                <router-link to="/profile">Profile</router-link>
-                <router-link to="/login">Login</router-link>
-            </div>
+            return <v-toolbar-items class="hidden-sm-and-down">
+                <router-link to="/"><v-btn text>Home</v-btn></router-link>
+                <router-link to="/about"><v-btn text>About</v-btn></router-link>
+                <router-link to="/upload"><v-btn text>Upload</v-btn></router-link>
+                <router-link to="/collection"><v-btn text>Collection</v-btn></router-link>
+                <router-link to="/profile"><v-btn text>Profile</v-btn></router-link>
+                <router-link to="/login"><v-btn text>Login</v-btn></router-link>
+            </v-toolbar-items>
         }
-
-
     }
-
+    //
     return (
         <div>
-            {renderApp()}
-            <div>
-                <router-view></router-view>
-            </div>
+            <v-app>
+                <v-app-bar fixed dense>
+                    <v-toolbar-title><p class="nav-title">Flowerfield</p></v-toolbar-title>
+                    <v-spacer></v-spacer>
+                    {renderApp()}
+                </v-app-bar>
+                <div>
+                    <router-view></router-view>
+                </div>
+            </v-app>
+
+
         </div>
     )
 }

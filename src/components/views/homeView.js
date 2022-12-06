@@ -2,7 +2,21 @@ import logopath from "@/assets/testlogo.png";
 import background from "@/assets/home_parallax.jpg";
 import "@/css/home.css"
 
-function HomeView() {
+function HomeView(props) {
+
+  function renderLandingPageButton() {
+    if(props.userStatus === undefined) {
+        return <router-link to="/login">
+            <v-btn /*color="#a02a3d"*/ variant="tonal">Get Started!</v-btn>
+        </router-link>
+    }
+    else {
+        return <router-link to="/upload">
+            <v-btn /*color="#a02a3d"*/ variant="tonal">Upload Flower!</v-btn>
+        </router-link>
+    }
+  }
+
   return (
     <div>
       <v-parallax height="600" src={background}>
@@ -10,9 +24,7 @@ function HomeView() {
           <div class="landing-page center">
             <img class="logo" src={logopath}></img>
             <p class="subheader">Flowers worth Remembering</p>
-            <router-link to="/login">
-              <v-btn /*color="#a02a3d"*/ variant="tonal">Get Started!</v-btn>
-            </router-link>
+            {renderLandingPageButton()}
           </div>
         </div>
       </v-parallax>

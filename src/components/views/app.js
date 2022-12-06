@@ -28,7 +28,6 @@ export default function App() {
         <router-link to="/upload"><v-btn text>Upload</v-btn></router-link>
         <router-link to="/collection"><v-btn text>Collection</v-btn></router-link>
         <router-link to="/profile"><v-btn text>Profile</v-btn></router-link>
-        <router-link to="/login"><v-btn text>Login</v-btn></router-link>
       </v-toolbar-items>
     );
   }

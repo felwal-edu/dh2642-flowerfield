@@ -5,7 +5,7 @@ import "@/css/home.css"
 function HomeView(props) {
 
   function renderLandingPageButton() {
-    if(props.userStatus === undefined) {
+    if(props.userStatus === undefined || props.userStatus === null) {
         return <router-link to="/login">
             <v-btn /*color="#a02a3d"*/ variant="tonal">Get Started!</v-btn>
         </router-link>

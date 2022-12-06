@@ -26,6 +26,10 @@ function LoginView(props) {
     props.onPasswordChange(evt.target.value);
   }
 
+  function closeErrorSnackbarACB(){
+    props.onCloseErrorSnackbar();
+  }
+
   return (
     <div>
       <v-app class="ma-8">
@@ -38,6 +42,12 @@ function LoginView(props) {
             <v-row class="mt-4"><v-btn onClick={signUpClickACB}>Sign up</v-btn></v-row>
           </v-col>
         </v-card>
+        <v-snackbar v-model={props.snackbar} class="d-flex" color="#0d0963">
+          {props.errorMessage}
+          <v-btn color="#a02a3d" variant="text" class="ml-12" onClick={closeErrorSnackbarACB}>
+              Close
+          </v-btn>
+        </v-snackbar>
       </v-app>
     </div>
   );

@@ -1,33 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap');
+
 .upload-page {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  background: #e0eafc;
+  background: linear-gradient(185deg, rgba(255, 255, 255, 0.672) 0%, rgba(255, 255, 255, 0.624) 25%, rgb(176, 210, 207) 100%),
+  url("/src/assets/grass_field.jpg");
+  width: 100%;
+  height: 110%;
 }
 .upload-container {
+  margin-top: 20px;
   max-width: 650px;
   width: 100%;
   padding: 30px;
-  background: #fff;
+  background: #fffefd;
   border-radius: 20px;
-  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  box-shadow: rgba(149, 157, 165, 0.588) 0px 8px 12px;
 }
 .drag-area {
   height: 400px;
-  border: 3px dashed #e0eafc;
+  border: 2px dashed #c6c6c6;
+  background: repeating-linear-gradient(
+  45deg,
+  #f6f6f6,
+  #f6f6f6 50px,
+  #fffefd 50px,
+  #fffefd 100px);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   margin: 10px auto;
+  border-radius: 25px;
 }
 .drag-area.active {
   border: 2px solid #1683ff;
 }
 .upload-container h3 {
+  font-family: 'Ubuntu', sans-serif;
   margin-bottom: 20px;
-  font-weight: 500;
+  font-weight: 1000;
+  color: #000efe;
 }
 .drag-area .header {
   font-size: 20px;

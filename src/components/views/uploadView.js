@@ -9,7 +9,7 @@ function UploadView(props) {
           onDrop={dropFileACB}>
 
           <div class="icon">
-            <i class="fas"></i>
+            <img src="https://img.icons8.com/color/96/null/stack-of-photos--v1.png"/>
           </div>
           <span class="header">{props.dragareaActive == true ? "Release to Upload" : "Drag & Drop"}</span>
           <span class="header">or <span class="browse-button" onClick={browseSpanClickACB}>browse</span></span>
@@ -30,7 +30,7 @@ function UploadView(props) {
                 <v-card-title class="justify-center">{props.uploadMessage.title}</v-card-title>
                 <v-card-subtitle class="justify-center">{props.uploadMessage.subhead}</v-card-subtitle>
                 <v-card-actions>
-                  <v-btn color="primary" block onClick={testACB}>{props.uploadMessage.buttonText}</v-btn>
+                  <v-btn color="primary" block onClick={disableOverlayACB}>{props.uploadMessage.buttonText}</v-btn>
                 </v-card-actions>
               </v-card>
             </v-row>
@@ -69,8 +69,8 @@ function UploadView(props) {
     props.onInputFileChange(evt);
   }
 
-  function testACB() {
-    props.onTest();
+  function disableOverlayACB() {
+    props.onDisableOverlay();
   }
 
   return (

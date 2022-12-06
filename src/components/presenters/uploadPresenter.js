@@ -57,7 +57,8 @@ const UploadPresenter = {
     }
 
     function browseSpanClickACB(event) {
-      this.input.click();
+        this.input = document.querySelector('input');
+        this.input.click();
     }
 
     function uploadImageToAPI() {
@@ -109,11 +110,6 @@ const UploadPresenter = {
       resolvePromiseMock(exampleResponse, this.plantPromiseState, notifyACB.bind(this));
     }
 
-    function sendPlantResultToCollection() {
-      console.log(this.plantObject);
-      useFlowerStore.addPlant(this.plantObject);
-    }
-
     // create listeners
     function dragoverListenerACB(evt) {
       evt.preventDefault();
@@ -147,15 +143,15 @@ const UploadPresenter = {
       }.bind(this));
     }
 
-    function test(evt) {
+    function disableOverlayACB(evt) {
       this.overlay = false;
     }
 
     //console.log(this.userStatus);
-    if (this.userStatus == undefined) {
+    if (this.userStatus === undefined) {
       return;
     }
-    else if (this.userStatus == null) {
+    else if (this.userStatus === null) {
       console.log("bugn");
       this.$router.push({name: "login"});
     }
@@ -170,7 +166,7 @@ const UploadPresenter = {
           onDragleaveFile={dragleaveListenerACB.bind(this)}
           onDropFile={dropListenerACB.bind(this)}
           onInputFileChange={inputChangeListenerACB.bind(this)}
-          onTest={test.bind(this)}
+          onDisableOverlay={disableOverlayACB.bind(this)}
           imageLoaded={this.isFileLoaded}
           fileURL={this.fileURL}
           overlay={this.overlay}

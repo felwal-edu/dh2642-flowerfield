@@ -4,7 +4,7 @@ function CollectionView(props) {
   return (
     <div>
       <div>
-        <h1>This is a collection page!</h1>
+        <h1>Your collection</h1>
       </div>
       <div>{renderCollection(props.plants)}</div>
     </div>
@@ -17,13 +17,15 @@ function renderCollection(plants) {
   }
 
   function createCollectionColCB(plant) {
-    return <td><v-img src={plant.url}></v-img></td>;
+    return <td><img src={plant.url} width="100"></img></td>;
   }
 
   return (
+    <div>
     <table>
-      <tbody>{Object.entries(sortPlants(plants)).forEach(createRowsCB)}</tbody>
+      <tbody>{Object.entries(sortPlants(plants)).map(createRowsCB)}</tbody>
     </table>
+    </div>
   );
 }
 

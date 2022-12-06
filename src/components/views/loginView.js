@@ -28,9 +28,9 @@ function LoginView(props) {
   return (
     <div>
       Email:
-      <input onChange={emailInputChangeACB} value="nils.felix@gmail.com"></input>
+      <input onChange={emailInputChangeACB} value=""></input>
       Password:
-      <input onChange={passwordInputChangeACB} value="Hejhej1"></input>
+      <input onChange={passwordInputChangeACB} value=""></input>
       <button onClick={signUpClickACB}>Sign up</button>
       <button onClick={signInClickACB}>Sign in</button>
     </div>

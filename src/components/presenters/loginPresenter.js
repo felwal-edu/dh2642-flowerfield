@@ -7,8 +7,8 @@ const LoginPresenter = {
   data() {
     return {
         authPromiseState: {},
-        email: "***REMOVED***",
-        password: "***REMOVED***"
+        email: "",
+        password: ""
     };
   },
 

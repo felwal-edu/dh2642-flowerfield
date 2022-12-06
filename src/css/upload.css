@@ -80,11 +80,11 @@
   background-color: #3aa7f9;
   border-color: #7dc7ff;
 }
-.btn.cancle {
+.btn.cancel {
   background-color: #f3f3f3;
   border-color: #d6d6d6;
   color: #080808;
 }
-.btn.cancle:hover {
+.btn.cancel:hover {
   background-color: #ececec;
 }

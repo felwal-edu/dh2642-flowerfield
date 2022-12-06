@@ -110,4 +110,4 @@ Framework used: Vue
 
   - **flowerStore.js**. A Pinia store holding the user data: user id, email, and collected plans. Initialises data by calling the appropriate functions in fiebaseModel.
 
-  - **uploadTemp.js**. Handels backend of uploading image, enableing uploading to database if the upload was successful. Will maybe be moved to another file in the future, hence the: 'temp' name.
+  - **uploadTemp.js**. Handels backend of uploading image, enabling saving to collection (the database) if the upload was successful. Will maybe be moved to another file in the future, hence the 'temp' name.

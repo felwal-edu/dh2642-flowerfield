@@ -7,6 +7,32 @@ export const examplePlant = {
   "url": "https://plant.id/media/images/e45f2ea386694230b908a191a6fbdfd0.jpg",
 }
 
+export const examplePlantArray = [{
+  "id": 381333016,
+  "scientificName": "Rubus idaeus",
+  "genus": "rubus",
+  "species": "idaeus",
+  "date": "2022-12-01",
+  "url": "https://plant.id/media/images/e45f2ea386694230b908a191a6fbdfd0.jpg",
+},
+{
+  "id": 381334016,
+  "scientificName": "Rubus idaeus",
+  "genus": "rubus",
+  "species": "idaeus",
+  "date": "2022-12-01",
+  "url": "https://plant.id/media/images/e45f2ea386694230b908a191a6fbdfd0.jpg",
+},
+{
+  "id": 381933016,
+  "scientificName": "Massive bananus",
+  "genus": "massive",
+  "species": "bananus",
+  "date": "2022-12-01",
+  "url": "https://images.immediate.co.uk/production/volatile/sites/30/2017/01/Bananas-218094b-scaled.jpg",
+}
+]
+
 export const exampleResponse = {
   "id": 67187515,
   "custom_id": null,

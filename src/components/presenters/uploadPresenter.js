@@ -1,22 +1,124 @@
 import UploadView from "../views/uploadView";
-import {commitFile, uploadImageToAPI, abortUpload} from "../../data/uploadTemp.js";
+import {commitFile, abortUpload} from "../../data/uploadTemp.js";
 import "../../css/upload.css";
 
+import resolvePromise from "@/data/network/resolvePromise";
+import { resolvePromiseMock } from "@/data/network/resolvePromise";
+import { getPlantByImage } from "@/data/network/plantIdService";
+import { exampleResponse } from "@/data/network/plantIdServiceMock";
+
+import useFlowerStore from "@/data/flowerStore";
+
 const UploadPresenter = {
-    props: ["model"],
 
     data() {
         return {
-            authPromiseState: {},
-            currentUser: undefined,
+            plantPromiseState: {},
             isFileLoaded: false,
             isActive: false,
             file: null,
             fileURL: null,
+            overlay: false,
+            plantObject: null,
+            userStatus: undefined,
         };
     },
 
     created () {
+        // TODO WAIT FOR FIREBASE TO LOAD FIRS
+        this.userStatus = useFlowerStore().currentUser;
+        useFlowerStore().$subscribe(function (mutation, state) {
+            if (mutation.events.key === "currentUser") {
+                // transform plant list to object with id as key
+                this.userStatus = mutation.events.newValue;
+            }
+        }.bind(this));
+
+        /*
+        this.dragoverListener = dragoverListenerACB.bind(this);
+        this.dragleaveListener = dragleaveListenerACB.bind(this);
+        this.dropListener = dropListenerACB.bind(this);
+        this.inputChangeListener = inputChangeListenerACB.bind(this);
+        */
+    },
+
+    mounted() {
+
+
+
+        // find elements and set events to them
+        this.dragArea = document.querySelector(".drag-area");
+        this.input = document.querySelector('input');
+    },
+
+    beforeUnmount () {
+
+    },
+
+    render() {
+        function onAbortUpload(event) {
+            // reset data
+            this.file = null;
+            this.isActive = false;
+            this.isFileLoaded = false;
+
+            document.querySelectorAll('.btn.upload').item(0).hidden = true;
+            document.querySelectorAll('.btn.cancle').item(0).hidden = true;
+
+            abortUpload();
+        }
+
+        function browseSpanClickACB(event) {
+            this.input.click();
+        }
+
+        function uploadImageToAPI() {
+            function notifyACB() {
+                if (this.plantPromiseState.data?.suggestions) {
+                    // extract relevant information
+                    let plant = this.plantPromiseState.data?.suggestions[0];
+
+                    this.plantObject = {
+                        "id": plant.id,
+                        "scientificName": plant.plant_name,
+                        "genus": plant.plant_details.structured_name.genus,
+                        "species": plant.plant_details.structured_name.species,
+                        "date": this.plantPromiseState.data.meta_data.date,
+                        "url": this.plantPromiseState.data.images[0],
+                    }
+
+                    // check if the plant exist already, if so we grey out the "add collection button"
+                    //useFlowerStore.hasPlant(this.plantObject.id)
+
+                    console.log("my plant! ");
+                    console.log(this.plantObject);
+
+                    //sendPlantResultToCollection().bind(this);
+                    useFlowerStore().addPlant(this.plantObject);
+
+                    //this.overlay = document.querySelector("bingus");
+                    this.overlay = true;
+                    this.overlay = false;
+                }
+            }
+
+            if (this.fileURL == null || this.fileURL == "")
+                return;
+
+            let base64 = this.fileURL.replace('data:', '').replace(/^.+,/, '');
+
+            // REAL CALL:
+            //resolvePromise(getPlantByImage(base64), this.plantPromiseState, notifyACB.bind(this));
+
+            // FAKE CALL:
+            resolvePromiseMock(exampleResponse, this.plantPromiseState, notifyACB.bind(this));
+        }
+
+        function sendPlantResultToCollection() {
+            console.log(this.plantObject);
+            useFlowerStore.addPlant(this.plantObject);
+        }
+
         // create listeners
         function dragoverListenerACB(evt) {
             evt.preventDefault();
@@ -50,66 +152,24 @@ const UploadPresenter = {
             }.bind(this));
         }
 
-        this.dragoverListener = dragoverListenerACB.bind(this);
-        this.dragleaveListener = dragleaveListenerACB.bind(this);
-        this.dropListener = dropListenerACB.bind(this);
-        this.inputChangeListener = inputChangeListenerACB.bind(this);
-    },
+        //console.log(this.userStatus);
 
-    mounted() {
-        // find elements and set events to them
-        this.dragArea = document.querySelector(".drag-area");
-        this.input = document.querySelector('input');
-
-        this.dragArea.addEventListener("dragover", this.dragoverListener);
-        this.dragArea.addEventListener("dragleave", this.dragleaveListener);
-        this.dragArea.addEventListener("drop", this.dropListener);
-        this.input.addEventListener("change", this.inputChangeListener);
-    },
-
-    beforeUnmount () {
-        let dragArea = document.querySelector(".drag-area");
-        let input = document.querySelector('input');
-
-        // if we render the image, drag-area is null
-        if (dragArea != null) {
-            // remove event at teardown
-            dragArea.removeEventListener("dragover", this.dragoverListener);
-            dragArea.removeEventListener("dragleave", this.dragleaveListenerACB);
-            dragArea.removeEventListener("drop", this.dropListener);
+        if (this.userStatus == undefined) {
+            return;
         }
-
-        if (input != null) {
-            input.removeEventListener("change", this.inputChangeListener);
+        else if (this.userStatus == null) {
+            console.log("bugn");
+            this.$router.push({name: "login"});
         }
-    },
-
-    render() {
-        function onAbortUpload(event) {
-            // reset data
-            this.file = null;
-            this.isActive = false;
-            this.isFileLoaded = false;
-
-            document.querySelectorAll('.btn.upload').item(0).hidden = true;
-            document.querySelectorAll('.btn.cancle').item(0).hidden = true;
-
-            abortUpload();
+        else {
+            return (
+                <UploadView onUploadImageToAPI={uploadImageToAPI.bind(this)} onAbortUpload={onAbortUpload.bind(this)} onBrowseSpanClick={browseSpanClickACB.bind(this)}
+                dragareaActive={this.isActive} imageLoaded={this.isFileLoaded} fileURL={this.fileURL}
+                onDragoverFile={dragoverListenerACB.bind(this)} onDragleaveFile={dragleaveListenerACB.bind(this)}
+                    onDropFile={dropListenerACB.bind(this)} onInputFileChange={inputChangeListenerACB.bind(this)}/>
+            );
         }
-
-        function browseSpanClickACB(event) {
-            this.input.click();
-        }
-
-        return (
-            <UploadView onUploadImageToAPI={uploadImageToAPI} onAbortUpload={onAbortUpload.bind(this)}
-                onBrowseSpanClick={browseSpanClickACB.bind(this)} dragareaActive={this.isActive}
-                imageLoaded={this.isFileLoaded} fileURL={this.fileURL}/>
-        );
     }
 }
-
-
-
 
 export default UploadPresenter;

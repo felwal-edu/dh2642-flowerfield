@@ -21,17 +21,23 @@ function UploadView(props) {
                     <div class="image-container">
                         <img src={props.fileURL} alt=""></img>
                     </div>
-                    <v-overlay v-model={props.overlay}>
-                    <v-card>
-                        <v-card-text>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                        </v-card-text>
-                        <v-card-actions>
-                            <button onClick={testACB}>
-                                Close Dialog
-                            </button>
-                        </v-card-actions>
-                    </v-card>
+                    <v-overlay v-model={props.overlay} class="justify-center" justify="center">
+                    <v-row
+                        align="center"
+                        justify="center"
+                        >
+                        <v-card>
+                            <v-card-title class="justify-center">
+                                {props.uploadMessage.title}
+                            </v-card-title>
+                            <v-card-subtitle class="justify-center">
+                                {props.uploadMessage.subhead}
+                            </v-card-subtitle>
+                            <v-card-actions>
+                                <v-btn color="primary" block onClick={testACB}>{props.uploadMessage.buttonText}</v-btn>
+                            </v-card-actions>
+                        </v-card>
+                    </v-row>
                     </v-overlay>
                 </div>
 
@@ -51,7 +57,6 @@ function UploadView(props) {
     }
 
     function dragoverFileACB(evt) {
-        //evt.preventDefault();
         props.onDragoverFile(evt);
     }
 
@@ -60,7 +65,6 @@ function UploadView(props) {
     }
 
     function dropFileACB(evt) {
-        //evt.preventDefault();
         props.onDropFile(evt);
     }
 
@@ -69,7 +73,7 @@ function UploadView(props) {
     }
 
     function testACB(){
-        props.overlay = false;
+        props.onTest();
     }
 
     return (

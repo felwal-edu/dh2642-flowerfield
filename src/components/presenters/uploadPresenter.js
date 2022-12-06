@@ -21,6 +21,7 @@ const UploadPresenter = {
             overlay: false,
             plantObject: null,
             userStatus: undefined,
+            uploadMessage: {},
         };
     },
 
@@ -33,19 +34,9 @@ const UploadPresenter = {
                 this.userStatus = mutation.events.newValue;
             }
         }.bind(this));
-
-        /*
-        this.dragoverListener = dragoverListenerACB.bind(this);
-        this.dragleaveListener = dragleaveListenerACB.bind(this);
-        this.dropListener = dropListenerACB.bind(this);
-        this.inputChangeListener = inputChangeListenerACB.bind(this);
-        */
     },
 
     mounted() {
-
-
-
         // find elements and set events to them
         this.dragArea = document.querySelector(".drag-area");
         this.input = document.querySelector('input');
@@ -84,21 +75,27 @@ const UploadPresenter = {
                         "genus": plant.plant_details.structured_name.genus,
                         "species": plant.plant_details.structured_name.species,
                         "date": this.plantPromiseState.data.meta_data.date,
-                        "url": this.plantPromiseState.data.images[0],
+                        "url": this.plantPromiseState.data.images[0].url,
                     }
 
                     // check if the plant exist already, if so we grey out the "add collection button"
-                    //useFlowerStore.hasPlant(this.plantObject.id)
+                    if (useFlowerStore().hasPlant(this.plantObject.scientificName)) {
+                        this.uploadMessage = {
+                            "title": this.plantObject.scientificName,
+                            "subhead": "Already exists in your collection.",
+                            "buttonText": "Continue"
+                        }
+                    }
+                    else {
+                        this.uploadMessage = {
+                            "title": "NEW! " + this.plantObject.scientificName,
+                            "subhead": "You photographed a new flower!",
+                            "buttonText": "Add to collection"
+                        }
+                    }
 
-                    console.log("my plant! ");
-                    console.log(this.plantObject);
-
-                    //sendPlantResultToCollection().bind(this);
-                    useFlowerStore().addPlant(this.plantObject);
-
-                    //this.overlay = document.querySelector("bingus");
                     this.overlay = true;
-                    this.overlay = false;
+                    useFlowerStore().addPlant(this.plantObject);
                 }
             }
 
@@ -152,8 +149,11 @@ const UploadPresenter = {
             }.bind(this));
         }
 
-        //console.log(this.userStatus);
+        function test(evt) {
+            this.overlay = false;
+        }
 
+        //console.log(this.userStatus);
         if (this.userStatus == undefined) {
             return;
         }
@@ -163,10 +163,13 @@ const UploadPresenter = {
         }
         else {
             return (
-                <UploadView onUploadImageToAPI={uploadImageToAPI.bind(this)} onAbortUpload={onAbortUpload.bind(this)} onBrowseSpanClick={browseSpanClickACB.bind(this)}
-                dragareaActive={this.isActive} imageLoaded={this.isFileLoaded} fileURL={this.fileURL}
+                <UploadView onUploadImageToAPI={uploadImageToAPI.bind(this)} onAbortUpload={onAbortUpload.bind(this)}
+                onBrowseSpanClick={browseSpanClickACB.bind(this)} dragareaActive={this.isActive}
                 onDragoverFile={dragoverListenerACB.bind(this)} onDragleaveFile={dragleaveListenerACB.bind(this)}
-                    onDropFile={dropListenerACB.bind(this)} onInputFileChange={inputChangeListenerACB.bind(this)}/>
+                onDropFile={dropListenerACB.bind(this)} onInputFileChange={inputChangeListenerACB.bind(this)}
+                onTest={test.bind(this)} imageLoaded={this.isFileLoaded} fileURL={this.fileURL} overlay={this.overlay}
+                uploadMessage={this.uploadMessage}
+                />
             );
         }
     }

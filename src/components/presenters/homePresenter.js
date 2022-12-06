@@ -1,6 +1,10 @@
 import HomeView from "../views/homeView";
 
-export default
-function Home(){
-    return <HomeView />;
+const HomePresenter = {
+
+    render() {
+        return <HomeView />;
+    }
 }
+
+export default HomePresenter

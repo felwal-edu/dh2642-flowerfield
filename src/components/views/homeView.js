@@ -1,18 +1,8 @@
-
-import useFlowerStore  from "@/data/flowerStore";
-import { examplePlant } from "@/data/network/plantIdServiceMock";
 import logopath from "@/assets/testlogo.png";
 import background from "@/assets/home_parallax.jpg";
 import "@/css/home.css"
 
-
 function HomeView() {
-    const store = useFlowerStore()
-
-    function plantInfoACB(evt) {
-        store.addPlant(examplePlant)
-    }
-
     return (
         <div>
             <v-parallax height="600" src={background}>
@@ -22,10 +12,6 @@ function HomeView() {
                     </div>
                 </div>
             </v-parallax>
-
-
-            <button onclick={plantInfoACB}>add plants</button>
-            <v-card text="..."></v-card>
             <div class="information-page">
                 This is a test to try this websites parallax effect! Scroll down and try it please!
             </div>

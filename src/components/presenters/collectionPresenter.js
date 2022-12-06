@@ -4,6 +4,5 @@ import CollectionView from "../views/collectionView.js";
 
 export default
 function Collection(props){
-    //change examplePlantArray back to useFlowerStore().plants
-    return <CollectionView plants={examplePlantArray}/>;
+    return <CollectionView plants={useFlowerStore().plants}/>;
 }

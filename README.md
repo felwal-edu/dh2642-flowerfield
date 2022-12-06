@@ -6,7 +6,7 @@ The course moment PRO1 in DH2642 Interaction Programming and the Dynamic Web.
 
 Group 42: Elliot Darth, Felix Wallin, Linus Wallin, Matias Eriksson
 
-**NOTE**: please only call the API once or twice, since we have limited quota.
+** **NOTE**: please only call the API once or twice, since we have limited quota.**
 
 ## Project description
 
@@ -110,4 +110,4 @@ Framework used: Vue
 
   - **flowerStore.js**. A Pinia store holding the user data: user id, email, and collected plans. Initialises data by calling the appropriate functions in fiebaseModel.
 
-  - **uploadTemp.js**. TODO
+  - **uploadTemp.js**. Handels backend of uploading image, enableing uploading to database if the upload was successful. Will maybe be moved to another file in the future, hence the: 'temp' name.

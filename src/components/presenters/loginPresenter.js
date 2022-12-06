@@ -8,7 +8,9 @@ const LoginPresenter = {
     return {
         authPromiseState: {},
         email: "",
-        password: ""
+        password: "",
+        snackbar: false,
+        errorMessage: ""
     };
   },
 
@@ -16,9 +18,14 @@ const LoginPresenter = {
     function authResultACB() {
       if (this.authPromiseState.error) {
         console.error(this.authPromiseState.error.message);
+        this.errorMessage = this.authPromiseState.error.message;
+        this.snackbar = true;
       }
-
-      // we probably dont need to do anything here
+      // return to home if login was successful!
+      else if (this.authPromiseState.data !== null) {
+        console.log("logged in!");
+        this.$router.push({name: "home"});
+      }
     }
 
     function signUpACB() {
@@ -37,13 +44,20 @@ const LoginPresenter = {
       this.password = password;
     }
 
+    function closeErrorSnackbar(){
+      this.snackbar = false;
+    }
+
     return (
       <LoginView
         currentUser={useFlowerStore().currentUser}
         onEmailChange={emailChangeACB.bind(this)}
         onPasswordChange={passwordChangeACB.bind(this)}
         onSignUp={signUpACB.bind(this)}
-        onSignIn={signInACB.bind(this)} />
+        onSignIn={signInACB.bind(this)}
+        onCloseErrorSnackbar={closeErrorSnackbar.bind(this)}
+        snackbar={this.snackbar}
+        errorMessage={this.errorMessage} />
     );
   }
 }

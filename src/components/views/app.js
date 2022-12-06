@@ -16,18 +16,30 @@ export default function App() {
     if (!userStatus) {
       return (
         <v-toolbar-items class="hidden-sm-and-down">
-          <router-link to="/"><v-btn text>Home</v-btn></router-link>
-          <router-link to="/login"><v-btn text>Login</v-btn></router-link>
+          <router-link to="/">
+            <v-btn text size="80">Home</v-btn>
+          </router-link>
+          <router-link to="/login">
+            <v-btn text size="80">Login</v-btn>
+          </router-link>
         </v-toolbar-items>
       );
     }
 
     return (
       <v-toolbar-items class="hidden-sm-and-down">
-        <router-link to="/"><v-btn text>Home</v-btn></router-link>
-        <router-link to="/upload"><v-btn text>Upload</v-btn></router-link>
-        <router-link to="/collection"><v-btn text>Collection</v-btn></router-link>
-        <router-link to="/profile"><v-btn text>Profile</v-btn></router-link>
+        <router-link to="/">
+            <v-btn text size="80">Home</v-btn>
+        </router-link>
+        <router-link to="/upload">
+            <v-btn text size="80">Upload</v-btn>
+        </router-link>
+        <router-link to="/collection">
+            <v-btn text height="80" width="110">Collection</v-btn>
+        </router-link>
+        <router-link to="/profile">
+            <v-btn text size="80">Profile</v-btn>
+        </router-link>
       </v-toolbar-items>
     );
   }

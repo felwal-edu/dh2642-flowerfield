@@ -6,7 +6,7 @@ The course moment PRO1 in DH2642 Interaction Programming and the Dynamic Web.
 
 Group 42: Elliot Darth, Felix Wallin, Linus Wallin, Matias Eriksson
 
-** **NOTE**: please only call the API once or twice, since we have limited quota.**
+**NOTE**: **please only call the API once or twice, since we have limited quota.**
 
 ## Project description
 

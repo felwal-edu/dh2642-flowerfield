@@ -44,6 +44,8 @@ Have some good way of waiting for Firebase to load data – and not let the user
 
 Probably implement a `detailPresenter` and -`View`, allowing the user to click on a plant and view more detailed info.
 
+Experience points (XP) for collecting flowers, added to ones profile.
+
 ## Project file structure (short description/purpose of each file)
 
 Framework used: Vue

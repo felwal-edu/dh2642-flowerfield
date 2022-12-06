@@ -1,16 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&display=swap');
+
 .landing-page {
     position: relative;
     height: 60vh;
     width: 100%;
 }
 
+.center {
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+    justify-content: center;
+    text-align: center;
+    font-size: 2em;
+}
+
+.center p {
+    margin-top: 30px;
+    padding-bottom: 5px;
+    -webkit-filter: drop-shadow(1px 1px 6px #3c3c3c);
+    filter: drop-shadow(1px 1px 6px #3c3c3c);
+    font-family: 'Dancing Script', cursive;
+}
+
+.center a {
+    text-decoration: none;
+    color: #fffefd;
+}
+
 .landing-page .logo {
     width: 100%;
     height: 100%;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+
     margin: auto;
     display: block;
     max-width:500px;
@@ -23,4 +44,8 @@
 .information-page {
     height: 1000px;
     background-color: white;
+}
+
+.subheader {
+    color: #96c29f;
 }

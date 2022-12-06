@@ -1,27 +1,33 @@
-#nav {
-  position: absolute;
-  top: 0;
-  right: 0;
-  padding: 20px;
-  background: #2e4f4a;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  border-bottom: 5px solid #a4afb1;
-  border-left: 5px solid #a4afb1;
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
 }
-#nav a {
+
+/* pushes windows down so they are not covered by navbar*/
+body {
+  margin-top: 60px;
+}
+
+.nav-title {
+  color: #0d0963;
+  font-family: 'Pacifico', cursive;
+}
+
+.v-toolbar-items a {
   margin-right: 15px;
-  color: rgb(47, 255, 71);
+  color: #0d0963;
   opacity: 0.7;
+  font-family: 'Pacifico', cursive;
   text-decoration: none;
   font-weight: bold;
 }
-#nav a.router-link-active,
-#nav a:hover {
+.v-toolbar-items a.router-link-active,
+.v-toolbar-items a:hover {
   opacity: 1;
 }
 
-body {
-  margin-top: 75px;
-}
+

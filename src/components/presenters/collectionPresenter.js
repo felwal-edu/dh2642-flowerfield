@@ -7,6 +7,7 @@ const CollectionPresenter = {
   data() {
     return {
       userStatus: undefined,
+      test: false,
     };
   },
 
@@ -21,6 +22,7 @@ const CollectionPresenter = {
   },
 
   render() {
+    this.test = true;
     //console.log(useFlowerStore().plants);
     if(this.userStatus == undefined) {
       return;
@@ -28,7 +30,7 @@ const CollectionPresenter = {
     else {
       return (
         <CollectionView
-          plants={useFlowerStore().plants} />
+          plants={useFlowerStore().plants} test={this.test} />
       );
     }
   },

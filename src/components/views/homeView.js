@@ -38,7 +38,7 @@ function HomeView(props) {
                 <v-row justify="center" align="center" class="mt-14">
                 <h1> A relaxing experience. </h1>
                 </v-row>
-                <v-row justify="center">
+                <v-row justify="center" align="center">
                     <img class="home-photo" src={home_photo} alt="Logo"  />
                     <p>Take pictures of flowers and plants - Flowerfield can automatically identify them, <br></br>
                     providing you with new information about your surroundings.</p>

@@ -25,10 +25,13 @@ export function updateFirebaseFromStore(store) {
     if (!mutation.events) return;
 
     function toIdKeyedObjectCB(obj, plant) {
-      return {...obj, [plant.id]: plant};
+      return {...obj, [plant.scientificName]: plant};
     }
 
+    console.log(mutation.events.key);
     if (mutation.events.key === "plants") {
+      console.log("IS CALLED");
+
       // transform plant list to object with id as key
       const plantsObj = mutation.events.newValue.reduce(toIdKeyedObjectCB, {});
       set(ref(db, REF + "/users/" + store.currentUser.uid + "/plants/"), plantsObj);

@@ -1,5 +1,5 @@
 import UploadView from "../views/uploadView";
-import {commitFile, abortUpload} from "../utils/uploadUtils.js";
+import { commitFile, abortUpload } from "../utils/uploadUtils.js";
 import "../css/upload.css";
 import resolvePromise from "@/utils/resolvePromise";
 import { resolvePromiseMock } from "@/utils/resolvePromise";

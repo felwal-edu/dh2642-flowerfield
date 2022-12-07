@@ -34,23 +34,25 @@ We load images by letting the user upload these, either via drag-and-drop or by 
 
 We have created the different presenters and views which make up the website.
 
+Experience points (XP) for collecting flowers, added to one's profile.
+
+Let the user wait while Firebase is loading data – and block pages only available to logged in users.
+
+Standaradise use of colours and fonts.
+
 ## What we still plan to do
 
-Make the website look okay.
-
-Make "Login" and "Profile" mutually exclusive.
-
-Have some good way of waiting for Firebase to load data – and not let the user in while not logged in.
+Make the website look even better.
 
 Probably implement a `detailPresenter` and -`View`, allowing the user to click on a plant and view more detailed info.
-
-Experience points (XP) for collecting flowers, added to one's profile. Also create ranks for leveling up.
 
 _Visability of system status_. Make the navbar clearly display which page the user is on.
 
 Adapt the navbar to mobile.
 
 Maybe use a second API for fetching more detailed plant info, and fetching all plants within a species – to let the user 'fill out' their collection and se what they are missing.
+
+Create ranks for leveling up using XP.
 
 ## Project file structure
 
@@ -118,4 +120,4 @@ Framework used: Vue
 
   - `flowerStore.js`. A Pinia store holding the user data: user id, email, and collected plans. Initialises data by calling the appropriate functions in fiebaseModel.
 
-  - `uploadTemp.js`. Handels backend of uploading image, enabling saving to collection (the database) if the upload was successful. Will maybe be moved to another file in the future, hence the 'temp' name.
+  - `uploadTemp.js`. Handles backend of uploading image, enabling saving to collection (the database) if the upload was successful. Will maybe be moved to another file in the future, hence the 'temp' name.

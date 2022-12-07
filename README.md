@@ -6,7 +6,7 @@ The course moment PRO1 in DH2642 Interaction Programming and the Dynamic Web.
 
 Group 42: Elliot Darth, Felix Wallin, Linus Wallin, Matias Eriksson
 
-**NOTE**: **please only call the API once or twice, since we have limited quota.**
+**NOTE: please only call the API once or twice, since we have limited quota.**
 
 ## Project description
 
@@ -44,9 +44,15 @@ Have some good way of waiting for Firebase to load data – and not let the user
 
 Probably implement a `detailPresenter` and -`View`, allowing the user to click on a plant and view more detailed info.
 
-Experience points (XP) for collecting flowers, added to ones profile.
+Experience points (XP) for collecting flowers, added to one's profile. Also create ranks for leveling up.
 
-## Project file structure (short description/purpose of each file)
+_Visability of system status_. Make the navbar clearly display which page the user is on.
+
+Adapt the navbar to mobile.
+
+Maybe use a second API for fetching more detailed plant info, and fetching all plants within a species – to let the user 'fill out' their collection and se what they are missing.
+
+## Project file structure
 
 Framework used: Vue
 
@@ -54,62 +60,62 @@ Framework used: Vue
 
 - _css_
 
-- **main.js**. Creates the app and sets up router, Pinia, Vuetify, and loads fonts.
+- `main.js`. Creates the app and sets up router, Pinia, Vuetify, and loads fonts.
 
-- **utilities.js**. Some utility functions.
+- `utilities.js`. Some utility functions.
 
 - _plugins_
 
-  - **veutify.js**. Creates a Veutify instance.
+  - `veutify.js`. Creates a Veutify instance.
 
-  - **webfontloader.js**. Defines a function for loading web fonts.
+  - `webfontloader.js`. Defines a function for loading web fonts.
 
 - _router_
 
-  - **index.js**. Routes different paths to different pages.
+  - `index.js`. Routes different paths to different pages.
 
 - _views_
 
-  - **app.js**. Defines the base HTML. It uses router links to show the right page.
+  - `app.js`. Defines the base HTML. It uses router links to show the right page.
 
-  - **loginView.js**. Let's the user log in or sign up.
+  - `loginView.js`. Let's the user log in or sign up.
 
-  - **profileView.js**. Displays the user's information, including email. Also let's the user log out.
+  - `profileView.js`. Displays the user's information, including email. Also let's the user log out.
 
-  - **collectionView.js**. Displays the user's collected plants, sorted by name and grouped by genus.
+  - `collectionView.js`. Displays the user's collected plants, sorted by name and grouped by genus.
 
-  - **uploadView.js**. Allows for uploading of an image to be classified as a specific plant via Plant.id's API. You can then add it to your collection.
+  - `uploadView.js`. Allows for uploading of an image to be classified as a specific plant via Plant.id's API. You can then add it to your collection.
 
 - _presenters_
 
-  - **loginPresenter.js**. Presents loginView.
+  - `loginPresenter.js`. Presents loginView.
 
-  - **profilePresenter.js**. Presents profileView.
+  - `profilePresenter.js`. Presents profileView.
 
-  - **collectionPresenter.js**. Presents collectionView.
+  - `collectionPresenter.js`. Presents collectionView.
 
-  - **uploadPresenter.js**. Presents uploadView.
+  - `uploadPresenter.js`. Presents uploadView.
 
 - _data_
 
   - _network_
 
-    - **plantIdService.js**. Interface for calling the Plant.id API. It takes an image encoded as base64 as parameter, and produces a response which includes a list of suggested plants which match the image.
+    - `plantIdService.js`. Interface for calling the Plant.id API. It takes an image encoded as base64 as parameter, and produces a response which includes a list of suggested plants which match the image.
 
-    - **plantIdServiceMock.js**. Cached API-results, used to not have to make excessive API calls while developing.
+    - `plantIdServiceMock.js`. Cached API-results, used to not have to make excessive API calls while developing.
 
-    - **plantIdSecrets.js**. Config for Plant.id, includes API key.
+    - `plantIdSecrets.js`. Config for Plant.id, includes API key.
 
-    - **resolvePromise.js**. A function for resolving a promise; extracting data and errors and notifying listeners.
+    - `resolvePromise.js`. A function for resolving a promise; extracting data and errors and notifying listeners.
 
   - _persistence_
 
-    - **firebaseAuth.js**. Authenticates the user. Contains functions for signing up, in and out; and observing changes to "user login" state.
+    - `firebaseAuth.js`. Authenticates the user. Contains functions for signing up, in and out; and observing changes to "user login" state.
 
-    - **firebaseModel.js**. Syncs and desyncs data between Firebase and Pinia.
+    - `firebaseModel.js`. Syncs and desyncs data between Firebase and Pinia.
 
-    - **firebaseSecrets.js**. Config for Firebase, includes API key.
+    - `firebaseSecrets.js`. Config for Firebase, includes API key.
 
-  - **flowerStore.js**. A Pinia store holding the user data: user id, email, and collected plans. Initialises data by calling the appropriate functions in fiebaseModel.
+  - `flowerStore.js`. A Pinia store holding the user data: user id, email, and collected plans. Initialises data by calling the appropriate functions in fiebaseModel.
 
-  - **uploadTemp.js**. Handels backend of uploading image, enabling saving to collection (the database) if the upload was successful. Will maybe be moved to another file in the future, hence the 'temp' name.
+  - `uploadTemp.js`. Handels backend of uploading image, enabling saving to collection (the database) if the upload was successful. Will maybe be moved to another file in the future, hence the 'temp' name.

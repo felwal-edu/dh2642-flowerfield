@@ -1,4 +1,4 @@
-import useFlowerStore  from "@/data/flowerStore";
+import useFlowerStore from "@/data/flowerStore";
 import { signOutUser } from "@/data/persistence/firebaseAuth";
 import ProfileView from "../views/profileView";
 
@@ -16,7 +16,10 @@ const ProfilePresenter = {
     return (
       <ProfileView
         currentUser={useFlowerStore().currentUser}
-        onSignOut={signOutACB} />
+        onSignOut={signOutACB}
+        userExperience={useFlowerStore().experience}
+        amountPlants={useFlowerStore().plants.length} />
+
     );
   }
 }

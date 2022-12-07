@@ -1,6 +1,7 @@
 import firebaseConfig from "./firebaseSecrets";
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, set, onChildAdded, onChildRemoved, get, child } from "firebase/database";
+import useFlowerStore from "../flowerStore";
 
 // init
 
@@ -23,26 +24,30 @@ export function updateFirebaseFromStore(store) {
   console.log("updateFirebaseFromStore")
 
   function dataChangedInStoreACB(mutation, state) {
-    console.log("mutation:")
-    console.log(mutation)
-    console.log("state:")
-    console.log(state)
+    //console.log("mutation:");
+    //console.log(mutation);
+    //console.log("state:");
+    //console.log(state);
 
-    // check if nothng has changed
-    if (!mutation.events) return;
+    // check if nothing has changed
+    //if (!mutation.events) return;
 
     function toIdKeyedObjectCB(obj, plant) {
       return {...obj, [plant.scientificName]: plant};
     }
 
-    console.log(mutation.events.key);
-    if (mutation.events.key === "plants") {
+    //console.log(mutation.events.key);
+
+    /*if (mutation.events.key === "plants") {
       console.log("IS CALLED");
 
       // transform plant list to object with id as key
       const plantsObj = mutation.events.newValue.reduce(toIdKeyedObjectCB, {});
       set(ref(db, REF + "/users/" + store.currentUser.uid + "/plants/"), plantsObj);
-    }
+    }*/
+
+    const plantsObj = store.plants.reduce(toIdKeyedObjectCB, {});
+    set(ref(db, REF + "/users/" + store.currentUser.uid + "/plants/"), plantsObj);
   }
 
   unsubscribers = [

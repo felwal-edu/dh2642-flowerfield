@@ -9,8 +9,8 @@ import useFlowerStore from './data/flowerStore.js';
 loadFonts()
 
 const app = createApp(App)
-  .use(router)
   .use(createPinia())
+  .use(router)
   .use(vuetify);
 
 app.mount("#app");

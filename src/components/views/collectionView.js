@@ -14,7 +14,6 @@ function CollectionView(props) {
 
 function renderCollection(plants) {
   function createRowsCB(plantItem) {
-    console.log(plantItem);
     return (
       <v-expansion-panels focusable>
         <v-expansion-panel title={capitalize(plantItem[0]) + " (" + plantItem[1].length + ")"}>
@@ -30,7 +29,7 @@ function renderCollection(plants) {
     return (
       <td>
         <v-card
-        max-width = "150">
+        max-width = "150" class="mx-3">
           <v-img src={plant.url} width="150" />
           <v-card-title class="plant-name">{capitalize(plant.scientificName.split(" ")[1])}</v-card-title>
         </v-card>

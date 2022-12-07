@@ -34,8 +34,6 @@ We load images by letting the user upload these, either via drag-and-drop or by 
 
 We have created the different presenters and views which make up the website.
 
-Experience points (XP) for collecting flowers, added to one's profile.
-
 Let the user wait while Firebase is loading data – and block pages only available to logged in users.
 
 Standaradise use of colours and fonts.
@@ -52,11 +50,11 @@ Probably implement a `detailPresenter` and -`View`, allowing the user to click o
 
 _Visability of system status_. Make the navbar clearly display which page the user is on.
 
-Adapt the navbar to mobile.
+Adapt to mobile.
 
-Maybe use a second API for fetching more detailed plant info, and fetching all plants within a species – to let the user 'fill out' their collection and se what they are missing.
+Experience points (XP) for collecting flowers, added to one's profile. Ranks for leveling up.
 
-Create ranks for leveling up using XP.
+Maybe use a second API for fetching more detailed plant info, and fetching all plants within a species – to let the user 'fill out' their collection and see what they are missing.
 
 ## Project file structure
 

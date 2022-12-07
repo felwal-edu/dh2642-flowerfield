@@ -20,7 +20,14 @@ export function createUser(user) {
 }
 
 export function updateFirebaseFromStore(store) {
+  console.log("updateFirebaseFromStore")
+
   function dataChangedInStoreACB(mutation, state) {
+    console.log("mutation:")
+    console.log(mutation)
+    console.log("state:")
+    console.log(state)
+
     // check if nothng has changed
     if (!mutation.events) return;
 

@@ -17,9 +17,7 @@ const useFlowerStore = defineStore({
 
     experienceadder() {
       this.experience += 10;
-
     },
-
 
     initUser() {
       function signedInACB(user) {
@@ -55,9 +53,9 @@ const useFlowerStore = defineStore({
         return;
       }
 
+      //this.experienceadder()
       this.plants = [...this.plants, plant];
       console.log(plant + " has been added");
-      //this.experienceadder()
     },
 
     removePlant(plantId) {

@@ -28,7 +28,7 @@ const CollectionPresenter = {
     else {
       return (
         <CollectionView
-          plants={examplePlantArray /*useFlowerStore().plants*/} />
+          plants={useFlowerStore().plants} />
       );
     }
   },

@@ -1,6 +1,7 @@
 import useFlowerStore from "@/data/flowerStore.js";
 import { examplePlantArray } from "@/data/network/plantIdServiceMock.js";
 import CollectionView from "../views/collectionView.js";
+import "../../css/collection.css";
 
 const CollectionPresenter = {
   data() {
@@ -27,7 +28,7 @@ const CollectionPresenter = {
     else {
       return (
         <CollectionView
-          plants={useFlowerStore().plants} />
+          plants={examplePlantArray /*useFlowerStore().plants*/} />
       );
     }
   },

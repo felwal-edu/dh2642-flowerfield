@@ -35,7 +35,7 @@ function HomeView(props) {
       <div class="information-page">
         <v-container justify="center">
             <v-col align-self="start" class="justify-center align-center pa-0" cols="12">
-                <v-row justify="center" class="mt-14">
+                <v-row justify="center" align="center" class="mt-14">
                 <h1> A relaxing experience. </h1>
                 </v-row>
                 <v-row justify="center">

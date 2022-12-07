@@ -28,10 +28,11 @@ function renderCollection(plants, test) {
   function createCollectionColCB(plant) {
     return (
       <td>
-        <v-card
-        max-width = "150" class="mx-3">
+        <v-card max-width = "150" class="mx-3">
           <v-img src={plant.url} width="150" />
-          <v-card-title class="plant-name">{capitalize(plant.scientificName.split(" ")[1])}</v-card-title>
+          <v-card-title class="plant-name">
+            {capitalize(plant.scientificName.split(" ")[1])}
+          </v-card-title>
         </v-card>
       </td>
     );

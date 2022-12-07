@@ -3,6 +3,7 @@ export default function resolvePromise(promise, promiseState, notifyACB) {
 
   // cancel uncompleted previous promise
   if (promiseState.promise && !promiseState.data && !promiseState.error) {
+    // TODO: cancel
     //cancelPromise(promiseState.promise);
   }
 

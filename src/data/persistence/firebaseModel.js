@@ -21,14 +21,7 @@ export function createUser(user) {
 }
 
 export function updateFirebaseFromStore(store) {
-  console.log("updateFirebaseFromStore")
-
   function dataChangedInStoreACB(mutation, state) {
-    //console.log("mutation:");
-    //console.log(mutation);
-    //console.log("state:");
-    //console.log(state);
-
     // check if nothing has changed
     //if (!mutation.events) return;
 
@@ -36,7 +29,10 @@ export function updateFirebaseFromStore(store) {
       return {...obj, [plant.scientificName]: plant};
     }
 
-    //console.log(mutation.events.key);
+    // NOTE: mutation.events is undefined during production.
+    // this means we can't se what was changed.
+    // as a temp solution, instead of just adding the added plant,
+    // we set the whole array.
 
     /*if (mutation.events.key === "plants") {
       console.log("IS CALLED");

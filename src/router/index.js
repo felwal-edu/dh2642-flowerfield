@@ -1,35 +1,35 @@
-import { createRouter, createWebHistory } from 'vue-router';
-import Home from '@/components/presenters/homePresenter.js';
-import Collection from '@/components/presenters/collectionPresenter.js';
-import LoginPresenter from '@/components/presenters/loginPresenter.js';
-import ProfilePresenter from '@/components/presenters/profilePresenter';
-import Upload from '@/components/presenters/uploadPresenter';
+import { createRouter, createWebHistory } from "vue-router";
+import Home from "@/components/presenters/homePresenter.js";
+import Collection from "@/components/presenters/collectionPresenter.js";
+import LoginPresenter from "@/components/presenters/loginPresenter.js";
+import ProfilePresenter from "@/components/presenters/profilePresenter";
+import UploadPresenter from "@/components/presenters/uploadPresenter";
 
 const routes = [
   {
-    path: '/',
-    name: 'home',
+    path: "/",
+    name: "home",
     component: Home
   },
   {
-    path: '/login',
-    name: 'login',
+    path: "/login",
+    name: "login",
     component: LoginPresenter
   },
   {
-    path: '/collection',
-    name: 'collection',
+    path: "/collection",
+    name: "collection",
     component: Collection
   },
   {
-    path: '/profile',
-    name: 'profile',
+    path: "/profile",
+    name: "profile",
     component: ProfilePresenter
   },
   {
-    path: '/upload',
-    name: 'upload',
-    component: Upload
+    path: "/upload",
+    name: "upload",
+    component: UploadPresenter
   }
 
 ]

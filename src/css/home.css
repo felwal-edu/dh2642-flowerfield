@@ -2,97 +2,97 @@
 @import url('https://fonts.googleapis.com/css2?family=Alexandria:wght@200&family=Ubuntu:wght@500&display=swap');
 
 .landing-page {
-    position: relative;
-    height: 60vh;
-    width: 100%;
+  position: relative;
+  height: 60vh;
+  width: 100%;
 }
 
 .center {
-    margin: auto;
-    width: 50%;
-    padding: 10px;
-    justify-content: center;
-    text-align: center;
-    font-size: 2em;
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+  justify-content: center;
+  text-align: center;
+  font-size: 2em;
 }
 
 .center p {
-    margin-top: 30px;
-    padding-bottom: 5px;
-    -webkit-filter: drop-shadow(1px 1px 6px #3c3c3c);
-    filter: drop-shadow(1px 1px 6px #3c3c3c);
-    font-family: 'Dancing Script', cursive;
+  margin-top: 30px;
+  padding-bottom: 5px;
+  -webkit-filter: drop-shadow(1px 1px 6px #3c3c3c);
+  filter: drop-shadow(1px 1px 6px #3c3c3c);
+  font-family: 'Dancing Script', cursive;
 }
 
 .center a {
-    text-decoration: none;
-    color: #fffefd;
+  text-decoration: none;
+  color: #fffefd;
 }
 
 .landing-page .logo {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 
-    margin: auto;
-    display: block;
-    max-width:500px;
-    max-height:170px;
+  margin: auto;
+  display: block;
+  max-width:500px;
+  max-height:170px;
 
-    -webkit-filter: drop-shadow(1px 1px 6px #3c3c3c);
-    filter: drop-shadow(1px 1px 6px #3c3c3c);
+  -webkit-filter: drop-shadow(1px 1px 6px #3c3c3c);
+  filter: drop-shadow(1px 1px 6px #3c3c3c);
 }
 
 .subheader {
-    color: #96c29f;
+  color: #96c29f;
 }
 
 .information-page {
-    height: 1000px;
-    background-color: white;
+  height: 1000px;
+  background-color: white;
 }
 
 .information-page h1 {
-    font-family: 'Ubuntu', sans-serif;
-    color: #000efe;
-    font-size: 2.6em;
+  font-family: 'Ubuntu', sans-serif;
+  color: #000efe;
+  font-size: 2.6em;
 }
 
 .information-page h1 span {
-    color: #33db69;
+  color: #33db69;
 }
 
 .information-page p {
-    vertical-align: middle;
-    text-align: center;
-    font-size: 1.5em;
-    font-family: 'Alexandria', sans-serif;
+  vertical-align: middle;
+  text-align: center;
+  font-size: 1.5em;
+  font-family: 'Alexandria', sans-serif;
 }
 
 .home-plant {
-    height: 350px;
+  height: 350px;
 }
 
 .information-end {
-    margin-top: 50px;
-    background-color: #000efe;
+  margin-top: 50px;
+  background-color: #000efe;
 }
 
 .information-end h1 {
-    color: #ffffff;
+  color: #ffffff;
 }
 
 .information-end p {
-    font-family: 'Ubuntu', sans-serif;
-    color: #ffffff;
-    font-size: 1.8em;
+  font-family: 'Ubuntu', sans-serif;
+  color: #ffffff;
+  font-size: 1.8em;
 }
 
 .home-camera {
-    height: 150px;
+  height: 150px;
 }
 
 .highlighted {
-    color: #0d0963;
-    text-shadow: #b3b3b3 1px 1px 2px;
-    font-weight: 1000;
+  color: #0d0963;
+  text-shadow: #b3b3b3 1px 1px 2px;
+  font-weight: 1000;
 }

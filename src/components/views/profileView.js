@@ -10,7 +10,6 @@ function ProfileView(props) {
     props.onSignOut();
   }
 
-
   return (
     <div>
       <v-card shaped class="rounded-card mx-auto mt-16" max-width="344" height="320">

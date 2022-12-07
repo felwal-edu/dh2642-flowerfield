@@ -53,7 +53,9 @@ const useFlowerStore = defineStore({
         return;
       }
 
+      // TODO: this makes the subscriber broken for plants
       //this.experienceadder()
+
       this.plants = [...this.plants, plant];
       console.log(plant + " has been added");
     },
@@ -71,30 +73,7 @@ const useFlowerStore = defineStore({
       this.plants = this.plants.filter(hasDifferentIdCB);
       console.log(plantId + " has been removed");
     }
-
-    /*
-    addPlant(plant_id, plant_name, plant_details, scientific_name, plant_genus, plant_species) {
-      this.plants.push({
-        id: plant_id,
-        plantName: plant_name,
-        plantDetails: plant_details,
-        scientificName: scientific_name,
-        genus: plant_genus,
-        species:plant_species,
-        acquired: false
-      });
-    },
-
-    acquirePlant(plant_id) {
-      //if id exists, set the objects acquired to true
-      //if id doesn't exist, do nothing.
-      idFinderCB(plant_id) {}
-
-      if this.plants.find(idfinderCB) {
-        this.plants["acquired"] = true;
-      }
-    }*/
   }
-})
+});
 
 export default useFlowerStore;

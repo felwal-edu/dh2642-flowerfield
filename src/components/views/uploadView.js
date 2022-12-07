@@ -9,10 +9,12 @@ function UploadView(props) {
           onDrop={dropFileACB}>
 
           <div class="icon">
-            <img src="https://img.icons8.com/color/96/null/stack-of-photos--v1.png"/>
+            <img src="https://img.icons8.com/color/96/null/stack-of-photos--v1.png" />
           </div>
           <span class="header">{props.dragareaActive == true ? "Release to Upload" : "Drag & Drop"}</span>
-          <span class="header">or <span class="browse-button" onClick={browseSpanClickACB}>browse</span></span>
+          <span class="header">
+            or <span class="browse-button" onClick={browseSpanClickACB}>browse</span>
+          </span>
           <input type="file" hidden onChange={inputFileChangeACB} />
           <span class="tip-support">PNG, JPG, JPEG</span>
         </div>
@@ -37,7 +39,6 @@ function UploadView(props) {
           </v-overlay>
         </div>
       );
-
     }
   }
 

@@ -5,7 +5,6 @@ import resolvePromise from "@/data/network/resolvePromise";
 import { resolvePromiseMock } from "@/data/network/resolvePromise";
 import { getPlantByImage } from "@/data/network/plantIdService";
 import { exampleResponse } from "@/data/network/plantIdServiceMock";
-
 import useFlowerStore from "@/data/flowerStore";
 
 const UploadPresenter = {
@@ -24,9 +23,12 @@ const UploadPresenter = {
   },
 
   created () {
-    // TODO WAIT FOR FIREBASE TO LOAD FIRS
+    // TODO: WAIT FOR FIREBASE TO LOAD FIRST
     this.userStatus = useFlowerStore().currentUser;
+
+    // TODO: extract used-more-than-once funcitonality
     useFlowerStore().$subscribe(function (mutation, state) {
+      // TODO: mutation is not defined in production
       if (mutation.events.key === "currentUser") {
         // transform plant list to object with id as key
         this.userStatus = mutation.events.newValue;
@@ -174,6 +176,6 @@ const UploadPresenter = {
       );
     }
   }
-}
+};
 
 export default UploadPresenter;

@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alexandria:wght@200&family=Ubuntu:wght@500&display=swap');
 
 .landing-page {
     position: relative;
@@ -41,11 +42,57 @@
     filter: drop-shadow(1px 1px 6px #3c3c3c);
 }
 
+.subheader {
+    color: #96c29f;
+}
+
 .information-page {
     height: 1000px;
     background-color: white;
 }
 
-.subheader {
-    color: #96c29f;
+.information-page h1 {
+    font-family: 'Ubuntu', sans-serif;
+    color: #000efe;
+    font-size: 2.6em;
+}
+
+.information-page h1 span {
+    color: #33db69;
+}
+
+.information-page p {
+    vertical-align: middle;
+    text-align: center;
+    font-size: 1.5em;
+    font-family: 'Alexandria', sans-serif;
+}
+
+.home-plant {
+    height: 350px;
+}
+
+.information-end {
+    margin-top: 50px;
+    background-color: #000efe;
+}
+
+.information-end h1 {
+    color: #ffffff;
+}
+
+.information-end p {
+    font-family: 'Ubuntu', sans-serif;
+    color: #ffffff;
+    font-size: 1.8em;
+}
+
+.home-camera {
+    height: 150px;
+}
+
+.highlighted {
+    color: #0d0963;
+    text-shadow: #b3b3b3 1px 1px 2px;
+    font-weight: 1000;
 }

@@ -1,4 +1,4 @@
-import useFlowerStore from "@/data/flowerStore";
+import useFlowerStore from "@/store/flowerStore";
 import HomeView from "../views/homeView";
 
 const HomePresenter = {

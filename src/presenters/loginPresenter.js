@@ -1,7 +1,7 @@
-import resolvePromise from "../../data/network/resolvePromise.js";
+import resolvePromise from "../utils/resolvePromise.js";
 import LoginView from "../views/loginView";
-import { signInUser, signUpUser } from "../../data/persistence/firebaseAuth";
-import useFlowerStore  from "@/data/flowerStore.js";
+import useFlowerStore  from "@/store/flowerStore.js";
+import { signInUser, signUpUser } from "@/persistence/firebaseAuth.js";
 
 const LoginPresenter = {
   data() {

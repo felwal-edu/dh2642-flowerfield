@@ -9,7 +9,7 @@ function addImageProcess(file) {
 
 export function commitFile(file, _callback) {
   if (file === null) {
-    alert('No file selected.');
+    alert("No file selected.");
     return null;
   }
 
@@ -20,17 +20,17 @@ export function commitFile(file, _callback) {
   // TODO: expand error to more then alert?
   if (validExtensions.includes(fileType)) {
     addImageProcess(file).then(url => {
-      document.querySelectorAll('.btn.upload').item(0).hidden = false;
-      document.querySelectorAll('.btn.cancel').item(0).hidden = false;
+      document.querySelectorAll(".btn.upload").item(0).hidden = false;
+      document.querySelectorAll(".btn.cancel").item(0).hidden = false;
 
       _callback(url, true);
     });
   }
   else {
-    alert('File format is not supported.');
+    alert("File format is not supported.");
 
-    document.querySelectorAll('.btn.upload').item(0).hidden = true;
-    document.querySelectorAll('.btn.cancel').item(0).hidden = true;
+    document.querySelectorAll(".btn.upload").item(0).hidden = true;
+    document.querySelectorAll(".btn.cancel").item(0).hidden = true;
     _callback(null, false);
   }
 }

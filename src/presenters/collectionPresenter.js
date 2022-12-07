@@ -1,7 +1,7 @@
-import useFlowerStore from "@/data/flowerStore.js";
-import { examplePlantArray } from "@/data/network/plantIdServiceMock.js";
+import useFlowerStore from "@/store/flowerStore.js";
+import { examplePlantArray } from "@/network/plantIdExample.js";
 import CollectionView from "../views/collectionView.js";
-import "../../css/collection.css";
+import "../css/collection.css";
 
 const CollectionPresenter = {
   data() {

@@ -1,11 +1,11 @@
 import UploadView from "../views/uploadView";
-import {commitFile, abortUpload} from "../../data/uploadTemp.js";
-import "../../css/upload.css";
-import resolvePromise from "@/data/network/resolvePromise";
-import { resolvePromiseMock } from "@/data/network/resolvePromise";
-import { getPlantByImage } from "@/data/network/plantIdService";
-import { exampleResponse } from "@/data/network/plantIdServiceMock";
-import useFlowerStore from "@/data/flowerStore";
+import {commitFile, abortUpload} from "../utils/uploadUtils.js";
+import "../css/upload.css";
+import resolvePromise from "@/utils/resolvePromise";
+import { resolvePromiseMock } from "@/utils/resolvePromise";
+import { getPlantByImage } from "@/network/plantIdService";
+import { exampleResponse } from "@/network/plantIdExample";
+import useFlowerStore from "@/store/flowerStore";
 
 const UploadPresenter = {
   data() {
@@ -39,7 +39,7 @@ const UploadPresenter = {
   mounted() {
     // find elements and set events to them
     this.dragArea = document.querySelector(".drag-area");
-    this.input = document.querySelector('input');
+    this.input = document.querySelector("input");
   },
 
   beforeUnmount () {
@@ -52,14 +52,14 @@ const UploadPresenter = {
       this.isActive = false;
       this.isFileLoaded = false;
 
-      document.querySelectorAll('.btn.upload').item(0).hidden = true;
-      document.querySelectorAll('.btn.cancel').item(0).hidden = true;
+      document.querySelectorAll(".btn.upload").item(0).hidden = true;
+      document.querySelectorAll(".btn.cancel").item(0).hidden = true;
 
       abortUpload();
     }
 
     function browseSpanClickACB(event) {
-        this.input = document.querySelector('input');
+        this.input = document.querySelector("input");
         this.input.click();
     }
 
@@ -103,7 +103,7 @@ const UploadPresenter = {
         return;
       }
 
-      let base64 = this.fileURL.replace('data:', '').replace(/^.+,/, '');
+      let base64 = this.fileURL.replace("data:", "").replace(/^.+,/, "");
 
       // REAL CALL:
       resolvePromise(getPlantByImage(base64), this.plantPromiseState, notifyACB.bind(this));
@@ -135,7 +135,7 @@ const UploadPresenter = {
 
     function inputChangeListenerACB(evt) {
       this.file = evt.target.files[0];
-      // add so the border is 'active'
+      // add so the border is "active"
       this.isActive = true;
 
       commitFile(this.file, function(f, success) {

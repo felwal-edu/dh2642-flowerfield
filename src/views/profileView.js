@@ -1,4 +1,4 @@
-import "../../plugins/vuetify";
+import "../plugins/vuetify";
 
 function ProfileView(props) {
   function signOutClickACB(evt) {

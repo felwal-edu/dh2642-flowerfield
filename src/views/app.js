@@ -1,5 +1,5 @@
-import useFlowerStore from "@/data/flowerStore";
-import "../../main.css";
+import useFlowerStore from "@/store/flowerStore";
+import "../css/main.css";
 
 export default function App() {
   let userStatus = useFlowerStore().currentUser;

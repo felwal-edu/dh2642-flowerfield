@@ -1,7 +1,6 @@
 import firebaseConfig from "./firebaseSecrets";
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, set, onChildAdded, onChildRemoved, get, child } from "firebase/database";
-import useFlowerStore from "../flowerStore";
 
 // init
 

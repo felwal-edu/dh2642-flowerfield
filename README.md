@@ -44,6 +44,10 @@ Standaradise use of colours and fonts.
 
 Make the website look even better.
 
+A better way of blocking and redirecting the user if not logged in.
+
+Clearly show 'loading' status.
+
 Probably implement a `detailPresenter` and -`View`, allowing the user to click on a plant and view more detailed info.
 
 _Visability of system status_. Make the navbar clearly display which page the user is on.
@@ -58,13 +62,23 @@ Create ranks for leveling up using XP.
 
 Framework used: Vue
 
-- _assets_
-
-- _css_
-
 - `main.js`. Creates the app and sets up router, Pinia, Vuetify, and loads fonts.
 
-- `utilities.js`. Some utility functions.
+- _router_
+
+  - `index.js`. Routes different paths to different pages.
+
+- _store_
+
+  - `flowerStore.js`. A Pinia store holding the user data: user id, email, and collected plans. Initialises data by calling the appropriate functions in fiebaseModel.
+
+- _utils_
+
+  - `plantUtils.js`. Some utility functions for transforming plant arrays.
+
+  - `uploadUtils.js`. Handles backend of uploading image, enabling saving to collection (the database) if the upload was successful. Will maybe be moved to another file in the future, hence the 'temp' name.
+
+  - `resolvePromise.js`. A function for resolving a promise; extracting data and errors and notifying listeners.
 
 - _plugins_
 
@@ -72,13 +86,11 @@ Framework used: Vue
 
   - `webfontloader.js`. Defines a function for loading web fonts.
 
-- _router_
-
-  - `index.js`. Routes different paths to different pages.
-
 - _views_
 
-  - `app.js`. Defines the base HTML. It uses router links to show the right page.
+  - `app.js`. Defines the base HTML to be injected into `index.html`. It uses router links to show the right page.
+
+  - `homeView.js`. Welcomes and onboards the user.
 
   - `loginView.js`. Let's the user log in or sign up.
 
@@ -90,6 +102,8 @@ Framework used: Vue
 
 - _presenters_
 
+  - `homePresenter.js`. Presents homeView.
+
   - `loginPresenter.js`. Presents loginView.
 
   - `profilePresenter.js`. Presents profileView.
@@ -98,26 +112,18 @@ Framework used: Vue
 
   - `uploadPresenter.js`. Presents uploadView.
 
-- _data_
+- _network_
 
-  - _network_
+  - `plantIdService.js`. Interface for calling the Plant.id API. It takes an image encoded as base64 as parameter, and produces a response which includes a list of suggested plants which match the image.
 
-    - `plantIdService.js`. Interface for calling the Plant.id API. It takes an image encoded as base64 as parameter, and produces a response which includes a list of suggested plants which match the image.
+  - `plantIdExample.js`. Cached API-results, used to not have to make excessive API calls while developing.
 
-    - `plantIdServiceMock.js`. Cached API-results, used to not have to make excessive API calls while developing.
+  - `plantIdSecrets.js`. Config for Plant.id, includes API key.
 
-    - `plantIdSecrets.js`. Config for Plant.id, includes API key.
+- _persistence_
 
-    - `resolvePromise.js`. A function for resolving a promise; extracting data and errors and notifying listeners.
+  - `firebaseAuth.js`. Authenticates the user. Contains functions for signing up, in and out; and observing changes to "user login" state.
 
-  - _persistence_
+  - `firebaseModel.js`. Syncs and desyncs data between Firebase and Pinia.
 
-    - `firebaseAuth.js`. Authenticates the user. Contains functions for signing up, in and out; and observing changes to "user login" state.
-
-    - `firebaseModel.js`. Syncs and desyncs data between Firebase and Pinia.
-
-    - `firebaseSecrets.js`. Config for Firebase, includes API key.
-
-  - `flowerStore.js`. A Pinia store holding the user data: user id, email, and collected plans. Initialises data by calling the appropriate functions in fiebaseModel.
-
-  - `uploadTemp.js`. Handles backend of uploading image, enabling saving to collection (the database) if the upload was successful. Will maybe be moved to another file in the future, hence the 'temp' name.
+  - `firebaseSecrets.js`. Config for Firebase, includes API key.

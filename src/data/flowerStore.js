@@ -9,10 +9,18 @@ const useFlowerStore = defineStore({
 
   state: () => ({
     currentUser: undefined, // undefined if not loaded, null if not logged in
-    plants: []
+    plants: [],
+    experience: 0
   }),
 
   actions: {
+
+    experienceadder() {
+      this.experience += 10;
+
+    },
+
+
     initUser() {
       function signedInACB(user) {
         this.currentUser = user;
@@ -38,6 +46,7 @@ const useFlowerStore = defineStore({
       }
 
       return this.plants.find(hasSamePlantIdCB);
+
     },
 
     addPlant(plant) {
@@ -48,6 +57,7 @@ const useFlowerStore = defineStore({
 
       this.plants = [...this.plants, plant];
       console.log(plant + " has been added");
+      this.experienceadder()
     },
 
     removePlant(plantId) {

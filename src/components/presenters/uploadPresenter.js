@@ -104,10 +104,10 @@ const UploadPresenter = {
       let base64 = this.fileURL.replace('data:', '').replace(/^.+,/, '');
 
       // REAL CALL:
-      //resolvePromise(getPlantByImage(base64), this.plantPromiseState, notifyACB.bind(this));
+      resolvePromise(getPlantByImage(base64), this.plantPromiseState, notifyACB.bind(this));
 
       // FAKE CALL:
-      resolvePromiseMock(exampleResponse, this.plantPromiseState, notifyACB.bind(this));
+      //resolvePromiseMock(exampleResponse, this.plantPromiseState, notifyACB.bind(this));
     }
 
     // create listeners

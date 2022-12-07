@@ -1,8 +1,8 @@
 // the data container for the flower information gathered from the API
 
 import { defineStore } from "pinia";
-import { observeAuthState } from "./persistence/firebaseAuth";
-import { disableFirebaseSync, enableFirebaseSync, createUser } from "./persistence/firebaseModel";
+import { observeAuthState } from "../persistence/firebaseAuth";
+import { disableFirebaseSync, enableFirebaseSync, createUser } from "../persistence/firebaseModel";
 
 const useFlowerStore = defineStore({
   id: "user",

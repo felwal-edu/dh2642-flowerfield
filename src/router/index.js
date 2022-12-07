@@ -1,9 +1,9 @@
 import { createRouter, createWebHistory } from "vue-router";
-import Home from "@/components/presenters/homePresenter.js";
-import Collection from "@/components/presenters/collectionPresenter.js";
-import LoginPresenter from "@/components/presenters/loginPresenter.js";
-import ProfilePresenter from "@/components/presenters/profilePresenter";
-import UploadPresenter from "@/components/presenters/uploadPresenter";
+import Home from "@/presenters/homePresenter.js";
+import Collection from "@/presenters/collectionPresenter.js";
+import LoginPresenter from "@/presenters/loginPresenter.js";
+import ProfilePresenter from "@/presenters/profilePresenter";
+import UploadPresenter from "@/presenters/uploadPresenter";
 
 const routes = [
   {

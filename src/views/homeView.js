@@ -1,4 +1,4 @@
-import logopath from "@/assets/testlogo.png";
+import logopath from "@/assets/logo_test.png";
 import background from "@/assets/home_parallax.jpg";
 import home_flower from "@/assets/home_flower_background.png";
 import home_photo from "@/assets/home_photo.png";

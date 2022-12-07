@@ -1,4 +1,4 @@
-import { sortPlants } from "@/utilities";
+import { sortPlants } from "@/utils/plantUtils";
 import { capitalize } from "vue";
 
 function CollectionView(props) {

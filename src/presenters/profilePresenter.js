@@ -1,5 +1,5 @@
-import useFlowerStore from "@/data/flowerStore";
-import { signOutUser } from "@/data/persistence/firebaseAuth";
+import { signOutUser } from "@/persistence/firebaseAuth";
+import useFlowerStore from "@/store/flowerStore";
 import ProfileView from "../views/profileView";
 
 const ProfilePresenter = {

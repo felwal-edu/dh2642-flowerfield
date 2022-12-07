@@ -3,11 +3,11 @@ function compareGenusCB(plantA, plantB) {
     ? plantA.scientificName === plantB.scientificName
       ? 0
       : plantA.scientificName < plantB.scientificName
-      ? -1
-      : 1
+        ? -1
+        : 1
     : plantA.genus < plantB.genus
-    ? -1
-    : 1;
+      ? -1
+      : 1;
 }
 
 function sortPlants(plants) {

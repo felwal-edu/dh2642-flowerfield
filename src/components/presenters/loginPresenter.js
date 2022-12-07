@@ -1,6 +1,6 @@
 import resolvePromise from "../../data/network/resolvePromise.js";
 import LoginView from "../views/loginView";
-import { signInUser, signOutUser, signUpUser } from "../../data/persistence/firebaseAuth";
+import { signInUser, signUpUser } from "../../data/persistence/firebaseAuth";
 import useFlowerStore  from "@/data/flowerStore.js";
 
 const LoginPresenter = {
@@ -44,7 +44,7 @@ const LoginPresenter = {
       this.password = password;
     }
 
-    function closeErrorSnackbar(){
+    function closeErrorSnackbar() {
       this.snackbar = false;
     }
 
@@ -60,6 +60,6 @@ const LoginPresenter = {
         errorMessage={this.errorMessage} />
     );
   }
-}
+};
 
 export default LoginPresenter;

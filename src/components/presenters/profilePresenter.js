@@ -19,9 +19,8 @@ const ProfilePresenter = {
         onSignOut={signOutACB}
         userExperience={useFlowerStore().experience}
         amountPlants={useFlowerStore().plants.length} />
-
     );
   }
-}
+};
 
-export default ProfilePresenter
+export default ProfilePresenter;

@@ -1,5 +1,3 @@
-//import { getPlantByImage } from "./network/plantIdService.js";
-
 function addImageProcess(file) {
   return new Promise((resolve, reject) => {
     let fileReader = new FileReader();
@@ -38,4 +36,5 @@ export function commitFile(file, _callback) {
 }
 
 export function abortUpload() {
+  // TODO
 }

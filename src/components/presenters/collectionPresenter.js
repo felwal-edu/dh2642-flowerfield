@@ -13,7 +13,10 @@ const CollectionPresenter = {
 
   created() {
     this.userStatus = useFlowerStore().currentUser;
+
+    // TODO: extract used-more-than-once funcitonality
     useFlowerStore().$subscribe(function (mutation, state) {
+      // TODO: mutation is not defined in production
       if (mutation.events.key === "currentUser") {
         // transform plant list to object with id as key
         this.userStatus = mutation.events.newValue;
@@ -23,17 +26,18 @@ const CollectionPresenter = {
 
   render() {
     this.test = true;
-    //console.log(useFlowerStore().plants);
-    if(this.userStatus == undefined) {
+
+    if (this.userStatus == undefined) {
       return;
     }
     else {
       return (
         <CollectionView
-          plants={useFlowerStore().plants} test={this.test} />
+          plants={useFlowerStore().plants}
+          test={this.test} />
       );
     }
   },
-}
+};
 
 export default CollectionPresenter;

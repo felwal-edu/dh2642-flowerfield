@@ -5,7 +5,9 @@ export default function App() {
   let userStatus = useFlowerStore().currentUser;
 
   function renderApp() {
+    // TODO: extract used-more-than-once funcitonality
     useFlowerStore().$subscribe(function (mutation, state) {
+      // TODO: mutation is not defined in production
       if (mutation.events.key === "currentUser") {
         // transform plant list to object with id as key
         userStatus = mutation.events.newValue;
@@ -29,16 +31,16 @@ export default function App() {
     return (
       <v-toolbar-items class="hidden-sm-and-down">
         <router-link to="/">
-            <v-btn text size="80">Home</v-btn>
+          <v-btn text size="80">Home</v-btn>
         </router-link>
         <router-link to="/upload">
-            <v-btn text size="80">Upload</v-btn>
+          <v-btn text size="80">Upload</v-btn>
         </router-link>
         <router-link to="/collection">
-            <v-btn text height="80" width="110">Collection</v-btn>
+          <v-btn text height="80" width="110">Collection</v-btn>
         </router-link>
         <router-link to="/profile">
-            <v-btn text size="80">Profile</v-btn>
+          <v-btn text size="80">Profile</v-btn>
         </router-link>
       </v-toolbar-items>
     );

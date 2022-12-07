@@ -10,9 +10,10 @@ function ProfileView(props) {
     props.onSignOut();
   }
 
+
   return (
     <div>
-      <v-card shaped class="rounded-card mx-auto mt-16" max-width="344" height="260">
+      <v-card shaped class="rounded-card mx-auto mt-16" max-width="344" height="320">
         <v-card-title>My Profile</v-card-title>
         <v-col align-self="start" class="justify-center align-center pa-0" cols="12">
           <v-row justify="center">
@@ -22,6 +23,12 @@ function ProfileView(props) {
           </v-row>
           <v-row justify="center">
             <v-card-title>{props.currentUser?.email || "Not logged in!"}</v-card-title>
+          </v-row>
+          <v-row justify="center">
+            <v-card-title>{"Number of plants collected: " + props.amountPlants}</v-card-title>
+          </v-row>
+          <v-row justify="center">
+            <v-card-title>{"Experience: " + props.userExperience}</v-card-title>
           </v-row>
           <v-row justify="center pt-5">
             <v-card-actions>

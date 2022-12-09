@@ -1,7 +1,26 @@
 function SignUpView(props) {
 
-    function testACB(evt) {
-        console.log("obama")
+
+    function signUpClickACB(evt) {
+        if (props.currentUser !== null || props.currentUser === undefined) {
+            console.log("already signed up");
+
+        }
+
+        props.onSignUp();
+    }
+
+    function emailInputChangeACB(evt) {
+        console.log(evt.target.value);
+        props.onEmailChange(evt.target.value);
+    }
+
+    function passwordInputChangeACB(evt) {
+        props.onPasswordChange(evt.target.value);
+    }
+
+    function passwordCheckInputChangeACB(evt) {
+        props.onPasswordCheckChange(evt.target.value)
     }
     return (
 
@@ -9,18 +28,21 @@ function SignUpView(props) {
             <v-app class="ma-8" align="center">
                 <v-card>
                     <v-col>
-                        <v-row justify="center"><v-col sm="11"><v-text-field clearable onChange={testACB}>Email: </v-text-field></v-col></v-row>
-                        <v-row justify="center"><v-col sm="11"><v-text-field clearable onChange={testACB}>Password: </v-text-field></v-col></v-row>
-                        <v-row justify="center"><v-col sm="11"><v-text-field clearable onChange={testACB}>Confirm password: </v-text-field></v-col></v-row>
-
-
+                        <v-row justify="center"><v-col sm="11"><v-text-field clearable onChange={emailInputChangeACB}>Email: </v-text-field></v-col></v-row>
+                        <v-row justify="center"><v-col sm="11"><v-text-field clearable onChange={passwordInputChangeACB}>Password: </v-text-field></v-col></v-row>
+                        <v-row justify="center"><v-col sm="11"><v-text-field clearable onChange={passwordCheckInputChangeACB}>Confirm password: </v-text-field></v-col></v-row>
+                        <v-row justify="center" class="mx-8"><v-btn onClick={signUpClickACB}>Sign up</v-btn></v-row>
                     </v-col>
-
-
                 </v-card>
+                <v-snackbar v-model={props.snackbar} class="d-flex" color="#0d0963">
+                    {"Passwords don't match"}
+                </v-snackbar>
             </v-app>
 
-        </div>
+        </div >
     )
 }
 
+
+
+export default SignUpView;

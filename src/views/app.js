@@ -25,7 +25,7 @@ export default function App() {
             <v-btn text size="80">Login</v-btn>
           </router-link>
           <router-link to="/signup">
-            <v-btn text size="80">Login</v-btn>
+            <v-btn text size="80">SignUp</v-btn>
           </router-link>
         </v-toolbar-items>
 

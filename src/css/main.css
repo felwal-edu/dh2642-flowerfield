@@ -15,6 +15,7 @@ body {
 .nav-title {
   color: #0d0963;
   font-family: 'Pacifico', cursive;
+  text-decoration: none;
 }
 
 .v-toolbar-items a {
@@ -24,7 +25,6 @@ body {
   font-family: 'Pacifico', cursive;
   text-decoration: none;
   font-weight: bold;
-  text-align: center;
 }
 
 .v-toolbar-items a.router-link-active,

@@ -27,12 +27,12 @@ function CollectionView(props) {
           </var-toolbar-items>
         </v-toolbar>
       </div>
-      <div>{renderCollection(props.plants, props.test, props.sort)}</div>
+      <div>{renderCollection(props.plants, props.sort)}</div>
     </div>
   );
 }
 
-function renderCollection(plants, test, order) {
+function renderCollection(plants, order) {
   function createRowsCB(plantItem) {
     return (
       <v-expansion-panels

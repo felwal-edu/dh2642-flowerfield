@@ -38,7 +38,7 @@ const CollectionPresenter = {
     else {
       return (
         <CollectionView
-          plants={/*useFlowerStore().plants*/ examplePlantArray}
+          plants={useFlowerStore().plants /*examplePlantArray*/}
           test={this.test}
           sort={this.sortStatus}
           onSort={sortACB.bind(this)} />

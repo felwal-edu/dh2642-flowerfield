@@ -8,24 +8,24 @@ function CollectionView(props) {
   return (
     <div>
       <div>
-        <v-card>
-          <v-row>
-            <v-col>Your Collection</v-col>
-            <v-col
-              offset-md="5"
-            >
-              Sort:
-            </v-col>
-            <v-col>
+        <v-toolbar
+          color="#96c29f"
+        >
+          <v-toolbar-title>Your Collection</v-toolbar-title>
+          <v-spacer></v-spacer>
+          <p class="font-weight-bold">
+            Sort:
+          </p>
+          <var-toolbar-items>
+            <v-divider vertical></v-divider>
               <v-select
                 model-value={props.sort}
                 items={["Genus A-Z", "Genus Z-A"]}
                 onUpdate:modelValue={onSortChangeACB}
               >
               </v-select>
-            </v-col>
-          </v-row>
-        </v-card>
+          </var-toolbar-items>
+        </v-toolbar>
       </div>
       <div>{renderCollection(props.plants, props.test, props.sort)}</div>
     </div>
@@ -35,8 +35,11 @@ function CollectionView(props) {
 function renderCollection(plants, test, order) {
   function createRowsCB(plantItem) {
     return (
-      <v-expansion-panels focusable>
-        <v-expansion-panel value={test} title={capitalize(plantItem[0]) + " (" + plantItem[1].length + ")"}>
+      <v-expansion-panels
+        focusable
+        model-value={[0]}
+      >
+        <v-expansion-panel title={capitalize(plantItem[0]) + " (" + plantItem[1].length + ")"} >
           <v-expansion-panel-text>
             <tr>{plantItem[1].map(createCollectionColCB)}</tr>
           </v-expansion-panel-text>

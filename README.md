@@ -12,7 +12,7 @@ Group 42: Elliot Darth, Felix Wallin, Linus Wallin, Matias Eriksson
 
 Flowerfield is an application where the user is able to collect _flowers_ by taking pictures of them.
 
-When a picture is taken, it can then be uploaded to the app, where the picture is processed and identified by an external image-identification API – [plant.id](https://web.plant.id/plant-identification-api/).
+When a picture is taken, it can then be uploaded to the app, where the picture is processed and identified by an external image-identification API – [Plant.id](https://web.plant.id/plant-identification-api/).
 
 If the picture is successfully identified, it will add the flower to the user's collection.
 
@@ -36,11 +36,11 @@ We have created the different presenters and views which make up the website.
 
 Let the user wait while Firebase is loading data – and block pages only available to logged in users.
 
-Standaradise use of colours and fonts.
-
 ## What we still plan to do
 
-Make the website look even better.
+Make the website look even better. 
+
+Standaradise use of colours and fonts.
 
 A better way of blocking and redirecting the user if not logged in.
 
@@ -74,9 +74,9 @@ Framework used: Vue
 
   - `plantUtils.js`. Some utility functions for transforming plant arrays.
 
-  - `uploadUtils.js`. Handles backend of uploading image, enabling saving to collection (the database) if the upload was successful. Will maybe be moved to another file in the future, hence the 'temp' name.
+  - `uploadUtils.js`. Handles backend of uploading image, enabling saving to collection (the database) if the upload was successful. Will maybe be moved to another file in the future.
 
-  - `resolvePromise.js`. A function for resolving a promise; extracting data and errors and notifying listeners.
+  - `resolvePromise.js`. A function for resolving a promise; extracting data and errors and notifying listeners. Also contains a "mock" version for simulating the resolving of API promises.
 
 - _plugins_
 

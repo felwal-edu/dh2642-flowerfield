@@ -7,7 +7,6 @@ const CollectionPresenter = {
   data() {
     return {
       userStatus: undefined,
-      test: false,
       sortStatus: "Genus A-Z"
     };
   },
@@ -26,8 +25,6 @@ const CollectionPresenter = {
   },
 
   render() {
-    this.test = true;
-
     function sortACB(order){
       this.sortStatus = order;
     }
@@ -39,7 +36,6 @@ const CollectionPresenter = {
       return (
         <CollectionView
           plants={useFlowerStore().plants /*examplePlantArray*/}
-          test={this.test}
           sort={this.sortStatus}
           onSort={sortACB.bind(this)} />
       );

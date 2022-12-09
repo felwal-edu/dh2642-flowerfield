@@ -50,7 +50,11 @@ export default function App() {
     <div>
       <v-app>
         <v-app-bar fixed dense>
-          <v-toolbar-title><p class="nav-title">Flowerfield</p></v-toolbar-title>
+          <v-toolbar-title>
+            <router-link to="/">
+              <p class="nav-title">Flowerfield</p>
+            </router-link>
+          </v-toolbar-title>
           <v-spacer></v-spacer>
           {renderApp()}
         </v-app-bar>

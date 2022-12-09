@@ -8,6 +8,7 @@ const CollectionPresenter = {
     return {
       userStatus: undefined,
       test: false,
+      sortStatus: "Genus A-Z"
     };
   },
 
@@ -27,14 +28,20 @@ const CollectionPresenter = {
   render() {
     this.test = true;
 
+    function sortACB(order){
+      this.sortStatus = order;
+    }
+
     if (this.userStatus == undefined) {
       return;
     }
     else {
       return (
         <CollectionView
-          plants={useFlowerStore().plants}
-          test={this.test} />
+          plants={/*useFlowerStore().plants*/ examplePlantArray}
+          test={this.test}
+          sort={this.sortStatus}
+          onSort={sortACB.bind(this)} />
       );
     }
   },

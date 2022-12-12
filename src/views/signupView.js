@@ -26,11 +26,12 @@ function SignUpView(props) {
 
         <div>
             <v-app class="ma-8" align="center">
-                <v-card>
+                <v-card class="mx-auto" elevation="2" width="100%" color="#b0d2cf">
                     <v-col>
+                        <v-row justify="center"><v-title>Create account: </v-title></v-row>
                         <v-row justify="center"><v-col sm="11"><v-text-field clearable onChange={emailInputChangeACB}>Email: </v-text-field></v-col></v-row>
-                        <v-row justify="center"><v-col sm="11"><v-text-field clearable onChange={passwordInputChangeACB}>Password: </v-text-field></v-col></v-row>
-                        <v-row justify="center"><v-col sm="11"><v-text-field clearable onChange={passwordCheckInputChangeACB}>Confirm password: </v-text-field></v-col></v-row>
+                        <v-row justify="center"><v-col sm="11"><v-text-field type="password" clearable onChange={passwordInputChangeACB}>Password: </v-text-field></v-col></v-row>
+                        <v-row justify="center"><v-col sm="11"><v-text-field type="password" clearable onChange={passwordCheckInputChangeACB}>Confirm password: </v-text-field></v-col></v-row>
                         <v-row justify="center" class="mx-8"><v-btn onClick={signUpClickACB}>Sign up</v-btn></v-row>
                     </v-col>
                 </v-card>

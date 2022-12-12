@@ -1,12 +1,4 @@
 function LoginView(props) {
-  function signUpClickACB(evt) {
-    if (props.currentUser !== null || props.currentUser === undefined) {
-      console.log("already signed up");
-      return;
-    }
-
-    props.onSignUp();
-  }
 
   function signInClickACB(evt) {
     if (props.currentUser !== null || props.currentUser === undefined) {
@@ -48,11 +40,8 @@ function LoginView(props) {
                 <v-text-field hint="Must be 6 characters long" clearable onChange={passwordInputChangeACB}>Password: </v-text-field>
               </v-col>
             </v-row>
-            <v-row justify="center" class="mt-4">
-              <v-btn onClick={signInClickACB}>Sign in</v-btn>
-            </v-row>
             <v-row justify="center" class="my-4">
-              <v-btn onClick={signUpClickACB}>Sign up</v-btn>
+              <v-btn onClick={signInClickACB}>Sign in</v-btn>
             </v-row>
           </v-col>
         </v-card>

@@ -29,8 +29,8 @@ function sortPlants(plants) {
 
   // Have an object filled with properties for each type of genus.
 
-  const test = [...plants].sort(compareGenusCB);
-  test.forEach(sortGenusCB);
+  const sortedPlantArray = [...plants].sort(compareGenusCB);
+  sortedPlantArray.forEach(sortGenusCB);
   return genusObject;
 }
 

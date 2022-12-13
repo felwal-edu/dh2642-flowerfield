@@ -1,6 +1,7 @@
 import useFlowerStore from "@/store/flowerStore.js";
 import { examplePlantArray } from "@/network/plantIdExample.js";
 import CollectionView from "../views/collectionView.js";
+import PopupView from "../views/popupView.js";
 import "../css/collection.css";
 
 const CollectionPresenter = {
@@ -8,7 +9,9 @@ const CollectionPresenter = {
     return {
       userStatus: undefined,
       test: false,
-      sortStatus: "Genus A-Z"
+      sortStatus: "Genus A-Z",
+      popupStatus: false,
+      selected: undefined,
     };
   },
 
@@ -32,16 +35,45 @@ const CollectionPresenter = {
       this.sortStatus = order;
     }
 
+    function openPopupACB(plant){
+      this.selected = plant;
+      console.log("SURELY", this.selected)
+      this.popupStatus = true;
+    }
+
+    function closePopupACB(){
+      this.popupStatus = false;
+    }
+
     if (this.userStatus == undefined) {
       return;
     }
-    else {
+    else if (!this.popupStatus){
+      console.log("REEEEEEEEEEEEEEEEEEEEEEEE");
       return (
         <CollectionView
-          plants={useFlowerStore().plants /*examplePlantArray*/}
+          plants={/*useFlowerStore().plants*/ examplePlantArray}
           test={this.test}
           sort={this.sortStatus}
-          onSort={sortACB.bind(this)} />
+          onSort={sortACB.bind(this)}
+          openPopup={openPopupACB.bind(this)}
+          />
+      );
+    }
+    else{
+      return (
+        <div>
+          <CollectionView
+            plants={/*useFlowerStore().plants*/ examplePlantArray}
+            test={this.test}
+            sort={this.sortStatus}
+            onSort={sortACB.bind(this)}
+          />
+          <PopupView class="ooga"
+            closePopup={closePopupACB.bind(this)}
+            currentPlant={this.selected}
+          />
+        </div>
       );
     }
   },

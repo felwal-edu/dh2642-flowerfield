@@ -5,3 +5,9 @@
 .plant-name{
   font-size: 10px;
 }
+
+.ooga{
+  position: absolute;
+  top: 0;
+  margin-right: 50%;
+}

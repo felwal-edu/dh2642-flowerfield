@@ -19,6 +19,7 @@ function CollectionView(props) {
           <var-toolbar-items>
             <v-divider vertical></v-divider>
               <v-select
+                class="pl-2"
                 model-value={props.sort}
                 items={["Genus A-Z", "Genus Z-A"]}
                 onUpdate:modelValue={onSortChangeACB}
@@ -27,12 +28,12 @@ function CollectionView(props) {
           </var-toolbar-items>
         </v-toolbar>
       </div>
-      <div>{renderCollection(props.plants, props.test, props.sort)}</div>
+      <div>{renderCollection(props.plants, props.test, props.sort, props)}</div>
     </div>
   );
 }
 
-function renderCollection(plants, test, order) {
+function renderCollection(plants, test, order, props) {
   function createRowsCB(plantItem) {
     return (
       <v-expansion-panels
@@ -49,9 +50,13 @@ function renderCollection(plants, test, order) {
   }
 
   function createCollectionColCB(plant) {
+    function showInfoACB(evt){
+      console.log(plant);
+      props.openPopup(plant);
+    }
     return (
       <td>
-        <v-card max-width = "150" class="mx-3" >
+        <v-card max-width = "150" class="mx-3" onClick={showInfoACB}>
           <v-img src={plant.url} max-width="150" max-heigth="200" />
           <v-card-title class="plant-name">
             {capitalize(plant.scientificName.split(" ")[1])}

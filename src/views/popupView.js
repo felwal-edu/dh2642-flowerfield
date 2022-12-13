@@ -3,7 +3,6 @@ function PopupView(props){
     function closePopupACB(evt){
         props.closePopup();
     }
-    console.log(props.currentPlant);
     return (
         <div>
             <v-card>

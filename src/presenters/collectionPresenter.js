@@ -47,31 +47,18 @@ const CollectionPresenter = {
     if (this.userStatus == undefined) {
       return;
     }
-    else if (!this.popupStatus){
+    else{
       return (
         <CollectionView
           plants={/*useFlowerStore().plants*/ examplePlantArray}
           test={this.test}
           sort={this.sortStatus}
+          overlay={this.popupStatus}
+          currentPlant={this.selected}
           onSort={sortACB.bind(this)}
           openPopup={openPopupACB.bind(this)}
+          closePopup={closePopupACB.bind(this)}
           />
-      );
-    }
-    else{
-      return (
-        <div>
-          <CollectionView
-            plants={/*useFlowerStore().plants*/ examplePlantArray}
-            test={this.test}
-            sort={this.sortStatus}
-            onSort={sortACB.bind(this)}
-          />
-          <PopupView class="overlay_test"
-            closePopup={closePopupACB.bind(this)}
-            currentPlant={this.selected}
-          />
-        </div>
       );
     }
   },

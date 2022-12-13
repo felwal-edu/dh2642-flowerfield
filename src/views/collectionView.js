@@ -51,7 +51,6 @@ function renderCollection(plants, test, order, props) {
 
   function createCollectionColCB(plant) {
     function showInfoACB(evt){
-      console.log(plant);
       props.openPopup(plant);
     }
     return (

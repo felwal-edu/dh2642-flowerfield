@@ -37,7 +37,6 @@ const CollectionPresenter = {
 
     function openPopupACB(plant){
       this.selected = plant;
-      console.log("SURELY", this.selected)
       this.popupStatus = true;
     }
 
@@ -49,7 +48,6 @@ const CollectionPresenter = {
       return;
     }
     else if (!this.popupStatus){
-      console.log("REEEEEEEEEEEEEEEEEEEEEEEE");
       return (
         <CollectionView
           plants={/*useFlowerStore().plants*/ examplePlantArray}
@@ -69,7 +67,7 @@ const CollectionPresenter = {
             sort={this.sortStatus}
             onSort={sortACB.bind(this)}
           />
-          <PopupView class="ooga"
+          <PopupView class="overlay_test"
             closePopup={closePopupACB.bind(this)}
             currentPlant={this.selected}
           />

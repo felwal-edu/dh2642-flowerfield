@@ -5,6 +5,9 @@ function CollectionView(props) {
   function onSortChangeACB(evt){
     props.onSort(evt);
   }
+  function onCloseInfoACB(evt){
+    props.closePopup();
+  }
   return (
     <div>
       <div>
@@ -16,7 +19,7 @@ function CollectionView(props) {
           <p class="font-weight-bold">
             Sort:
           </p>
-          <var-toolbar-items>
+          <v-toolbar-items>
             <v-divider vertical></v-divider>
               <v-select
                 class="pl-2"
@@ -25,10 +28,24 @@ function CollectionView(props) {
                 onUpdate:modelValue={onSortChangeACB}
               >
               </v-select>
-          </var-toolbar-items>
+          </v-toolbar-items>
         </v-toolbar>
       </div>
       <div>{renderCollection(props.plants, props.test, props.sort, props)}</div>
+      <div class="overlay_test">
+        <v-overlay
+          z-index={10}
+          model-value={props.overlay}
+          onClick:outside={onCloseInfoACB}
+        >
+          <v-card>
+            <v-card-title>{props.currentPlant.scientificName}</v-card-title>
+            <v-img src={props.currentPlant.url}></v-img>
+            <v-card-text>Information about the plant</v-card-text>
+            <v-btn onClick={onCloseInfoACB}>Close</v-btn>
+          </v-card>
+        </v-overlay>
+      </div>
     </div>
   );
 }

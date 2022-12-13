@@ -7,7 +7,7 @@
 }
 
 .overlay_test{
-  position: absolute;
-  top: 0;
-  margin-right: 50%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
 }

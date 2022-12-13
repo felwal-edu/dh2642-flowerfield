@@ -34,5 +34,18 @@ function sortPlants(plants) {
   return genusObject;
 }
 
+function rankDisplay(experience) {
+  const ranks = [["seed", 0], ["sprout", 50]["sapling", 100], ["youngTree", 250], ["matureTree", 500]]
+  let currentRank = "seed"
+  for (let i = 0; i < ranks.length; i++) {
+    if (experience >= ranks[i][1]) {
 
-export { sortPlants };
+      currentRank = ranks[i][0]
+    }
+    return "seed"
+  }
+
+}
+
+
+export { sortPlants, rankDisplay };

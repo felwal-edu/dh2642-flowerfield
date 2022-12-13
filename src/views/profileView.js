@@ -24,6 +24,9 @@ function ProfileView(props) {
             <v-card-title>{props.currentUser?.email || "Not logged in!"}</v-card-title>
           </v-row>
           <v-row justify="center">
+            <v-card-title>{"Current rank:" + props.currentRank}</v-card-title>
+          </v-row>
+          <v-row justify="center">
             <v-card-title>{"Number of plants collected: " + props.amountPlants}</v-card-title>
           </v-row>
           <v-row justify="center">

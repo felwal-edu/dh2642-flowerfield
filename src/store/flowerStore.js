@@ -57,7 +57,14 @@ const useFlowerStore = defineStore({
       //this.experienceadder()
 
       this.plants = [...this.plants, plant];
-      console.log(plant + " has been added");
+
+
+      this.experience += 10 * Object.keys(this.plants[plant.genus]).length
+
+
+
+      console.log(plant + " has been added, you gained: " + (10 * Object.keys(this.plants[plant.genus]).length) + "of experience");
+
     },
 
     removePlant(plantId) {

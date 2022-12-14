@@ -40,7 +40,7 @@ function SignUpView(props) {
                 </v-snackbar>
             </v-app>
 
-        </div >
+        </div>
     )
 }
 

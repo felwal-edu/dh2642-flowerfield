@@ -2,7 +2,7 @@
 
 import { defineStore } from "pinia";
 import { observeAuthState } from "../persistence/firebaseAuth";
-import { disableFirebaseSync, enableFirebaseSync, createUser } from "../persistence/firebaseModel";
+import { disableFirebaseSync, enableFirebaseSync, setUserMetadata } from "../persistence/firebaseModel";
 
 const useFlowerStore = defineStore({
   id: "user",
@@ -23,7 +23,7 @@ const useFlowerStore = defineStore({
       function signedInACB(user) {
         this.currentUser = user;
 
-        createUser(user); // TODO: only if just signed up?
+        setUserMetadata(user); // TODO: only if just signed up?
         enableFirebaseSync(this); // TODO: should we pass store like this?
       }
 

@@ -2,6 +2,7 @@ import useFlowerStore from "@/store/flowerStore.js";
 import { examplePlantArray } from "@/network/plantIdExample.js";
 import CollectionView from "../views/collectionView.js";
 import "../css/collection.css";
+import { watch } from "vue";
 
 const CollectionPresenter = {
   data() {
@@ -14,13 +15,9 @@ const CollectionPresenter = {
   created() {
     this.userStatus = useFlowerStore().currentUser;
 
-    // TODO: extract used-more-than-once funcitonality
-    useFlowerStore().$subscribe(function (mutation, state) {
-      // TODO: mutation is not defined in production
-      if (mutation.events.key === "currentUser") {
-        // transform plant list to object with id as key
-        this.userStatus = mutation.events.newValue;
-      }
+    // watch current user
+    watch(() => useFlowerStore().currentUser, function (newUser) {
+      this.userStatus = newUser;
     }.bind(this));
   },
 

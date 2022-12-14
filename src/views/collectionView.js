@@ -2,7 +2,7 @@ import { sortPlants } from "@/utils/plantUtils";
 import { capitalize } from "vue";
 
 function CollectionView(props) {
-  function onSortChangeACB(evt){
+  function onSortChangeACB(evt) {
     props.onSort(evt);
   }
   return (
@@ -18,12 +18,12 @@ function CollectionView(props) {
           </p>
           <var-toolbar-items>
             <v-divider vertical></v-divider>
-              <v-select
-                model-value={props.sort}
-                items={["Genus A-Z", "Genus Z-A"]}
-                onUpdate:modelValue={onSortChangeACB}
-              >
-              </v-select>
+            <v-select
+              model-value={props.sort}
+              items={["Genus A-Z", "Genus Z-A"]}
+              onUpdate:modelValue={onSortChangeACB}
+            >
+            </v-select>
           </var-toolbar-items>
         </v-toolbar>
       </div>
@@ -51,7 +51,7 @@ function renderCollection(plants, order) {
   function createCollectionColCB(plant) {
     return (
       <td>
-        <v-card max-width = "150" class="mx-3" >
+        <v-card max-width="150" class="mx-3" >
           <v-img src={plant.url} max-width="150" max-heigth="200" />
           <v-card-title class="plant-name">
             {capitalize(plant.scientificName.split(" ")[1])}
@@ -61,11 +61,11 @@ function renderCollection(plants, order) {
     );
   }
 
-  if (order === "Genus A-Z"){
+  if (order === "Genus A-Z") {
     return (
       <div>{Object.entries(sortPlants(plants)).map(createRowsCB)}</div>
     );
-  }else{
+  } else {
     return (
       <div>{Object.entries(sortPlants(plants)).reverse().map(createRowsCB)}</div>
     );

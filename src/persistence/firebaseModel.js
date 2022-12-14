@@ -5,7 +5,7 @@ import { watch } from "vue";
 
 // init
 
-console.log("initializing firebase ...")
+console.log("initializing Firebase ...")
 
 export const app = initializeApp(firebaseConfig);
 const db = getDatabase();

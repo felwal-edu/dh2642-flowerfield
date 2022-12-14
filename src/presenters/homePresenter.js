@@ -12,7 +12,7 @@ const HomePresenter = {
   created () {
     this.userStatus = useFlowerStore().currentUser;
 
-    // watch current user
+    // watch user status
     watch(() => useFlowerStore().currentUser, function (newUser) {
       this.userStatus = newUser;
     }.bind(this));

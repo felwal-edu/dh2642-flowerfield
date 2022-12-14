@@ -6,7 +6,7 @@ export default function App() {
   let userStatus = useFlowerStore().currentUser;
 
   function renderApp() {
-    // watch current user
+    // watch user status
     watch(() => useFlowerStore().currentUser, function (newUser) {
       userStatus = newUser;
     }.bind(this));

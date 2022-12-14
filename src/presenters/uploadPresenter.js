@@ -7,6 +7,7 @@ import { getPlantByImage } from "@/network/plantIdService";
 import { exampleResponse } from "@/network/plantIdExample";
 import useFlowerStore from "@/store/flowerStore";
 import { watch } from "vue";
+import { waitingForUserToBeSignedIn } from "@/utils/userUtils";
 
 const UploadPresenter = {
   data() {
@@ -26,7 +27,7 @@ const UploadPresenter = {
   created() {
     this.userStatus = useFlowerStore().currentUser;
 
-    // watch current user
+    // watch user status
     watch(() => useFlowerStore().currentUser, function (newUser) {
       this.userStatus = newUser;
     }.bind(this));
@@ -38,10 +39,9 @@ const UploadPresenter = {
     this.input = document.querySelector("input");
   },
 
-  beforeUnmount() {
-  },
-
   render() {
+    if (waitingForUserToBeSignedIn(this.userStatus, this.$router)) return;
+
     function abortUploadACB() {
       // reset data
       this.file = null;
@@ -103,12 +103,12 @@ const UploadPresenter = {
 
       // REAL CALL:
       resolvePromise(getPlantByImage(base64), this.plantPromiseState, processApiResultACB.bind(this));
-
       // FAKE CALL:
       //resolvePromiseMock(exampleResponse, this.plantPromiseState, processApiResultACB.bind(this));
     }
 
     // create listeners
+
     function dragoverListenerACB(evt) {
       evt.preventDefault();
       this.isActive = true;
@@ -153,35 +153,23 @@ const UploadPresenter = {
       }
     }
 
-    //console.log(this.userStatus);
-    if (this.userStatus === undefined) {
-      return;
-    }
-    else if (this.userStatus === null) {
-      console.log("bugn");
-      this.$router.push({ name: "login" });
-    }
-    else {
-      console.log(this.uploadMessage?.subhead)
-
-      return (
-        <UploadView
-          onUploadImageToAPI={uploadImageToAPI.bind(this)}
-          onAbortUpload={abortUploadACB.bind(this)}
-          onBrowseSpanClick={browseSpanClickACB.bind(this)}
-          dragareaActive={this.isActive}
-          onDragoverFile={dragoverListenerACB.bind(this)}
-          onDragleaveFile={dragleaveListenerACB.bind(this)}
-          onDropFile={dropListenerACB.bind(this)}
-          onInputFileChange={inputChangeListenerACB.bind(this)}
-          onUploadConfirmation={uploadConfirmationACB.bind(this)}
-          imageLoaded={this.isFileLoaded}
-          promiseState={this.plantPromiseState}
-          fileURL={this.fileURL}
-          overlay={this.overlay}
-          uploadMessage={this.uploadMessage} />
-      );
-    }
+    return (
+      <UploadView
+        onUploadImageToAPI={uploadImageToAPI.bind(this)}
+        onAbortUpload={abortUploadACB.bind(this)}
+        onBrowseSpanClick={browseSpanClickACB.bind(this)}
+        dragareaActive={this.isActive}
+        onDragoverFile={dragoverListenerACB.bind(this)}
+        onDragleaveFile={dragleaveListenerACB.bind(this)}
+        onDropFile={dropListenerACB.bind(this)}
+        onInputFileChange={inputChangeListenerACB.bind(this)}
+        onUploadConfirmation={uploadConfirmationACB.bind(this)}
+        imageLoaded={this.isFileLoaded}
+        promiseState={this.plantPromiseState}
+        fileURL={this.fileURL}
+        overlay={this.overlay}
+        uploadMessage={this.uploadMessage} />
+    );
   }
 };
 

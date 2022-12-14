@@ -3,6 +3,7 @@ import { examplePlantArray } from "@/network/plantIdExample.js";
 import CollectionView from "../views/collectionView.js";
 import "../css/collection.css";
 import { watch } from "vue";
+import { waitingForUserToBeSignedIn } from "@/utils/userUtils.js";
 
 const CollectionPresenter = {
   data() {
@@ -15,28 +16,25 @@ const CollectionPresenter = {
   created() {
     this.userStatus = useFlowerStore().currentUser;
 
-    // watch current user
+    // watch user status
     watch(() => useFlowerStore().currentUser, function (newUser) {
       this.userStatus = newUser;
     }.bind(this));
   },
 
   render() {
+    if (waitingForUserToBeSignedIn(this.userStatus, this.$router)) return;
+
     function sortACB(order){
       this.sortStatus = order;
     }
 
-    if (this.userStatus == undefined) {
-      return;
-    }
-    else {
-      return (
-        <CollectionView
-          plants={useFlowerStore().plants /*examplePlantArray*/}
-          sort={this.sortStatus}
-          onSort={sortACB.bind(this)} />
-      );
-    }
+    return (
+      <CollectionView
+        plants={useFlowerStore().plants /*examplePlantArray*/}
+        sort={this.sortStatus}
+        onSort={sortACB.bind(this)} />
+    );
   },
 };
 

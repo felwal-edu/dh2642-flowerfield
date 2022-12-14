@@ -2,11 +2,14 @@ import resolvePromise from "../utils/resolvePromise.js";
 import useFlowerStore from "@/store/flowerStore";
 import { signUpUser } from "@/persistence/firebaseAuth.js";
 import SignUpView from "@/views/signupView.js";
+import { watch } from "vue";
+import { waitingForUserToBeSignedOut } from "@/utils/userUtils.js";
 
 
 const SignUpPresenter = {
     data() {
         return {
+            userStatus: undefined,
             authPromiseState: {},
             email: "",
             password: "",
@@ -16,9 +19,18 @@ const SignUpPresenter = {
         };
     },
 
+    created() {
+        this.userStatus = useFlowerStore().currentUser;
 
+        // watch user status
+        watch(() => useFlowerStore().currentUser, function (newUser) {
+            this.userStatus = newUser;
+        }.bind(this));
+    },
 
     render() {
+        if (waitingForUserToBeSignedOut(this.userStatus, this.$router)) return;
+
         function authResultACB() {
             if (this.authPromiseState.error) {
                 console.error(this.authPromiseState.error.message);

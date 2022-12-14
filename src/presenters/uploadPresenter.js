@@ -22,7 +22,7 @@ const UploadPresenter = {
     };
   },
 
-  created () {
+  created() {
     // TODO: WAIT FOR FIREBASE TO LOAD FIRST
     this.userStatus = useFlowerStore().currentUser;
 
@@ -42,7 +42,7 @@ const UploadPresenter = {
     this.input = document.querySelector("input");
   },
 
-  beforeUnmount () {
+  beforeUnmount() {
   },
 
   render() {
@@ -59,8 +59,8 @@ const UploadPresenter = {
     }
 
     function browseSpanClickACB(event) {
-        this.input = document.querySelector("input");
-        this.input.click();
+      this.input = document.querySelector("input");
+      this.input.click();
     }
 
     function uploadImageToAPI() {
@@ -126,7 +126,7 @@ const UploadPresenter = {
       evt.preventDefault();
       this.file = evt.dataTransfer.files[0];
 
-      commitFile(this.file, function(f, success) {
+      commitFile(this.file, function (f, success) {
         this.fileURL = f;
         this.isFileLoaded = success;
         this.isActive = success; // usefull if we fail
@@ -138,7 +138,7 @@ const UploadPresenter = {
       // add so the border is "active"
       this.isActive = true;
 
-      commitFile(this.file, function(f, success) {
+      commitFile(this.file, function (f, success) {
         this.fileURL = f;
         this.isFileLoaded = success;
         this.isActive = success;
@@ -155,7 +155,7 @@ const UploadPresenter = {
     }
     else if (this.userStatus === null) {
       console.log("bugn");
-      this.$router.push({name: "login"});
+      this.$router.push({ name: "login" });
     }
     else {
       return (
@@ -170,6 +170,7 @@ const UploadPresenter = {
           onInputFileChange={inputChangeListenerACB.bind(this)}
           onDisableOverlay={disableOverlayACB.bind(this)}
           imageLoaded={this.isFileLoaded}
+          promiseState={this.plantPromiseState}
           fileURL={this.fileURL}
           overlay={this.overlay}
           uploadMessage={this.uploadMessage} />

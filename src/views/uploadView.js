@@ -1,9 +1,11 @@
+import promiseNoData from "./promiseNodata";
+
 function UploadView(props) {
   function renderUploadView() {
-    if (!props.imageLoaded) {
+    function renderInstruction() {
       return (
         <div
-          class={props.dragareaActive == true ? "drag-area active" : "drag-area"}
+          class={props.dragareaActive === true ? "drag-area active" : "drag-area"}
           onDragover={dragoverFileACB}
           onDragleave={dragleaveFileACB}
           onDrop={dropFileACB}>
@@ -18,9 +20,10 @@ function UploadView(props) {
           <input type="file" hidden onChange={inputFileChangeACB} />
           <span class="tip-support">PNG, JPG, JPEG</span>
         </div>
-      );
+      )
     }
-    else {
+
+    function renderResults() {
       return (
         <div>
           <div class="image-container">
@@ -40,6 +43,10 @@ function UploadView(props) {
         </div>
       );
     }
+
+    return !props.promiseState.promise ? (renderInstruction()
+
+    ) : promiseNoData(props.promiseState) || renderResults()
   }
 
   function browseSpanClickACB() {

@@ -12,6 +12,8 @@ const ProfilePresenter = {
   render() {
     function signOutACB() {
       signOutUser();
+      // return to home
+      this.$router.push({name: "home"});
     }
 
     return (

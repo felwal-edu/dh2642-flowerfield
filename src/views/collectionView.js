@@ -54,7 +54,7 @@ function renderCollection(plants, order) {
         <v-card max-width="150" class="mx-3" >
           <v-img src={plant.url} max-width="150" max-heigth="200" />
           <v-card-title class="plant-name">
-            {capitalize(plant.scientificName.split(" ")[1])}
+            {capitalize(plant.species || plant.genus)}
           </v-card-title>
         </v-card>
       </td>

@@ -16,7 +16,7 @@ const UploadPresenter = {
       file: null,
       fileURL: null,
       overlay: false,
-      plantObject: null,
+      plant: null,
       userStatus: undefined,
       uploadMessage: {},
     };
@@ -46,7 +46,7 @@ const UploadPresenter = {
   },
 
   render() {
-    function onAbortUpload(event) {
+    function abortUploadACB() {
       // reset data
       this.file = null;
       this.isActive = false;
@@ -64,38 +64,38 @@ const UploadPresenter = {
     }
 
     function uploadImageToAPI() {
-      function notifyACB() {
+      function processApiResultACB() {
         if (this.plantPromiseState.data?.suggestions) {
           // extract relevant information
+          // TODO: only if > X% chance
           let plant = this.plantPromiseState.data?.suggestions[0];
 
-          this.plantObject = {
+          this.plant = {
             "id": plant.id,
-            "scientificName": plant.plant_name,
-            "genus": plant.plant_details.structured_name.genus,
-            "species": plant.plant_details.structured_name.species,
+            "scientificName": plant.plant_name || "",
+            "genus": plant.plant_details.structured_name.genus || "",
+            "species": plant.plant_details.structured_name.species || "",
             "date": this.plantPromiseState.data.meta_data.date,
             "url": this.plantPromiseState.data.images[0].url,
           };
 
           // check if the plant exist already, if so we grey out the "add collection button"
-          if (useFlowerStore().hasPlant(this.plantObject.scientificName)) {
+          if (useFlowerStore().hasPlant(this.plant.scientificName)) {
             this.uploadMessage = {
-              "title": this.plantObject.scientificName,
+              "title": this.plant.scientificName,
               "subhead": "Already exists in your collection.",
               "buttonText": "Continue"
             };
           }
           else {
             this.uploadMessage = {
-              "title": "NEW! " + this.plantObject.scientificName,
+              "title": "NEW! " + this.plant.scientificName,
               "subhead": "You photographed a new flower!",
               "buttonText": "Add to collection"
             };
           }
 
           this.overlay = true;
-          useFlowerStore().addPlant(this.plantObject);
         }
       }
 
@@ -106,10 +106,10 @@ const UploadPresenter = {
       let base64 = this.fileURL.replace("data:", "").replace(/^.+,/, "");
 
       // REAL CALL:
-      resolvePromise(getPlantByImage(base64), this.plantPromiseState, notifyACB.bind(this));
+      resolvePromise(getPlantByImage(base64), this.plantPromiseState, processApiResultACB.bind(this));
 
       // FAKE CALL:
-      //resolvePromiseMock(exampleResponse, this.plantPromiseState, notifyACB.bind(this));
+      //resolvePromiseMock(exampleResponse, this.plantPromiseState, processApiResultACB.bind(this));
     }
 
     // create listeners
@@ -145,8 +145,16 @@ const UploadPresenter = {
       }.bind(this));
     }
 
-    function disableOverlayACB(evt) {
-      this.overlay = false;
+    function uploadConfirmationACB() {
+      if (!useFlowerStore().hasPlant(this.plant.scientificName)) {
+        // only add to store if not already exists
+        useFlowerStore().addPlant(this.plant);
+        this.$router.push({ name: "collection" });
+      }
+      else {
+        this.overlay = false;
+        this.uploadMessage = {};
+      }
     }
 
     //console.log(this.userStatus);
@@ -158,17 +166,19 @@ const UploadPresenter = {
       this.$router.push({ name: "login" });
     }
     else {
+      console.log(this.uploadMessage?.subhead)
+
       return (
         <UploadView
           onUploadImageToAPI={uploadImageToAPI.bind(this)}
-          onAbortUpload={onAbortUpload.bind(this)}
+          onAbortUpload={abortUploadACB.bind(this)}
           onBrowseSpanClick={browseSpanClickACB.bind(this)}
           dragareaActive={this.isActive}
           onDragoverFile={dragoverListenerACB.bind(this)}
           onDragleaveFile={dragleaveListenerACB.bind(this)}
           onDropFile={dropListenerACB.bind(this)}
           onInputFileChange={inputChangeListenerACB.bind(this)}
-          onDisableOverlay={disableOverlayACB.bind(this)}
+          onUploadConfirmation={uploadConfirmationACB.bind(this)}
           imageLoaded={this.isFileLoaded}
           promiseState={this.plantPromiseState}
           fileURL={this.fileURL}

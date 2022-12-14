@@ -14,19 +14,13 @@ const ProfilePresenter = {
       signOutUser();
     }
 
-    function rankACB() {
-
-      console.log(rankDisplay(useFlowerStore().experience));
-
-    }
-
     return (
       <ProfileView
         currentUser={useFlowerStore().currentUser}
         onSignOut={signOutACB}
         userExperience={useFlowerStore().experience}
         amountPlants={useFlowerStore().plants.length}
-        currentRank={rankACB} />
+        currentRank={rankDisplay(useFlowerStore().experience)} />
     );
   }
 };

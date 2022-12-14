@@ -41,8 +41,9 @@ function rankDisplay(experience) {
     if (experience >= ranks[i][1]) {
 
       currentRank = ranks[i][0]
+
     }
-    return "seed"
+    return currentRank
   }
 
 }

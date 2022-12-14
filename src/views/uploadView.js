@@ -35,7 +35,7 @@ function UploadView(props) {
                 <v-card-title class="justify-center">{props.uploadMessage.title}</v-card-title>
                 <v-card-subtitle class="justify-center">{props.uploadMessage.subhead}</v-card-subtitle>
                 <v-card-actions>
-                  <v-btn color="primary" block onClick={disableOverlayACB}>{props.uploadMessage.buttonText}</v-btn>
+                  <v-btn color="primary" block onClick={uploadConfirmationACB}>{props.uploadMessage.buttonText}</v-btn>
                 </v-card-actions>
               </v-card>
             </v-row>
@@ -77,8 +77,8 @@ function UploadView(props) {
     props.onInputFileChange(evt);
   }
 
-  function disableOverlayACB() {
-    props.onDisableOverlay();
+  function uploadConfirmationACB() {
+    props.onUploadConfirmation();
   }
 
   return (

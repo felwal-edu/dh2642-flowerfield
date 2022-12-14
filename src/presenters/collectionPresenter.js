@@ -2,7 +2,6 @@ import useFlowerStore from "@/store/flowerStore.js";
 import { examplePlantArray } from "@/network/plantIdExample.js";
 import CollectionView from "../views/collectionView.js";
 import PopupView from "../views/popupView.js";
-import "../css/collection.css";
 
 const CollectionPresenter = {
   data() {

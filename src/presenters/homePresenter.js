@@ -1,24 +1,20 @@
 import useFlowerStore from "@/store/flowerStore";
+import { watch } from "vue";
 import HomeView from "../views/homeView";
 
 const HomePresenter = {
   data() {
     return {
-        userStatus: undefined,
+      userStatus: undefined,
     }
   },
 
   created () {
-    // TODO WAIT FOR FIREBASE TO LOAD FIRS
     this.userStatus = useFlowerStore().currentUser;
 
-    // TODO: extract used-more-than-once funcitonality
-    useFlowerStore().$subscribe(function (mutation, state) {
-      // TODO: mutation is not defined in production
-      if (mutation.events.key === "currentUser") {
-        // transform plant list to object with id as key
-        this.userStatus = mutation.events.newValue;
-      }
+    // watch current user
+    watch(() => useFlowerStore().currentUser, function (newUser) {
+      this.userStatus = newUser;
     }.bind(this));
   },
 
@@ -27,4 +23,4 @@ const HomePresenter = {
   }
 };
 
-export default HomePresenter
+export default HomePresenter;

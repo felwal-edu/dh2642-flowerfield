@@ -1,17 +1,14 @@
 import useFlowerStore from "@/store/flowerStore";
+import { watch } from "vue";
 import "../css/main.css";
 
 export default function App() {
   let userStatus = useFlowerStore().currentUser;
 
   function renderApp() {
-    // TODO: extract used-more-than-once funcitonality
-    useFlowerStore().$subscribe(function (mutation, state) {
-      // TODO: mutation is not defined in production
-      if (mutation.events.key === "currentUser") {
-        // transform plant list to object with id as key
-        userStatus = mutation.events.newValue;
-      }
+    // watch current user
+    watch(() => useFlowerStore().currentUser, function (newUser) {
+      userStatus = newUser;
     }.bind(this));
 
     // logged out or waiting for initialization

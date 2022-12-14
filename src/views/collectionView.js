@@ -1,4 +1,4 @@
-import { sortPlants } from "@/utils/plantUtils";
+import { sortPlantsIntoObject } from "@/utils/plantUtils";
 import { capitalize } from "vue";
 
 function CollectionView(props) {
@@ -8,9 +8,7 @@ function CollectionView(props) {
   return (
     <div>
       <div>
-        <v-toolbar
-          color="#96c29f"
-        >
+        <v-toolbar color="#96c29f">
           <v-toolbar-title>Your Collection</v-toolbar-title>
           <v-spacer></v-spacer>
           <p class="font-weight-bold">
@@ -21,8 +19,8 @@ function CollectionView(props) {
             <v-select
               model-value={props.sort}
               items={["Genus A-Z", "Genus Z-A"]}
-              onUpdate:modelValue={onSortChangeACB}
-            >
+              onUpdate:modelValue={onSortChangeACB}>
+
             </v-select>
           </var-toolbar-items>
         </v-toolbar>
@@ -37,9 +35,9 @@ function renderCollection(plants, order) {
     return (
       <v-expansion-panels
         focusable
-        model-value={[0]}
-      >
-        <v-expansion-panel title={capitalize(plantItem[0]) + " (" + plantItem[1].length + ")"} >
+        model-value={[0]}>
+
+        <v-expansion-panel title={capitalize(plantItem[0]) + " (" + plantItem[1].length + ")"}>
           <v-expansion-panel-text>
             <tr>{plantItem[1].map(createCollectionColCB)}</tr>
           </v-expansion-panel-text>
@@ -51,7 +49,7 @@ function renderCollection(plants, order) {
   function createCollectionColCB(plant) {
     return (
       <td>
-        <v-card max-width="150" class="mx-3" >
+        <v-card max-width="150" class="mx-3">
           <v-img src={plant.url} max-width="150" max-heigth="200" />
           <v-card-title class="plant-name">
             {capitalize(plant.species || plant.genus)}
@@ -63,11 +61,12 @@ function renderCollection(plants, order) {
 
   if (order === "Genus A-Z") {
     return (
-      <div>{Object.entries(sortPlants(plants)).map(createRowsCB)}</div>
+      <div>{Object.entries(sortPlantsIntoObject(plants)).map(createRowsCB)}</div>
     );
-  } else {
+  }
+  else {
     return (
-      <div>{Object.entries(sortPlants(plants)).reverse().map(createRowsCB)}</div>
+      <div>{Object.entries(sortPlantsIntoObject(plants)).reverse().map(createRowsCB)}</div>
     );
   }
 }

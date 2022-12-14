@@ -2,7 +2,7 @@ import promiseNoData from "./promiseNodata";
 
 function UploadView(props) {
   function renderUploadView() {
-    function renderInstruction() {
+    function renderInstructions() {
       return (
         <div
           class={props.dragareaActive === true ? "drag-area active" : "drag-area"}
@@ -44,9 +44,9 @@ function UploadView(props) {
       );
     }
 
-    return !props.promiseState.promise ? (renderInstruction()
-
-    ) : promiseNoData(props.promiseState) || renderResults()
+    return !props.promiseState.promise
+      ? renderInstructions()
+      : promiseNoData(props.promiseState) || renderResults();
   }
 
   function browseSpanClickACB() {

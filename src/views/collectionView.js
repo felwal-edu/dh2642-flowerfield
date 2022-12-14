@@ -32,20 +32,29 @@ function CollectionView(props) {
         </v-toolbar>
       </div>
       <div>{renderCollection(props.plants, props.test, props.sort, props)}</div>
-      <div class="overlay_test">
-        <v-overlay
-          z-index={10}
-          model-value={props.overlay}
-          onClick:outside={onCloseInfoACB}
+      <v-overlay
+        class="d-flex justify-center align-center"
+        z-index={10}
+        model-value={props.overlay}
+        onClick:outside={onCloseInfoACB}
+      >
+        <v-card
         >
-          <v-card>
-            <v-card-title>{props.currentPlant.scientificName}</v-card-title>
-            <v-img src={props.currentPlant.url}></v-img>
-            <v-card-text>Information about the plant</v-card-text>
-            <v-btn onClick={onCloseInfoACB}>Close</v-btn>
-          </v-card>
-        </v-overlay>
-      </div>
+          <v-card-title>{props.currentPlant.scientificName}</v-card-title>
+          <v-img src={props.currentPlant.url}></v-img>
+          <v-card-text>Information about the plant</v-card-text>
+          <v-card-actions>
+            <v-row class="justify-center align-center">
+              <v-btn
+                onClick={onCloseInfoACB}
+                color="red"
+              >
+                  Close
+              </v-btn>
+            </v-row>
+          </v-card-actions>
+        </v-card>
+      </v-overlay>
     </div>
   );
 }
@@ -59,7 +68,7 @@ function renderCollection(plants, test, order, props) {
       >
         <v-expansion-panel title={capitalize(plantItem[0]) + " (" + plantItem[1].length + ")"} >
           <v-expansion-panel-text>
-            <tr>{plantItem[1].map(createCollectionColCB)}</tr>
+            <v-row class="d-flex justify-start">{plantItem[1].map(createCollectionColCB)}</v-row>
           </v-expansion-panel-text>
         </v-expansion-panel>
       </v-expansion-panels>
@@ -71,14 +80,14 @@ function renderCollection(plants, test, order, props) {
       props.openPopup(plant);
     }
     return (
-      <td>
+      <v-col>
         <v-card max-width = "150" class="mx-3" onClick={showInfoACB}>
           <v-img src={plant.url} max-width="150" max-heigth="200" />
           <v-card-title class="plant-name">
             {capitalize(plant.scientificName.split(" ")[1])}
           </v-card-title>
         </v-card>
-      </td>
+      </v-col>
     );
   }
 

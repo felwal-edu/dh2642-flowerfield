@@ -4,6 +4,7 @@ import ProfileView from "../views/profileView";
 import { rankDisplay } from "@/utils/plantUtils";
 import { watch } from "vue";
 import { waitingForUserToBeSignedIn } from "@/utils/userUtils";
+import "../css/profile.css"
 
 const ProfilePresenter = {
   data() {
@@ -27,7 +28,7 @@ const ProfilePresenter = {
     function signOutACB() {
       signOutUser();
       // return to home
-      this.$router.push({name: "home"});
+      this.$router.push({ name: "home" });
     }
 
     return (

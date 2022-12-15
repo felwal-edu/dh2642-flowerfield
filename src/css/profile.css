@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap');
+
+.header-font {
+  font-family: 'Ubuntu', sans-serif;
+  margin-bottom: 20px;
+  font-weight: 1000;
+  color: #b0d2cf;
+  font-size: 1.5em;
+  text-align: center;
+}
+
+.link-text span {
+  text-decoration: underline;
+  color: #a02a3d;
+  cursor: pointer;
+}
+
+.v-card.profile-background {
+  width: 90vh;
+}
+
+.profile-small-background {
+  height: 100%;
+  width: 100%;
+  max-height: 450px;
+  max-width: 650px;
+  z-index: -1;
+}
+
+.background-left {
+  z-index: -1;
+}
+
+.user-info {
+  color: #b0d2cf;
+}

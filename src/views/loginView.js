@@ -51,8 +51,8 @@ function LoginView(props) {
             <v-row justify="center" class="my-4">
               <v-btn onClick={signInClickACB}>Sign in</v-btn>
             </v-row>
-            <v-row>
-              <v-btn onClick={goToSignUpACB}>Already have an account? Go to sign up view</v-btn>
+            <v-row justify="center" class="my-4">
+              <v-btn onClick={goToSignUpACB}>Don't have an account? Go to sign up view</v-btn>
             </v-row>
           </v-col>
         </v-card>

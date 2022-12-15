@@ -24,7 +24,7 @@ const LoginPresenter = {
     watch(() => useFlowerStore().currentUser, function (newUser) {
       this.userStatus = newUser;
     }.bind(this));
-},
+  },
 
   render() {
     if (waitingForUserToBeSignedOut(this.userStatus, this.$router)) return;
@@ -59,6 +59,12 @@ const LoginPresenter = {
       this.snackbar = false;
     }
 
+
+    function toSignUpACB() {
+      this.$router.push({ name: "signup" })
+    }
+
+
     return (
       <LoginView
         currentUser={useFlowerStore().currentUser}
@@ -67,7 +73,8 @@ const LoginPresenter = {
         onSignIn={signInACB.bind(this)}
         onCloseErrorSnackbar={closeErrorSnackbar.bind(this)}
         snackbar={this.snackbar}
-        errorMessage={this.errorMessage} />
+        errorMessage={this.errorMessage}
+        onGoToSignUp={toSignUpACB.bind(this)} />
     );
   }
 };

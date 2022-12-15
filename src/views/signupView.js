@@ -20,7 +20,12 @@ function SignUpView(props) {
     }
 
     function passwordCheckInputChangeACB(evt) {
-        props.onPasswordCheckChange(evt.target.value)
+        props.onPasswordCheckChange(evt.target.value);
+    }
+
+    function goToLoginACB() {
+        props.onGoToLogin();
+
     }
     return (
 
@@ -33,6 +38,7 @@ function SignUpView(props) {
                         <v-row justify="center"><v-col sm="11"><v-text-field type="password" clearable onChange={passwordInputChangeACB}>Password: </v-text-field></v-col></v-row>
                         <v-row justify="center"><v-col sm="11"><v-text-field type="password" clearable onChange={passwordCheckInputChangeACB}>Confirm password: </v-text-field></v-col></v-row>
                         <v-row justify="center" class="mx-8"><v-btn onClick={signUpClickACB}>Sign up</v-btn></v-row>
+                        <v-row justify="center" class="ma-8"><v-btn onClick={goToLoginACB}>Already have an account? </v-btn></v-row>
                     </v-col>
                 </v-card>
                 <v-snackbar v-model={props.snackbar} class="d-flex" color="#0d0963">

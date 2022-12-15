@@ -22,6 +22,8 @@ export function setUserMetadata(user) {
 
 export function updateFirebaseFromStore(store) {
   function plantsChangedInStoreACB(newPlants) {
+    console.log("store plants:")
+    console.log(newPlants)
     function toNameKeyedObjectCB(obj, plant) {
       return { ...obj, [plant.scientificName]: plant };
     }
@@ -33,8 +35,9 @@ export function updateFirebaseFromStore(store) {
   }
 
   function experienceChangedInStoreACB(storeExp) {
-
-    set(ref(db, REF + "/users/" + store.currentUser.uid + "/experience/"), storeExp);
+    console.log("store exp:")
+    console.log(storeExp)
+    set(ref(db, REF + "/users/" + store.currentUser.uid + "/experience"), store.experience);
   }
 
   unsubscribers = [

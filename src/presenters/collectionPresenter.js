@@ -43,9 +43,11 @@ const CollectionPresenter = {
       return;
     }
     else {
+      console.log("plants:")
+      console.log(useFlowerStore().plants)
       return (
         <CollectionView
-          plants={/*useFlowerStore().plants*/ examplePlantArray}
+          plants={useFlowerStore().plants /*examplePlantArray*/}
           test={this.test}
           sort={this.sortStatus}
           overlay={this.popupStatus}

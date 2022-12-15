@@ -4,6 +4,7 @@ import useFlowerStore from "@/store/flowerStore.js";
 import { signInUser, signUpUser } from "@/persistence/firebaseAuth.js";
 import { watch } from "vue";
 import { waitingForUserToBeSignedOut } from "@/utils/userUtils.js";
+import "../css/login.css"
 
 const LoginPresenter = {
   data() {

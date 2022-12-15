@@ -10,7 +10,7 @@ function HomeView(props) {
   function renderLandingPageButton() {
     if (props.userStatus === undefined || props.userStatus === null) {
       return (
-        <router-link to="/login">
+        <router-link to="/signup">
           <v-btn /*color="#a02a3d"*/ variant="tonal">Get Started!</v-btn>
         </router-link>
       );
@@ -27,13 +27,13 @@ function HomeView(props) {
   return (
     <div>
       <v-parallax height="600" src={background}>
-      <div class="d-flex flex-column fill-height justify-center align-center text-white">
-        <div class="landing-page center">
-        <img class="logo" src={logopath} />
-        <p class="subheader">Flowers worth Remembering</p>
-        {renderLandingPageButton()}
+        <div class="d-flex flex-column fill-height justify-center align-center text-white">
+          <div class="landing-page center">
+            <img class="logo" src={logopath} />
+            <p class="subheader">Flowers worth Remembering</p>
+            {renderLandingPageButton()}
+          </div>
         </div>
-      </div>
       </v-parallax>
       <div class="information-page">
         <v-container justify="center">
@@ -44,7 +44,7 @@ function HomeView(props) {
             <v-row justify="center" align="center">
               <img class="home-photo" src={home_photo} alt="Logo" />
               <p>Take pictures of flowers and plants - Flowerfield can automatically identify them, <br></br>
-              providing you with new information about your surroundings.</p>
+                providing you with new information about your surroundings.</p>
             </v-row>
           </v-col>
         </v-container>
@@ -56,7 +56,7 @@ function HomeView(props) {
               </v-row>
               <v-row justify="center" align="center" class="mt-14 pt-14">
                 <p class="highlighted">Store your discoveries in a digital collection, hosted on Flowerfield. <br></br>
-                View your progress and collect sets of flowers and plants.</p>
+                  View your progress and collect sets of flowers and plants.</p>
               </v-row>
             </v-col>
           </v-parallax>
@@ -69,7 +69,7 @@ function HomeView(props) {
             <v-row justify="center" align="center" class="mt-4">
               <img class="home-plant" src={home_growth} alt="Logo" />
               <p class="mt-10">As your collection grows, so do you! <br></br>
-              Gain experience from collecting flowers, and grow your botanical expertise.</p>
+                Gain experience from collecting flowers, and grow your botanical expertise.</p>
             </v-row>
           </v-col>
         </v-container>

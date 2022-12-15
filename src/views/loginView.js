@@ -9,17 +9,25 @@ function LoginView(props) {
     props.onSignIn();
   }
 
+
   function emailInputChangeACB(evt) {
     console.log(evt.target.value);
     props.onEmailChange(evt.target.value);
   }
 
+
   function passwordInputChangeACB(evt) {
     props.onPasswordChange(evt.target.value);
   }
 
+
   function closeErrorSnackbarACB() {
     props.onCloseErrorSnackbar();
+  }
+
+
+  function goToSignUpACB() {
+    props.onGoToSignUp();
   }
 
   return (
@@ -42,6 +50,9 @@ function LoginView(props) {
             </v-row>
             <v-row justify="center" class="my-4">
               <v-btn onClick={signInClickACB}>Sign in</v-btn>
+            </v-row>
+            <v-row>
+              <v-btn onClick={goToSignUpACB}>Already have an account? Go to sign up view</v-btn>
             </v-row>
           </v-col>
         </v-card>

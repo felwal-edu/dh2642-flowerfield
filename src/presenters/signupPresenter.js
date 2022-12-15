@@ -66,6 +66,9 @@ const SignUpPresenter = {
             this.passwordCheck = passwordCheck;
         }
 
+        function toSignUpACB() {
+            this.$router.push({ name: "signup" })
+        }
 
 
 
@@ -76,7 +79,8 @@ const SignUpPresenter = {
                 onPasswordChange={passwordChangeACB.bind(this)}
                 onPasswordCheckChange={checkPasswordChangeACB.bind(this)}
                 onSignUp={signUpACB.bind(this)}
-                snackbar={this.snackbar} />
+                snackbar={this.snackbar}
+                goToSignUp={toSignUpACB} />
         );
 
     }

@@ -1,6 +1,6 @@
 import firebaseConfig from "./firebaseSecrets";
 import { initializeApp } from "firebase/app";
-import { getDatabase, ref, set, onChildAdded, onChildRemoved, get, child } from "firebase/database";
+import { getDatabase, ref, set, onChildAdded, onChildRemoved, get, child, onValue } from "firebase/database";
 import { watch } from "vue";
 
 // init
@@ -52,10 +52,18 @@ export function updateStoreFromFirebase(store) {
     store.removePlant(+data.key);
   }
 
+  function experienceAddedInFirebase(experience) {
+    if (store.experience !== experience) {
+      store.experience = experience;
+    }
+  }
+
   unsubscribers = [
     ...unsubscribers,
     onChildAdded(ref(db, REF + "/users/" + store.currentUser.uid + "/plants"), plantAddedInFirebase),
-    onChildRemoved(ref(db, REF + "/users/" + store.currentUser.uid + "/plants"), plantRemovedInFirebase)
+    onChildRemoved(ref(db, REF + "/users/" + store.currentUser.uid + "/plants"), plantRemovedInFirebase),
+    onValue(ref(db, REF + "/users/" + store.currentUser.uid + "/experience"), experienceAddedInFirebase)
+
   ];
 }
 

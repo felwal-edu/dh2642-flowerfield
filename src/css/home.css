@@ -35,8 +35,8 @@
 
   margin: auto;
   display: block;
-  max-width:500px;
-  max-height:170px;
+  max-width: 500px;
+  max-height: 170px;
 
   -webkit-filter: drop-shadow(1px 1px 6px #3c3c3c);
   filter: drop-shadow(1px 1px 6px #3c3c3c);
@@ -74,16 +74,15 @@
 
 .information-end {
   margin-top: 50px;
-  background-color: #000efe;
 }
 
 .information-end h1 {
-  color: #ffffff;
+  color: #000efe;
 }
 
 .information-end p {
   font-family: 'Ubuntu', sans-serif;
-  color: #ffffff;
+  color: #000efe;
   font-size: 1.8em;
 }
 

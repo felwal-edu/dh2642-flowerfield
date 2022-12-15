@@ -1,4 +1,6 @@
 import "../plugins/vuetify";
+//import profileBackground from "@/assets/flower_profile_placeholder.png";
+import profileBackground from "@/assets/profile-card.png";
 
 function ProfileView(props) {
   function signOutClickACB(evt) {
@@ -10,37 +12,56 @@ function ProfileView(props) {
     props.onSignOut();
   }
 
+
   return (
     <div>
-      <v-card shaped class="rounded-card mx-auto mt-16" max-width="344" height="320">
-        <v-card-title>My Profile</v-card-title>
-        <v-col align-self="start" class="justify-center align-center pa-0" cols="12">
-          <v-row justify="center">
-            <v-avatar color="info" class="mb-6 mt-6 mx-auto" size="60">
-              <v-icon icon="mdi-account-circle"></v-icon>
-            </v-avatar>
+      <v-card shaped class="mx-auto mt-16 profile-background" max-width="700" height="360">
+        <v-img src={profileBackground}>
+          <v-card-title class="header-font mt-12">My Profile</v-card-title>
+          <v-row>
+            <v-col class="background-left ml-8">
+
+              <v-row class="mt-2" justify="center">
+                <v-card-title ><h4 class="user-info">placeholder-username</h4></v-card-title>
+              </v-row>
+
+              <v-row class="my-5" justify="center">
+                <v-card-title><h4 class="user-info">{props.currentUser?.email || "Not logged in!"}</h4></v-card-title>
+              </v-row>
+              <v-row class="my-10" justify="center">
+                <v-btn variant="outlined" onClick={signOutClickACB}>Sign out</v-btn>
+              </v-row>
+            </v-col>
+            <v-col class="mr-12">
+
+              <v-row class="mt-2" justify="center">
+                <v-card-title><h4 class="user-info">{"Current rank:" + props.currentRank}</h4></v-card-title>
+              </v-row>
+
+              <v-row class="my-5" justify="center">
+                <v-card-title><h4 class="user-info">{"Progress until next rank:"}</h4></v-card-title>
+                <v-progress-linear
+                  model-value="20"
+                  color="light-green-darken-4"
+                  height="10"
+                  striped
+                ></v-progress-linear>
+                <v-card-title><h4 class="user-info">{"Experience: " + props.userExperience}</h4></v-card-title>
+              </v-row>
+
+
+
+            </v-col>
           </v-row>
-          <v-row justify="center">
-            <v-card-title>{props.currentUser?.email || "Not logged in!"}</v-card-title>
-          </v-row>
-          <v-row justify="center">
-            <v-card-title>{"Current rank:" + props.currentRank}</v-card-title>
-          </v-row>
-          <v-row justify="center">
-            <v-card-title>{"Number of plants collected: " + props.amountPlants}</v-card-title>
-          </v-row>
-          <v-row justify="center">
-            <v-card-title>{"Experience: " + props.userExperience}</v-card-title>
-          </v-row>
-          <v-row justify="center pt-5">
-            <v-card-actions>
-              <v-btn variant="outlined" onClick={signOutClickACB}>Sign out</v-btn>
-            </v-card-actions>
-          </v-row>
-        </v-col>
+        </v-img>
+
+
+
       </v-card>
+
     </div>
-  );
+  )
+
 }
 
 export default ProfileView;

@@ -1,7 +1,6 @@
 import useFlowerStore from "@/store/flowerStore.js";
 import { examplePlantArray } from "@/network/plantIdExample.js";
 import CollectionView from "../views/collectionView.js";
-import PopupView from "../views/popupView.js";
 
 const CollectionPresenter = {
   data() {
@@ -30,23 +29,23 @@ const CollectionPresenter = {
   render() {
     this.test = true;
 
-    function sortACB(order){
+    function sortACB(order) {
       this.sortStatus = order;
     }
 
-    function openPopupACB(plant){
+    function openPopupACB(plant) {
       this.selected = plant;
       this.popupStatus = true;
     }
 
-    function closePopupACB(){
+    function closePopupACB() {
       this.popupStatus = false;
     }
 
     if (this.userStatus == undefined) {
       return;
     }
-    else{
+    else {
       return (
         <CollectionView
           plants={/*useFlowerStore().plants*/ examplePlantArray}
@@ -57,7 +56,7 @@ const CollectionPresenter = {
           onSort={sortACB.bind(this)}
           openPopup={openPopupACB.bind(this)}
           closePopup={closePopupACB.bind(this)}
-          />
+        />
       );
     }
   },

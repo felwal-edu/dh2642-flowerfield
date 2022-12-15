@@ -30,7 +30,7 @@ function CollectionView(props) {
           </v-toolbar-items>
         </v-toolbar>
       </div>
-      <div>{renderCollection(props.plants, props.test, props.sort, props)}</div>
+      <div>{renderCollection(props.plants, props.test, props.sort, props.openPopup)}</div>
       <v-overlay
         class="d-flex justify-center align-center"
         persistent
@@ -66,7 +66,7 @@ function CollectionView(props) {
   );
 }
 
-function renderCollection(plants, test, order, props) {
+function renderCollection(plants, test, order, openPopup) {
   function createRowsCB(plantItem) {
     return (
       <v-expansion-panels
@@ -86,12 +86,12 @@ function renderCollection(plants, test, order, props) {
 
   function createCollectionColCB(plant) {
     function showInfoACB(evt) {
-      props.openPopup(plant);
+      openPopup(plant);
     }
     return (
       <v-col md="2">
-        <v-card max-width="200" class="mx-3" onClick={showInfoACB}>
-          <v-img src={plant.url} aspect-ratio="4/3" width="200" />
+        <v-card width="200" class="mx-3" onClick={showInfoACB}>
+          <v-img src={plant.url} height="175" cover/>
           <v-card-title class="text-center">
             {capitalize(plant.scientificName.split(" ")[1])}
           </v-card-title>

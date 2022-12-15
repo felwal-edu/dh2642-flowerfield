@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap');
+
+.header-font-signup {
+  font-family: 'Ubuntu', sans-serif;
+  margin-bottom: 20px;
+  font-weight: 1000;
+  color: #33db69;
+  font-size: 1.5em;
+  text-align: center;
+}
+
+
+
+.link-text span {
+  text-decoration: underline;
+  color: #a02a3d;
+  cursor: pointer;
+
+}

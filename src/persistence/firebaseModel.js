@@ -23,17 +23,24 @@ export function setUserMetadata(user) {
 export function updateFirebaseFromStore(store) {
   function plantsChangedInStoreACB(newPlants) {
     function toNameKeyedObjectCB(obj, plant) {
-      return {...obj, [plant.scientificName]: plant};
+      return { ...obj, [plant.scientificName]: plant };
     }
 
+
     const plantsObj = newPlants.reduce(toNameKeyedObjectCB, {});
+
     set(ref(db, REF + "/users/" + store.currentUser.uid + "/plants/"), plantsObj);
+  }
+
+  function experienceChangedInStoreACB(storeExp) {
+
+    set(ref(db, REF + "/users/" + store.currentUser.uid + "/experience/"), storeExp);
   }
 
   unsubscribers = [
     ...unsubscribers,
-    watch(() => store.plants, plantsChangedInStoreACB)
-  ];
+    watch(() => store.plants, plantsChangedInStoreACB),
+    watch(() => store.experience, experienceChangedInStoreACB)];
 }
 
 export function updateStoreFromFirebase(store) {

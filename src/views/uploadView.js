@@ -3,33 +3,39 @@ import promiseNoData from "./promiseNodata";
 function UploadView(props) {
   function renderUploadView() {
     function renderInstructions() {
-      return (
-        <div
-          class={props.dragareaActive === true ? "drag-area active" : "drag-area"}
-          onDragover={dragoverFileACB}
-          onDragleave={dragleaveFileACB}
-          onDrop={dropFileACB}>
-
-          <div class="icon">
-            <img src="https://img.icons8.com/color/96/null/stack-of-photos--v1.png" />
+      if (props.imageLoaded) {
+        return (
+          <div class="image-container">
+            <img src={props.fileURL} alt=""></img>
           </div>
-          <span class="header">{props.dragareaActive == true ? "Release to Upload" : "Drag & Drop"}</span>
-          <span class="header">
-            or <span class="browse-button" onClick={browseSpanClickACB}>browse</span>
-          </span>
-          <input type="file" hidden onChange={inputFileChangeACB} />
-          <span class="tip-support">PNG, JPG, JPEG</span>
-        </div>
-      )
+        )
+      }
+      else {
+        return (
+          <div
+            class={props.dragareaActive === true ? "drag-area active" : "drag-area"}
+            onDragover={dragoverFileACB}
+            onDragleave={dragleaveFileACB}
+            onDrop={dropFileACB}>
+
+            <div class="icon">
+              <img src="https://img.icons8.com/color/96/null/stack-of-photos--v1.png" />
+            </div>
+            <span class="header">{props.dragareaActive == true ? "Release to Upload" : "Drag & Drop"}</span>
+            <span class="header">
+              or <span class="browse-button" onClick={browseSpanClickACB}>browse</span>
+            </span>
+            <input type="file" hidden onChange={inputFileChangeACB} />
+            <span class="tip-support">PNG, JPG, JPEG</span>
+          </div>
+        )
+      }
     }
 
     function renderResults() {
       return (
         <div>
-          <div class="image-container">
-            <img src={props.fileURL} alt=""></img>
-          </div>
-          <v-overlay v-model={props.overlay} class="justify-center" justify="center">
+          <v-overlay mode-value={props.overlay} class="d-flex justify-center align-center">
             <v-row align="center" justify="center">
               <v-card>
                 <v-card-title class="justify-center">{props.uploadMessage.title}</v-card-title>

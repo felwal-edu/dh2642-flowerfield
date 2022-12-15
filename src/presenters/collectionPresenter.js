@@ -39,7 +39,6 @@ const CollectionPresenter = {
     function closePopupACB() {
       this.popupStatus = false;
     }
-    console.log(useFlowerStore().plants, "WHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHAAAAAAAAAAAAAAT")
     if (this.userStatus == undefined) {
       return;
     }

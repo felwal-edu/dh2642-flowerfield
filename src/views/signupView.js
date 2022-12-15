@@ -1,4 +1,4 @@
-import background from "@/assets/signupbackground.jpg";
+import background from "@/assets/signupbackground.png";
 
 function SignUpView(props) {
 

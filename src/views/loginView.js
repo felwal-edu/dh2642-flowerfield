@@ -39,7 +39,7 @@ function LoginView(props) {
         <v-parallax
           height="10vh"
           src={background}>
-          <v-card class="mx-auto mt-12" elevation="4" width="35%" color="#33db69" justify="center">
+          <v-card class="mx-auto mt-12 login-background" elevation="4" justify="center">
             <v-col align-self="start" class="justify-center align-center pa-0" cols="12">
               <v-row justify="center">
                 <v-card-title class="mt-12">

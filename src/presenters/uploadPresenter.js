@@ -1,13 +1,15 @@
 import UploadView from "../views/uploadView";
-import { commitFile, abortUpload } from "../utils/uploadUtils.js";
+import { commitFile } from "../utils/uploadUtils.js";
 import "../css/upload.css";
 import resolvePromise from "@/utils/resolvePromise";
-import { resolvePromiseMock } from "@/utils/resolvePromise";
+//import { resolvePromiseMock } from "@/utils/resolvePromise";
 import { getPlantByImage } from "@/network/plantIdService";
-import { exampleResponse } from "@/network/plantIdExample";
+//import { exampleResponse } from "@/network/plantIdExample";
 import useFlowerStore from "@/store/flowerStore";
 import { watch } from "vue";
 import { waitingForUserToBeSignedIn } from "@/utils/userUtils";
+
+const PROBABLILITY_REJECTION_LIMIT = 0.3;
 
 const UploadPresenter = {
   data() {
@@ -47,12 +49,10 @@ const UploadPresenter = {
       this.file = null;
       this.isActive = false;
       this.isFileLoaded = false;
-      this.plantPromiseState = {};
+      this.plantPromiseState = {};  // reset here for if API call fails
 
       document.querySelectorAll(".btn.upload").item(0).hidden = true;
       document.querySelectorAll(".btn.cancel").item(0).hidden = true;
-
-      //abortUpload();
     }
 
     function browseSpanClickACB(event) {
@@ -66,6 +66,24 @@ const UploadPresenter = {
           // extract relevant information
           // TODO: only if > X% chance
           let plant = this.plantPromiseState.data?.suggestions[0];
+
+          console.log("probability: " + plant.probability);
+
+          if (plant.probability < PROBABLILITY_REJECTION_LIMIT) {
+            this.uploadMessage = {
+              "title": "An error has occured.",
+              "subhead": "Our image detector could not correctly identify a flower from your image, please upload a new image.",
+              "buttonText": "OK"
+            };
+
+            // show overlay
+            this.overlay = true;
+
+            // TODO: add error in box?
+
+            // jump out of function to not set plant
+            return;
+          }
 
           this.plant = {
             "id": plant.id,
@@ -143,14 +161,14 @@ const UploadPresenter = {
     }
 
     function uploadConfirmationACB() {
-      if (!useFlowerStore().hasPlant(this.plant.scientificName)) {
+      // don't try to upload flower if none was found from image
+      if (this.plant != null && !useFlowerStore().hasPlant(this.plant.scientificName)) {
         // only add to store if not already exists
         useFlowerStore().addPlant(this.plant);
         this.$router.push({ name: "collection" });
       }
       else {
         this.overlay = false;
-        this.uploadMessage = {};
       }
     }
 

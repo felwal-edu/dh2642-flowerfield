@@ -50,12 +50,12 @@ function LoginView(props) {
               </v-row>
               <v-row justify="center">
                 <v-col sm="8">
-                  <v-text-field clearable onChange={emailInputChangeACB}>Email: </v-text-field>
+                  <v-text-field clearable onChange={emailInputChangeACB} label="Email" placeholder="example@mail.com"></v-text-field>
                 </v-col>
               </v-row>
               <v-row justify="center">
                 <v-col sm="8">
-                  <v-text-field hint="Must be 6 characters long" clearable onChange={passwordInputChangeACB}>Password: </v-text-field>
+                  <v-text-field hint="Must be 6 characters long" type="password" clearable onChange={passwordInputChangeACB} label="Password"></v-text-field>
                 </v-col>
               </v-row>
               <v-row justify="center" class="my-4">

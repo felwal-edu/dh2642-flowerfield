@@ -4,7 +4,7 @@ import { signUpUser } from "@/persistence/firebaseAuth.js";
 import SignUpView from "@/views/signupView.js";
 import { watch } from "vue";
 import { waitingForUserToBeSignedOut } from "@/utils/userUtils.js";
-
+import "../css/signup.css"
 
 const SignUpPresenter = {
     data() {

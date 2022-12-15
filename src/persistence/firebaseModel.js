@@ -1,10 +1,11 @@
 import firebaseConfig from "./firebaseSecrets";
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, set, onChildAdded, onChildRemoved, get, child } from "firebase/database";
+import { watch } from "vue";
 
 // init
 
-console.log("initializing firebase ...")
+console.log("initializing Firebase ...")
 
 export const app = initializeApp(firebaseConfig);
 const db = getDatabase();
@@ -15,42 +16,24 @@ let unsubscribers = [];
 
 //
 
-export function createUser(user) {
+export function setUserMetadata(user) {
   set(ref(db, REF + "/users/" + user.uid + "/email"), user.email);
 }
 
 export function updateFirebaseFromStore(store) {
-  function dataChangedInStoreACB(mutation, state) {
-    // check if nothing has changed
-    //if (!mutation.events) return;
-
-    function toIdKeyedObjectCB(obj, plant) {
+  function plantsChangedInStoreACB(newPlants) {
+    function toNameKeyedObjectCB(obj, plant) {
       return {...obj, [plant.scientificName]: plant};
     }
 
-    // NOTE: mutation.events is undefined during production.
-    // this means we can't se what was changed.
-    // as a temp solution, instead of just adding the added plant,
-    // we set the whole array.
-
-    /*if (mutation.events.key === "plants") {
-      console.log("IS CALLED");
-
-      // transform plant list to object with id as key
-      const plantsObj = mutation.events.newValue.reduce(toIdKeyedObjectCB, {});
-      set(ref(db, REF + "/users/" + store.currentUser.uid + "/plants/"), plantsObj);
-    }*/
-
-    const plantsObj = store.plants.reduce(toIdKeyedObjectCB, {});
+    const plantsObj = newPlants.reduce(toNameKeyedObjectCB, {});
     set(ref(db, REF + "/users/" + store.currentUser.uid + "/plants/"), plantsObj);
   }
 
   unsubscribers = [
     ...unsubscribers,
-    store.$subscribe(dataChangedInStoreACB)
+    watch(() => store.plants, plantsChangedInStoreACB)
   ];
-
-  return;
 }
 
 export function updateStoreFromFirebase(store) {
@@ -67,8 +50,6 @@ export function updateStoreFromFirebase(store) {
     onChildAdded(ref(db, REF + "/users/" + store.currentUser.uid + "/plants"), plantAddedInFirebase),
     onChildRemoved(ref(db, REF + "/users/" + store.currentUser.uid + "/plants"), plantRemovedInFirebase)
   ];
-
-  return;
 }
 
 export function enableFirebaseSync(store) {
@@ -76,7 +57,6 @@ export function enableFirebaseSync(store) {
     // user should always be logged in when calling this,
     // but check just in case.
     console.log("can't enable Firebase sync when logged out");
-    return;
   }
 
   console.log("syncing Firebase ...");

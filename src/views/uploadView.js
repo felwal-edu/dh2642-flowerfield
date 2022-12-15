@@ -1,9 +1,11 @@
+import promiseNoData from "./promiseNodata";
+
 function UploadView(props) {
   function renderUploadView() {
-    if (!props.imageLoaded) {
+    function renderInstructions() {
       return (
         <div
-          class={props.dragareaActive == true ? "drag-area active" : "drag-area"}
+          class={props.dragareaActive === true ? "drag-area active" : "drag-area"}
           onDragover={dragoverFileACB}
           onDragleave={dragleaveFileACB}
           onDrop={dropFileACB}>
@@ -18,9 +20,10 @@ function UploadView(props) {
           <input type="file" hidden onChange={inputFileChangeACB} />
           <span class="tip-support">PNG, JPG, JPEG</span>
         </div>
-      );
+      )
     }
-    else {
+
+    function renderResults() {
       return (
         <div>
           <div class="image-container">
@@ -32,7 +35,7 @@ function UploadView(props) {
                 <v-card-title class="justify-center">{props.uploadMessage.title}</v-card-title>
                 <v-card-subtitle class="justify-center">{props.uploadMessage.subhead}</v-card-subtitle>
                 <v-card-actions>
-                  <v-btn color="primary" block onClick={disableOverlayACB}>{props.uploadMessage.buttonText}</v-btn>
+                  <v-btn color="primary" block onClick={uploadConfirmationACB}>{props.uploadMessage.buttonText}</v-btn>
                 </v-card-actions>
               </v-card>
             </v-row>
@@ -40,6 +43,10 @@ function UploadView(props) {
         </div>
       );
     }
+
+    return !props.promiseState.promise
+      ? renderInstructions()
+      : promiseNoData(props.promiseState) || renderResults();
   }
 
   function browseSpanClickACB() {
@@ -70,8 +77,8 @@ function UploadView(props) {
     props.onInputFileChange(evt);
   }
 
-  function disableOverlayACB() {
-    props.onDisableOverlay();
+  function uploadConfirmationACB() {
+    props.onUploadConfirmation();
   }
 
   return (

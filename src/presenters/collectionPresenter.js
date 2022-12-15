@@ -1,6 +1,8 @@
 import useFlowerStore from "@/store/flowerStore.js";
 import { examplePlantArray } from "@/network/plantIdExample.js";
 import CollectionView from "../views/collectionView.js";
+import { watch } from "vue";
+import { waitingForUserToBeSignedIn } from "@/utils/userUtils.js";
 
 const CollectionPresenter = {
   data() {
@@ -16,18 +18,14 @@ const CollectionPresenter = {
   created() {
     this.userStatus = useFlowerStore().currentUser;
 
-    // TODO: extract used-more-than-once funcitonality
-    useFlowerStore().$subscribe(function (mutation, state) {
-      // TODO: mutation is not defined in production
-      if (mutation.events.key === "currentUser") {
-        // transform plant list to object with id as key
-        this.userStatus = mutation.events.newValue;
-      }
+    // watch user status
+    watch(() => useFlowerStore().currentUser, function (newUser) {
+      this.userStatus = newUser;
     }.bind(this));
   },
 
   render() {
-    this.test = true;
+    if (waitingForUserToBeSignedIn(this.userStatus, this.$router)) return;
 
     function sortACB(order) {
       this.sortStatus = order;
@@ -41,7 +39,7 @@ const CollectionPresenter = {
     function closePopupACB() {
       this.popupStatus = false;
     }
-
+    console.log(useFlowerStore().plants, "WHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHAAAAAAAAAAAAAAT")
     if (this.userStatus == undefined) {
       return;
     }

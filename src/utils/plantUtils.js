@@ -10,28 +10,46 @@ function compareGenusCB(plantA, plantB) {
       : 1;
 }
 
-function sortPlants(plants) {
+function sortPlantsIntoObject(plants) {
   // 1. take plants and for each plant do a callback
   // 2. The callback should append the plant to a new list in the callback.
   //   a.If the plant has a genus which isnt part of the new list, create a sub-list and put the plant into that.
   //   b. If there already exists a sub-list with that genus put the plant into that.
-  const genusObject = {};
 
-  function sortGenusCB(plant) {
-    // check if plants genus exists as a property in genusObject
-    if (genusObject[plant.genus]) {
-      genusObject[plant.genus] = [...genusObject[plant.genus], plant];
-    } else {
-      //create a new property
-      genusObject[plant.genus] = [plant];
+  function getGenusKeyedObject(plants) {
+    const plantsByGenus = {};
+
+    function addPlantToObjectCB(plant) {
+      // check if plants genus exists as a property in genusObject
+      if (plantsByGenus[plant.genus]) {
+        plantsByGenus[plant.genus] = [...plantsByGenus[plant.genus], plant];
+      }
+      else {
+        // create a new property
+        plantsByGenus[plant.genus] = [plant];
+      }
     }
+
+    plants.forEach(addPlantToObjectCB);
+
+    return plantsByGenus;
   }
 
   // Have an object filled with properties for each type of genus.
-
-  const sortedPlantArray = [...plants].sort(compareGenusCB);
-  sortedPlantArray.forEach(sortGenusCB);
-  return genusObject;
+  return getGenusKeyedObject([...plants].sort(compareGenusCB));
 }
 
-export { sortPlants };
+function rankDisplay(experience) {
+  const ranks = [["seed", 0], ["sprout", 50], ["sapling", 100], ["youngTree", 250], ["matureTree", 500]]
+  let currentRank = "seed";
+
+  for (let i = 0; i < ranks.length; i++) {
+    if (experience >= ranks[i][1]) {
+      currentRank = ranks[i][0];
+    }
+
+    return currentRank;
+  }
+}
+
+export { sortPlantsIntoObject, rankDisplay };

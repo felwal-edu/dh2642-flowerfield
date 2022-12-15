@@ -2,7 +2,7 @@
 
 import { defineStore } from "pinia";
 import { observeAuthState } from "../persistence/firebaseAuth";
-import { disableFirebaseSync, enableFirebaseSync, createUser } from "../persistence/firebaseModel";
+import { disableFirebaseSync, enableFirebaseSync, setUserMetadata } from "../persistence/firebaseModel";
 
 const useFlowerStore = defineStore({
   id: "user",
@@ -23,7 +23,7 @@ const useFlowerStore = defineStore({
       function signedInACB(user) {
         this.currentUser = user;
 
-        createUser(user); // TODO: only if just signed up?
+        setUserMetadata(user); // TODO: only if just signed up?
         enableFirebaseSync(this); // TODO: should we pass store like this?
       }
 
@@ -48,6 +48,10 @@ const useFlowerStore = defineStore({
     },
 
     addPlant(plant) {
+      function hasSameGenusCB(plant_) {
+        return plant_.genus === plant.genus;
+      }
+
       if (this.hasPlant(plant.scientificName)) {
         console.log("plant already exists");
         return;
@@ -57,7 +61,12 @@ const useFlowerStore = defineStore({
       //this.experienceadder()
 
       this.plants = [...this.plants, plant];
-      console.log(plant + " has been added");
+
+      this.experience += 10 * this.plants.filter(hasSameGenusCB).length
+      console.log("it's gaming time")
+      console.log(10 * this.plants.filter(hasSameGenusCB).length)
+
+      //console.log(plant + " has been added, you gained: " + (10 * Object.keys(this.plants[plant.genus]).length) + "of experience");
     },
 
     removePlant(plantId) {

@@ -1,17 +1,14 @@
 import useFlowerStore from "@/store/flowerStore";
+import { watch } from "vue";
 import "../css/main.css";
 
 export default function App() {
   let userStatus = useFlowerStore().currentUser;
 
   function renderApp() {
-    // TODO: extract used-more-than-once funcitonality
-    useFlowerStore().$subscribe(function (mutation, state) {
-      // TODO: mutation is not defined in production
-      if (mutation.events.key === "currentUser") {
-        // transform plant list to object with id as key
-        userStatus = mutation.events.newValue;
-      }
+    // watch user status
+    watch(() => useFlowerStore().currentUser, function (newUser) {
+      userStatus = newUser;
     }.bind(this));
 
     // logged out or waiting for initialization
@@ -24,7 +21,11 @@ export default function App() {
           <router-link to="/login">
             <v-btn text size="80">Login</v-btn>
           </router-link>
+          <router-link to="/signup">
+            <v-btn text size="80">SignUp</v-btn>
+          </router-link>
         </v-toolbar-items>
+
       );
     }
 
@@ -50,7 +51,11 @@ export default function App() {
     <div>
       <v-app>
         <v-app-bar fixed dense>
-          <v-toolbar-title><p class="nav-title">Flowerfield</p></v-toolbar-title>
+          <v-toolbar-title>
+            <router-link to="/">
+              <p class="nav-title">Flowerfield</p>
+            </router-link>
+          </v-toolbar-title>
           <v-spacer></v-spacer>
           {renderApp()}
         </v-app-bar>

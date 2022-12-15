@@ -47,11 +47,12 @@ const UploadPresenter = {
       this.file = null;
       this.isActive = false;
       this.isFileLoaded = false;
+      this.plantPromiseState = {};
 
       document.querySelectorAll(".btn.upload").item(0).hidden = true;
       document.querySelectorAll(".btn.cancel").item(0).hidden = true;
 
-      abortUpload();
+      //abortUpload();
     }
 
     function browseSpanClickACB(event) {

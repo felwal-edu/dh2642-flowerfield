@@ -1,4 +1,4 @@
-import { sortPlants } from "@/utils/plantUtils";
+import { sortPlantsIntoObject } from "@/utils/plantUtils";
 import { capitalize } from "vue";
 
 function CollectionView(props) {
@@ -11,9 +11,7 @@ function CollectionView(props) {
   return (
     <div>
       <div>
-        <v-toolbar
-          color="#96c29f"
-        >
+        <v-toolbar color="#96c29f">
           <v-toolbar-title>Your Collection</v-toolbar-title>
           <v-spacer></v-spacer>
           <p class="font-weight-bold">
@@ -71,9 +69,9 @@ function renderCollection(plants, test, order, openPopup) {
     return (
       <v-expansion-panels
         focusable
-        model-value={[0]}
-      >
-        <v-expansion-panel title={capitalize(plantItem[0]) + " (" + plantItem[1].length + ")"} >
+        model-value={[0]}>
+
+        <v-expansion-panel title={capitalize(plantItem[0]) + " (" + plantItem[1].length + ")"}>
           <v-expansion-panel-text>
             <v-row class="d-flex justify-start">
               {plantItem[1].map(createCollectionColCB)}
@@ -102,11 +100,11 @@ function renderCollection(plants, test, order, openPopup) {
 
   if (order === "Genus A-Z") {
     return (
-      <div>{Object.entries(sortPlants(plants)).map(createRowsCB)}</div>
+      <div>{Object.entries(sortPlantsIntoObject(plants)).map(createRowsCB)}</div>
     );
   } else {
     return (
-      <div>{Object.entries(sortPlants(plants)).reverse().map(createRowsCB)}</div>
+      <div>{Object.entries(sortPlantsIntoObject(plants)).reverse().map(createRowsCB)}</div>
     );
   }
 }

@@ -6,6 +6,8 @@ import { resolvePromiseMock } from "@/utils/resolvePromise";
 import { getPlantByImage } from "@/network/plantIdService";
 import { exampleResponse } from "@/network/plantIdExample";
 import useFlowerStore from "@/store/flowerStore";
+import { watch } from "vue";
+import { waitingForUserToBeSignedIn } from "@/utils/userUtils";
 
 const UploadPresenter = {
   data() {
@@ -16,23 +18,18 @@ const UploadPresenter = {
       file: null,
       fileURL: null,
       overlay: false,
-      plantObject: null,
+      plant: null,
       userStatus: undefined,
       uploadMessage: {},
     };
   },
 
-  created () {
-    // TODO: WAIT FOR FIREBASE TO LOAD FIRST
+  created() {
     this.userStatus = useFlowerStore().currentUser;
 
-    // TODO: extract used-more-than-once funcitonality
-    useFlowerStore().$subscribe(function (mutation, state) {
-      // TODO: mutation is not defined in production
-      if (mutation.events.key === "currentUser") {
-        // transform plant list to object with id as key
-        this.userStatus = mutation.events.newValue;
-      }
+    // watch user status
+    watch(() => useFlowerStore().currentUser, function (newUser) {
+      this.userStatus = newUser;
     }.bind(this));
   },
 
@@ -42,11 +39,10 @@ const UploadPresenter = {
     this.input = document.querySelector("input");
   },
 
-  beforeUnmount () {
-  },
-
   render() {
-    function onAbortUpload(event) {
+    if (waitingForUserToBeSignedIn(this.userStatus, this.$router)) return;
+
+    function abortUploadACB() {
       // reset data
       this.file = null;
       this.isActive = false;
@@ -59,43 +55,43 @@ const UploadPresenter = {
     }
 
     function browseSpanClickACB(event) {
-        this.input = document.querySelector("input");
-        this.input.click();
+      this.input = document.querySelector("input");
+      this.input.click();
     }
 
     function uploadImageToAPI() {
-      function notifyACB() {
+      function processApiResultACB() {
         if (this.plantPromiseState.data?.suggestions) {
           // extract relevant information
+          // TODO: only if > X% chance
           let plant = this.plantPromiseState.data?.suggestions[0];
 
-          this.plantObject = {
+          this.plant = {
             "id": plant.id,
-            "scientificName": plant.plant_name,
-            "genus": plant.plant_details.structured_name.genus,
-            "species": plant.plant_details.structured_name.species,
+            "scientificName": plant.plant_name || "",
+            "genus": plant.plant_details.structured_name.genus || "",
+            "species": plant.plant_details.structured_name.species || "",
             "date": this.plantPromiseState.data.meta_data.date,
             "url": this.plantPromiseState.data.images[0].url,
           };
 
           // check if the plant exist already, if so we grey out the "add collection button"
-          if (useFlowerStore().hasPlant(this.plantObject.scientificName)) {
+          if (useFlowerStore().hasPlant(this.plant.scientificName)) {
             this.uploadMessage = {
-              "title": this.plantObject.scientificName,
+              "title": this.plant.scientificName,
               "subhead": "Already exists in your collection.",
               "buttonText": "Continue"
             };
           }
           else {
             this.uploadMessage = {
-              "title": "NEW! " + this.plantObject.scientificName,
+              "title": "NEW! " + this.plant.scientificName,
               "subhead": "You photographed a new flower!",
               "buttonText": "Add to collection"
             };
           }
 
           this.overlay = true;
-          useFlowerStore().addPlant(this.plantObject);
         }
       }
 
@@ -106,13 +102,13 @@ const UploadPresenter = {
       let base64 = this.fileURL.replace("data:", "").replace(/^.+,/, "");
 
       // REAL CALL:
-      resolvePromise(getPlantByImage(base64), this.plantPromiseState, notifyACB.bind(this));
-
+      resolvePromise(getPlantByImage(base64), this.plantPromiseState, processApiResultACB.bind(this));
       // FAKE CALL:
-      //resolvePromiseMock(exampleResponse, this.plantPromiseState, notifyACB.bind(this));
+      //resolvePromiseMock(exampleResponse, this.plantPromiseState, processApiResultACB.bind(this));
     }
 
     // create listeners
+
     function dragoverListenerACB(evt) {
       evt.preventDefault();
       this.isActive = true;
@@ -126,7 +122,7 @@ const UploadPresenter = {
       evt.preventDefault();
       this.file = evt.dataTransfer.files[0];
 
-      commitFile(this.file, function(f, success) {
+      commitFile(this.file, function (f, success) {
         this.fileURL = f;
         this.isFileLoaded = success;
         this.isActive = success; // usefull if we fail
@@ -138,43 +134,42 @@ const UploadPresenter = {
       // add so the border is "active"
       this.isActive = true;
 
-      commitFile(this.file, function(f, success) {
+      commitFile(this.file, function (f, success) {
         this.fileURL = f;
         this.isFileLoaded = success;
         this.isActive = success;
       }.bind(this));
     }
 
-    function disableOverlayACB(evt) {
-      this.overlay = false;
+    function uploadConfirmationACB() {
+      if (!useFlowerStore().hasPlant(this.plant.scientificName)) {
+        // only add to store if not already exists
+        useFlowerStore().addPlant(this.plant);
+        this.$router.push({ name: "collection" });
+      }
+      else {
+        this.overlay = false;
+        this.uploadMessage = {};
+      }
     }
 
-    //console.log(this.userStatus);
-    if (this.userStatus === undefined) {
-      return;
-    }
-    else if (this.userStatus === null) {
-      console.log("bugn");
-      this.$router.push({name: "login"});
-    }
-    else {
-      return (
-        <UploadView
-          onUploadImageToAPI={uploadImageToAPI.bind(this)}
-          onAbortUpload={onAbortUpload.bind(this)}
-          onBrowseSpanClick={browseSpanClickACB.bind(this)}
-          dragareaActive={this.isActive}
-          onDragoverFile={dragoverListenerACB.bind(this)}
-          onDragleaveFile={dragleaveListenerACB.bind(this)}
-          onDropFile={dropListenerACB.bind(this)}
-          onInputFileChange={inputChangeListenerACB.bind(this)}
-          onDisableOverlay={disableOverlayACB.bind(this)}
-          imageLoaded={this.isFileLoaded}
-          fileURL={this.fileURL}
-          overlay={this.overlay}
-          uploadMessage={this.uploadMessage} />
-      );
-    }
+    return (
+      <UploadView
+        onUploadImageToAPI={uploadImageToAPI.bind(this)}
+        onAbortUpload={abortUploadACB.bind(this)}
+        onBrowseSpanClick={browseSpanClickACB.bind(this)}
+        dragareaActive={this.isActive}
+        onDragoverFile={dragoverListenerACB.bind(this)}
+        onDragleaveFile={dragleaveListenerACB.bind(this)}
+        onDropFile={dropListenerACB.bind(this)}
+        onInputFileChange={inputChangeListenerACB.bind(this)}
+        onUploadConfirmation={uploadConfirmationACB.bind(this)}
+        imageLoaded={this.isFileLoaded}
+        promiseState={this.plantPromiseState}
+        fileURL={this.fileURL}
+        overlay={this.overlay}
+        uploadMessage={this.uploadMessage} />
+    );
   }
 };
 

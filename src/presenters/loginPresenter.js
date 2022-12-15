@@ -1,20 +1,34 @@
 import resolvePromise from "../utils/resolvePromise.js";
 import LoginView from "../views/loginView";
-import useFlowerStore  from "@/store/flowerStore.js";
+import useFlowerStore from "@/store/flowerStore.js";
 import { signInUser, signUpUser } from "@/persistence/firebaseAuth.js";
+import { watch } from "vue";
+import { waitingForUserToBeSignedOut } from "@/utils/userUtils.js";
 
 const LoginPresenter = {
   data() {
     return {
-        authPromiseState: {},
-        email: "",
-        password: "",
-        snackbar: false,
-        errorMessage: ""
+      userStatus: undefined,
+      authPromiseState: {},
+      email: "",
+      password: "",
+      snackbar: false,
+      errorMessage: ""
     };
   },
 
+  created() {
+    this.userStatus = useFlowerStore().currentUser;
+
+    // watch user status
+    watch(() => useFlowerStore().currentUser, function (newUser) {
+      this.userStatus = newUser;
+    }.bind(this));
+},
+
   render() {
+    if (waitingForUserToBeSignedOut(this.userStatus, this.$router)) return;
+
     function authResultACB() {
       if (this.authPromiseState.error) {
         console.error(this.authPromiseState.error.message);
@@ -24,13 +38,10 @@ const LoginPresenter = {
       // return to home if login was successful!
       else if (this.authPromiseState.data !== null) {
         console.log("logged in!");
-        this.$router.push({name: "home"});
+        this.$router.push({ name: "home" });
       }
     }
 
-    function signUpACB() {
-      resolvePromise(signUpUser(this.email, this.password), this.authPromiseState, authResultACB.bind(this));
-    }
 
     function signInACB() {
       resolvePromise(signInUser(this.email, this.password), this.authPromiseState, authResultACB.bind(this));
@@ -53,7 +64,6 @@ const LoginPresenter = {
         currentUser={useFlowerStore().currentUser}
         onEmailChange={emailChangeACB.bind(this)}
         onPasswordChange={passwordChangeACB.bind(this)}
-        onSignUp={signUpACB.bind(this)}
         onSignIn={signInACB.bind(this)}
         onCloseErrorSnackbar={closeErrorSnackbar.bind(this)}
         snackbar={this.snackbar}

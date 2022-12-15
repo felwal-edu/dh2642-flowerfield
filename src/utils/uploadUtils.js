@@ -34,7 +34,3 @@ export function commitFile(file, _callback) {
     _callback(null, false);
   }
 }
-
-export function abortUpload() {
-  // TODO
-}

@@ -14,7 +14,9 @@
 .upload-container {
   margin-top: 20px;
   max-width: 650px;
-  width: 100%;
+  max-height: 500px;
+  width: 60vw;
+  height: 80vh;
   padding: 30px;
   background: #fffefd;
   border-radius: 20px;
@@ -22,7 +24,8 @@
 }
 
 .drag-area {
-  height: 400px;
+  height: 90%;
+  width: 100%;
   border: 2px dashed #c6c6c6;
   background: repeating-linear-gradient(
   45deg,
@@ -70,6 +73,14 @@
 }
 
 .image-container img {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+}
+
+div img {
   width: 100%;
   height: 100%;
   max-width: 100%;

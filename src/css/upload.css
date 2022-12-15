@@ -6,7 +6,7 @@
   justify-content: center;
   flex-direction: column;
   background: linear-gradient(185deg, rgba(255, 255, 255, 0.672) 0%, rgba(255, 255, 255, 0.624) 25%, rgb(176, 210, 207) 100%),
-  url("/src/assets/grass_field.jpg");
+  url("/src/assets/grass_field.jpg") no-repeat center center fixed;
   width: 100%;
   height: 110%;
 }
@@ -80,7 +80,7 @@
   object-fit: cover;
 }
 
-div img {
+.upload-container div img {
   width: 100%;
   height: 100%;
   max-width: 100%;

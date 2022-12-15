@@ -1,6 +1,7 @@
 import { sortPlantsIntoObject } from "@/utils/plantUtils";
 import { capitalize } from "vue";
-import loading_flower from "@/assets/loading_flowers.jpg";
+// TODO: add import for all icons
+import loading_flower from "@/assets/loading_icons/loading_icon_1.png";
 
 function CollectionView(props) {
   function onSortChangeACB(evt) {
@@ -38,6 +39,7 @@ function CollectionView(props) {
         onUpdate:modelValue={onCloseInfoACB}
         onClick:outside={onCloseInfoACB}
       >
+        <v-expand-x-transition model-value={true}>
         <v-card
           width="400"
           height="500"
@@ -62,6 +64,7 @@ function CollectionView(props) {
             </v-row>
           </v-card-actions>
         </v-card>
+        </v-expand-x-transition>
       </v-overlay>
     </div>
   );

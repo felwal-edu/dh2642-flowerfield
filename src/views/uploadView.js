@@ -35,7 +35,7 @@ function UploadView(props) {
     function renderResults() {
       return (
         <div>
-          <v-overlay mode-value={props.overlay} class="d-flex justify-center align-center">
+          <v-overlay model-value={props.overlay} class="d-flex justify-center align-center">
             <v-row align="center" justify="center">
               <v-card>
                 <v-card-title class="justify-center">{props.uploadMessage.title}</v-card-title>

@@ -37,19 +37,19 @@ function SignUpView(props) {
                 <v-parallax
                     height="10vh"
                     src={background}>
-                    <v-card class="mx-auto mt-12" elevation="4" width="35%" color="#000efe" justify="center">
+                    <v-card class="mx-auto mt-12 signup-background" elevation="4" justify="center">
                         <v-col align-self="start" class="justify-center align-center pa-0" cols="12">
                             <v-row justify="center">
                                 <v-card-title class="mt-12">
                                     <h1 class="header-font-signup">Create an account:</h1>
                                 </v-card-title>
                             </v-row>
-                            <v-row justify="center"><v-col sm="8"><v-text-field clearable onChange={emailInputChangeACB}>Email: </v-text-field></v-col></v-row>
-                            <v-row justify="center"><v-col sm="8"><v-text-field type="password" clearable onChange={passwordInputChangeACB}>Password: </v-text-field></v-col></v-row>
-                            <v-row justify="center"><v-col sm="8"><v-text-field type="password" clearable onChange={passwordCheckInputChangeACB}>Confirm password: </v-text-field></v-col></v-row>
+                            <v-row justify="center"><v-col sm="8"><v-text-field class="inputtext" clearable onChange={emailInputChangeACB}>Email: </v-text-field></v-col></v-row>
+                            <v-row justify="center"><v-col sm="8"><v-text-field class="inputtext" type="password" clearable onChange={passwordInputChangeACB}>Password: </v-text-field></v-col></v-row>
+                            <v-row justify="center"><v-col sm="8"><v-text-field class="inputtext" type="password" clearable onChange={passwordCheckInputChangeACB}>Confirm password: </v-text-field></v-col></v-row>
                             <v-row justify="center" class="mx-8"><v-btn onClick={signUpClickACB}>Sign up</v-btn></v-row>
                             <v-row justify="center" class="my-4 mb-12">
-                                <p class="link-text">Already have an account? <span onClick={goToLoginACB}>Login</span></p>
+                                <p class="link-text-signup">Already have an account? <span onClick={goToLoginACB}>Login</span></p>
                             </v-row>
                         </v-col>
                     </v-card>

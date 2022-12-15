@@ -9,11 +9,30 @@
   text-align: center;
 }
 
+.link-text-signup {
+  color: #ffffff;
+}
 
-
-.link-text span {
+.link-text-signup span {
   text-decoration: underline;
   color: #a02a3d;
   cursor: pointer;
+}
 
+.inputtext {
+  color: white;
+}
+
+.v-card.signup-background {
+  width: 65vh;
+  background-color: #000efe;
+  opacity: 1;
+  background-image:
+    linear-gradient(135deg, #000efe 25%, transparent 25%),
+    linear-gradient(225deg, #000efe 25%, transparent 25%),
+    linear-gradient(45deg, #000efe 25%, transparent 25%),
+    linear-gradient(315deg, #000efe 25%, #000bdd 25%);
+  background-position: 40px 0, 40px 0, 0 0, 0 0;
+  background-size: 80px 80px;
+  background-repeat: repeat;
 }

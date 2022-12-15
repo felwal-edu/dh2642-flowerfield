@@ -2,10 +2,10 @@ import { sortPlants } from "@/utils/plantUtils";
 import { capitalize } from "vue";
 
 function CollectionView(props) {
-  function onSortChangeACB(evt){
+  function onSortChangeACB(evt) {
     props.onSort(evt);
   }
-  function onCloseInfoACB(evt){
+  function onCloseInfoACB(evt) {
     props.closePopup();
   }
   return (
@@ -20,20 +20,20 @@ function CollectionView(props) {
             Sort:
           </p>
           <v-toolbar-items>
-            <v-divider vertical></v-divider>
-              <v-select
-                class="pl-2"
-                model-value={props.sort}
-                items={["Genus A-Z", "Genus Z-A"]}
-                onUpdate:modelValue={onSortChangeACB}
-              >
-              </v-select>
+            <v-select
+              class="pl-2 align center"
+              model-value={props.sort}
+              items={["Genus A-Z", "Genus Z-A"]}
+              onUpdate:modelValue={onSortChangeACB}
+            >
+            </v-select>
           </v-toolbar-items>
         </v-toolbar>
       </div>
       <div>{renderCollection(props.plants, props.test, props.sort, props)}</div>
       <v-overlay
         class="d-flex justify-center align-center"
+        persistent
         z-index={1}
         model-value={props.overlay}
         onClick:outside={onCloseInfoACB}
@@ -85,12 +85,12 @@ function renderCollection(plants, test, order, props) {
   }
 
   function createCollectionColCB(plant) {
-    function showInfoACB(evt){
+    function showInfoACB(evt) {
       props.openPopup(plant);
     }
     return (
       <v-col md="2">
-        <v-card max-width = "200" class="mx-3" onClick={showInfoACB}>
+        <v-card max-width="200" class="mx-3" onClick={showInfoACB}>
           <v-img src={plant.url} aspect-ratio="4/3" width="200" />
           <v-card-title class="text-center">
             {capitalize(plant.scientificName.split(" ")[1])}
@@ -100,11 +100,11 @@ function renderCollection(plants, test, order, props) {
     );
   }
 
-  if (order === "Genus A-Z"){
+  if (order === "Genus A-Z") {
     return (
       <div>{Object.entries(sortPlants(plants)).map(createRowsCB)}</div>
     );
-  }else{
+  } else {
     return (
       <div>{Object.entries(sortPlants(plants)).reverse().map(createRowsCB)}</div>
     );

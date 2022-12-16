@@ -6,6 +6,7 @@ import { watch } from "vue";
 import { waitingForUserToBeSignedIn } from "@/utils/userUtils.js";
 import resolvePromise from "@/utils/resolvePromise.js";
 import promiseNoData from "@/views/promiseNodata.js";
+import log from "@/utils/logUtils.js";
 
 const CollectionPresenter = {
   data() {
@@ -58,7 +59,8 @@ const CollectionPresenter = {
     }
 
     function searchACB(){
-      console.log(this.searchQuery);
+      log.d(this.searchQuery);
+
       if (this.searchQuery !== "" && this.searchStatus === false){
         this.searchStatus = true;
         this.icon = "mdi-close-circle";
@@ -71,7 +73,7 @@ const CollectionPresenter = {
       }
     }
 
-    console.log(this.searchResultsPromiseState,"THIS IS A TEST");
+    log.d("searchResultsPromiseState", this.searchResultsPromiseState);
 
     // TODO: SHOW LOADING
     if (this.userStatus == undefined) {

@@ -1,5 +1,6 @@
 import { getRandomLoadingImage } from "@/utils/loadingUtils.js";
 import { getArticleByPlantName } from "@/network/wikipediaService.js";
+import log from "@/utils/logUtils";
 
 function DetailView(props){
 
@@ -8,7 +9,8 @@ function DetailView(props){
     }
 
     function onDeleteACB(evt){
-      console.log("DELETE THE PLANT")
+      // TODO
+      log.d("DELETE THE PLANT");
     }
 
     return (

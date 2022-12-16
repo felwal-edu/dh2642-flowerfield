@@ -3,6 +3,7 @@ import { capitalize } from "vue";
 import { getRandomLoadingImage } from "@/utils/loadingUtils.js";
 import "../css/collection.css";
 import promiseNoData from "./promiseNodata";
+import log from "@/utils/logUtils";
 
 function CollectionView(props) {
   function onSortChangeACB(evt) {
@@ -132,7 +133,8 @@ function renderCollection(plants, order, openPopup) {
     );
   }
 
-  console.log(plants, "THIS IS The PLANTS");
+  log.d("THIS IS The PLANTS", plants);
+
   if (plants.length === 0){
     return (
       <v-card

@@ -1,11 +1,12 @@
 import "../plugins/vuetify";
 //import profileBackground from "@/assets/flower_profile_placeholder.png";
 import profileBackground from "@/assets/profile-card.png";
+import log from "@/utils/logUtils";
 
 function ProfileView(props) {
   function signOutClickACB(evt) {
     if (!props.currentUser) {
-      console.log("already signed out");
+      log.w("already signed out");
       return;
     }
     props.onSignOut();

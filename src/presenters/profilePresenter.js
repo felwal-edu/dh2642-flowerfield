@@ -5,6 +5,7 @@ import { rankDisplay, progressBarValue } from "@/utils/plantUtils";
 import { watch } from "vue";
 import { waitingForUserToBeSignedIn } from "@/utils/userUtils";
 import "../css/profile.css"
+import log from "@/utils/logUtils";
 
 const ProfilePresenter = {
   data() {
@@ -33,7 +34,7 @@ const ProfilePresenter = {
 
     function changeUsernameACB(evt, newName) {
       if (evt.key === 'Enter') {
-        console.log("update name: " + newName);
+        log.d("update name:", newName);
         useFlowerStore().setUserName(newName)
       }
     }

@@ -44,8 +44,9 @@ export function updateFirebaseFromStore(store) {
     set(ref(db, REF + "/users/" + store.currentUser.uid + "/plants/"), plantsObj);
   }
 
+  // TODO: FIX THIS FUNCTION
   function experienceChangedInStoreACB(storeExp) {
-    console.log("store exp:")
+    console.log("store exp: " + storeExp)
     console.log(storeExp)
 
     set(ref(db, REF + "/users/" + store.currentUser.uid + "/experience"), store.experience);

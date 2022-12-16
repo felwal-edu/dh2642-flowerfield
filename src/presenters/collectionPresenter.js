@@ -5,6 +5,7 @@ import DetailView from "@/views/detailView.js";
 import { watch } from "vue";
 import { waitingForUserToBeSignedIn } from "@/utils/userUtils.js";
 import resolvePromise from "@/utils/resolvePromise.js";
+import promiseNoData from "@/views/promiseNodata.js";
 
 const CollectionPresenter = {
   data() {
@@ -15,7 +16,7 @@ const CollectionPresenter = {
       selected: undefined,
       searchStatus: false,
       searchQuery: "",
-      searchResultsPromiseState: {},
+      searchResult: [],
       icon: "mdi-magnify",
       username: "",
     };
@@ -53,11 +54,9 @@ const CollectionPresenter = {
     function searchACB(){
       console.log(this.searchQuery);
       if (this.searchQuery !== "" && this.searchStatus === false){
-        console.log("BBBBBBBBBEEEEEEEEEEEEEEEE")
         this.searchStatus = true;
         this.icon = "mdi-close-circle";
-        resolvePromise(useFlowerStore().searchPlants(this.searchQuery), this.searchResultsPromiseState);
-        console.log(this.searchResultsPromiseState)
+        this.searchResult = useFlowerStore().searchPlants(this.searchQuery);
       }
       else{
         this.searchStatus = false;
@@ -66,14 +65,12 @@ const CollectionPresenter = {
       }
     }
 
-    console.log(this.searchResultsPromiseState)
+    console.log(this.searchResultsPromiseState,"THIS IS A TEST");
 
     if (this.userStatus == undefined) {
       return;
     }
     else {
-      console.log("plants:")
-      console.log(useFlowerStore().plants)
       return (
         <div>
           <CollectionView
@@ -81,7 +78,7 @@ const CollectionPresenter = {
             sort={this.sortStatus}
             searchStatus={this.searchStatus}
             searchQuery={this.searchQuery}
-            searchQueryPlants={this.searchResultsPromiseState}
+            searchQueryPlants={this.searchResult}
             icon={this.icon}
             username={this.username}
             onSort={sortACB.bind(this)}

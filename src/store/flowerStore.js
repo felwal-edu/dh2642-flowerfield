@@ -37,8 +37,8 @@ const useFlowerStore = defineStore({
       observeAuthState(signedInACB.bind(this), signedOutACB.bind(this));
     },
 
-    changeUserName(userName) {
-      this.userName = userName
+    setUserName(userName) {
+      this.userName = userName;
     },
 
     hasPlant(plantName) {

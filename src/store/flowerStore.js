@@ -2,7 +2,7 @@
 
 import { defineStore } from "pinia";
 import { observeAuthState } from "../persistence/firebaseAuth";
-import { disableFirebaseSync, enableFirebaseSync, setUserMetadata } from "../persistence/firebaseModel";
+import { disableFirebaseSync, enableFirebaseSync } from "../persistence/firebaseModel";
 
 const useFlowerStore = defineStore({
   id: "user",
@@ -11,20 +11,17 @@ const useFlowerStore = defineStore({
     currentUser: undefined, // undefined if not loaded, null if not logged in
     plants: [],
     experience: 0,
-    userName: ""
+    userName: "",
+    ranks: [["Dirt", 0], ["Seed", 1], ["Sprout", 50], ["Sapling", 100], ["Bush", 250], ["Birch", 500], ["Oak", 1000]]
+
   }),
 
   actions: {
-
-    experienceadder() {
-      this.experience += 10;
-    },
 
     initUser() {
       function signedInACB(user) {
         this.currentUser = user;
 
-        setUserMetadata(user); // TODO: only if just signed up?
         enableFirebaseSync(this); // TODO: should we pass store like this?
       }
 
@@ -39,8 +36,8 @@ const useFlowerStore = defineStore({
       observeAuthState(signedInACB.bind(this), signedOutACB.bind(this));
     },
 
-    changeUserName(userName) {
-      this.userName = userName
+    setUserName(userName) {
+      this.userName = userName;
     },
 
     hasPlant(plantName) {
@@ -53,25 +50,17 @@ const useFlowerStore = defineStore({
     },
 
     addPlant(plant) {
-      function hasSameGenusCB(plant_) {
-        return plant_.genus === plant.genus;
-      }
-
       if (this.hasPlant(plant.scientificName)) {
         console.log("plant already exists");
         return;
       }
 
-      // TODO: this makes the subscriber broken for plants
-      //this.experienceadder()
+      function hasSameGenusCB(plant_) {
+        return plant_.genus === plant.genus;
+      }
 
       this.plants = [...this.plants, plant];
-
-      this.experience += 10 * this.plants.filter(hasSameGenusCB).length
-      console.log("it's gaming time")
-      console.log(10 * this.plants.filter(hasSameGenusCB).length)
-
-      //console.log(plant + " has been added, you gained: " + (10 * Object.keys(this.plants[plant.genus]).length) + "of experience");
+      this.experience += 10 * this.plants.filter(hasSameGenusCB).length;
     },
 
     removePlant(plantId) {

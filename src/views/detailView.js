@@ -1,4 +1,5 @@
 import { getRandomLoadingImage } from "@/utils/loadingUtils.js";
+import { getArticleByPlantName } from "@/network/wikipediaService.js";
 
 function DetailView(props){
 
@@ -29,6 +30,10 @@ function DetailView(props){
             class="bg-grey-lighten-4"
           ></v-img>
           <v-card-text>Information about the plant</v-card-text>
+          <div>
+            {getArticleByPlantName(props.currentPlant.scientificName)}
+          </div>
+
           <v-card-actions>
             <v-row class="justify-center align-center">
               <v-btn

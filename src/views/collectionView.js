@@ -110,12 +110,22 @@ function renderCollection(plants, order, openPopup) {
     function showInfoACB(evt) {
       openPopup(plant);
     }
+
+    // get species name bly splitting scientific name
+    let species = plant.scientificName.split(" ")[1];
+
+    // error check if species is not defined
+    if(species == "" || species == undefined){
+      // if not we use the genus, which we will have
+      species = plant.scientificName.split(" ")[0];
+    }
+
     return (
       <v-col md="2">
         <v-card width="200" class="mx-3" onClick={showInfoACB}>
           <v-img lazy-src={getRandomLoadingImage()} src={plant.url} height="175" cover />
           <v-card-title class="text-center">
-            {capitalize(plant.scientificName.split(" ")[1])}
+            {capitalize(species)}
           </v-card-title>
         </v-card>
       </v-col>

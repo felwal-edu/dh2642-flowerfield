@@ -9,7 +9,7 @@ import "../css/profile.css"
 const ProfilePresenter = {
   data() {
     return {
-      userStatus: undefined
+      userStatus: undefined,
     };
   },
 
@@ -31,13 +31,21 @@ const ProfilePresenter = {
       this.$router.push({ name: "home" });
     }
 
+    function changeUsernameACB(evt, newName){
+      if(evt.key === 'Enter') {
+        console.log("update name: " + newName);
+      }
+    }
+
     return (
       <ProfileView
         currentUser={useFlowerStore().currentUser}
         onSignOut={signOutACB.bind(this)}
         userExperience={useFlowerStore().experience}
         amountPlants={useFlowerStore().plants.length}
-        currentRank={rankDisplay(useFlowerStore().experience)} />
+        currentRank={rankDisplay(useFlowerStore().experience)}
+        onChangeUsername={changeUsernameACB.bind(this)}
+        userName={"Bingus"} />
     );
   }
 };

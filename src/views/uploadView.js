@@ -1,4 +1,5 @@
 import promiseNoData from "./promiseNodata";
+import errorIcon from "@/assets/icons/warning.png";
 
 function UploadView(props) {
   function renderUploadView() {
@@ -19,7 +20,7 @@ function UploadView(props) {
             onDrop={dropFileACB}>
 
             <div class="icon">
-              <img src="https://img.icons8.com/color/96/null/stack-of-photos--v1.png" />
+              <img src="https://img.icons8.com/color/96/null/stack-of-photos--v1.png"/>
             </div>
             <span class="header">{props.dragareaActive == true ? "Release to Upload" : "Drag & Drop"}</span>
             <span class="header">
@@ -50,9 +51,24 @@ function UploadView(props) {
       );
     }
 
+    function renderError() {
+      return (
+        <div class="drag-area error">
+          <div class="icon">
+              <img src={errorIcon}/>
+            </div>
+            <span class="header">{"Something went wrong!"}</span>
+            <span class="header">
+              <span class="cancel-text-button" onClick={cancelButtonClickACB}>Cancel</span> and try again
+            </span>
+            <span class="tip-support">Tip: try a different picture.</span>
+        </div>
+      );
+    }
+
     return !props.promiseState.promise
       ? renderInstructions()
-      : promiseNoData(props.promiseState) || renderResults();
+      : promiseNoData(props.promiseState, renderError) || renderResults();
   }
 
   function browseSpanClickACB() {

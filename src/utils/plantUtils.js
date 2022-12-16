@@ -40,8 +40,8 @@ function sortPlantsIntoObject(plants) {
 }
 
 function rankDisplay(experience) {
-  const ranks = [["seed", 0], ["sprout", 50], ["sapling", 100], ["youngTree", 250], ["matureTree", 500]]
-  let currentRank = "seed";
+  const ranks = [["Worm", 0], ["Seed", 1], ["Sprout", 50], ["Sapling", 100], ["Bush", 250], ["Birch", 500], ["Oak", 1000]]
+  let currentRank = "Worm";
 
   for (let i = 0; i < ranks.length; i++) {
     if (experience >= ranks[i][1]) {

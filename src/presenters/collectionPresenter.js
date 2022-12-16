@@ -46,16 +46,26 @@ const CollectionPresenter = {
       console.log("plants:")
       console.log(useFlowerStore().plants)
       return (
-        <CollectionView
-          plants={useFlowerStore().plants /*examplePlantArray*/}
-          sort={this.sortStatus}
-          overlay={this.popupStatus}
-          currentPlant={this.selected}
-          onSort={sortACB.bind(this)}
-          openPopup={openPopupACB.bind(this)}
-          closePopup={closePopupACB.bind(this)}
-          username={this.username}
-        />
+        <div>
+          <CollectionView
+            plants={useFlowerStore().plants /*examplePlantArray*/}
+            sort={this.sortStatus}
+            searchStatus={this.searchStatus}
+            searchQuery={this.searchQuery}
+            searchQueryPlants={this.searchResultsPromiseState}
+            icon={this.icon}
+            username={this.username}
+            onSort={sortACB.bind(this)}
+            openPopup={openPopupACB.bind(this)}
+            updateQuery={updateQueryACB.bind(this)}
+            onSearch={searchACB.bind(this)}
+          />
+          <DetailView
+            closePopup={closePopupACB.bind(this)}
+            currentPlant={this.selected}
+            overlay={this.popupStatus}
+          />
+        </div>
       );
     }
   },

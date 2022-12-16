@@ -50,25 +50,17 @@ const useFlowerStore = defineStore({
     },
 
     addPlant(plant) {
-      function hasSameGenusCB(plant_) {
-        return plant_.genus === plant.genus;
-      }
-
       if (this.hasPlant(plant.scientificName)) {
         console.log("plant already exists");
         return;
       }
 
-      // TODO: this makes the subscriber broken for plants
-      //this.experienceadder()
+      function hasSameGenusCB(plant_) {
+        return plant_.genus === plant.genus;
+      }
 
       this.plants = [...this.plants, plant];
-
-      this.experience += 10 * this.plants.filter(hasSameGenusCB).length
-      console.log("it's gaming time")
-      console.log(10 * this.plants.filter(hasSameGenusCB).length)
-
-      //console.log(plant + " has been added, you gained: " + (10 * Object.keys(this.plants[plant.genus]).length) + "of experience");
+      this.experience += 10 * this.plants.filter(hasSameGenusCB).length;
     },
 
     removePlant(plantId) {

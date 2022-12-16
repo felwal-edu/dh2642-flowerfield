@@ -71,9 +71,9 @@ export function updateStoreFromFirebase(store) {
     store.removePlant(+data.key);
   }
 
-  function experienceAddedInFirebase(experience) {
-    if (store.experience !== experience) {
-      store.experience = experience;
+  function experienceAddedInFirebase(data) {
+    if (store.experience !== data.val()) {
+      store.experience = data.val();
     }
   }
 

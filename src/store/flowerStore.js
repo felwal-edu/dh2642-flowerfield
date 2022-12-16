@@ -81,6 +81,14 @@ const useFlowerStore = defineStore({
 
       this.plants = this.plants.filter(hasDifferentIdCB);
       console.log(plantId + " has been removed");
+    },
+
+    searchPlants(query) {
+      function includesQueryCB(plant){
+        console.log(plant.scientificName.toLowerCase().includes(query.toLowerCase()));
+        return plant.scientificName.toLowerCase().includes(query.toLowerCase());
+      }
+      return [...this.plants].filter(includesQueryCB);
     }
   }
 });

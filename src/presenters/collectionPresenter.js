@@ -1,17 +1,23 @@
 import useFlowerStore from "@/store/flowerStore.js";
 import { examplePlantArray } from "@/network/plantIdExample.js";
 import CollectionView from "../views/collectionView.js";
+import DetailView from "@/views/detailView.js";
 import { watch } from "vue";
 import { waitingForUserToBeSignedIn } from "@/utils/userUtils.js";
+import resolvePromise from "@/utils/resolvePromise.js";
+import searchPlants from "@/store/flowerStore.js"
 
 const CollectionPresenter = {
   data() {
     return {
       userStatus: undefined,
-      test: false,
       sortStatus: "Genus A-Z",
       popupStatus: false,
       selected: undefined,
+      searchStatus: false,
+      searchQuery: "",
+      searchResultsPromiseState: {},
+      icon: "mdi-magnify",
     };
   },
 
@@ -39,21 +45,52 @@ const CollectionPresenter = {
     function closePopupACB() {
       this.popupStatus = false;
     }
+
+    function updateQueryACB(query){
+      this.searchQuery = query;
+    }
+
+    function searchACB(){
+      console.log(this.searchQuery);
+      if (this.searchQuery !== "" && this.searchStatus === false){
+        this.searchStatus = true;
+        this.icon = "mdi-close-circle";
+        resolvePromise(searchPlants(this.searchQuery), this.searchResultsPromiseState);
+      }
+      else{
+        this.searchStatus = false;
+        this.icon = "mdi-magnify"
+        //reset model-value !??!?!?!?
+      }
+    }
+
+    console.log(this.searchResultsPromiseState)
+
     if (this.userStatus == undefined) {
       return;
     }
     else {
       return (
-        <CollectionView
-          plants={/*useFlowerStore().plants*/ examplePlantArray}
-          test={this.test}
-          sort={this.sortStatus}
-          overlay={this.popupStatus}
-          currentPlant={this.selected}
-          onSort={sortACB.bind(this)}
-          openPopup={openPopupACB.bind(this)}
-          closePopup={closePopupACB.bind(this)}
-        />
+        <div>
+          <CollectionView
+            plants={/*useFlowerStore().plants*/ examplePlantArray}
+            sort={this.sortStatus}
+            searchStatus={this.searchStatus}
+            searchQuery={this.searchQuery}
+            searchQueryPlants={this.searchResultsPromiseState}
+            s={this.s}
+            icon={this.icon}
+            onSort={sortACB.bind(this)}
+            openPopup={openPopupACB.bind(this)}
+            updateQuery={updateQueryACB.bind(this)}
+            onSearch={searchACB.bind(this)}
+          />
+          <DetailView
+            closePopup={closePopupACB.bind(this)}
+            currentPlant={this.selected}
+            overlay={this.popupStatus}
+          />
+        </div>
       );
     }
   },

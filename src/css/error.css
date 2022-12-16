@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap');
+
+.header-font-error {
+    font-family: 'Ubuntu', sans-serif;
+    margin-bottom: 20px;
+    font-weight: 1000;
+    color: #ffffff;
+    font-size: 1.5em;
+    text-align: center;
+}
+
+p {
+    color: #ffffff;
+}
+
+.error-background {
+    background-color: #33db69;
+}
+
+.error-card {
+    background-color: #b0d2cf;
+}

@@ -5,6 +5,7 @@ import LoginPresenter from "@/presenters/loginPresenter.js";
 import ProfilePresenter from "@/presenters/profilePresenter";
 import UploadPresenter from "@/presenters/uploadPresenter";
 import SignUpPresenter from "@/presenters/signupPresenter";
+import ErrorPresenter from "@/presenters/errorPresenter";
 
 const routes = [
   {
@@ -37,11 +38,12 @@ const routes = [
     name: "upload",
     component: UploadPresenter
   },
+
   {
     // TODO: add 404page
     // catch missing pages 404 - define at the very end (VUE 3 Version)
     path: '/:pathMatch(.*)*',
-    //component: PathNotFound
+    component: ErrorPresenter
   }
 ]
 

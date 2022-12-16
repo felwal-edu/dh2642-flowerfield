@@ -17,36 +17,48 @@ let unsubscribers = [];
 //
 
 export function setUserMetadata(user) {
+  // TODO: bara vid account creation
   set(ref(db, REF + "/users/" + user.uid + "/email"), user.email);
 }
 
 export function updateFirebaseFromStore(store) {
+  function nameChangedInStoreACB(newName) {
+    console.log("setting new name: " + newName);
+
+    set(ref(db, REF + "/users/" + store.currentUser.uid + "/name"), newName);
+  }
+
   function plantsChangedInStoreACB(newPlants) {
     console.log("store plants:")
     console.log(newPlants)
+
     function toNameKeyedObjectCB(obj, plant) {
       return { ...obj, [plant.scientificName]: plant };
     }
 
-
     const plantsObj = newPlants.reduce(toNameKeyedObjectCB, {});
-
     set(ref(db, REF + "/users/" + store.currentUser.uid + "/plants/"), plantsObj);
   }
 
   function experienceChangedInStoreACB(storeExp) {
     console.log("store exp:")
     console.log(storeExp)
+
     set(ref(db, REF + "/users/" + store.currentUser.uid + "/experience"), store.experience);
   }
 
   unsubscribers = [
     ...unsubscribers,
+    watch(() => store.userName, nameChangedInStoreACB),
     watch(() => store.plants, plantsChangedInStoreACB),
     watch(() => store.experience, experienceChangedInStoreACB)];
 }
 
 export function updateStoreFromFirebase(store) {
+  function nameChangedInFirebase(data) {
+    store.userName = data.val();
+  }
+
   function plantAddedInFirebase(data) {
     store.addPlant(data.val());
   }
@@ -63,10 +75,10 @@ export function updateStoreFromFirebase(store) {
 
   unsubscribers = [
     ...unsubscribers,
+    onValue(ref(db, REF + "/users/" + store.currentUser.uid + "/name"), nameChangedInFirebase),
     onChildAdded(ref(db, REF + "/users/" + store.currentUser.uid + "/plants"), plantAddedInFirebase),
     onChildRemoved(ref(db, REF + "/users/" + store.currentUser.uid + "/plants"), plantRemovedInFirebase),
     onValue(ref(db, REF + "/users/" + store.currentUser.uid + "/experience"), experienceAddedInFirebase)
-
   ];
 }
 
@@ -81,11 +93,13 @@ export function enableFirebaseSync(store) {
 
   function initStoreDataByFirebase(data) {
     if (data.exists()) {
-      store.plants = Object.values(data.val());
+      store.userName = data.val().name || "";
+      store.plants = Object.values(data.val().plants) || [];
+      store.experience = data.val().experience || 0;
     }
     else {
       // user had no plant data saved
-      //console.log("no plant data for user in Firebase");
+      //console.log("no user data in Firebase");
     }
 
     console.log("Firebase synced");
@@ -96,7 +110,7 @@ export function enableFirebaseSync(store) {
   }
 
   // load data from Firebase, then set up sync
-  get(child(ref(db), REF + "/users/" + store.currentUser.uid + "/plants"))
+  get(child(ref(db), REF + "/users/" + store.currentUser.uid))
     .then(initStoreDataByFirebase)
     .catch((error) => { console.error(error); });
 }

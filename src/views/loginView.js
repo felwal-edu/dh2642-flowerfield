@@ -34,7 +34,6 @@ function LoginView(props) {
 
   return (
     <div>
-
       <v-app class="ma-8 mt-12" align="center" justify="center">
         <v-parallax
           height="10vh"
@@ -43,7 +42,7 @@ function LoginView(props) {
             <v-col align-self="start" class="justify-center align-center pa-0" cols="12">
               <v-row justify="center">
                 <v-card-title class="mt-12">
-                  <h1 class="header-font">
+                  <h1 class="header-font-login">
                     Welcome back to Flowerfield
                   </h1>
                 </v-card-title>
@@ -72,9 +71,7 @@ function LoginView(props) {
           </v-snackbar>
         </v-parallax>
       </v-app>
-
     </div >
-
   );
 }
 

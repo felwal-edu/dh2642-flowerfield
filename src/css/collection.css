@@ -1,0 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap');
+
+.header-font-collection {
+  font-family: 'Ubuntu', sans-serif;
+  color: #000efe;
+  font-size: 1.1em;
+  text-align: left;
+}

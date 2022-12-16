@@ -8,10 +8,10 @@ const CollectionPresenter = {
   data() {
     return {
       userStatus: undefined,
-      test: false,
       sortStatus: "Genus A-Z",
       popupStatus: false,
       selected: undefined,
+      username: ""
     };
   },
 
@@ -48,13 +48,13 @@ const CollectionPresenter = {
       return (
         <CollectionView
           plants={useFlowerStore().plants /*examplePlantArray*/}
-          test={this.test}
           sort={this.sortStatus}
           overlay={this.popupStatus}
           currentPlant={this.selected}
           onSort={sortACB.bind(this)}
           openPopup={openPopupACB.bind(this)}
           closePopup={closePopupACB.bind(this)}
+          username={this.username}
         />
       );
     }

@@ -4,11 +4,12 @@ import ProfileView from "../views/profileView";
 import { rankDisplay } from "@/utils/plantUtils";
 import { watch } from "vue";
 import { waitingForUserToBeSignedIn } from "@/utils/userUtils";
+import "../css/profile.css"
 
 const ProfilePresenter = {
   data() {
     return {
-      userStatus: undefined
+      userStatus: undefined,
     };
   },
 
@@ -27,7 +28,14 @@ const ProfilePresenter = {
     function signOutACB() {
       signOutUser();
       // return to home
-      this.$router.push({name: "home"});
+      this.$router.push({ name: "home" });
+    }
+
+    function changeUsernameACB(evt, newName) {
+      if (evt.key === 'Enter') {
+        console.log("update name: " + newName);
+        useFlowerStore().changeUserName(newName)
+      }
     }
 
     return (
@@ -36,7 +44,9 @@ const ProfilePresenter = {
         onSignOut={signOutACB.bind(this)}
         userExperience={useFlowerStore().experience}
         amountPlants={useFlowerStore().plants.length}
-        currentRank={rankDisplay(useFlowerStore().experience)} />
+        currentRank={rankDisplay(useFlowerStore().experience)}
+        onChangeUsername={changeUsernameACB.bind(this)}
+        userName={useFlowerStore().userName} />
     );
   }
 };

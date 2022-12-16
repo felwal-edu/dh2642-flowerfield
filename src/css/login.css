@@ -1,15 +1,28 @@
-* {
-  background-color: rgb(141, 141, 141);
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap');
+
+.header-font-login {
+  font-family: 'Ubuntu', sans-serif;
+  margin-bottom: 20px;
+  font-weight: 1000;
+  color: #000efe;
+  font-size: 1.5em;
+  text-align: center;
 }
 
-.loginwindow {
-  background-color: rgba(85, 255, 0, 0.406);
-  display: flex;
-  flex-direction: column;
-  height: 500px;
-  border-radius: 10px;
+.link-text span {
+  text-decoration: underline;
+  color: #a02a3d;
+  cursor: pointer;
+}
+
+.v-card.login-background {
+  width: 75vh;
+  background-color: #33db69;
+  opacity: 1;
+  background-image:
+  linear-gradient(135deg, #33db69 25%, transparent 25%),
+  linear-gradient(225deg, #33db69 25%, transparent 25%),
+  linear-gradient(45deg, #33db69 25%, transparent 25%),
+  linear-gradient(315deg, #33db69 25%, #2ed463 25%);
+  background-position:  40px 0, 40px 0, 0 0, 0 0; background-size: 80px 80px; background-repeat: repeat;
 }

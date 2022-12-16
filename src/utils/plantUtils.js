@@ -39,17 +39,46 @@ function sortPlantsIntoObject(plants) {
   return getGenusKeyedObject([...plants].sort(compareGenusCB));
 }
 
-function rankDisplay(experience) {
-  const ranks = [["seed", 0], ["sprout", 50], ["sapling", 100], ["youngTree", 250], ["matureTree", 500]]
-  let currentRank = "seed";
+function rankDisplay(ranks, experience) {
 
-  for (let i = 0; i < ranks.length; i++) {
-    if (experience >= ranks[i][1]) {
-      currentRank = ranks[i][0];
+  function getCurrentRank(ranks, experience) {
+    let currentRank = ranks[0]
+
+    for (let i = 0; i < ranks.length; i++) {
+      if (experience >= ranks[i][1]) {
+        currentRank = ranks[i];
+      }
     }
 
     return currentRank;
   }
+
+  let currentRank = getCurrentRank(ranks, experience)[0];
+  return currentRank;
 }
 
-export { sortPlantsIntoObject, rankDisplay };
+function progressBarValue(ranks, experience) {
+  function getNextRank(ranks, experience) {
+    // get largest rank as default next
+    let nextRank = ranks[ranks.length - 1];
+
+    for (let i = 0; i < ranks.length; i++) {
+      if (experience < ranks[i][1]) {
+        nextRank = ranks[i];
+
+        return nextRank;
+      }
+    }
+    return nextRank;
+  }
+
+  let nextRank = getNextRank(ranks, experience)[1];
+  let ratio = Math.round((experience / nextRank) * 100);
+
+  if (isNaN(ratio))
+    return 0;
+
+  return ratio;
+}
+
+export { sortPlantsIntoObject, rankDisplay, progressBarValue };

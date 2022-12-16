@@ -30,6 +30,11 @@ const CollectionPresenter = {
     watch(() => useFlowerStore().currentUser, function (newUser) {
       this.userStatus = newUser;
     }.bind(this));
+
+    // watch name update as well
+    watch(() => useFlowerStore().userName, function (name) {
+      this.username = name;
+    }.bind(this));
   },
 
   render() {
@@ -68,6 +73,7 @@ const CollectionPresenter = {
 
     console.log(this.searchResultsPromiseState,"THIS IS A TEST");
 
+    // TODO: SHOW LOADING
     if (this.userStatus == undefined) {
       return;
     }
@@ -84,6 +90,8 @@ const CollectionPresenter = {
             username={this.username}
             onSort={sortACB.bind(this)}
             openPopup={openPopupACB.bind(this)}
+            updateQuery={updateQueryACB.bind(this)}
+            onSearch={searchACB.bind(this)}
           />
           <DetailView
             closePopup={closePopupACB.bind(this)}

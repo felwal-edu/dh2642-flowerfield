@@ -17,6 +17,7 @@ const CollectionPresenter = {
 
   created() {
     this.userStatus = useFlowerStore().currentUser;
+    this.username = useFlowerStore().userName;
 
     // watch user status
     watch(() => useFlowerStore().currentUser, function (newUser) {

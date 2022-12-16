@@ -32,8 +32,8 @@ function ProfileView(props) {
                   md="8"
                 >
                   <v-text-field id="username-inputfield" label="" placeholder="Enter a username" variant="underlined"
-                  density="compact" model-value={props.userName} hint="Press 'enter' to confirm."
-                  onKeydown={changeUsernameACB}>
+                    density="compact" model-value={props.userName} hint="Press 'enter' to confirm."
+                    onKeydown={changeUsernameACB}>
                   </v-text-field>
                 </v-col>
               </v-row>
@@ -54,10 +54,10 @@ function ProfileView(props) {
                 <v-card-title class="my-n2">
                   <span class="header-description">progress to next rank</span>
                 </v-card-title>
-                <v-progress-linear
-                  model-value="100"
+                <v-progress-linear class="mx-8"
+                  model-value={props.experienceBar}
                   color="light-green-darken-3"
-                  height="8"
+                  height="9"
                   striped
                   elevation="2"
                 ></v-progress-linear>
@@ -68,9 +68,9 @@ function ProfileView(props) {
       </v-card>
 
       <v-btn
-          icon="mdi-delete"
-          color="success"
-        ></v-btn>
+        icon="mdi-delete"
+        color="success"
+      ></v-btn>
     </div>
   )
 

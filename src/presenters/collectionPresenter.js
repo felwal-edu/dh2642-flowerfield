@@ -75,34 +75,28 @@ const CollectionPresenter = {
 
     log.d("searchResultsPromiseState", this.searchResultsPromiseState);
 
-    // TODO: SHOW LOADING
-    if (this.userStatus == undefined) {
-      return;
-    }
-    else {
-      return (
-        <div>
-          <CollectionView
-            plants={useFlowerStore().plants /*examplePlantArray*/}
-            sort={this.sortStatus}
-            searchStatus={this.searchStatus}
-            searchQuery={this.searchQuery}
-            searchQueryPlants={this.searchResult}
-            icon={this.icon}
-            username={this.username}
-            onSort={sortACB.bind(this)}
-            openPopup={openPopupACB.bind(this)}
-            updateQuery={updateQueryACB.bind(this)}
-            onSearch={searchACB.bind(this)}
-          />
-          <DetailView
-            closePopup={closePopupACB.bind(this)}
-            currentPlant={this.selected}
-            overlay={this.popupStatus}
-          />
-        </div>
-      );
-    }
+    return (
+      <div>
+        <CollectionView
+          plants={useFlowerStore().plants /*examplePlantArray*/}
+          sort={this.sortStatus}
+          searchStatus={this.searchStatus}
+          searchQuery={this.searchQuery}
+          searchQueryPlants={this.searchResult}
+          icon={this.icon}
+          username={this.username}
+          onSort={sortACB.bind(this)}
+          openPopup={openPopupACB.bind(this)}
+          updateQuery={updateQueryACB.bind(this)}
+          onSearch={searchACB.bind(this)}
+        />
+        <DetailView
+          closePopup={closePopupACB.bind(this)}
+          currentPlant={this.selected}
+          overlay={this.popupStatus}
+        />
+      </div>
+    );
   },
 };
 

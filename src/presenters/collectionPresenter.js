@@ -54,6 +54,11 @@ const CollectionPresenter = {
       this.popupStatus = false;
     }
 
+    function deletePlantACB() {
+      useFlowerStore().removePlant(this.selected);
+      closePopupACB.bind(this)();
+    }
+
     function updateQueryACB(query){
       this.searchQuery = query;
     }
@@ -92,6 +97,7 @@ const CollectionPresenter = {
         />
         <DetailView
           closePopup={closePopupACB.bind(this)}
+          onDelete={deletePlantACB.bind(this)}
           currentPlant={this.selected}
           overlay={this.popupStatus}
         />

@@ -1,20 +1,52 @@
+async function getFlowerArticle(flowerName) {
+  //const API_ENDPOINT = "https://en.wikipedia.org/w/api.php";
+  const API_ENDPOINT = "https://cors-anywhere.herokuapp.com/https://en.wikipedia.org/w/api.php";
+
+  // Make a request to the Wikipedia API to search for articles based on the flower name
+  const response = await fetch(`${API_ENDPOINT}?action=query&format=json&list=search&utf8=1&formatversion=2&srsearch=${flowerName}&srprop=size`);
+
+  // Parse the response to extract the URL of the Wikipedia article for the flower
+  const data = await response.json();
+  const article = data.query.search[0];
+  const articleUrl = `https://en.wikipedia.org/wiki/${article.title}`;
+
+  // Retrieve the content of the Wikipedia article
+  const articleResponse = await fetch(articleUrl);
+  const articleHtml = await articleResponse.text();
+
+  // Extract the content of the Wikipedia article from the HTML
+  const parser = new DOMParser();
+  const articleDoc = parser.parseFromString(articleHtml, "text/html");
+  const articleContent = articleDoc.querySelector(".mw-parser-output").innerHTML;
+
+  return articleContent;
+}
+
+export function getArticleByPlantName(scientificName) {
+  getFlowerArticle(scientificName).then(articleContent => {
+    console.log(articleContent);
+  });
+}
+
+/*
+
 //import { PLANTID_KEY } from "./plantIdSecrets";
 const BASE_URL = `https://en.wikipedia.org/w/api.php?action=query&format=json&list=search&utf8=1&srsearch=`;
 
 export function getArticleByPlantName(scientificName) {
     let encodedQuery = encodeURIComponent(scientificName)
-  return callAPI({
-
-  }, query);
+    console.log(encodedQuery);
+  return callAPI(encodedQuery);
 }
 
-function callAPI(data, query) {
-  return fetch(BASE_URL + query, {
+function callAPI(params) {
+  return fetch(BASE_URL + params, {
     method: "GET",
     headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify(data),
+
+    //body: JSON.stringify(data),
   }).then(treatHTTPResponseACB);
 }
 
@@ -26,8 +58,8 @@ export function treatHTTPResponseACB(response) {
   throw new Error("API problem: " + response.status);
 }
 
-// Example program that uses the Wikipedia API to search for an article
 /*
+// Example program that uses the Wikipedia API to search for an article
 const readline = require('readline');
 const https = require('https');
 

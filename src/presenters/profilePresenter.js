@@ -31,9 +31,10 @@ const ProfilePresenter = {
       this.$router.push({ name: "home" });
     }
 
-    function changeUsernameACB(evt, newName){
-      if(evt.key === 'Enter') {
+    function changeUsernameACB(evt, newName) {
+      if (evt.key === 'Enter') {
         console.log("update name: " + newName);
+        useFlowerStore().changeUserName(newName)
       }
     }
 
@@ -45,7 +46,7 @@ const ProfilePresenter = {
         amountPlants={useFlowerStore().plants.length}
         currentRank={rankDisplay(useFlowerStore().experience)}
         onChangeUsername={changeUsernameACB.bind(this)}
-        userName={"Bingus"} />
+        userName={useFlowerStore().userName} />
     );
   }
 };

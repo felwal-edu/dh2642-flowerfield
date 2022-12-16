@@ -10,7 +10,8 @@ const useFlowerStore = defineStore({
   state: () => ({
     currentUser: undefined, // undefined if not loaded, null if not logged in
     plants: [],
-    experience: 0
+    experience: 0,
+    userName: ""
   }),
 
   actions: {
@@ -36,6 +37,10 @@ const useFlowerStore = defineStore({
 
       // this observes any changes to "signed in / signed out" state
       observeAuthState(signedInACB.bind(this), signedOutACB.bind(this));
+    },
+
+    changeUserName(userName) {
+      this.userName = userName
     },
 
     hasPlant(plantName) {

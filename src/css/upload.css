@@ -6,15 +6,20 @@
   justify-content: center;
   flex-direction: column;
   background: linear-gradient(185deg, rgba(255, 255, 255, 0.672) 0%, rgba(255, 255, 255, 0.624) 25%, rgb(176, 210, 207) 100%),
-  url("/src/assets/grass_field.jpg");
-  width: 100%;
-  height: 110%;
+  url("/src/assets/grass_field.jpg") no-repeat center center fixed;
+
+  /* Full height */
+  height: 100vh;
+
+  /* Scale the image nicely */
+  background-size: cover;
 }
 
 .upload-container {
-  margin-top: 20px;
   max-width: 650px;
-  width: 100%;
+  max-height: 500px;
+  width: 60vw;
+  height: 80vh;
   padding: 30px;
   background: #fffefd;
   border-radius: 20px;
@@ -22,7 +27,8 @@
 }
 
 .drag-area {
-  height: 400px;
+  height: 90%;
+  width: 100%;
   border: 2px dashed #c6c6c6;
   background: repeating-linear-gradient(
   45deg,
@@ -40,6 +46,21 @@
 
 .drag-area.active {
   border: 2px solid #1683ff;
+}
+
+.drag-area.error {
+  border: 2px solid #a02a3d;
+}
+
+.drag-area.error .cancel-text-button {
+  color: #a02a3d;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.drag-area.error .icon {
+  width: 6vw;
+  height: 6vw;
 }
 
 .upload-container h3 {
@@ -70,6 +91,14 @@
 }
 
 .image-container img {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+}
+
+.upload-container div img {
   width: 100%;
   height: 100%;
   max-width: 100%;

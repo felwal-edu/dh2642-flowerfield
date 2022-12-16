@@ -1,13 +1,15 @@
 import UploadView from "../views/uploadView";
-import { commitFile, abortUpload } from "../utils/uploadUtils.js";
+import { commitFile } from "../utils/uploadUtils.js";
 import "../css/upload.css";
 import resolvePromise from "@/utils/resolvePromise";
-import { resolvePromiseMock } from "@/utils/resolvePromise";
+//import { resolvePromiseMock } from "@/utils/resolvePromise";
 import { getPlantByImage } from "@/network/plantIdService";
-import { exampleResponse } from "@/network/plantIdExample";
+//import { exampleResponse } from "@/network/plantIdExample";
 import useFlowerStore from "@/store/flowerStore";
 import { watch } from "vue";
 import { waitingForUserToBeSignedIn } from "@/utils/userUtils";
+
+const PROBABLILITY_REJECTION_LIMIT = 0.3;
 
 const UploadPresenter = {
   data() {
@@ -21,6 +23,7 @@ const UploadPresenter = {
       plant: null,
       userStatus: undefined,
       uploadMessage: {},
+      buttonPopupCallback: undefined
     };
   },
 
@@ -47,11 +50,10 @@ const UploadPresenter = {
       this.file = null;
       this.isActive = false;
       this.isFileLoaded = false;
+      this.plantPromiseState = {};  // reset here for if API call fails
 
       document.querySelectorAll(".btn.upload").item(0).hidden = true;
       document.querySelectorAll(".btn.cancel").item(0).hidden = true;
-
-      abortUpload();
     }
 
     function browseSpanClickACB(event) {
@@ -61,10 +63,29 @@ const UploadPresenter = {
 
     function uploadImageToAPI() {
       function processApiResultACB() {
+        this.uploadMessage = {};
+
         if (this.plantPromiseState.data?.suggestions) {
           // extract relevant information
-          // TODO: only if > X% chance
           let plant = this.plantPromiseState.data?.suggestions[0];
+          console.log("probability: " + plant.probability);
+
+          if (plant.probability < PROBABLILITY_REJECTION_LIMIT) {
+            this.uploadMessage = {
+              "title": "An error has occured.",
+              "subhead": "Our image detector could not correctly identify a flower from your image, please upload a new image.",
+              "buttonText": "OK",
+            };
+
+            this.buttonPopupCallback = abortUploadACB.bind(this);
+
+            // show overlay
+            this.overlay = true;
+
+            // TODO: add error in box?
+            // jump out of function to not set plant
+            return;
+          }
 
           this.plant = {
             "id": plant.id,
@@ -82,6 +103,8 @@ const UploadPresenter = {
               "subhead": "Already exists in your collection.",
               "buttonText": "Continue"
             };
+
+            this.buttonPopupCallback = abortUploadACB.bind(this);
           }
           else {
             this.uploadMessage = {
@@ -89,9 +112,12 @@ const UploadPresenter = {
               "subhead": "You photographed a new flower!",
               "buttonText": "Add to collection"
             };
+
+            this.buttonPopupCallback = uploadAcceptToCollectionACB.bind(this);
           }
 
           this.overlay = true;
+          // DISPLAY ERROR-box
         }
       }
 
@@ -141,15 +167,16 @@ const UploadPresenter = {
       }.bind(this));
     }
 
-    function uploadConfirmationACB() {
-      if (!useFlowerStore().hasPlant(this.plant.scientificName)) {
+    function uploadAcceptToCollectionACB() {
+      // don't try to accept new flower if none was found from the image
+      if (this.plant != null && !useFlowerStore().hasPlant(this.plant.scientificName)) {
         // only add to store if not already exists
         useFlowerStore().addPlant(this.plant);
         this.$router.push({ name: "collection" });
       }
       else {
+        // close overlay
         this.overlay = false;
-        this.uploadMessage = {};
       }
     }
 
@@ -163,7 +190,7 @@ const UploadPresenter = {
         onDragleaveFile={dragleaveListenerACB.bind(this)}
         onDropFile={dropListenerACB.bind(this)}
         onInputFileChange={inputChangeListenerACB.bind(this)}
-        onUploadConfirmation={uploadConfirmationACB.bind(this)}
+        onUploadConfirmation={this.buttonPopupCallback}
         imageLoaded={this.isFileLoaded}
         promiseState={this.plantPromiseState}
         fileURL={this.fileURL}

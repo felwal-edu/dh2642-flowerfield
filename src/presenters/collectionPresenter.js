@@ -17,6 +17,7 @@ const CollectionPresenter = {
       searchQuery: "",
       searchResultsPromiseState: {},
       icon: "mdi-magnify",
+      username: "",
     };
   },
 
@@ -71,6 +72,8 @@ const CollectionPresenter = {
       return;
     }
     else {
+      console.log("plants:")
+      console.log(useFlowerStore().plants)
       return (
         <div>
           <CollectionView

@@ -30,16 +30,30 @@
 }
 
 .landing-page .logo {
-  width: 100%;
-  height: 100%;
+  width: auto;
+  height: auto;
 
   margin: auto;
   display: block;
-  max-width:500px;
-  max-height:170px;
+  max-width: 38vw;
+  max-height: 38vh;
 
   -webkit-filter: drop-shadow(1px 1px 6px #3c3c3c);
   filter: drop-shadow(1px 1px 6px #3c3c3c);
+}
+
+/* bad atempt at mobile responsiveness for logo*/
+@media (max-width: 500px) {
+  .landing-page .logo {
+    width: 88vh;
+    max-width: 100vw;
+    height: 18vh;
+
+    position: relative;
+    top: 20%;
+    left: 50%;
+    transform:translate(-50%, -50%);
+  }
 }
 
 .subheader {
@@ -74,16 +88,15 @@
 
 .information-end {
   margin-top: 50px;
-  background-color: #000efe;
 }
 
 .information-end h1 {
-  color: #ffffff;
+  color: #000efe;
 }
 
 .information-end p {
   font-family: 'Ubuntu', sans-serif;
-  color: #ffffff;
+  color: #000efe;
   font-size: 1.8em;
 }
 

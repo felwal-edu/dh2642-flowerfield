@@ -26,7 +26,7 @@ function HomeView(props) {
 
   return (
     <div>
-      <v-parallax height="600" src={background}>
+      <v-parallax height="100vh" src={background}>
         <div class="d-flex flex-column fill-height justify-center align-center text-white">
           <div class="landing-page center">
             <img class="logo" src={logopath} />

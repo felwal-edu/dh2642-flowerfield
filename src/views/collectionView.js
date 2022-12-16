@@ -1,7 +1,6 @@
 import { sortPlantsIntoObject } from "@/utils/plantUtils";
 import { capitalize } from "vue";
-// TODO: add import for all icons
-import loading_flower from "@/assets/loading_icons/loading_icon_1.png";
+import { getRandomLoadingImage } from "@/utils/loadingUtils.js";
 import "../css/collection.css";
 import promiseNoData from "./promiseNodata";
 
@@ -14,6 +13,9 @@ function CollectionView(props) {
   }
   function onInputACB(evt){
     props.updateQuery(evt);
+  }
+  function onCloseInfoACB(evt){
+
   }
 
   return (
@@ -43,6 +45,38 @@ function CollectionView(props) {
         </v-toolbar>
       </div>
       <div>{checkRender(props)}</div>
+      <v-overlay
+        class="d-flex justify-center align-center"
+        z-index={1}
+        model-value={props.overlay}
+        onUpdate:modelValue={onCloseInfoACB}
+        onClick:outside={onCloseInfoACB}
+      >
+        <v-card
+          width="400"
+          height="500"
+        >
+          <v-card-title class="text-center bg-green-lighten-3">{props.currentPlant.scientificName}</v-card-title>
+          <v-img
+            lazy-src={getRandomLoadingImage()}
+            src={props.currentPlant.url}
+            max-height="300"
+            class="bg-grey-lighten-4"
+          ></v-img>
+          <v-card-text>Information about the plant</v-card-text>
+          <v-card-actions>
+            <v-row class="justify-center align-center">
+              <v-btn
+                onClick={onCloseInfoACB}
+                color="red"
+                variant="outlined"
+              >
+                Close
+              </v-btn>
+            </v-row>
+          </v-card-actions>
+        </v-card>
+      </v-overlay>
     </div>
   );
 }
@@ -79,7 +113,7 @@ function renderCollection(plants, order, openPopup) {
     return (
       <v-col md="2">
         <v-card width="200" class="mx-3" onClick={showInfoACB}>
-          <v-img lazy-src={loading_flower} src={plant.url} height="175" cover />
+          <v-img lazy-src={getRandomLoadingImage()} src={plant.url} height="175" cover />
           <v-card-title class="text-center">
             {capitalize(plant.scientificName.split(" ")[1])}
           </v-card-title>

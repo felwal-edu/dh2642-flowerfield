@@ -2,7 +2,6 @@ import "../css/error.css"
 
 function ErrorView(props) {
 
-
     function homePageACB() {
         props.goToHomePage()
     }
@@ -12,7 +11,7 @@ function ErrorView(props) {
             <v-app align="center">
                 <v-card class="error-background" height="100%">
                     <v-card class="mt-12 error-card" height="250px" width="600px">
-                        <v-card-title class="header-font-error" justify="center" >404 error</v-card-title>
+                        <v-card-title class="header-font-error mt-6" justify="center" >404 error</v-card-title>
                         <v-row justify="center">
                             <v-col class="mb-10">
                                 <p>
@@ -20,7 +19,7 @@ function ErrorView(props) {
                                 </p>
                             </v-col>
                         </v-row>
-                        <v-row class="mt-12" justify="center">
+                        <v-row class="mx-12" justify="center">
                             <v-btn onClick={homePageACB}>
                                 Go to homepage
                             </v-btn>

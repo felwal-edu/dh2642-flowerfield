@@ -11,14 +11,12 @@ const useFlowerStore = defineStore({
     currentUser: undefined, // undefined if not loaded, null if not logged in
     plants: [],
     experience: 0,
-    userName: ""
+    userName: "",
+    ranks: [["Dirt", 0], ["Seed", 1], ["Sprout", 50], ["Sapling", 100], ["Bush", 250], ["Birch", 500], ["Oak", 1000]]
+
   }),
 
   actions: {
-
-    experienceadder() {
-      this.experience += 10;
-    },
 
     initUser() {
       function signedInACB(user) {

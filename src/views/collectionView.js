@@ -16,7 +16,7 @@ function CollectionView(props) {
       <div>
         <v-toolbar color="#96c29f">
           <v-toolbar-title>
-            <h2 class="header-font-collection">{props.username == "" ? "Your Collection" : props.username}</h2>
+            <h2 class="header-font-collection">{props.username == "" ? "Your Collection" : props.username + "'s Collection"}</h2>
           </v-toolbar-title>
           <v-spacer></v-spacer>
           <v-text-field
@@ -95,7 +95,7 @@ function renderCollection(plants, order, openPopup) {
     return (
       <v-col md="2">
         <v-card width="200" class="mx-3" onClick={showInfoACB}>
-          <v-img lazy-src={loading_flower} src={plant.url} height="175" cover/>
+          <v-img lazy-src={loading_flower} src={plant.url} height="175" cover />
           <v-card-title class="text-center">
             {capitalize(plant.scientificName.split(" ")[1])}
           </v-card-title>

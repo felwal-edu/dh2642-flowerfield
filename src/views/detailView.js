@@ -1,4 +1,5 @@
-import loading_flower from "@/assets/loading_flowers.jpg"
+import loading_flower from "@/assets/loading_icons/loading_icon_1.png"
+
 
 function DetailView(props){
 

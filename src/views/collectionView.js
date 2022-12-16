@@ -3,6 +3,7 @@ import { capitalize } from "vue";
 // TODO: add import for all icons
 import loading_flower from "@/assets/loading_icons/loading_icon_1.png";
 import "../css/collection.css";
+import promiseNoData from "./promiseNodata";
 
 function CollectionView(props) {
   function onSortChangeACB(evt) {
@@ -87,8 +88,20 @@ function renderCollection(plants, order, openPopup) {
     );
   }
 
-  console.log(plants, "THTHTAHHTAHAHTATH");
-  if (order === "Genus A-Z") {
+  console.log(plants, "THIS IS The PLANTS");
+  if (plants.length === 0){
+    return (
+      <v-card
+        class="d-flex justify-center align-center"
+        width="350"
+        height="300"
+      >
+        <v-card-text class="text-center">
+          <h1>No plants found</h1>
+        </v-card-text>
+      </v-card>
+    );
+  } else if (order === "Genus A-Z") {
     return (
       <div>{Object.entries(sortPlantsIntoObject(plants)).map(createRowsCB)}</div>
     );

@@ -84,6 +84,8 @@ const CollectionPresenter = {
             username={this.username}
             onSort={sortACB.bind(this)}
             openPopup={openPopupACB.bind(this)}
+            updateQuery={updateQueryACB.bind(this)}
+            onSearch={searchACB.bind(this)}
           />
           <DetailView
             closePopup={closePopupACB.bind(this)}

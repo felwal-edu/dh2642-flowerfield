@@ -1,14 +1,18 @@
 import { sortPlantsIntoObject } from "@/utils/plantUtils";
-import { capitalize } from "vue";
+import { capitalize, render } from "vue";
 import loading_flower from "@/assets/loading_flowers.jpg";
 
 function CollectionView(props) {
   function onSortChangeACB(evt) {
     props.onSort(evt);
   }
-  function onCloseInfoACB(evt) {
-    props.closePopup();
+  function onIconClickACB(evt){
+    props.onSearch();
   }
+  function onInputACB(evt){
+    props.updateQuery(evt);
+  }
+
   return (
     <div>
       <div>
@@ -16,55 +20,34 @@ function CollectionView(props) {
           <v-toolbar-title>Your Collection</v-toolbar-title>
           <v-spacer></v-spacer>
           <v-text-field
-            class="mt-8"
+            class="mt-8 mr-2"
+            loading={props.searchStatus}
+            append-icon={props.icon}
+            onClick:append={onIconClickACB}
+            onUpdate:modelValue={onInputACB}
           ></v-text-field>
           <v-toolbar-items>
             <v-select
-              class="pl-2 mt-2"
+              class="pl-2 mt-2 mr-3"
               model-value={props.sort}
               items={["Genus A-Z", "Genus Z-A"]}
               onUpdate:modelValue={onSortChangeACB}
-              solo
             >
             </v-select>
           </v-toolbar-items>
         </v-toolbar>
       </div>
-      <div>{renderCollection(props.plants, props.sort, props.openPopup)}</div>
-      <v-overlay
-        class="d-flex justify-center align-center"
-        z-index={1}
-        model-value={props.overlay}
-        onUpdate:modelValue={onCloseInfoACB}
-        onClick:outside={onCloseInfoACB}
-      >
-        <v-card
-          width="400"
-          height="500"
-        >
-          <v-card-title class="text-center bg-green-lighten-3">{props.currentPlant.scientificName}</v-card-title>
-          <v-img
-            lazy-src={loading_flower}
-            src={props.currentPlant.url}
-            max-height="300"
-            class="bg-grey-lighten-4"
-          ></v-img>
-          <v-card-text>Information about the plant</v-card-text>
-          <v-card-actions>
-            <v-row class="justify-center align-center">
-              <v-btn
-                onClick={onCloseInfoACB}
-                color="red"
-                variant="outlined"
-              >
-                Close
-              </v-btn>
-            </v-row>
-          </v-card-actions>
-        </v-card>
-      </v-overlay>
+      <div>{checkRender(props)}</div>
     </div>
   );
+}
+
+function checkRender(props){
+  if (!props.searchStatus){
+    return renderCollection(props.plants, props.sort, props.openPopup);
+  } else{
+    return renderCollection(props.searchQueryPlants, props.sort, props.openPopup);
+  }
 }
 
 function renderCollection(plants, order, openPopup) {

@@ -83,6 +83,7 @@ function renderCollection(plants, order, openPopup) {
     );
   }
 
+  console.log(plants, "THTHTAHHTAHAHTATH");
   if (order === "Genus A-Z") {
     return (
       <div>{Object.entries(sortPlantsIntoObject(plants)).map(createRowsCB)}</div>

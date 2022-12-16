@@ -5,7 +5,6 @@ import DetailView from "@/views/detailView.js";
 import { watch } from "vue";
 import { waitingForUserToBeSignedIn } from "@/utils/userUtils.js";
 import resolvePromise from "@/utils/resolvePromise.js";
-import searchPlants from "@/store/flowerStore.js"
 
 const CollectionPresenter = {
   data() {
@@ -53,9 +52,11 @@ const CollectionPresenter = {
     function searchACB(){
       console.log(this.searchQuery);
       if (this.searchQuery !== "" && this.searchStatus === false){
+        console.log("BBBBBBBBBEEEEEEEEEEEEEEEE")
         this.searchStatus = true;
         this.icon = "mdi-close-circle";
-        resolvePromise(searchPlants(this.searchQuery), this.searchResultsPromiseState);
+        resolvePromise(useFlowerStore().searchPlants(this.searchQuery), this.searchResultsPromiseState);
+        console.log(this.searchResultsPromiseState)
       }
       else{
         this.searchStatus = false;
@@ -73,7 +74,7 @@ const CollectionPresenter = {
       return (
         <div>
           <CollectionView
-            plants={/*useFlowerStore().plants*/ examplePlantArray}
+            plants={useFlowerStore().plants /*examplePlantArray*/}
             sort={this.sortStatus}
             searchStatus={this.searchStatus}
             searchQuery={this.searchQuery}

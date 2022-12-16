@@ -85,9 +85,11 @@ const useFlowerStore = defineStore({
 
     searchPlants(query) {
       function includesQueryCB(plant){
-        console.log(plant.scientificName.toLowerCase().includes(query.toLowerCase()));
+        console.log("REEEEEeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
+        console.log(plant.scientificName.toLowerCase().includes(query.toLowerCase()), "TESTTTTTTTTTTTTTT");
         return plant.scientificName.toLowerCase().includes(query.toLowerCase());
       }
+      console.log(this.plants, "WHACK SHIT BRO")
       return [...this.plants].filter(includesQueryCB);
     }
   }

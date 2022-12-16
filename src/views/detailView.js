@@ -9,8 +9,7 @@ function DetailView(props){
     }
 
     function onDeleteACB(evt){
-      // TODO
-      log.d("DELETE THE PLANT");
+      props.onDelete();
     }
 
     return (

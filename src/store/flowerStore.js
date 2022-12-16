@@ -64,18 +64,18 @@ const useFlowerStore = defineStore({
       this.experience += 10 * this.plants.filter(hasSameGenusCB).length;
     },
 
-    removePlant(plantId) {
-      if (!this.hasPlant(plantId)) {
+    removePlant(plant) {
+      if (!this.hasPlant(plant.scientificName)) {
         log.w("plant does not exist");
         return;
       }
 
-      function hasDifferentIdCB(plant) {
-        plant.id !== plantId;
+      function hasDifferentIdCB(plant_) {
+        return plant_.id !== plant.id;
       }
 
       this.plants = this.plants.filter(hasDifferentIdCB);
-      log.i(plantId + " has been removed");
+      log.i(plant.id + " has been removed");
     },
 
     searchPlants(query) {

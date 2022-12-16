@@ -16,10 +16,14 @@ let unsubscribers = [];
 
 //
 
-export function setUserMetadata(user) {
-  // TODO: bara vid account creation
+function createAccount(user) {
   set(ref(db, REF + "/users/" + user.uid + "/email"), user.email);
+  set(ref(db, REF + "/users/" + user.uid + "/name"), "");
+  set(ref(db, REF + "/users/" + user.uid + "/plants"), []);
+  set(ref(db, REF + "/users/" + user.uid + "/experience"), 0);
 }
+
+//
 
 export function updateFirebaseFromStore(store) {
   function nameChangedInStoreACB(newName) {
@@ -82,6 +86,8 @@ export function updateStoreFromFirebase(store) {
   ];
 }
 
+//
+
 export function enableFirebaseSync(store) {
   if (!store.currentUser) {
     // user should always be logged in when calling this,
@@ -94,12 +100,15 @@ export function enableFirebaseSync(store) {
   function initStoreDataByFirebase(data) {
     if (data.exists()) {
       store.userName = data.val().name || "";
-      store.plants = Object.values(data.val().plants) || [];
+      store.plants = Object.values(data.val().plants || {});
       store.experience = data.val().experience || 0;
+
+      console.log("account loaded");
     }
     else {
-      // user had no plant data saved
-      //console.log("no user data in Firebase");
+      // user did not already exist; the account was created just now.
+      console.log("account created");
+      createAccount(store.currentUser);
     }
 
     console.log("Firebase synced");

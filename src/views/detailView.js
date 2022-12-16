@@ -1,6 +1,5 @@
 import loading_flower from "@/assets/loading_icons/loading_icon_1.png"
 
-
 function DetailView(props){
 
     function onCloseInfoACB(evt) {

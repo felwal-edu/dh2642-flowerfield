@@ -5,6 +5,7 @@ import SignUpView from "@/views/signupView.js";
 import { watch } from "vue";
 import { waitingForUserToBeSignedOut } from "@/utils/userUtils.js";
 import "../css/signup.css"
+import log from "@/utils/logUtils.js";
 
 const SignUpPresenter = {
     data() {
@@ -39,7 +40,7 @@ const SignUpPresenter = {
             }
             // return to home if login was successful!
             else if (this.authPromiseState.data !== null) {
-                console.log("logged in!");
+                log.i("logged in!");
                 this.$router.push({ name: "home" });
             }
         }
@@ -48,7 +49,7 @@ const SignUpPresenter = {
             if (this.password !== this.passwordCheck) {
 
                 this.snackbar = true
-                console.log(this.passwordCheck)
+                log.d(this.passwordCheck)
                 return;
             }
             this.snackbar = false

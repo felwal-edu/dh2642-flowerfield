@@ -8,6 +8,7 @@ import { getPlantByImage } from "@/network/plantIdService";
 import useFlowerStore from "@/store/flowerStore";
 import { watch } from "vue";
 import { waitingForUserToBeSignedIn } from "@/utils/userUtils";
+import log from "@/utils/logUtils";
 
 const PROBABLILITY_REJECTION_LIMIT = 0.3;
 
@@ -68,7 +69,7 @@ const UploadPresenter = {
         if (this.plantPromiseState.data?.suggestions) {
           // extract relevant information
           let plant = this.plantPromiseState.data?.suggestions[0];
-          console.log("probability: " + plant.probability);
+          log.i("probability: " + plant.probability);
 
           if (plant.probability < PROBABLILITY_REJECTION_LIMIT) {
             this.uploadMessage = {

@@ -1,11 +1,12 @@
 import background from "@/assets/signupbackground.png";
+import log from "@/utils/logUtils";
 
 function SignUpView(props) {
 
 
     function signUpClickACB(evt) {
         if (props.currentUser !== null || props.currentUser === undefined) {
-            console.log("already signed up");
+            log.w("already signed up");
 
         }
 
@@ -13,7 +14,7 @@ function SignUpView(props) {
     }
 
     function emailInputChangeACB(evt) {
-        console.log(evt.target.value);
+        log.d("email input target", evt.target.value);
         props.onEmailChange(evt.target.value);
     }
 

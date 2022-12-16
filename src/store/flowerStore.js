@@ -1,5 +1,6 @@
 // the data container for the flower information gathered from the API
 
+import log from "@/utils/logUtils";
 import { defineStore } from "pinia";
 import { observeAuthState } from "../persistence/firebaseAuth";
 import { disableFirebaseSync, enableFirebaseSync } from "../persistence/firebaseModel";
@@ -51,7 +52,7 @@ const useFlowerStore = defineStore({
 
     addPlant(plant) {
       if (this.hasPlant(plant.scientificName)) {
-        console.log("plant already exists");
+        log.w("plant already exists");
         return;
       }
 
@@ -65,7 +66,7 @@ const useFlowerStore = defineStore({
 
     removePlant(plantId) {
       if (!this.hasPlant(plantId)) {
-        console.log("plant does not exist");
+        log.w("plant does not exist");
         return;
       }
 
@@ -74,14 +75,14 @@ const useFlowerStore = defineStore({
       }
 
       this.plants = this.plants.filter(hasDifferentIdCB);
-      console.log(plantId + " has been removed");
+      log.i(plantId + " has been removed");
     },
 
     searchPlants(query) {
       function includesQueryCB(plant){
         return plant.scientificName.toLowerCase().includes(query.toLowerCase());
       }
-      console.log([...this.plants].filter(includesQueryCB), "TESSSSWTSTSTSTSADJAJNDANDN")
+      log.d("TESSSSWTSTSTSTSADJAJNDANDN", [...this.plants].filter(includesQueryCB))
       return ([...this.plants].filter(includesQueryCB) || undefined);
     }
   }

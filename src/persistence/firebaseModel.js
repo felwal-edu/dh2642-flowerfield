@@ -2,10 +2,11 @@ import firebaseConfig from "./firebaseSecrets";
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, set, onChildAdded, onChildRemoved, get, child, onValue } from "firebase/database";
 import { watch } from "vue";
+import log from "@/utils/logUtils";
 
 // init
 
-console.log("initializing Firebase ...")
+log.i("initializing Firebase ...")
 
 export const app = initializeApp(firebaseConfig);
 const db = getDatabase();
@@ -27,15 +28,10 @@ function createAccount(user) {
 
 export function updateFirebaseFromStore(store) {
   function nameChangedInStoreACB(newName) {
-    console.log("setting new name: " + newName);
-
     set(ref(db, REF + "/users/" + store.currentUser.uid + "/name"), newName);
   }
 
   function plantsChangedInStoreACB(newPlants) {
-    console.log("store plants:")
-    console.log(newPlants)
-
     function toNameKeyedObjectCB(obj, plant) {
       return { ...obj, [plant.scientificName]: plant };
     }
@@ -44,12 +40,8 @@ export function updateFirebaseFromStore(store) {
     set(ref(db, REF + "/users/" + store.currentUser.uid + "/plants/"), plantsObj);
   }
 
-  // TODO: FIX THIS FUNCTION
   function experienceChangedInStoreACB(storeExp) {
-    console.log("store exp: " + storeExp)
-    console.log(storeExp)
-
-    set(ref(db, REF + "/users/" + store.currentUser.uid + "/experience"), store.experience);
+    set(ref(db, REF + "/users/" + store.currentUser.uid + "/experience"), storeExp);
   }
 
   unsubscribers = [
@@ -93,10 +85,10 @@ export function enableFirebaseSync(store) {
   if (!store.currentUser) {
     // user should always be logged in when calling this,
     // but check just in case.
-    console.log("can't enable Firebase sync when logged out");
+    log.w("can't enable Firebase sync when logged out");
   }
 
-  console.log("syncing Firebase ...");
+  log.i("syncing Firebase ...");
 
   function initStoreDataByFirebase(data) {
     if (data.exists()) {
@@ -104,15 +96,15 @@ export function enableFirebaseSync(store) {
       store.plants = Object.values(data.val().plants || {});
       store.experience = data.val().experience || 0;
 
-      console.log("account loaded");
+      log.i("account loaded");
     }
     else {
       // user did not already exist; the account was created just now.
-      console.log("account created");
+      log.i("account created");
       createAccount(store.currentUser);
     }
 
-    console.log("Firebase synced");
+    log.i("Firebase synced");
 
     // set up sync after first load
     updateFirebaseFromStore(store);
@@ -126,10 +118,10 @@ export function enableFirebaseSync(store) {
 }
 
 export function disableFirebaseSync() {
-  console.log("desyncing Firebase ...");
+  log.i("desyncing Firebase ...");
 
   unsubscribers.forEach(unsubscribe => unsubscribe());
   unsubscribers = [];
 
-  console.log("Firebase desynced");
+  log.i("Firebase desynced");
 }

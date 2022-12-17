@@ -1,0 +1,26 @@
+.details-header {
+    font-size: 1.2em !important;
+    font-family: 'Ubuntu', sans-serif;
+    margin-bottom: 20px;
+    font-weight: 1000;
+    color: #000efe;
+}
+
+#plantdetails {
+    width: 100%;
+    justify-content: center;
+}
+
+/* We access the loading icon here, just to move it so we can see it loading */
+#plantdetails .promsieNoData-loading {
+    margin-top: -10vh;
+    margin-left: -2vw;
+}
+
+/* scaling for mac laptops */
+@media (max-width: 1400px), (max-height: 800px) {
+    #plantdetails .promsieNoData-loading {
+        margin-top: -15vh;
+        margin-left: -3vw;
+    }
+}

@@ -59,6 +59,7 @@ const UploadPresenter = {
 
     function uploadImageToAPI() {
       function processApiResultACB() {
+        // reset message
         this.uploadMessage = {};
 
         if (this.plantPromiseState.data?.suggestions) {

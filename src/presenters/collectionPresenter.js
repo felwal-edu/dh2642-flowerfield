@@ -3,14 +3,13 @@ import { examplePlantArray } from "@/network/plantIdExample.js";
 import CollectionView from "../views/collectionView.js";
 import DetailView from "@/views/detailView.js";
 import ErrorView from "@/views/errorView.js";
-import { watch } from "vue";
 import { waitingForUserToBeSignedIn } from "@/utils/userUtils.js";
 import log from "@/utils/logUtils.js";
+import { mapState } from "pinia";
 
 const CollectionPresenter = {
   data() {
     return {
-      userStatus: undefined,
       sortStatus: "Genus A-Z",
       popupStatus: false,
       selected: undefined,
@@ -18,22 +17,14 @@ const CollectionPresenter = {
       searchQuery: "",
       searchResult: [],
       icon: "mdi-magnify",
-      username: "",
     };
   },
 
-  created() {
-    this.userStatus = useFlowerStore().currentUser;
-
-    // watch user status
-    watch(() => useFlowerStore().currentUser, function (newUser) {
-      this.userStatus = newUser;
-    }.bind(this));
-
-    // watch name update as well
-    watch(() => useFlowerStore().userName, function (name) {
-      this.username = name;
-    }.bind(this));
+  computed: {
+    ...mapState(useFlowerStore, {
+      userStatus: "currentUser",
+      username: "userName"
+    })
   },
 
   render() {

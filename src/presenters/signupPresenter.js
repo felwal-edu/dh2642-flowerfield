@@ -2,15 +2,14 @@ import resolvePromise from "../utils/resolvePromise.js";
 import useFlowerStore from "@/store/flowerStore";
 import { signUpUser } from "@/persistence/firebaseAuth.js";
 import SignUpView from "@/views/signupView.js";
-import { watch } from "vue";
 import { waitingForUserToBeSignedOut } from "@/utils/userUtils.js";
 import "../css/signup.css"
 import log from "@/utils/logUtils.js";
+import { mapState } from "pinia";
 
 const SignUpPresenter = {
     data() {
         return {
-            userStatus: undefined,
             authPromiseState: {},
             email: "",
             password: "",
@@ -20,13 +19,8 @@ const SignUpPresenter = {
         };
     },
 
-    created() {
-        this.userStatus = useFlowerStore().currentUser;
-
-        // watch user status
-        watch(() => useFlowerStore().currentUser, function (newUser) {
-            this.userStatus = newUser;
-        }.bind(this));
+    computed: {
+        ...mapState(useFlowerStore, {userStatus: "currentUser"})
     },
 
     render() {

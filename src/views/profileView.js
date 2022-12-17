@@ -78,13 +78,15 @@ function ProfileView(props) {
                   striped
                   elevation="2"
                 />
-                <v-row class="mt-6 ml-5">
+                <v-row class="mt-6 ml-5" justify="center">
                   <v-col>
                     <v-btn
                       onClick={deleteAccountClickACB}
                       icon="mdi-delete"
                       color="red"
+                      class="ml-4"
                     />
+                    <h4 class="header-description mt-1">delete account</h4>
                   </v-col>
                 </v-row>
               </v-row>

@@ -2,7 +2,6 @@ import { sortPlantsIntoObject } from "@/utils/plantUtils";
 import { capitalize } from "vue";
 import { getRandomLoadingImage } from "@/utils/loadingUtils.js";
 import "../css/collection.css";
-import promiseNoData from "./promiseNodata";
 import log from "@/utils/logUtils";
 
 function CollectionView(props) {
@@ -33,8 +32,7 @@ function CollectionView(props) {
           <v-spacer></v-spacer>
           <v-text-field
             class="mt-8 mr-2"
-            loading={props.searchStatus}
-            append-icon={props.icon}
+            append-icon="mdi-magnify"
             clearable
             onClick:clear={onClearACB}
             onClick:append={onIconClickACB}
@@ -106,8 +104,6 @@ function renderCollection(plants, order, openPopup) {
       </v-col>
     );
   }
-
-  log.d("THIS IS The PLANTS", plants);
 
   if (plants.length === 0) {
     return (

@@ -9,9 +9,17 @@ function SearchView(props) {
         props.onSearch();
     }
 
-    function onInputACB(evt) {
-        props.updateQuery(evt);
+    function onEnterACB(evt) {
+        if (evt.key === "Enter"){
+            props.onSearch();
+        }
     }
+
+    function onInputACB(query) {
+        props.updateQuery(query);
+    }
+
+
 
     return (
         <v-text-field
@@ -21,6 +29,7 @@ function SearchView(props) {
             clearable
             onClick:clear={onClearACB}
             onClick:append={onIconClickACB}
+            onkeydown={onEnterACB}
             onUpdate:modelValue={onInputACB}
         ></v-text-field>
     );

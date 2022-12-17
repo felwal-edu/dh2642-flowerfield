@@ -1,6 +1,7 @@
 import { getRandomLoadingImage } from "@/utils/loadingUtils.js";
-import { getArticleByPlantName } from "@/network/wikipediaService.js";
 import log from "@/utils/logUtils";
+import promiseNoData from "./promiseNodata";
+import "../css/details.css";
 
 function DetailView(props) {
 
@@ -11,17 +12,15 @@ function DetailView(props) {
   function onDeleteACB(evt) {
     props.onDelete();
   }
+    function renderDetails() {
+      function renderError() {
+        return <div><span>No description for plant was found.</span></div>
+      }
 
-  return (
-    <v-overlay
-      class="d-flex justify-center align-center"
-      z-index={1}
-      model-value={props.overlay}
-      onUpdate:modelValue={onCloseInfoACB}
-    >
-      <v-card
+      return <v-card
         width="400"
         height="500"
+        style="overflow-y:scroll;"
       >
         <v-card-title class="text-center bg-green-lighten-3">{props.currentPlant.scientificName}</v-card-title>
         <v-img
@@ -30,11 +29,12 @@ function DetailView(props) {
           max-height="300"
           class="bg-grey-lighten-4"
         ></v-img>
-        <v-card-text>Information about the plant</v-card-text>
-        <div>
-          {getArticleByPlantName(props.currentPlant.scientificName)}
-        </div>
-
+        <v-card-text class="details-header">Information about the plant</v-card-text>
+        <v-container class="mt-n8" id="plantdetails" justify="center">
+          {!props.descriptionState.promise
+            ? ""
+            : promiseNoData(props.descriptionState, renderError) || ""}
+        </v-container>
         <v-card-actions>
           <v-row class="justify-center align-center">
             <v-btn
@@ -51,8 +51,18 @@ function DetailView(props) {
           </v-row>
         </v-card-actions>
       </v-card>
-    </v-overlay>
-  );
+    }
+
+    return (
+      <v-overlay
+        class="d-flex justify-center align-center"
+        z-index={1}
+        model-value={props.overlay}
+        onUpdate:modelValue={onCloseInfoACB}
+      >
+        {renderDetails()}
+      </v-overlay>
+    );
 }
 
 export default DetailView;

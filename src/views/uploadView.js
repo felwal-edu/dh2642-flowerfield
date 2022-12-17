@@ -20,7 +20,7 @@ function UploadView(props) {
             onDrop={dropFileACB}>
 
             <div class="icon">
-              <img src="https://img.icons8.com/color/96/null/stack-of-photos--v1.png"/>
+              <img draggable="false" src="https://img.icons8.com/color/96/null/stack-of-photos--v1.png"/>
             </div>
             <span class="header">{props.dragareaActive == true ? "Release to Upload" : "Drag & Drop"}</span>
             <span class="header">

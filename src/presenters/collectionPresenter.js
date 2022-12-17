@@ -103,8 +103,6 @@ const CollectionPresenter = {
       );
     }
 
-    log.d(this.sortStatus);
-
     return (this.plants.length === 0 || (this.searchResult.length === 0 && this.searchStatus === true))
       ? (
         <div>

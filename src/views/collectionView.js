@@ -67,7 +67,6 @@ function renderCollection(plants, order, openPopup) {
       <div>{Object.entries(sortPlantsIntoObject(plants)).map(createRowsCB)}</div>
     );
   } else {
-    log.d("REEEEEEEEEEE");
     return (
       <div>{Object.entries(sortPlantsIntoObject(plants)).reverse().map(createRowsCB)}</div>
     );

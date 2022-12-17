@@ -33,6 +33,12 @@ const CollectionPresenter = {
     })
   },
 
+  created() {
+    // when view is creaated / initiated, force scroll to top
+    // otherwise toolbar will be hidden
+    window.scrollTo(0, 0);
+  },
+
   render() {
     if (waitingForUserToBeSignedIn(this.userStatus, this.$router) || useFlowerStore().plants === null) {
       return <LoadingView />;

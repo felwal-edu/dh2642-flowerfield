@@ -2,9 +2,6 @@ import SortView from "@/views/sortView.js";
 import SearchView from "@/views/searchView.js";
 
 function ToolBarView(props) {
-    // when view is creaated / initiated, force scroll to top
-    // otherwise toolbar will be hidden
-    window.scrollTo(0, 0);
 
     function onClearACB(evt) {
         props.resetSearch();

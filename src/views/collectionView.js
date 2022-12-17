@@ -13,13 +13,13 @@ function CollectionView(props) {
 
 function checkRender(props) {
   if (!props.searchStatus) {
-    return renderCollection(props.plants, props.sort, props.openPopup, props.searchStatus);
+    return renderCollection(props.plants, props.sort, props.openPopup);
   } else {
-    return renderCollection(props.searchQueryPlants, props.sort, props.openPopup, props.searchStatus);
+    return renderCollection(props.searchQueryPlants, props.sort, props.openPopup);
   }
 }
 
-function renderCollection(plants, order, openPopup, searchStatus) {
+function renderCollection(plants, order, openPopup) {
   function createRowsCB(plantItem) {
     return (
       <v-expansion-panels
@@ -62,31 +62,12 @@ function renderCollection(plants, order, openPopup, searchStatus) {
     );
   }
 
-  if (plants.length === 0 && searchStatus === true) {
-    return (
-      <v-card
-        class="d-flex justify-center align-center"
-        width="350"
-        height="300"
-      >
-        <v-card-text class="text-center">
-          <h1>No plants found</h1>
-        </v-card-text>
-      </v-card>
-    );
-  } else if (plants.length === 0) {
-    return (
-      <div>
-        <h1>No plants have yet been acquiered</h1>
-      </div>
-    );
-  }
-
-  else if (order === "Genus A-Z") {
+  if (order === "Genus A-Z") {
     return (
       <div>{Object.entries(sortPlantsIntoObject(plants)).map(createRowsCB)}</div>
     );
   } else {
+    log.d("REEEEEEEEEEE");
     return (
       <div>{Object.entries(sortPlantsIntoObject(plants)).reverse().map(createRowsCB)}</div>
     );

@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from "vue-router";
+import { createRouter, createWebHashHistory } from "vue-router";
 import Home from "@/presenters/homePresenter.js";
 import Collection from "@/presenters/collectionPresenter.js";
 import LoginPresenter from "@/presenters/loginPresenter.js";
@@ -46,7 +46,7 @@ const routes = [
 ]
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
+  history: createWebHashHistory(process.env.BASE_URL),
   routes,
   linkActiveClass: "active-route"
 });

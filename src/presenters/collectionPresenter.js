@@ -2,8 +2,8 @@ import useFlowerStore from "@/store/flowerStore.js";
 import CollectionView from "../views/collectionView.js";
 import DetailView from "@/views/detailView.js";
 import EmptyPageView from "@/views/emptyPageView.js";
-import SortView from "@/views/sortView.js";
-import SearchView from "@/views/searchView.js";
+import ToolBarView from "@/views/toolBarView.js";
+
 import { waitingForUserToBeSignedIn } from "@/utils/userUtils.js";
 import log from "@/utils/logUtils.js";
 import { mapState } from "pinia";
@@ -22,7 +22,6 @@ const CollectionPresenter = {
       searchQuery: "",
       searchResult: [],
       icon: "mdi-magnify",
-      username: "",
       plantDescriptionPromiseState: {},
     };
   },
@@ -100,60 +99,63 @@ const CollectionPresenter = {
       this.searchStatus = false;
     }
 
-    function renderToolbar(){
+    function renderToolbar() {
       return (
-        <v-toolbar color="#96c29f">
-          <v-toolbar-title>
-            <h2 class="header-font-collection">{this.username == "" ? "Your Collection" : this.username + "'s Collection"}</h2>
-          </v-toolbar-title>
-          <v-spacer></v-spacer>
-          <SearchView
-            updateQuery={updateQueryACB.bind(this)}
-            onSearch={searchACB.bind(this)}
-            resetSearch={resetSearchACB.bind(this)}
-          />
-          <v-toolbar-items>
-            <SortView
-              sort={this.sortStatus}
-              onSort={sortACB.bind(this)}
-            />
-          </v-toolbar-items>
-        </v-toolbar>
-      );
+        <ToolBarView
+          username={this.username}
+          sortStatus={this.sortStatus}
+          updateQuery={updateQueryACB.bind(this)}
+          onSearch={searchACB.bind(this)}
+          resetSearch={resetSearchACB.bind(this)}
+          onSort={sortACB.bind(this)}
+        />
+      )
     }
 
     return (useFlowerStore().plants.length === 0 || (this.searchResult.length === 0 && this.searchStatus === true))
       ? (
         <div>
-          {renderToolbar.bind(this)()}
-          <div>
-            <EmptyPageView
-              message={useFlowerStore().plants.length === 0 ? "You have not added any plants to your collection!" : ("No results!")}
-            />
-          </div>
+          <ToolBarView
+            username={this.username}
+            sortStatus={this.sortStatus}
+            updateQuery={updateQueryACB.bind(this)}
+            onSearch={searchACB.bind(this)}
+            resetSearch={resetSearchACB.bind(this)}
+            onSort={sortACB.bind(this)}
+          />
+          <EmptyPageView
+            message={useFlowerStore().plants.length === 0 ? "You have not added any plants to your collection!" : ("No results!")}
+          />
         </div>
       )
       : (
         <div>
-          {renderToolbar.bind(this)()}
-          <div>
-            <CollectionView
-              plants={useFlowerStore().plants}
-              searchStatus={this.searchStatus}
-              searchQuery={this.searchQuery}
-              searchQueryPlants={this.searchResult}
-              username={this.username}
-              sort={this.sortStatus}
-              openPopup={openPopupACB.bind(this)}
-            />
-            <DetailView
-              closePopup={closePopupACB.bind(this)}
-              onDelete={deletePlantACB.bind(this)}
-              currentPlant={this.selected}
-              overlay={this.popupStatus}
-              descriptionState={this.plantDescriptionPromiseState}
-            />
-          </div>
+        <div>
+          <ToolBarView
+            username={this.username}
+            sortStatus={this.sortStatus}
+            updateQuery={updateQueryACB.bind(this)}
+            onSearch={searchACB.bind(this)}
+            resetSearch={resetSearchACB.bind(this)}
+            onSort={sortACB.bind(this)}
+          />
+        </div>
+          <CollectionView
+            plants={useFlowerStore().plants}
+            searchStatus={this.searchStatus}
+            searchQuery={this.searchQuery}
+            searchQueryPlants={this.searchResult}
+            username={this.username}
+            sort={this.sortStatus}
+            openPopup={openPopupACB.bind(this)}
+          />
+          <DetailView
+            closePopup={closePopupACB.bind(this)}
+            onDelete={deletePlantACB.bind(this)}
+            currentPlant={this.selected}
+            overlay={this.popupStatus}
+            descriptionState={this.plantDescriptionPromiseState}
+          />
         </div>
       );
   },

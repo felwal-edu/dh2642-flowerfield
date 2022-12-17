@@ -1,4 +1,3 @@
-
 function SearchView(props) {
 
     function onClearACB(evt) {
@@ -18,8 +17,6 @@ function SearchView(props) {
     function onInputACB(query) {
         props.updateQuery(query);
     }
-
-
 
     return (
         <v-text-field

@@ -77,6 +77,10 @@ const CollectionPresenter = {
       }
     }
 
+    function resetSearchACB() {
+      this.searchStatus = false;
+    }
+
     log.d("searchResultsPromiseState", this.searchResultsPromiseState);
 
     return (
@@ -93,6 +97,7 @@ const CollectionPresenter = {
           openPopup={openPopupACB.bind(this)}
           updateQuery={updateQueryACB.bind(this)}
           onSearch={searchACB.bind(this)}
+          resetSearch={resetSearchACB.bind(this)}
         />
         <DetailView
           closePopup={closePopupACB.bind(this)}

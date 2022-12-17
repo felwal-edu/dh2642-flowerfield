@@ -17,7 +17,7 @@ let unsubscribers = [];
 
 //
 
-export function setUserMetadata(user) {
+function createAccount(user) {
   set(ref(db, REF + "/users/" + user.uid + "/email"), user.email);
 }
 

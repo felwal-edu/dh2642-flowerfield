@@ -17,8 +17,10 @@ function ProfileView(props) {
   }
 
   function changeUsernameACB(evt) {
-    let newName = document.getElementById("username-inputfield").value;
-    props.onChangeUsername(evt, newName);
+    if (evt.key === 'Enter') {
+      let newName = document.getElementById("username-inputfield").value;
+      props.onChangeUsername(newName);
+    }
   }
 
   return (

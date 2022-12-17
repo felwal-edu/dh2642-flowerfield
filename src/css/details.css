@@ -1,0 +1,22 @@
+.details-header {
+    font-size: 1.2em !important;
+    font-family: 'Ubuntu', sans-serif;
+    margin-bottom: 20px;
+    font-weight: 1000;
+    color: #000efe;
+}
+
+#plantdetails {
+    width: 100%;
+    height: auto;
+    justify-content: center;
+}
+
+/* We access the loading icon here, just to move it so we can see it loading */
+#plantdetails .optical-center {
+    margin-top: 6vh;
+    position: relative;
+    top: 40%;
+    left: 40%;
+    z-index: -1;
+}

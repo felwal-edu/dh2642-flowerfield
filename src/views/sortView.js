@@ -2,8 +2,8 @@
 
 function SortView(props) {
 
-    function onSortChangeACB(evt) {
-        props.onSort(evt);
+    function onSortChangeACB(order) {
+        props.onSort(order);
     }
 
     return (

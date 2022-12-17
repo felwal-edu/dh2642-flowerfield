@@ -66,7 +66,7 @@ function LoginView(props) {
               </v-row>
             </v-col>
           </v-card>
-          <v-snackbar model-value={props.snackbar} class="d-flex" color="#0d0963">
+          <v-snackbar model-value={props.snackbar} class="d-flex" color="#0d0963" timeout="-1">
             {props.errorMessage}
           </v-snackbar>
         </v-parallax>

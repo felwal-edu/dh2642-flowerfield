@@ -1,13 +1,13 @@
 function compareGenusCB(plantA, plantB) {
-  return plantA.genus === plantB.genus
-    ? plantA.scientificName === plantB.scientificName
+  return (plantA.genus === plantB.genus
+    ? (plantA.scientificName === plantB.scientificName
       ? 0
-      : plantA.scientificName < plantB.scientificName
+      : (plantA.scientificName < plantB.scientificName
         ? -1
-        : 1
-    : plantA.genus < plantB.genus
+        : 1))
+    : (plantA.genus < plantB.genus
       ? -1
-      : 1;
+      : 1));
 }
 
 function sortPlantsIntoObject(plants) {

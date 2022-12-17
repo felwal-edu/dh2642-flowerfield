@@ -1,16 +1,15 @@
 import resolvePromise from "../utils/resolvePromise.js";
 import LoginView from "../views/loginView";
 import useFlowerStore from "@/store/flowerStore.js";
-import { signInUser, signUpUser } from "@/persistence/firebaseAuth.js";
-import { watch } from "vue";
+import { signInUser } from "@/persistence/firebaseAuth.js";
 import { waitingForUserToBeSignedOut } from "@/utils/userUtils.js";
 import "../css/login.css"
 import log from "@/utils/logUtils.js";
+import { mapState } from "pinia";
 
 const LoginPresenter = {
   data() {
     return {
-      userStatus: undefined,
       authPromiseState: {},
       email: "",
       password: "",
@@ -19,13 +18,8 @@ const LoginPresenter = {
     };
   },
 
-  created() {
-    this.userStatus = useFlowerStore().currentUser;
-
-    // watch user status
-    watch(() => useFlowerStore().currentUser, function (newUser) {
-      this.userStatus = newUser;
-    }.bind(this));
+  computed: {
+    ...mapState(useFlowerStore, {userStatus: "currentUser"})
   },
 
   render() {

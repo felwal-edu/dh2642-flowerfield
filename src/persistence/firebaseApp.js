@@ -5,7 +5,7 @@ import firebaseConfig from "./firebaseSecrets";
 log.i("initializing Firebase ...")
 
 // this can't be in `firebaseModel.js` since that causes
-// a circular dependency between that and `firebaseAuth.js`.
+// a circular dependency with `firebaseAuth.js`.
 const app = initializeApp(firebaseConfig);
 
 export default app;

@@ -6,9 +6,9 @@ import resolvePromise from "@/utils/resolvePromise";
 import { getPlantByImage } from "@/network/plantIdService";
 //import { exampleResponse } from "@/network/plantIdExample";
 import useFlowerStore from "@/store/flowerStore";
-import { watch } from "vue";
 import { waitingForUserToBeSignedIn } from "@/utils/userUtils";
 import log from "@/utils/logUtils";
+import { mapState } from "pinia";
 
 const PROBABLILITY_REJECTION_LIMIT = 0.3;
 
@@ -22,19 +22,13 @@ const UploadPresenter = {
       fileURL: null,
       overlay: false,
       plant: null,
-      userStatus: undefined,
       uploadMessage: {},
       buttonPopupCallback: undefined
     };
   },
 
-  created() {
-    this.userStatus = useFlowerStore().currentUser;
-
-    // watch user status
-    watch(() => useFlowerStore().currentUser, function (newUser) {
-      this.userStatus = newUser;
-    }.bind(this));
+  computed: {
+    ...mapState(useFlowerStore, {userStatus: "currentUser"})
   },
 
   mounted() {

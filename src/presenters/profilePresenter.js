@@ -2,26 +2,15 @@ import { removeUser, signOutUser } from "@/persistence/firebaseAuth";
 import useFlowerStore from "@/store/flowerStore";
 import ProfileView from "../views/profileView";
 import { rankDisplay, progressBarValue } from "@/utils/plantUtils";
-import { watch } from "vue";
 import { waitingForUserToBeSignedIn } from "@/utils/userUtils";
 import "../css/profile.css"
 import log from "@/utils/logUtils";
 import { deleteUserData } from "@/persistence/firebaseModel";
+import { mapState } from "pinia";
 
 const ProfilePresenter = {
-  data() {
-    return {
-      userStatus: undefined,
-    };
-  },
-
-  created() {
-    this.userStatus = useFlowerStore().currentUser;
-
-    // watch user status
-    watch(() => useFlowerStore().currentUser, function (newUser) {
-      this.userStatus = newUser;
-    }.bind(this));
+  computed: {
+    ...mapState(useFlowerStore, {userStatus: "currentUser"})
   },
 
   render() {

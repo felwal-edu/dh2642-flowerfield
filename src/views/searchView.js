@@ -17,6 +17,7 @@ function SearchView(props) {
         <v-text-field
             class="mt-8 mr-2"
             append-icon="mdi-magnify"
+            placeholder="Search"
             clearable
             onClick:clear={onClearACB}
             onClick:append={onIconClickACB}

@@ -29,6 +29,7 @@ function DetailView(props) {
           max-height="300"
           class="bg-grey-lighten-4"
         ></v-img>
+        <v-card-text>Uploaded: {props.currentPlant.date}</v-card-text>
         <v-card-text class="details-header">Information about the plant</v-card-text>
         <v-container class="mt-n8" id="plantdetails" justify="center">
           {!props.descriptionState.promise

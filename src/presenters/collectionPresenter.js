@@ -15,14 +15,12 @@ import LoadingView from "@/views/loadingView.js";
 const CollectionPresenter = {
   data() {
     return {
-      plants: useFlowerStore().plants,
       sortStatus: "Genus A-Z",
       popupStatus: false,
       selected: undefined,
       searchStatus: false,
       searchQuery: "",
       searchResult: [],
-      username: "",
     };
   },
 
@@ -103,13 +101,13 @@ const CollectionPresenter = {
       );
     }
 
-    return (this.plants.length === 0 || (this.searchResult.length === 0 && this.searchStatus === true))
+    return (useFlowerStore().plants.length === 0 || (this.searchResult.length === 0 && this.searchStatus === true))
       ? (
         <div>
           {renderToolbar.bind(this)()}
           <div>
             <EmptyPageView
-              message={this.plants.length === 0 ? "You have not added any plants to your collection!" : ("No results!")}
+              message={useFlowerStore().plants.length === 0 ? "You have not added any plants to your collection!" : ("No results!")}
             />
           </div>
         </div>
@@ -119,7 +117,7 @@ const CollectionPresenter = {
           {renderToolbar.bind(this)()}
           <div>
             <CollectionView
-              plants={this.plants}
+              plants={useFlowerStore().plants}
               searchStatus={this.searchStatus}
               searchQuery={this.searchQuery}
               searchQueryPlants={this.searchResult}

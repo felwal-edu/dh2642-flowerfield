@@ -1,13 +1,11 @@
+import LoadingView from "./loadingView";
+
 function promiseNoData(promiseState, _callback) {
     if (!promiseState.promise) {
         return <div>No data</div>;
     }
     if (promiseState.promise && !promiseState.error && !promiseState.data) {
-        return (
-            <div justify="center" align="center">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif?20151024034921" />
-            </div>
-        );
+        return <LoadingView />;
     }
 
     if (promiseState.promise && promiseState.error && !promiseState.data) {

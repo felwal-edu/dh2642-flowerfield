@@ -4,7 +4,7 @@ import router from "./router";
 import { vuetify } from "./plugins/vuetify";
 import { loadFonts } from "./plugins/webfontloader";
 import { createPinia } from "pinia";
-import useFlowerStore from "./store/flowerStore.js";
+import { setUpFirebase } from "./persistence/firebaseModel";
 
 loadFonts();
 
@@ -15,4 +15,4 @@ const app = createApp(App)
 
 app.mount("#app");
 
-useFlowerStore().initUser();
+setUpFirebase();

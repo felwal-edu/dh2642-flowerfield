@@ -1,21 +1,16 @@
-import firebaseConfig from "./firebaseSecrets";
-import { initializeApp } from "firebase/app";
 import { getDatabase, ref, set, onChildAdded, onChildRemoved, get, child, onValue } from "firebase/database";
 import { watch } from "vue";
 import log from "@/utils/logUtils";
+import useFlowerStore from "@/store/flowerStore";
+import { observeAuthState } from "./firebaseAuth";
 
 // init
 
-log.i("initializing Firebase ...")
-
-export const app = initializeApp(firebaseConfig);
 const db = getDatabase();
-
 const REF = "flowerModel";
-
 let unsubscribers = [];
 
-//
+// set
 
 function createUserData(user) {
   set(ref(db, REF + "/users/" + user.uid + "/email"), user.email);
@@ -30,9 +25,83 @@ export function deleteUserData(user) {
   set(ref(db, REF + "/users/" + user.uid), null);
 }
 
-//
+// start/stop
 
-export function updateFirebaseFromStore(store) {
+export function setUpFirebase() {
+  function signedInACB(user) {
+    useFlowerStore().currentUser = user;
+
+    function dataLoadedACB() {
+      enableFirebaseSync();
+    }
+
+    // load existing data, then start sync
+    loadFirebaseData(dataLoadedACB);
+  }
+
+  function signedOutACB() {
+    disableFirebaseSync();
+
+    useFlowerStore().currentUser = null;
+    useFlowerStore().plants = [];
+  }
+
+  // this observes any changes to "signed in / signed out" state
+  observeAuthState(signedInACB, signedOutACB);
+}
+
+function loadFirebaseData(loadedACB) {
+  if (!useFlowerStore().currentUser) {
+    // user should always be logged in when calling this,
+    // but check just in case.
+    log.w("can't load Firebase data when logged out");
+  }
+
+  log.i("loading Firebase ...");
+
+  function dataLoadedFromFirebaseACB(data) {
+    if (data.exists()) {
+      useFlowerStore().userName = data.val().name || "";
+      useFlowerStore().plants = Object.values(data.val().plants || {});
+      useFlowerStore().experience = data.val().experience || 0;
+
+      log.i("Firebase account loaded");
+    }
+    else {
+      // user did not already exist; the account was created just now.
+      log.i("Firebase account created");
+      createUserData(useFlowerStore().currentUser);
+    }
+
+    loadedACB();
+  }
+
+  // load data from Firebase, then set up sync
+  get(child(ref(db), REF + "/users/" + useFlowerStore().currentUser.uid))
+    .then(dataLoadedFromFirebaseACB)
+    .catch((error) => { log.e(error); });
+}
+
+function enableFirebaseSync() {
+  log.i("starting Firebase sync ...")
+
+  // set up sync after first load
+  updateFirebaseFromStore(useFlowerStore());
+  updateStoreFromFirebase(useFlowerStore());
+}
+
+function disableFirebaseSync() {
+  log.i("desyncing Firebase ...");
+
+  unsubscribers.forEach(unsubscribe => unsubscribe());
+  unsubscribers = [];
+
+  log.i("Firebase desynced");
+}
+
+// sync
+
+function updateFirebaseFromStore(store) {
   function nameChangedInStoreACB(newName) {
     set(ref(db, REF + "/users/" + store.currentUser.uid + "/name"), newName);
   }
@@ -57,20 +126,20 @@ export function updateFirebaseFromStore(store) {
     watch(() => store.experience, experienceChangedInStoreACB)];
 }
 
-export function updateStoreFromFirebase(store) {
-  function nameChangedInFirebase(data) {
+function updateStoreFromFirebase(store) {
+  function nameChangedInFirebaseACB(data) {
     store.userName = data.val();
   }
 
-  function plantAddedInFirebase(data) {
+  function plantAddedInFirebaseACB(data) {
     store.addPlant(data.val());
   }
 
-  function plantRemovedInFirebase(data) {
+  function plantRemovedInFirebaseACB(data) {
     store.removePlant(+data.key);
   }
 
-  function experienceAddedInFirebase(data) {
+  function experienceChangedInFirebaseACB(data) {
     if (store.experience !== data.val()) {
       store.experience = data.val();
     }
@@ -78,56 +147,9 @@ export function updateStoreFromFirebase(store) {
 
   unsubscribers = [
     ...unsubscribers,
-    onValue(ref(db, REF + "/users/" + store.currentUser.uid + "/name"), nameChangedInFirebase),
-    onChildAdded(ref(db, REF + "/users/" + store.currentUser.uid + "/plants"), plantAddedInFirebase),
-    onChildRemoved(ref(db, REF + "/users/" + store.currentUser.uid + "/plants"), plantRemovedInFirebase),
-    onValue(ref(db, REF + "/users/" + store.currentUser.uid + "/experience"), experienceAddedInFirebase)
+    onValue(ref(db, REF + "/users/" + store.currentUser.uid + "/name"), nameChangedInFirebaseACB),
+    onChildAdded(ref(db, REF + "/users/" + store.currentUser.uid + "/plants"), plantAddedInFirebaseACB),
+    onChildRemoved(ref(db, REF + "/users/" + store.currentUser.uid + "/plants"), plantRemovedInFirebaseACB),
+    onValue(ref(db, REF + "/users/" + store.currentUser.uid + "/experience"), experienceChangedInFirebaseACB)
   ];
-}
-
-//
-
-export function enableFirebaseSync(store) {
-  if (!store.currentUser) {
-    // user should always be logged in when calling this,
-    // but check just in case.
-    log.w("can't enable Firebase sync when logged out");
-  }
-
-  log.i("syncing Firebase ...");
-
-  function initStoreDataByFirebase(data) {
-    if (data.exists()) {
-      store.userName = data.val().name || "";
-      store.plants = Object.values(data.val().plants || {});
-      store.experience = data.val().experience || 0;
-
-      log.i("account loaded");
-    }
-    else {
-      // user did not already exist; the account was created just now.
-      log.i("account created");
-      createUserData(store.currentUser);
-    }
-
-    log.i("Firebase synced");
-
-    // set up sync after first load
-    updateFirebaseFromStore(store);
-    updateStoreFromFirebase(store);
-  }
-
-  // load data from Firebase, then set up sync
-  get(child(ref(db), REF + "/users/" + store.currentUser.uid))
-    .then(initStoreDataByFirebase)
-    .catch((error) => { log.e(error); });
-}
-
-export function disableFirebaseSync() {
-  log.i("desyncing Firebase ...");
-
-  unsubscribers.forEach(unsubscribe => unsubscribe());
-  unsubscribers = [];
-
-  log.i("Firebase desynced");
 }

@@ -1,18 +1,10 @@
 import useFlowerStore from "@/store/flowerStore";
-import { watch } from "vue";
 import "../css/main.css";
 
 export default function App() {
-  let userStatus = useFlowerStore().currentUser;
-
   function renderApp() {
-    // watch user status
-    watch(() => useFlowerStore().currentUser, function (newUser) {
-      userStatus = newUser;
-    }.bind(this));
-
     // logged out or waiting for initialization
-    if (!userStatus) {
+    if (!useFlowerStore().currentUser) {
       return (
         <v-toolbar-items class="hidden-sm-and-down">
           <router-link to="/">

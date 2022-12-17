@@ -1,6 +1,6 @@
 import log from "@/utils/logUtils";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, deleteUser } from "firebase/auth";
-import { app } from "./firebaseModel";
+import app from "./firebaseApp";
 
 const auth = getAuth(app);
 
@@ -22,7 +22,7 @@ export function signOutUser() {
   return auth.signOut();
 }
 
-export function removeUser(user) {
+export function removeUser() {
   log.i("Removing user ...", auth.currentUser);
 
   deleteUser(auth.currentUser).then(() => {

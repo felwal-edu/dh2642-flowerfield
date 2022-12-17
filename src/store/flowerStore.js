@@ -2,8 +2,6 @@
 
 import log from "@/utils/logUtils";
 import { defineStore } from "pinia";
-import { observeAuthState } from "../persistence/firebaseAuth";
-import { disableFirebaseSync, enableFirebaseSync } from "../persistence/firebaseModel";
 
 const useFlowerStore = defineStore({
   id: "user",
@@ -18,25 +16,6 @@ const useFlowerStore = defineStore({
   }),
 
   actions: {
-
-    initUser() {
-      function signedInACB(user) {
-        this.currentUser = user;
-
-        enableFirebaseSync(this); // TODO: should we pass store like this?
-      }
-
-      function signedOutACB() {
-        disableFirebaseSync();
-
-        this.currentUser = null;
-        this.plants = [];
-      }
-
-      // this observes any changes to "signed in / signed out" state
-      observeAuthState(signedInACB.bind(this), signedOutACB.bind(this));
-    },
-
     setUserName(userName) {
       this.userName = userName;
     },

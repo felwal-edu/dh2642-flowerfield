@@ -1,9 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Alexandria:wght@200&family=Ubuntu:wght@500&display=swap');
+
+.detail-title {
+    font-family: 'Ubuntu', sans-serif;
+}
+
 .details-header {
     font-size: 1.2em !important;
     font-family: 'Ubuntu', sans-serif;
     margin-bottom: 20px;
     font-weight: 1000;
     color: #000efe;
+}
+
+.details-upload-text {
+    font-family: 'Alexandria', sans-serif;
 }
 
 #plantdetails {
@@ -19,4 +29,8 @@
     top: 40%;
     left: 40%;
     z-index: -1;
+}
+
+#plantdetails p {
+    font-family: 'Alexandria', sans-serif;
 }

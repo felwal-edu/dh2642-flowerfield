@@ -22,14 +22,14 @@ function DetailView(props) {
         height="500"
         style="overflow-y:scroll;"
       >
-        <v-card-title class="text-center bg-green-lighten-3">{props.currentPlant.scientificName}</v-card-title>
+        <v-card-title class="text-center bg-green-lighten-3 detail-title">{props.currentPlant.scientificName}</v-card-title>
         <v-img
           lazy-src={getRandomLoadingImage()}
           src={props.currentPlant.url}
           max-height="300"
           class="bg-grey-lighten-4"
-        ></v-img>
-        <v-card-text>Uploaded: {props.currentPlant.date}</v-card-text>
+        />
+        <v-card-text class="details-upload-text">Uploaded: {props.currentPlant.date}</v-card-text>
         <v-card-text class="details-header">Information about the plant</v-card-text>
         <v-container class="mt-n8" id="plantdetails" justify="center">
           {!props.descriptionState.promise

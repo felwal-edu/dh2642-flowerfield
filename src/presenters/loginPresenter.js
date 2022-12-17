@@ -6,6 +6,7 @@ import { waitingForUserToBeSignedOut } from "@/utils/userUtils.js";
 import "../css/login.css"
 import log from "@/utils/logUtils.js";
 import { mapState } from "pinia";
+import { InvalidLoginInfoMessage } from "@/utils/userUtils.js";
 
 const LoginPresenter = {
   data() {
@@ -19,7 +20,7 @@ const LoginPresenter = {
   },
 
   computed: {
-    ...mapState(useFlowerStore, {userStatus: "currentUser"})
+    ...mapState(useFlowerStore, { userStatus: "currentUser" })
   },
 
   render() {
@@ -28,8 +29,8 @@ const LoginPresenter = {
     function authResultACB() {
       if (this.authPromiseState.error) {
         log.e(this.authPromiseState.error.message);
+        this.errorMessage = InvalidLoginInfoMessage(this.authPromiseState.error.message);
 
-        this.errorMessage = this.authPromiseState.error.message;
         this.snackbar = true;
       }
       // return to home if login was successful!

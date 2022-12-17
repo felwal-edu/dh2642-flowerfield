@@ -75,8 +75,8 @@ function SignUpView(props) {
                             </v-row>
                         </v-col>
                     </v-card>
-                    <v-snackbar v-model={props.snackbar} class="d-flex" color="#0d0963">
-                        {"Passwords don't match"}
+                    <v-snackbar model-value={props.snackbar} class="d-flex" color="#0d0963">
+                        {props.errorMessage}
                     </v-snackbar>
                 </v-parallax>
             </v-app>

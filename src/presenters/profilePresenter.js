@@ -1,7 +1,7 @@
 import { signOutUser } from "@/persistence/firebaseAuth";
 import useFlowerStore from "@/store/flowerStore";
 import ProfileView from "../views/profileView";
-import { rankDisplay, progressBarValue } from "@/utils/plantUtils";
+import { rankDisplay } from "@/utils/plantUtils";
 import { watch } from "vue";
 import { waitingForUserToBeSignedIn } from "@/utils/userUtils";
 import "../css/profile.css"
@@ -43,9 +43,9 @@ const ProfilePresenter = {
       <ProfileView
         currentUser={useFlowerStore().currentUser}
         onSignOut={signOutACB.bind(this)}
+        userExperience={useFlowerStore().experience}
         amountPlants={useFlowerStore().plants.length}
-        currentRank={rankDisplay(useFlowerStore().ranks, useFlowerStore().experience)}
-        experienceBar={progressBarValue(useFlowerStore().ranks, useFlowerStore().experience)}
+        currentRank={rankDisplay(useFlowerStore().experience)}
         onChangeUsername={changeUsernameACB.bind(this)}
         userName={useFlowerStore().userName} />
     );

@@ -47,8 +47,10 @@ const CollectionPresenter = {
     }
 
     function deletePlantACB() {
-      useFlowerStore().removePlant(this.selected);
-      closePopupACB.bind(this)();
+      if (window.confirm("Do you want to remove this plant?")) {
+        useFlowerStore().removePlant(this.selected);
+        closePopupACB.bind(this)();
+      }
     }
 
     function updateQueryACB(query) {
@@ -74,51 +76,43 @@ const CollectionPresenter = {
       this.searchStatus = false;
     }
 
-    if (this.searchResult.length === 0 && this.searchStatus === true) {
-      return (
-        <ErrorView
-          goToHomePage={resetSearchACB.bind(this)}
-        />
-      );
-    } else {
-      return (
+    return (
+      <div>
+        <v-toolbar color="#96c29f">
+          <v-toolbar-title>
+            <h2 class="header-font-collection">{this.username == "" ? "Your Collection" : this.username + "'s Collection"}</h2>
+          </v-toolbar-title>
+          <v-spacer></v-spacer>
+          <SearchView
+            updateQuery={updateQueryACB.bind(this)}
+            onSearch={searchACB.bind(this)}
+            resetSearch={resetSearchACB.bind(this)}
+          />
+          <v-toolbar-items>
+            <SortView
+              sort={this.sortStatus}
+              onSort={sortACB.bind(this)}
+            />
+          </v-toolbar-items>
+        </v-toolbar>
         <div>
-          <v-toolbar color="#96c29f">
-            <v-toolbar-title>
-              <h2 class="header-font-collection">{this.username == "" ? "Your Collection" : this.username + "'s Collection"}</h2>
-            </v-toolbar-title>
-            <v-spacer></v-spacer>
-            <SearchView
-              updateQuery={updateQueryACB.bind(this)}
-              onSearch={searchACB.bind(this)}
-              resetSearch={resetSearchACB.bind(this)}
-            />
-            <v-toolbar-items>
-              <SortView
-                sort={this.sortStatus}
-                onSort={sortACB.bind(this)}
-              />
-            </v-toolbar-items>
-          </v-toolbar>
-          <div>
-            <CollectionView
-              plants={useFlowerStore().plants}
-              searchStatus={this.searchStatus}
-              searchQuery={this.searchQuery}
-              searchQueryPlants={this.searchResult}
-              username={this.username}
-              openPopup={openPopupACB.bind(this)}
-            />
-            <DetailView
-              closePopup={closePopupACB.bind(this)}
-              onDelete={deletePlantACB.bind(this)}
-              currentPlant={this.selected}
-              overlay={this.popupStatus}
-            />
-          </div>
+          <CollectionView
+            plants={useFlowerStore().plants}
+            searchStatus={this.searchStatus}
+            searchQuery={this.searchQuery}
+            searchQueryPlants={this.searchResult}
+            username={this.username}
+            openPopup={openPopupACB.bind(this)}
+          />
+          <DetailView
+            closePopup={closePopupACB.bind(this)}
+            onDelete={deletePlantACB.bind(this)}
+            currentPlant={this.selected}
+            overlay={this.popupStatus}
+          />
         </div>
-      );
-    }
+      </div>
+    );
   },
 };
 

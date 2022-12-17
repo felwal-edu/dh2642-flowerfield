@@ -10,7 +10,7 @@ import { mapState } from "pinia";
 
 const ProfilePresenter = {
   computed: {
-    ...mapState(useFlowerStore, {userStatus: "currentUser"})
+    ...mapState(useFlowerStore, { userStatus: "currentUser" })
   },
 
   render() {
@@ -22,10 +22,12 @@ const ProfilePresenter = {
     }
 
     function deleteAccountACB() {
-      deleteUserData(useFlowerStore().currentUser);
-      removeUser();
+      if (window.confirm("Are you sure that you want to delete your account?")) {
+        deleteUserData(useFlowerStore().currentUser);
+        removeUser();
 
-      this.$router.push({name: "home"});
+        this.$router.push({ name: "home" });
+      }
     }
 
     function changeUsernameACB(evt, newName) {

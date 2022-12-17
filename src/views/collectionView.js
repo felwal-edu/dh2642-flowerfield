@@ -41,14 +41,8 @@ function renderCollection(plants, order, openPopup) {
       openPopup(plant);
     }
 
-    // get species name bly splitting scientific name
-    let species = plant.scientificName.split(" ")[1];
-
-    // error check if species is not defined
-    if (species == "" || species == undefined) {
-      // if not we use the genus, which we will have
-      species = plant.scientificName.split(" ")[0];
-    }
+    // get species name – and genus if there is none
+    const species = plant.species || plant.genus;
 
     return (
       <v-col md="2">

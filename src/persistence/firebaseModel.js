@@ -12,11 +12,14 @@ let unsubscribers = [];
 
 // set
 
-function createUserData(user) {
+
+
+export function createUserData(user, username) {
   set(ref(db, REF + "/users/" + user.uid + "/email"), user.email);
-  set(ref(db, REF + "/users/" + user.uid + "/name"), "");
+  set(ref(db, REF + "/users/" + user.uid + "/name"), username);
   set(ref(db, REF + "/users/" + user.uid + "/plants"), []);
   set(ref(db, REF + "/users/" + user.uid + "/experience"), 0);
+
 }
 
 export function deleteUserData(user) {
@@ -66,11 +69,6 @@ function loadFirebaseData(loadedACB) {
       useFlowerStore().experience = data.val().experience || 0;
 
       log.i("Firebase account loaded");
-    }
-    else {
-      // user did not already exist; the account was created just now.
-      log.i("Firebase account created");
-      createUserData(useFlowerStore().currentUser);
     }
 
     loadedACB();

@@ -41,7 +41,6 @@ const ProfilePresenter = {
         currentUser={useFlowerStore().currentUser}
         onSignOut={signOutACB.bind(this)}
         onDeleteAccount={deleteAccountACB.bind(this)}
-        amountPlants={useFlowerStore().plants.length}
         currentRank={rankDisplay(useFlowerStore().ranks, useFlowerStore().experience)}
         experienceBar={progressBarValue(useFlowerStore().ranks, useFlowerStore().experience)}
         onChangeUsername={changeUsernameACB.bind(this)}

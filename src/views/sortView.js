@@ -1,5 +1,3 @@
-
-
 function SortView(props) {
 
     function onSortChangeACB(order) {

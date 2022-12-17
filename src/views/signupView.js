@@ -13,6 +13,10 @@ function SignUpView(props) {
         props.onSignUp();
     }
 
+    function userNameInputChangeACB(evt) {
+        props.onUserNameChange(evt.target.value);
+    }
+
     function emailInputChangeACB(evt) {
         log.d("email input target", evt.target.value);
         props.onEmailChange(evt.target.value);
@@ -44,6 +48,12 @@ function SignUpView(props) {
                                 <v-card-title class="mt-12">
                                     <h1 class="header-font-signup">Create an account</h1>
                                 </v-card-title>
+                            </v-row>
+
+                            <v-row justify="center">
+                                <v-col sm="8">
+                                    <v-text-field class="input-text" clearable onChange={userNameInputChangeACB} label="Username" placeholder="user"></v-text-field>
+                                </v-col>
                             </v-row>
 
                             <v-row justify="center">

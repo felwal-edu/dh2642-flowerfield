@@ -2,7 +2,7 @@ import useFlowerStore from "@/store/flowerStore.js";
 import { examplePlantArray } from "@/network/plantIdExample.js";
 import CollectionView from "../views/collectionView.js";
 import DetailView from "@/views/detailView.js";
-import ErrorView from "@/views/errorView.js";
+import EmptyPageView from "@/views/emptyPageView.js";
 import SortView from "@/views/sortView.js";
 import SearchView from "@/views/searchView.js";
 import { watch } from "vue";
@@ -15,6 +15,7 @@ import LoadingView from "@/views/loadingView.js";
 const CollectionPresenter = {
   data() {
     return {
+      plants: useFlowerStore().plants,
       sortStatus: "Genus A-Z",
       popupStatus: false,
       selected: undefined,
@@ -80,8 +81,8 @@ const CollectionPresenter = {
       this.searchStatus = false;
     }
 
-    return (
-      <div>
+    function renderToolbar(){
+      return (
         <v-toolbar color="#96c29f">
           <v-toolbar-title>
             <h2 class="header-font-collection">{this.username == "" ? "Your Collection" : this.username + "'s Collection"}</h2>
@@ -99,24 +100,44 @@ const CollectionPresenter = {
             />
           </v-toolbar-items>
         </v-toolbar>
+      );
+    }
+
+    log.d(this.sortStatus);
+
+    return (this.plants.length === 0 || (this.searchResult.length === 0 && this.searchStatus === true))
+      ? (
         <div>
-          <CollectionView
-            plants={useFlowerStore().plants}
-            searchStatus={this.searchStatus}
-            searchQuery={this.searchQuery}
-            searchQueryPlants={this.searchResult}
-            username={this.username}
-            openPopup={openPopupACB.bind(this)}
-          />
-          <DetailView
-            closePopup={closePopupACB.bind(this)}
-            onDelete={deletePlantACB.bind(this)}
-            currentPlant={this.selected}
-            overlay={this.popupStatus}
-          />
+          {renderToolbar.bind(this)()}
+          <div>
+            <EmptyPageView
+              message={this.plants.length === 0 ? "You have not added any plants to your collection!" : ("No results!")}
+            />
+          </div>
         </div>
-      </div>
-    );
+      )
+      : (
+        <div>
+          {renderToolbar.bind(this)()}
+          <div>
+            <CollectionView
+              plants={this.plants}
+              searchStatus={this.searchStatus}
+              searchQuery={this.searchQuery}
+              searchQueryPlants={this.searchResult}
+              username={this.username}
+              sort={this.sortStatus}
+              openPopup={openPopupACB.bind(this)}
+            />
+            <DetailView
+              closePopup={closePopupACB.bind(this)}
+              onDelete={deletePlantACB.bind(this)}
+              currentPlant={this.selected}
+              overlay={this.popupStatus}
+            />
+          </div>
+        </div>
+      );
   },
 };
 

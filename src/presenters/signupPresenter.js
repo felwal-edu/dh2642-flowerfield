@@ -7,6 +7,7 @@ import "../css/signup.css"
 import log from "@/utils/logUtils.js";
 import { mapState } from "pinia";
 
+
 const SignUpPresenter = {
     data() {
         return {
@@ -20,7 +21,7 @@ const SignUpPresenter = {
     },
 
     computed: {
-        ...mapState(useFlowerStore, {userStatus: "currentUser"})
+        ...mapState(useFlowerStore, { userStatus: "currentUser" })
     },
 
     render() {
@@ -44,6 +45,7 @@ const SignUpPresenter = {
             if (this.password !== this.passwordCheck) {
 
                 this.snackbar = true
+                this.errorMessage = "Passwords do not match, please double check."
                 log.d(this.passwordCheck)
                 return;
             }
@@ -77,7 +79,8 @@ const SignUpPresenter = {
                 onPasswordCheckChange={checkPasswordChangeACB.bind(this)}
                 onSignUp={signUpACB.bind(this)}
                 snackbar={this.snackbar}
-                onGoToLogin={tologinACB.bind(this)} />
+                onGoToLogin={tologinACB.bind(this)}
+                errorMessage={this.errorMessage} />
         );
 
     }

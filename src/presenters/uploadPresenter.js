@@ -9,6 +9,7 @@ import useFlowerStore from "@/store/flowerStore";
 import { waitingForUserToBeSignedIn } from "@/utils/userUtils";
 import log from "@/utils/logUtils";
 import { mapState } from "pinia";
+import LoadingView from "@/views/loadingView";
 
 const PROBABLILITY_REJECTION_LIMIT = 0.3;
 
@@ -38,7 +39,7 @@ const UploadPresenter = {
   },
 
   render() {
-    if (waitingForUserToBeSignedIn(this.userStatus, this.$router)) return;
+    if (waitingForUserToBeSignedIn(this.userStatus, this.$router)) return <LoadingView />;
 
     function abortUploadACB() {
       // reset data

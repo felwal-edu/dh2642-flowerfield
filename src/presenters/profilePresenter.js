@@ -7,6 +7,7 @@ import "../css/profile.css"
 import log from "@/utils/logUtils";
 import { deleteUserData } from "@/persistence/firebaseModel";
 import { mapState } from "pinia";
+import LoadingView from "@/views/loadingView";
 
 const ProfilePresenter = {
   computed: {
@@ -14,7 +15,7 @@ const ProfilePresenter = {
   },
 
   render() {
-    if (waitingForUserToBeSignedIn(this.userStatus, this.$router)) return;
+    if (waitingForUserToBeSignedIn(this.userStatus, this.$router)) return <LoadingView />;
 
     function signOutACB() {
       signOutUser();

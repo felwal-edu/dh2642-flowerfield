@@ -7,7 +7,7 @@ import "../css/signup.css"
 import log from "@/utils/logUtils.js";
 import { mapState } from "pinia";
 import { createUserData } from "@/persistence/firebaseModel.js";
-
+import LoadingView from "@/views/loadingView.js";
 
 const SignUpPresenter = {
     data() {
@@ -27,7 +27,7 @@ const SignUpPresenter = {
     },
 
     render() {
-        if (waitingForUserToBeSignedOut(this.userStatus, this.$router)) return;
+        if (waitingForUserToBeSignedOut(this.userStatus, this.$router)) return <LoadingView />;
 
         function authResultACB() {
             if (this.authPromiseState.error) {

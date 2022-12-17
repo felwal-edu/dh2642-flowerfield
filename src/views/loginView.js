@@ -4,7 +4,7 @@ import log from "@/utils/logUtils";
 function LoginView(props) {
 
   function signInClickACB(evt) {
-    if (props.currentUser !== null || props.currentUser === undefined) {
+    if (props.currentUser) {
       log.w("already signed in");
       return;
     }

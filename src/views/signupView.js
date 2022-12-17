@@ -5,7 +5,7 @@ function SignUpView(props) {
 
 
     function signUpClickACB(evt) {
-        if (props.currentUser !== null || props.currentUser === undefined) {
+        if (!props.currentUser) {
             log.w("already signed up");
 
         }

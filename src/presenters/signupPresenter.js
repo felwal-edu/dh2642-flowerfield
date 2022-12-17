@@ -34,7 +34,8 @@ const SignUpPresenter = {
 
         function authResultACB() {
             if (this.authPromiseState.error) {
-                console.error(this.authPromiseState.error.message);
+                log.e(this.authPromiseState.error.message);
+
                 this.errorMessage = this.authPromiseState.error.message;
                 this.snackbar = true;
             }

@@ -51,8 +51,9 @@ const useFlowerStore = defineStore({
     },
 
     addPlant(plant) {
+      // don't add duplicates
       if (this.hasPlant(plant.scientificName)) {
-        log.w("plant already exists");
+        //log.w("plant already exists");
         return;
       }
 
@@ -66,7 +67,7 @@ const useFlowerStore = defineStore({
 
     removePlant(plant) {
       if (!this.hasPlant(plant.scientificName)) {
-        log.w("plant does not exist");
+        log.w("trying to remove non-existent plant", plant.scientificName);
         return;
       }
 

@@ -17,11 +17,17 @@ let unsubscribers = [];
 
 //
 
-function createAccount(user) {
+function createUserData(user) {
   set(ref(db, REF + "/users/" + user.uid + "/email"), user.email);
   set(ref(db, REF + "/users/" + user.uid + "/name"), "");
   set(ref(db, REF + "/users/" + user.uid + "/plants"), []);
   set(ref(db, REF + "/users/" + user.uid + "/experience"), 0);
+}
+
+export function deleteUserData(user) {
+  log.i("Removing user data:", user.email);
+
+  set(ref(db, REF + "/users/" + user.uid), null);
 }
 
 //
@@ -101,7 +107,7 @@ export function enableFirebaseSync(store) {
     else {
       // user did not already exist; the account was created just now.
       log.i("account created");
-      createAccount(store.currentUser);
+      createUserData(store.currentUser);
     }
 
     log.i("Firebase synced");
@@ -114,7 +120,7 @@ export function enableFirebaseSync(store) {
   // load data from Firebase, then set up sync
   get(child(ref(db), REF + "/users/" + store.currentUser.uid))
     .then(initStoreDataByFirebase)
-    .catch((error) => { console.error(error); });
+    .catch((error) => { log.e(error); });
 }
 
 export function disableFirebaseSync() {

@@ -12,6 +12,10 @@ function ProfileView(props) {
     props.onSignOut();
   }
 
+  function deleteAccountClickACB(evt) {
+    props.onDeleteAccount();
+  }
+
   function changeUsernameACB(evt) {
     let newName = document.getElementById("username-inputfield").value;
     props.onChangeUsername(evt, newName);
@@ -70,6 +74,7 @@ function ProfileView(props) {
       </v-card>
 
       <v-btn
+        onClick={deleteAccountClickACB}
         icon="mdi-delete"
         color="success"
       ></v-btn>

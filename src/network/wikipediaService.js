@@ -38,8 +38,7 @@ async function getFlowerArticle(flowerName) {
   // Using rest_v1 for better formatting on fetch
   const articlePage = await fetch(`${BASE_URL_REST_V1}page/summary/${title}?origin=*`);
   const articleData = await articlePage.json();
-  log.d(articleData);
-  console.log(articleData);
+  log.d("articleData", articleData);
   const content = articleData.extract_html;
 
   return content;

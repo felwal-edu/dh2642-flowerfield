@@ -11,18 +11,17 @@ import promiseNoData from "@/views/promiseNodata.js";
 import LoadingView from "@/views/loadingView.js";
 import { getArticleByPlantName } from "@/network/wikipediaService.js";
 import resolvePromise from "@/utils/resolvePromise.js";
+import DetailPresenter from "./detailPresenter.js";
 
 const CollectionPresenter = {
   data() {
     return {
       sortStatus: "Genus A-Z",
-      popupStatus: false,
-      selected: undefined,
       searchStatus: false,
       searchQuery: "",
       searchResult: [],
+      selectedPlant: null,
       icon: "mdi-magnify",
-      plantDescriptionPromiseState: {},
     };
   },
 
@@ -49,37 +48,11 @@ const CollectionPresenter = {
     }
 
     function openPopupACB(plant) {
-      this.selected = plant;
-      this.popupStatus = true;
-
-      // call API
-      function processAPIResultACB() {
-        // set description if we find it
-        let description = document.getElementById("plantdetails");
-        if (description == null) {
-          return;
-        }
-
-        if (this.plantDescriptionPromiseState.data == null || this.plantDescriptionPromiseState.data == undefined) {
-          description.innerHTML = "No description for plant was found."
-        }
-        else {
-          description.innerHTML = this.plantDescriptionPromiseState.data;
-        }
-      }
-
-      resolvePromise(getArticleByPlantName(plant.scientificName), this.plantDescriptionPromiseState, processAPIResultACB.bind(this));
+      this.selectedPlant = plant;
     }
 
     function closePopupACB() {
-      this.popupStatus = false;
-    }
-
-    function deletePlantACB() {
-      if (window.confirm("Do you want to remove this plant?")) {
-        useFlowerStore().removePlant(this.selected);
-        closePopupACB.bind(this)();
-      }
+      this.selectedPlant = null;
     }
 
     function updateQueryACB(query) {
@@ -105,65 +78,40 @@ const CollectionPresenter = {
       this.searchStatus = false;
     }
 
-    function renderToolbar() {
-      return (
+    return (
+      <div>
         <ToolBarView
-          username={this.username}
-          sortStatus={this.sortStatus}
-          updateQuery={updateQueryACB.bind(this)}
-          onSearch={searchACB.bind(this)}
-          resetSearch={resetSearchACB.bind(this)}
-          onSort={sortACB.bind(this)}
-        />
-      )
-    }
-
-    return (useFlowerStore().plants.length === 0 || (this.searchResult.length === 0 && this.searchStatus === true))
-      ? (
-        <div>
-          <ToolBarView
             username={this.username}
             sortStatus={this.sortStatus}
             updateQuery={updateQueryACB.bind(this)}
             onSearch={searchACB.bind(this)}
             resetSearch={resetSearchACB.bind(this)}
-            onSort={sortACB.bind(this)}
-          />
-          <EmptyPageView
-            message={useFlowerStore().plants.length === 0 ? "You have not added any plants to your collection!" : ("No results!")}
-          />
-        </div>
-      )
-      : (
-        <div>
-        <div>
-          <ToolBarView
-            username={this.username}
-            sortStatus={this.sortStatus}
-            updateQuery={updateQueryACB.bind(this)}
-            onSearch={searchACB.bind(this)}
-            resetSearch={resetSearchACB.bind(this)}
-            onSort={sortACB.bind(this)}
-          />
-        </div>
-          <CollectionView
-            plants={useFlowerStore().plants}
-            searchStatus={this.searchStatus}
-            searchQuery={this.searchQuery}
-            searchQueryPlants={this.searchResult}
-            username={this.username}
-            sort={this.sortStatus}
-            openPopup={openPopupACB.bind(this)}
-          />
-          <DetailView
-            closePopup={closePopupACB.bind(this)}
-            onDelete={deletePlantACB.bind(this)}
-            currentPlant={this.selected}
-            overlay={this.popupStatus}
-            descriptionState={this.plantDescriptionPromiseState}
-          />
-        </div>
-      );
+            onSort={sortACB.bind(this)} />
+        {
+          useFlowerStore().plants.length === 0
+            ? <EmptyPageView message={"You have not added any plants to your collection!"} />
+            : (this.searchStatus === true && this.searchResult.length === 0)
+              ? <EmptyPageView message={"No results!"} />
+              : (
+                <div>
+                  <CollectionView
+                    plants={useFlowerStore().plants}
+                    searchStatus={this.searchStatus}
+                    searchQuery={this.searchQuery}
+                    searchQueryPlants={this.searchResult}
+                    username={this.username}
+                    sort={this.sortStatus}
+                    openPopup={openPopupACB.bind(this)} />
+                  {
+                    this.selectedPlant
+                      ? <DetailPresenter plant={this.selectedPlant} onClose={closePopupACB.bind(this)} />
+                      : undefined
+                  }
+                </div>
+              )
+        }
+      </div>
+    );
   },
 };
 

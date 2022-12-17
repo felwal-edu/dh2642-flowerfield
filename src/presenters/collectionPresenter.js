@@ -10,6 +10,7 @@ import { waitingForUserToBeSignedIn } from "@/utils/userUtils.js";
 import log from "@/utils/logUtils.js";
 import { mapState } from "pinia";
 import promiseNoData from "@/views/promiseNodata.js";
+import LoadingView from "@/views/loadingView.js";
 
 const CollectionPresenter = {
   data() {
@@ -32,7 +33,9 @@ const CollectionPresenter = {
   },
 
   render() {
-    if (waitingForUserToBeSignedIn(this.userStatus, this.$router)) return;
+    if (waitingForUserToBeSignedIn(this.userStatus, this.$router) || useFlowerStore().plants === null) {
+      return <LoadingView />;
+    }
 
     function sortACB(order) {
       this.sortStatus = order;

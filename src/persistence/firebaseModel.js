@@ -46,7 +46,7 @@ export function setUpFirebase() {
     disableFirebaseSync();
 
     useFlowerStore().currentUser = null;
-    useFlowerStore().plants = [];
+    useFlowerStore().plants = null;
   }
 
   // this observes any changes to "signed in / signed out" state

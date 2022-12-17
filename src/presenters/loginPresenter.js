@@ -7,6 +7,7 @@ import "../css/login.css"
 import log from "@/utils/logUtils.js";
 import { mapState } from "pinia";
 import { InvalidLoginInfoMessage } from "@/utils/userUtils.js";
+import LoadingView from "@/views/loadingView.js";
 
 const LoginPresenter = {
   data() {
@@ -24,7 +25,7 @@ const LoginPresenter = {
   },
 
   render() {
-    if (waitingForUserToBeSignedOut(this.userStatus, this.$router)) return;
+    if (waitingForUserToBeSignedOut(this.userStatus, this.$router)) return <LoadingView />;
 
     function authResultACB() {
       if (this.authPromiseState.error) {

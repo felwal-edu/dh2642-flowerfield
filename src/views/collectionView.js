@@ -23,34 +23,7 @@ function CollectionView(props) {
   }
 
   return (
-    <div>
-      <div>
-        <v-toolbar color="#96c29f">
-          <v-toolbar-title>
-            <h2 class="header-font-collection">{props.username == "" ? "Your Collection" : props.username + "'s Collection"}</h2>
-          </v-toolbar-title>
-          <v-spacer></v-spacer>
-          <v-text-field
-            class="mt-8 mr-2"
-            append-icon="mdi-magnify"
-            clearable
-            onClick:clear={onClearACB}
-            onClick:append={onIconClickACB}
-            onUpdate:modelValue={onInputACB}
-          ></v-text-field>
-          <v-toolbar-items>
-            <v-select
-              class="pl-2 mt-2 mr-3"
-              model-value={props.sort}
-              items={["Genus A-Z", "Genus Z-A"]}
-              onUpdate:modelValue={onSortChangeACB}
-            >
-            </v-select>
-          </v-toolbar-items>
-        </v-toolbar>
-      </div>
-      <div>{checkRender(props)}</div>
-    </div>
+    <div>{checkRender(props)}</div>
   );
 }
 

@@ -8,6 +8,8 @@ import log from "@/utils/logUtils.js";
 import { mapState } from "pinia";
 import { createUserData } from "@/persistence/firebaseModel.js";
 import LoadingView from "@/views/loadingView.js";
+import { InvalidInfoMessage } from "@/utils/userUtils.js";
+
 
 const SignUpPresenter = {
     data() {
@@ -33,7 +35,7 @@ const SignUpPresenter = {
             if (this.authPromiseState.error) {
                 log.e(this.authPromiseState.error.message);
 
-                this.errorMessage = this.authPromiseState.error.message;
+                this.errorMessage = InvalidInfoMessage(this.authPromiseState.error.message);
                 this.snackbar = true;
             }
             // return to home if login was successful!

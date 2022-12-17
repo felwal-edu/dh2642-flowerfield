@@ -23,32 +23,49 @@ function ProfileView(props) {
 
   return (
     <div>
-      <v-card shaped class="mx-auto mt-16 profile-background" max-width="700" height="360">
+      <v-card shaped class="mx-auto mt-16 profile-background" max-width="900" height="450">
         <v-img src={profileBackground}>
-          <v-card-title class="header-font-profile mt-12">My Profile</v-card-title>
+          <v-card-title class="header-font-profile mt-14">My Profile</v-card-title>
           <v-row>
-            <v-col class="ml-8">
-              <v-row class="mt-2" justify="center">
-                <v-card-title><h4 class="user-info">{props.currentUser?.email || "Not logged in!"}</h4></v-card-title>
-              </v-row>
+
+            <v-col class="ml-8 mt-8">
+
               <v-row justify="center">
-                <v-col
-                  sm="10"
-                  md="8"
-                >
+                <v-col>
+                  <v-card-title><h4 class="header-description">Email:</h4></v-card-title>
+                </v-col>
+                <v-col>
+                  <v-card-title><h4 class="user-info">{props.currentUser?.email || "Not logged in!"}</h4></v-card-title></v-col>
+              </v-row>
+
+              <v-row justify="center">
+                <v-col><v-card-title><h4 class="header-description">Username:</h4></v-card-title></v-col>
+
+                <v-col>
                   <v-text-field id="username-inputfield" label="" placeholder="Enter a username" variant="underlined"
                     density="compact" model-value={props.userName} hint="Press 'enter' to confirm."
                     onKeydown={changeUsernameACB}>
                   </v-text-field>
                 </v-col>
               </v-row>
-              <v-row class="my-5" justify="center">
+
+              <v-row>
+                <v-col><v-card-title><h4 class="header-description">Delete account:</h4></v-card-title></v-col>
+                <v-col>
+                  <v-btn
+                    onClick={deleteAccountClickACB}
+                    icon="mdi-delete"
+                    color="red"
+                  ></v-btn>
+                </v-col>
+              </v-row>
+              <v-row class="my-5 mx-8" justify="left">
                 <v-btn variant="outlined" onClick={signOutClickACB}>Sign out</v-btn>
               </v-row>
             </v-col>
-            <v-col justify="center" class="profilecard-marginleft" cols="4">
+            <v-col justify="center" class="profilecard-marginleft mt-8" cols="4">
               <v-row justify="center" class="mt-2 mb-n6">
-                <span class="header-description" justify="center">Current rank</span>
+                <span class="header-description mb-4" justify="center">Current rank:</span>
               </v-row>
               <v-row justify="center" class="">
                 <v-card-title>
@@ -61,7 +78,7 @@ function ProfileView(props) {
                 </v-card-title>
                 <v-progress-linear
                   class="mx-8"
-                  model-value={props.experienceBar}s
+                  model-value={props.experienceBar}
                   color="light-green-darken-3"
                   height="9"
                   striped
@@ -73,11 +90,7 @@ function ProfileView(props) {
         </v-img>
       </v-card>
 
-      <v-btn
-        onClick={deleteAccountClickACB}
-        icon="mdi-delete"
-        color="success"
-      ></v-btn>
+
     </div>
   )
 

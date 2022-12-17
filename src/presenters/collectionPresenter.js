@@ -25,7 +25,6 @@ const CollectionPresenter = {
 
   created() {
     this.userStatus = useFlowerStore().currentUser;
-    this.username = useFlowerStore().userName;
 
     // watch user status
     watch(() => useFlowerStore().currentUser, function (newUser) {
@@ -59,19 +58,19 @@ const CollectionPresenter = {
       closePopupACB.bind(this)();
     }
 
-    function updateQueryACB(query){
+    function updateQueryACB(query) {
       this.searchQuery = query;
     }
 
-    function searchACB(){
+    function searchACB() {
       log.d(this.searchQuery);
 
-      if (this.searchQuery !== "" && this.searchStatus === false){
+      if (this.searchQuery !== "" && this.searchStatus === false) {
         this.searchStatus = true;
         this.icon = "mdi-close-circle";
         this.searchResult = useFlowerStore().searchPlants(this.searchQuery);
       }
-      else{
+      else {
         this.searchStatus = false;
         this.icon = "mdi-magnify"
         //reset model-value !??!?!?!?

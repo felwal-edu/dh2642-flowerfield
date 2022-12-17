@@ -9,6 +9,7 @@ import { watch } from "vue";
 import { waitingForUserToBeSignedIn } from "@/utils/userUtils.js";
 import log from "@/utils/logUtils.js";
 import { mapState } from "pinia";
+import promiseNoData from "@/views/promiseNodata.js";
 
 const CollectionPresenter = {
   data() {

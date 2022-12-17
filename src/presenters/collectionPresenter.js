@@ -156,32 +156,6 @@ const CollectionPresenter = {
           </div>
         </div>
       );
-      /*
-    return (
-      <div>
-        <CollectionView
-          plants={useFlowerStore().plants}
-          sort={this.sortStatus}
-          searchStatus={this.searchStatus}
-          searchQuery={this.searchQuery}
-          searchQueryPlants={this.searchResult}
-          icon={this.icon}
-          username={this.username}
-          onSort={sortACB.bind(this)}
-          openPopup={openPopupACB.bind(this)}
-          updateQuery={updateQueryACB.bind(this)}
-          onSearch={searchACB.bind(this)}
-        />
-        <DetailView
-          closePopup={closePopupACB.bind(this)}
-          onDelete={deletePlantACB.bind(this)}
-          currentPlant={this.selected}
-          overlay={this.popupStatus}
-          descriptionState={this.plantDescriptionPromiseState}
-        />
-      </div>
-    );
-      */
   },
 };
 

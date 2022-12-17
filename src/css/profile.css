@@ -16,7 +16,7 @@
 }
 
 .v-card.profile-background {
-  width: 90vh;
+  width: 110vh;
 }
 
 .profile-small-background {
@@ -27,8 +27,9 @@
   z-index: -1;
 }
 
-.profilecard-marginleft {
-  margin-right: 100px;
+
+.profilecard-margin-left {
+  margin-left: 7vw;
 }
 
 .user-info {

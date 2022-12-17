@@ -54,12 +54,19 @@ const useFlowerStore = defineStore({
         return plant_.id !== plant.id;
       }
 
+      function hasSameGenusCB(plant_) {
+        return plant_.genus === plant.genus;
+      }
+
+      this.experience -= 10 * this.plants.filter(hasSameGenusCB).length;
+
       this.plants = this.plants.filter(hasDifferentIdCB);
+
       log.i(plant.id + " has been removed");
     },
 
     searchPlants(query) {
-      function includesQueryCB(plant){
+      function includesQueryCB(plant) {
         return plant.scientificName.toLowerCase().includes(query.toLowerCase());
       }
       log.d("TESSSSWTSTSTSTSADJAJNDANDN", [...this.plants].filter(includesQueryCB))

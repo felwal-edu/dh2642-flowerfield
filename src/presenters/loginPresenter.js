@@ -6,7 +6,7 @@ import { waitingForUserToBeSignedOut } from "@/utils/userUtils.js";
 import "../css/login.css"
 import log from "@/utils/logUtils.js";
 import { mapState } from "pinia";
-import { InvalidLoginInfoMessage } from "@/utils/userUtils.js";
+import { InvalidInfoMessage } from "@/utils/userUtils.js";
 import LoadingView from "@/views/loadingView.js";
 
 const LoginPresenter = {
@@ -30,7 +30,7 @@ const LoginPresenter = {
     function authResultACB() {
       if (this.authPromiseState.error) {
         log.e(this.authPromiseState.error.message);
-        this.errorMessage = InvalidLoginInfoMessage(this.authPromiseState.error.message);
+        this.errorMessage = InvalidInfoMessage(this.authPromiseState.error.message);
 
         this.snackbar = true;
       }
@@ -38,11 +38,14 @@ const LoginPresenter = {
       else if (this.authPromiseState.data !== null) {
         log.i("logged in!");
         this.$router.push({ name: "home" });
+
       }
+
     }
 
 
     function signInACB() {
+      this.snackbar = false
       resolvePromise(signInUser(this.email, this.password), this.authPromiseState, authResultACB.bind(this));
     }
 
@@ -52,10 +55,6 @@ const LoginPresenter = {
 
     function passwordChangeACB(password) {
       this.password = password;
-    }
-
-    function closeErrorSnackbar() {
-      this.snackbar = false;
     }
 
 
@@ -70,7 +69,6 @@ const LoginPresenter = {
         onEmailChange={emailChangeACB.bind(this)}
         onPasswordChange={passwordChangeACB.bind(this)}
         onSignIn={signInACB.bind(this)}
-        onCloseErrorSnackbar={closeErrorSnackbar.bind(this)}
         snackbar={this.snackbar}
         errorMessage={this.errorMessage}
         onGoToSignUp={toSignUpACB.bind(this)} />

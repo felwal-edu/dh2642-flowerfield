@@ -23,12 +23,16 @@ export function waitingForUserToBeSignedOut(userStatus, router) {
 }
 
 
-export function InvalidLoginInfoMessage(fireBaseMessage) {
+export function InvalidInfoMessage(fireBaseMessage) {
   if (fireBaseMessage === "Firebase: Error (auth/invalid-email).") {
-    return "This email doesn't exist, doublecheck your input."
+    return "Email is in wrong format, double check email."
   }
   else if (fireBaseMessage === "Firebase: Error (auth/wrong-password).") {
     return "Wrong password, please try again."
+
+  }
+  else if (fireBaseMessage === "Firebase: Error (auth/user-not-found).") {
+    return "User does not exist, double check email."
 
   }
   else {

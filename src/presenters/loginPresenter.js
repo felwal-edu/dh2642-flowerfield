@@ -5,6 +5,7 @@ import { signInUser, signUpUser } from "@/persistence/firebaseAuth.js";
 import { watch } from "vue";
 import { waitingForUserToBeSignedOut } from "@/utils/userUtils.js";
 import "../css/login.css"
+import log from "@/utils/logUtils.js";
 
 const LoginPresenter = {
   data() {
@@ -38,7 +39,7 @@ const LoginPresenter = {
       }
       // return to home if login was successful!
       else if (this.authPromiseState.data !== null) {
-        console.log("logged in!");
+        log.i("logged in!");
         this.$router.push({ name: "home" });
       }
     }

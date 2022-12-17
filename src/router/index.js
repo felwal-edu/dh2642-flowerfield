@@ -38,7 +38,6 @@ const routes = [
     component: UploadPresenter
   },
   {
-    // TODO: add 404page
     // catch missing pages 404 - define at the very end (VUE 3 Version)
     path: '/:pathMatch(.*)*',
     //component: PathNotFound

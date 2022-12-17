@@ -1,5 +1,6 @@
 // the data container for the flower information gathered from the API
 
+import log from "@/utils/logUtils";
 import { defineStore } from "pinia";
 import { observeAuthState } from "../persistence/firebaseAuth";
 import { disableFirebaseSync, enableFirebaseSync, setUserMetadata } from "../persistence/firebaseModel";
@@ -58,7 +59,7 @@ const useFlowerStore = defineStore({
       }
 
       if (this.hasPlant(plant.scientificName)) {
-        console.log("plant already exists");
+        log.w("plant already exists");
         return;
       }
 
@@ -74,25 +75,25 @@ const useFlowerStore = defineStore({
       //console.log(plant + " has been added, you gained: " + (10 * Object.keys(this.plants[plant.genus]).length) + "of experience");
     },
 
-    removePlant(plantId) {
-      if (!this.hasPlant(plantId)) {
-        console.log("plant does not exist");
+    removePlant(plant) {
+      if (!this.hasPlant(plant.scientificName)) {
+        log.w("plant does not exist");
         return;
       }
 
-      function hasDifferentIdCB(plant) {
-        plant.id !== plantId;
+      function hasDifferentIdCB(plant_) {
+        return plant_.id !== plant.id;
       }
 
       this.plants = this.plants.filter(hasDifferentIdCB);
-      console.log(plantId + " has been removed");
+      log.i(plant.id + " has been removed");
     },
 
     searchPlants(query) {
       function includesQueryCB(plant){
         return plant.scientificName.toLowerCase().includes(query.toLowerCase());
       }
-      console.log([...this.plants].filter(includesQueryCB), "TESSSSWTSTSTSTSADJAJNDANDN")
+      log.d("TESSSSWTSTSTSTSADJAJNDANDN", [...this.plants].filter(includesQueryCB))
       return ([...this.plants].filter(includesQueryCB) || undefined);
     }
   }

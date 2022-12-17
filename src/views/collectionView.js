@@ -1,19 +1,22 @@
 import { sortPlantsIntoObject } from "@/utils/plantUtils";
 import { capitalize } from "vue";
-// TODO: add import for all icons
-import loading_flower from "@/assets/loading_icons/loading_icon_1.png";
+import { getRandomLoadingImage } from "@/utils/loadingUtils.js";
 import "../css/collection.css";
 import promiseNoData from "./promiseNodata";
+import log from "@/utils/logUtils";
 
 function CollectionView(props) {
   function onSortChangeACB(evt) {
     props.onSort(evt);
   }
-  function onIconClickACB(evt){
+  function onIconClickACB(evt) {
     props.onSearch();
   }
-  function onInputACB(evt){
+  function onInputACB(evt) {
     props.updateQuery(evt);
+  }
+  function onCloseInfoACB(evt) {
+
   }
 
   return (
@@ -43,14 +46,46 @@ function CollectionView(props) {
         </v-toolbar>
       </div>
       <div>{checkRender(props)}</div>
+      <v-overlay
+        class="d-flex justify-center align-center"
+        z-index={1}
+        model-value={props.overlay}
+        onUpdate:modelValue={onCloseInfoACB}
+        onClick:outside={onCloseInfoACB}
+      >
+        <v-card
+          width="400"
+          height="500"
+        >
+          <v-card-title class="text-center bg-green-lighten-3">{props.currentPlant.scientificName}</v-card-title>
+          <v-img
+            lazy-src={getRandomLoadingImage()}
+            src={props.currentPlant.url}
+            max-height="300"
+            class="bg-grey-lighten-4"
+          ></v-img>
+          <v-card-text>Information about the plant</v-card-text>
+          <v-card-actions>
+            <v-row class="justify-center align-center">
+              <v-btn
+                onClick={onCloseInfoACB}
+                color="red"
+                variant="outlined"
+              >
+                Close
+              </v-btn>
+            </v-row>
+          </v-card-actions>
+        </v-card>
+      </v-overlay>
     </div>
   );
 }
 
-function checkRender(props){
-  if (!props.searchStatus){
+function checkRender(props) {
+  if (!props.searchStatus) {
     return renderCollection(props.plants, props.sort, props.openPopup);
-  } else{
+  } else {
     return renderCollection(props.searchQueryPlants, props.sort, props.openPopup);
   }
 }
@@ -76,20 +111,31 @@ function renderCollection(plants, order, openPopup) {
     function showInfoACB(evt) {
       openPopup(plant);
     }
+
+    // get species name bly splitting scientific name
+    let species = plant.scientificName.split(" ")[1];
+
+    // error check if species is not defined
+    if (species == "" || species == undefined) {
+      // if not we use the genus, which we will have
+      species = plant.scientificName.split(" ")[0];
+    }
+
     return (
       <v-col md="2">
         <v-card width="200" class="mx-3" onClick={showInfoACB}>
-          <v-img lazy-src={loading_flower} src={plant.url} height="175" cover/>
+          <v-img lazy-src={getRandomLoadingImage()} src={plant.url} height="175" cover />
           <v-card-title class="text-center">
-            {capitalize(plant.scientificName.split(" ")[1])}
+            {capitalize(species)}
           </v-card-title>
         </v-card>
       </v-col>
     );
   }
 
-  console.log(plants, "THIS IS The PLANTS");
-  if (plants.length === 0){
+  log.d("THIS IS The PLANTS", plants);
+
+  if (plants.length === 0) {
     return (
       <v-card
         class="d-flex justify-center align-center"

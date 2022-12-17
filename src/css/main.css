@@ -31,3 +31,11 @@ body {
 .v-toolbar-items a:hover {
   opacity: 1;
 }
+
+.active-route {
+  background-color: #0d0963;
+}
+
+.active-route span {
+  color: #ffffff;
+}

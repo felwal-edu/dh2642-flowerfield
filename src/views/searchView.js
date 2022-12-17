@@ -1,3 +1,4 @@
+import log from "@/utils/logUtils";
 
 
 function SearchView(props){
@@ -6,7 +7,7 @@ function SearchView(props){
         if (props.searchStatus){ //FIX (cant check searchstatus before doing searchACB)
           props.onSearch();
         } else {
-          console.log(props.searchStatus);
+          log.d(props.searchStatus);
         }
     }
 

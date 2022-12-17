@@ -1,4 +1,6 @@
-import loading_flower from "@/assets/loading_icons/loading_icon_1.png"
+import { getRandomLoadingImage } from "@/utils/loadingUtils.js";
+import { getArticleByPlantName } from "@/network/wikipediaService.js";
+import log from "@/utils/logUtils";
 
 function DetailView(props){
 
@@ -7,7 +9,7 @@ function DetailView(props){
     }
 
     function onDeleteACB(evt){
-      console.log("DELETE THE PLANT")
+      props.onDelete();
     }
 
     return (
@@ -23,12 +25,16 @@ function DetailView(props){
         >
           <v-card-title class="text-center bg-green-lighten-3">{props.currentPlant.scientificName}</v-card-title>
           <v-img
-            lazy-src={loading_flower}
+            lazy-src={getRandomLoadingImage()}
             src={props.currentPlant.url}
             max-height="300"
             class="bg-grey-lighten-4"
           ></v-img>
           <v-card-text>Information about the plant</v-card-text>
+          <div>
+            {getArticleByPlantName(props.currentPlant.scientificName)}
+          </div>
+
           <v-card-actions>
             <v-row class="justify-center align-center">
               <v-btn

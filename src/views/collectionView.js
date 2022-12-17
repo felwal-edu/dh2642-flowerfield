@@ -6,22 +6,6 @@ import log from "@/utils/logUtils";
 
 function CollectionView(props) {
 
-  function onSortChangeACB(evt) {
-    props.onSort(evt);
-  }
-
-  function onClearACB(evt) {
-    props.resetSearch();
-  }
-
-  function onIconClickACB(evt) {
-    props.onSearch();
-  }
-
-  function onInputACB(evt) {
-    props.updateQuery(evt);
-  }
-
   return (
     <div>{checkRender(props)}</div>
   );
@@ -29,13 +13,13 @@ function CollectionView(props) {
 
 function checkRender(props) {
   if (!props.searchStatus) {
-    return renderCollection(props.plants, props.sort, props.openPopup);
+    return renderCollection(props.plants, props.sort, props.openPopup, props.searchStatus);
   } else {
-    return renderCollection(props.searchQueryPlants, props.sort, props.openPopup);
+    return renderCollection(props.searchQueryPlants, props.sort, props.openPopup, props.searchStatus);
   }
 }
 
-function renderCollection(plants, order, openPopup) {
+function renderCollection(plants, order, openPopup, searchStatus) {
   function createRowsCB(plantItem) {
     return (
       <v-expansion-panels
@@ -78,7 +62,7 @@ function renderCollection(plants, order, openPopup) {
     );
   }
 
-  if (plants.length === 0) {
+  if (plants.length === 0 && searchStatus === true) {
     return (
       <v-card
         class="d-flex justify-center align-center"
@@ -90,7 +74,15 @@ function renderCollection(plants, order, openPopup) {
         </v-card-text>
       </v-card>
     );
-  } else if (order === "Genus A-Z") {
+  } else if (plants.length === 0) {
+    return (
+      <div>
+        <h1>No plants have yet been acquiered</h1>
+      </div>
+    );
+  }
+
+  else if (order === "Genus A-Z") {
     return (
       <div>{Object.entries(sortPlantsIntoObject(plants)).map(createRowsCB)}</div>
     );

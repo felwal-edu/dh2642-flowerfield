@@ -32,9 +32,12 @@ function DetailView(props) {
         <v-card-text class="details-upload-text">Uploaded: {props.currentPlant.date}</v-card-text>
         <v-card-text class="details-header">Information about the plant</v-card-text>
         <v-container class="mt-n8" id="plantdetails" justify="center">
-          {!props.descriptionState.promise
-            ? ""
-            : promiseNoData(props.descriptionState, renderError, true) || ""}
+          {
+            props.descriptionState.promise
+              // v-html is used to insert html strings properly formatted
+              ? promiseNoData(props.descriptionState, renderError, true) || <p v-html={props.descriptionState.data} />
+              : ""
+          }
         </v-container>
         <v-card-actions>
           <v-row class="justify-center align-center">

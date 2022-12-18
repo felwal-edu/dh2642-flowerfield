@@ -14,24 +14,7 @@ const DetailPresenter = {
 
   created() {
     // call API
-    function processAPIResultACB() {
-      // set description if we find it
-      let description = document.getElementById("plantdetails");
-      if (description == null) {
-        return;
-      }
-
-      // TODO: förklara varför vi använder innerHTML
-      if (this.plantDescriptionPromiseState.data === null || this.plantDescriptionPromiseState.data === undefined) {
-        description.innerHTML = "No description for plant was found."
-      }
-      else {
-        description.innerHTML = this.plantDescriptionPromiseState.data.content
-          + " – <a href='" + this.plantDescriptionPromiseState.data.url + "'>Wikipedia</a>";
-      }
-    }
-
-    resolvePromise(getArticleByPlantName(this.plant.scientificName), this.plantDescriptionPromiseState, processAPIResultACB.bind(this));
+    resolvePromise(getArticleByPlantName(this.plant.scientificName), this.plantDescriptionPromiseState);
   },
 
   render() {

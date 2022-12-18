@@ -21,7 +21,6 @@ const UploadPresenter = {
       isActive: false,
       file: null,
       fileURL: null,
-      overlay: false,
       plant: null,
       uploadMessage: {},
       buttonPopupCallback: undefined
@@ -76,10 +75,8 @@ const UploadPresenter = {
 
             this.buttonPopupCallback = abortUploadACB.bind(this);
 
-            // show overlay
-            this.overlay = true;
-
             // TODO: add error in box?
+
             // jump out of function to not set plant
             return;
           }
@@ -113,7 +110,6 @@ const UploadPresenter = {
             this.buttonPopupCallback = uploadAcceptToCollectionACB.bind(this);
           }
 
-          this.overlay = true;
           // TODO: DISPLAY ERROR-box
         }
       }
@@ -171,10 +167,6 @@ const UploadPresenter = {
         useFlowerStore().addPlant(this.plant);
         this.$router.push({ name: "collection" });
       }
-      else {
-        // close overlay
-        this.overlay = false;
-      }
     }
 
     return (
@@ -191,7 +183,6 @@ const UploadPresenter = {
         imageLoaded={this.isFileLoaded}
         promiseState={this.plantPromiseState}
         fileURL={this.fileURL}
-        overlay={this.overlay}
         uploadMessage={this.uploadMessage} />
     );
   }

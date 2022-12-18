@@ -69,8 +69,8 @@ const UploadPresenter = {
 
           if (plant.probability < PROBABLILITY_REJECTION_LIMIT) {
             this.uploadMessage = {
-              "title": "An error has occured.",
-              "subhead": "Our image detector could not correctly identify a flower from your image, please upload a new image.",
+              "title": "Flower could not identified",
+              "subhead": "Please try again with another image.",
               "buttonText": "OK",
             };
 

@@ -43,11 +43,15 @@ async function getFlowerArticle(flowerName) {
   const content = articleData.extract_html;
   const url = articleData.content_urls.desktop.page;
 
-  return {content: content, url: url};
+  // remove outmost <p> tag, since we will place in within another <p>
+  const contentWithUrl = content.replace("<p>", "").replace("</p>", "")
+    + " <a target='_blank' rel='noopener noreferrer' href='" + url + "'>read more</a>";
+
+    return contentWithUrl;
 }
 
 export function getArticleByPlantName(scientificName) {
-  return getFlowerArticle(scientificName).then((article) => {
-    return article;
+  return getFlowerArticle(scientificName).then((articleContent) => {
+    return articleContent;
   });
 }

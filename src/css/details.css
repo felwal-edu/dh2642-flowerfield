@@ -24,10 +24,8 @@
 
 /* We access the loading icon here, just to move it so we can see it loading */
 #plantdetails .optical-center {
-    margin-top: 6vh;
+    margin-top: 1em;
     position: relative;
-    top: 40%;
-    left: 40%;
     z-index: -1;
 }
 

@@ -1,5 +1,6 @@
 import promiseNoData from "./promiseNodata";
 import errorIcon from "@/assets/icons/warning.png";
+import DialogView from "./dialogView";
 
 function UploadView(props) {
   function renderUploadView() {
@@ -35,19 +36,11 @@ function UploadView(props) {
 
     function renderResults() {
       return (
-        <div>
-          <v-overlay model-value={props.overlay} class="d-flex justify-center align-center">
-            <v-row align="center" justify="center">
-              <v-card>
-                <v-card-title class="justify-center">{props.uploadMessage.title}</v-card-title>
-                <v-card-subtitle class="justify-center">{props.uploadMessage.subhead}</v-card-subtitle>
-                <v-card-actions>
-                  <v-btn color="primary" block onClick={uploadConfirmationACB}>{props.uploadMessage.buttonText}</v-btn>
-                </v-card-actions>
-              </v-card>
-            </v-row>
-          </v-overlay>
-        </div>
+        <DialogView
+          title={props.uploadMessage.title}
+          message={props.uploadMessage.subhead}
+          buttonPrimaryText={props.uploadMessage.buttonText}
+          onButtonPrimaryClick={uploadConfirmationACB} />
       );
     }
 

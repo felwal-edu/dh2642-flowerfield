@@ -46,8 +46,18 @@ function renderCollection(plants, order, openPopup) {
 
     return (
       <v-col md="2">
-        <v-card width="200" class="mx-3" onClick={showInfoACB}>
-          <v-img lazy-src={getRandomLoadingImage()} src={plant.url} height="175" cover />
+        <v-card width="200" class="mx-3 card-hover" onClick={showInfoACB}>
+          <v-img lazy-src={getRandomLoadingImage()} src={plant.url} height="175" cover>
+            <v-container class="card-info-overlay">
+              <div class="card-info-ovlerlay-text">
+                <v-icon>mdi-eye</v-icon><br/>
+                Click for info
+              </div>
+            </v-container>
+            <v-icon large color="white darken-2" class="ma-1 card-info-icon">
+              mdi-information
+            </v-icon>
+          </v-img>
           <v-card-title class="text-center">
             {capitalize(species)}
           </v-card-title>

@@ -16,11 +16,24 @@ function ProfileView(props) {
     props.onDeleteAccount();
   }
 
-  function changeUserNameACB(evt) {
+  function changeUserNameOnEnterACB(evt) {
     if (evt.key === 'Enter') {
-      let newName = document.getElementById("user-name-inputfield").value;
-      props.onChangeUserName(newName);
+      updateName();
     }
+  }
+
+  function changeUserNameOnUnfocusACB(evt) {
+    log.i("focusout");
+    updateName();
+  }
+
+  function updateName() {
+    // get value and assign it as new username
+    let newName = document.getElementById("user-name-inputfield").value;
+    props.onChangeUserName(newName);
+
+    // deselects input box for input feedback
+    document.activeElement.blur();
   }
 
   return (
@@ -31,28 +44,28 @@ function ProfileView(props) {
           <v-row>
 
             <v-col justify="center" class="profilecard-margin-left mt-8" cols="4">
-              <v-row justify="center">
-                <v-col cols="3" class="mt-4">
+              <v-row justify="center" class="disable-flex-wrap">
+                <v-col cols="2" class="mt-4 special-case">
                   <h4 class="header-description">email</h4>
                 </v-col>
-                <v-col>
+                <v-col justify="start">
                   <v-card-title>
                     <h4 class="user-info">{props.currentUser?.email || "Not logged in!"}</h4>
                   </v-card-title>
                 </v-col>
               </v-row>
               <v-row justify="center">
-                <v-col cols="4" class="mt-5">
+                <v-col cols="2" class="mt-5 special-case">
                   <h4 class="header-description">name</h4>
                 </v-col>
                 <v-col>
                   <v-text-field id="user-name-inputfield" label="" placeholder="Enter a name" variant="underlined"
                     density="compact" model-value={props.userName} hint="Press 'enter' to confirm."
-                    onKeydown={changeUserNameACB}
+                    onKeydown={changeUserNameOnEnterACB} onFocusout={changeUserNameOnUnfocusACB}
                   />
                 </v-col>
               </v-row>
-              <v-row class="my-5 mx-8" justify="left">
+              <v-row class="my-5 mx-8" justify="center">
                 <v-btn variant="outlined" onClick={signOutClickACB}>Sign out</v-btn>
               </v-row>
             </v-col>

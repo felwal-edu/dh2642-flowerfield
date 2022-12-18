@@ -32,6 +32,12 @@ function HomeView(props) {
             <img class="logo" src={logopath} />
             <p class="subheader">Flowers worth Remembering</p>
             {renderLandingPageButton()}
+            <section class="scroll-container">
+              <span class="scroll-icon">
+                <span class="scroll-icon-dot"></span>
+              </span>
+              <h4 class="mt-3">Scroll for information</h4>
+            </section>
           </div>
         </div>
       </v-parallax>

@@ -25,7 +25,7 @@ function UploadView(props) {
             </div>
             <span class="header">{props.dragareaActive == true ? "Release to Upload" : "Drag & Drop"}</span>
             <span class="header">
-              or <span class="browse-button" onClick={browseSpanClickACB}>browse</span>
+              or <span class="browse-button" onClick={browseSpanClickACB}>browse files</span>
             </span>
             <input type="file" accept="image/png, image/jpg, image/jpeg" hidden onChange={inputFileChangeACB} />
             <span class="tip-support">PNG, JPG, JPEG</span>

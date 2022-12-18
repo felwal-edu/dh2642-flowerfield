@@ -9,6 +9,7 @@ import { mapState } from "pinia";
 import { createUserData } from "@/persistence/firebaseModel.js";
 import LoadingView from "@/views/loadingView.js";
 import { InvalidInfoMessage } from "@/utils/userUtils.js";
+import { isPromiseLoading } from "@/utils/loadingUtils.js";
 
 
 const SignUpPresenter = {
@@ -90,6 +91,7 @@ const SignUpPresenter = {
                 onPasswordChange={passwordChangeACB.bind(this)}
                 onPasswordCheckChange={checkPasswordChangeACB.bind(this)}
                 onSignUp={signUpACB.bind(this)}
+                isWaitingForAuth={isPromiseLoading(this.authPromiseState)}
                 snackbar={this.snackbar}
                 onGoToLogin={tologinACB.bind(this)}
                 errorMessage={this.errorMessage}

@@ -20,7 +20,7 @@ function ToolBarView(props) {
     }
 
     return (
-        <v-toolbar color="#96c29f">
+        <v-toolbar color="var(--color-green-light)">
             <v-toolbar-title>
                 <h2 class="header-font-collection">{props.username == "" ? "Your Collection" : props.username + "'s Collection"}</h2>
             </v-toolbar-title>

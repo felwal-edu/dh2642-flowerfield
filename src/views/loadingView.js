@@ -3,8 +3,8 @@ export default function LoadingView(props) {
     <div class={"optical-center"}>
       {
         props.linear
-          ? <v-progress-linear indeterminate="true" color="light-green-darken-3" />
-          : <v-progress-circular indeterminate="true" color="light-green-darken-3" />
+          ? <v-progress-linear indeterminate="true" color="var(--color-green-dark)" />
+          : <v-progress-circular indeterminate="true" color="var(--color-green-dark)" />
       }
     </div>
   );

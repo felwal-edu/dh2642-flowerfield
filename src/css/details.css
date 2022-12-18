@@ -9,7 +9,7 @@
     font-family: 'Ubuntu', sans-serif;
     margin-bottom: 20px;
     font-weight: 1000;
-    color: #000efe;
+    color: var(--color-blue);
 }
 
 .details-upload-text {

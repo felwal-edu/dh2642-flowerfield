@@ -2,7 +2,7 @@
 
 .header-font-collection {
   font-family: 'Ubuntu', sans-serif;
-  color: #000efe;
+  color: var(--color-blue);
   font-size: 1.1em;
   text-align: left;
 }

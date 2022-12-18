@@ -98,7 +98,7 @@ const UploadPresenter = {
             this.uploadMessage = {
               "title": this.plant.scientificName,
               "subhead": "Already exists in your collection.",
-              "buttonText": "Continue"
+              "buttonText": "OK"
             };
 
             this.buttonPopupCallback = abortUploadACB.bind(this);
@@ -114,7 +114,7 @@ const UploadPresenter = {
           }
 
           this.overlay = true;
-          // DISPLAY ERROR-box
+          // TODO: DISPLAY ERROR-box
         }
       }
 

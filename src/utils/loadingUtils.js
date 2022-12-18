@@ -18,4 +18,8 @@ function getRandomLoadingImage() {
     return item;
 }
 
-export { getRandomLoadingImage };
+function isPromiseLoading(promiseState) {
+    return promiseState.promise && !promiseState.error && !promiseState.data;
+}
+
+export { getRandomLoadingImage, isPromiseLoading };

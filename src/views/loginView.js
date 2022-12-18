@@ -1,5 +1,6 @@
 import background from "@/assets/loginbackground.jpg";
 import log from "@/utils/logUtils";
+import LoadingView from "./loadingView";
 
 function LoginView(props) {
 
@@ -59,7 +60,12 @@ function LoginView(props) {
                 </v-col>
               </v-row>
               <v-row justify="center" class="my-4">
-                <v-btn onClick={signInClickACB}>Sign in</v-btn>
+                {
+                  props.isWaitingForAuth
+                    // TODO: använd promiseNoData?
+                    ? <v-progress-circular indeterminate="true" color="white" class="mt-1" />
+                    : <v-btn onClick={signInClickACB}>Sign in</v-btn>
+                }
               </v-row>
               <v-row justify="center" class="my-4 mb-12">
                 <p class="link-text">Don't have an account? <span onClick={goToSignUpACB}>Sign up</span></p>

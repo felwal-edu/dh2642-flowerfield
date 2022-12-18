@@ -8,6 +8,7 @@ import log from "@/utils/logUtils.js";
 import { mapState } from "pinia";
 import { InvalidInfoMessage } from "@/utils/userUtils.js";
 import LoadingView from "@/views/loadingView.js";
+import { isPromiseLoading } from "@/utils/loadingUtils.js";
 
 const LoginPresenter = {
   data() {
@@ -69,6 +70,7 @@ const LoginPresenter = {
         onEmailChange={emailChangeACB.bind(this)}
         onPasswordChange={passwordChangeACB.bind(this)}
         onSignIn={signInACB.bind(this)}
+        isWaitingForAuth={isPromiseLoading(this.authPromiseState)}
         snackbar={this.snackbar}
         errorMessage={this.errorMessage}
         onGoToSignUp={toSignUpACB.bind(this)} />

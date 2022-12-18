@@ -1,8 +1,10 @@
+import { isPromiseLoading } from "./loadingUtils";
+
 export default function resolvePromise(promise, promiseState, notifyACB) {
   if (!promise) return;
 
   // cancel uncompleted previous promise
-  if (promiseState.promise && !promiseState.data && !promiseState.error) {
+  if (isPromiseLoading(promiseState)) {
     // TODO: cancel
     //cancelPromise(promiseState.promise);
   }

@@ -6,3 +6,38 @@
   font-size: 1.1em;
   text-align: left;
 }
+
+.card-info-icon {
+  text-shadow: rgba(0, 0, 0, 0.7) 0px 1px 2px;
+}
+
+.card-info-overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  transition: .3s ease;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.card-hover:hover .card-info-overlay {
+  opacity: 0.7;
+}
+
+.card-info-ovlerlay-text {
+  color: white;
+  font-size: 1.5em;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+  opacity: 1;
+  width: 100%;
+}

@@ -32,9 +32,13 @@
   margin-left: 7vw;
 }
 
+.profilecard-margin-left .v-card-title {
+  margin-left: -1rem !important;
+}
+
 .user-info {
   color: var(--color-turqoise-light);
-  font-size: 0.8em;
+  font-size: 0.65em;
 }
 
 .user-info.rank {
@@ -45,5 +49,14 @@
 .header-description {
   font-size: 0.7em;
   color: gray;
+}
 
+/* used to fix alignemnt error on longer mails */
+.special-case {
+  max-width: 25% !important;
+}
+
+/* used as well to fix aligment on longer mails */
+.disable-flex-wrap {
+  flex-wrap: nowrap;
 }

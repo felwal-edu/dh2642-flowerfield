@@ -26,7 +26,7 @@ function UploadView(props) {
             <span class="header">
               or <span class="browse-button" onClick={browseSpanClickACB}>browse</span>
             </span>
-            <input type="file" hidden onChange={inputFileChangeACB} />
+            <input type="file" accept="image/png, image/jpg, image/jpeg" hidden onChange={inputFileChangeACB} />
             <span class="tip-support">PNG, JPG, JPEG</span>
           </div>
         )

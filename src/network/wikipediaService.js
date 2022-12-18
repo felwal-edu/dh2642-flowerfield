@@ -39,13 +39,15 @@ async function getFlowerArticle(flowerName) {
   const articlePage = await fetch(`${BASE_URL_REST_V1}page/summary/${title}?origin=*`);
   const articleData = await articlePage.json();
   log.d("articleData", articleData);
-  const content = articleData.extract_html;
 
-  return content;
+  const content = articleData.extract_html;
+  const url = articleData.content_urls.desktop.page;
+
+  return {content: content, url: url};
 }
 
 export function getArticleByPlantName(scientificName) {
-  return getFlowerArticle(scientificName).then(articleContent => {
-    return articleContent;
+  return getFlowerArticle(scientificName).then((article) => {
+    return article;
   });
 }

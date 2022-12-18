@@ -26,7 +26,8 @@ const DetailPresenter = {
         description.innerHTML = "No description for plant was found."
       }
       else {
-        description.innerHTML = this.plantDescriptionPromiseState.data;
+        description.innerHTML = this.plantDescriptionPromiseState.data.content
+          + " – <a href='" + this.plantDescriptionPromiseState.data.url + "'>Wikipedia</a>";
       }
     }
 

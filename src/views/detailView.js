@@ -34,7 +34,7 @@ function DetailView(props) {
         <v-container class="mt-n8" id="plantdetails" justify="center">
           {!props.descriptionState.promise
             ? ""
-            : promiseNoData(props.descriptionState, renderError) || ""}
+            : promiseNoData(props.descriptionState, renderError, true) || ""}
         </v-container>
         <v-card-actions>
           <v-row class="justify-center align-center">

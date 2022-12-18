@@ -1,11 +1,11 @@
 import LoadingView from "./loadingView";
 
-function promiseNoData(promiseState, _callback) {
+function promiseNoData(promiseState, _callback, linearProgressBar=false) {
     if (!promiseState.promise) {
         return <div>No data</div>;
     }
     if (promiseState.promise && !promiseState.error && !promiseState.data) {
-        return <LoadingView />;
+        return <LoadingView linear={linearProgressBar} />;
     }
 
     if (promiseState.promise && promiseState.error && !promiseState.data) {

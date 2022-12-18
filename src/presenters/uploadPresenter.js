@@ -52,7 +52,7 @@ const UploadPresenter = {
       document.querySelectorAll(".btn.cancel").item(0).hidden = true;
     }
 
-    function browseSpanClickACB(event) {
+    function browseSpanClickACB() {
       this.input = document.querySelector("input");
       this.input.click();
     }

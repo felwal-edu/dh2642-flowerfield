@@ -16,10 +16,10 @@ function ProfileView(props) {
     props.onDeleteAccount();
   }
 
-  function changeUsernameACB(evt) {
+  function changeUserNameACB(evt) {
     if (evt.key === 'Enter') {
-      let newName = document.getElementById("username-inputfield").value;
-      props.onChangeUsername(newName);
+      let newName = document.getElementById("user-name-inputfield").value;
+      props.onChangeUserName(newName);
     }
   }
 
@@ -43,12 +43,12 @@ function ProfileView(props) {
               </v-row>
               <v-row justify="center">
                 <v-col cols="4" class="mt-5">
-                  <h4 class="header-description">username</h4>
+                  <h4 class="header-description">name</h4>
                 </v-col>
                 <v-col>
-                  <v-text-field id="username-inputfield" label="" placeholder="Enter a username" variant="underlined"
+                  <v-text-field id="user-name-inputfield" label="" placeholder="Enter a name" variant="underlined"
                     density="compact" model-value={props.userName} hint="Press 'enter' to confirm."
-                    onKeydown={changeUsernameACB}
+                    onKeydown={changeUserNameACB}
                   />
                 </v-col>
               </v-row>

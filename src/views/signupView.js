@@ -52,7 +52,7 @@ function SignUpView(props) {
 
                             <v-row justify="center">
                                 <v-col sm="8">
-                                    <v-text-field class="input-text" clearable onChange={userNameInputChangeACB} label="Username" placeholder="user"></v-text-field>
+                                    <v-text-field class="input-text" clearable onChange={userNameInputChangeACB} label="Name" placeholder="John Doe"></v-text-field>
                                 </v-col>
                             </v-row>
 

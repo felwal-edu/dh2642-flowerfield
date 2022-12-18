@@ -14,9 +14,9 @@ let unsubscribers = [];
 
 
 
-export function createUserData(user, username) {
+export function createUserData(user, userName) {
   set(ref(db, REF + "/users/" + user.uid + "/email"), user.email);
-  set(ref(db, REF + "/users/" + user.uid + "/name"), username);
+  set(ref(db, REF + "/users/" + user.uid + "/name"), userName);
   set(ref(db, REF + "/users/" + user.uid + "/plants"), []);
   set(ref(db, REF + "/users/" + user.uid + "/experience"), 0);
 

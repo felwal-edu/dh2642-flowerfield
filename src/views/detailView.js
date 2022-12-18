@@ -22,7 +22,7 @@ function DetailView(props) {
         height="500"
         style="overflow-y:scroll;">
 
-        <v-card-title class="text-center bg-green-lighten-3 detail-title">{props.currentPlant.scientificName}</v-card-title>
+        <v-card-title class="text-center bg-green-lighten-3 detail-title"><i>{props.currentPlant.scientificName}</i></v-card-title>
         <v-img
           lazy-src={getRandomLoadingImage()}
           src={props.currentPlant.url}

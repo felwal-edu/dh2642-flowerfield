@@ -4,25 +4,25 @@
   font-family: 'Ubuntu', sans-serif;
   margin-bottom: 20px;
   font-weight: 1000;
-  color: #000efe;
+  color: var(--color-blue);
   font-size: 1.5em;
   text-align: center;
 }
 
 .link-text span {
   text-decoration: underline;
-  color: #a02a3d;
+  color: var(--color-red-dark);
   cursor: pointer;
 }
 
 .v-card.login-background {
   width: 75vh;
-  background-color: #33db69;
+  background-color: var(--color-green);
   opacity: 1;
   background-image:
-  linear-gradient(135deg, #33db69 25%, transparent 25%),
-  linear-gradient(225deg, #33db69 25%, transparent 25%),
-  linear-gradient(45deg, #33db69 25%, transparent 25%),
-  linear-gradient(315deg, #33db69 25%, #2ed463 25%);
+  linear-gradient(135deg, var(--color-green) 25%, transparent 25%),
+  linear-gradient(225deg, var(--color-green) 25%, transparent 25%),
+  linear-gradient(45deg, var(--color-green) 25%, transparent 25%),
+  linear-gradient(315deg, var(--color-green) 25%, #2ed463 25%);
   background-position:  40px 0, 40px 0, 0 0, 0 0; background-size: 80px 80px; background-repeat: repeat;
 }

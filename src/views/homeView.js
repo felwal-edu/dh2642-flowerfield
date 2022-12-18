@@ -11,14 +11,14 @@ function HomeView(props) {
     if (props.userStatus === undefined || props.userStatus === null) {
       return (
         <router-link to="/signup">
-          <v-btn /*color="#a02a3d"*/ variant="tonal">Get Started!</v-btn>
+          <v-btn variant="tonal">Get Started!</v-btn>
         </router-link>
       );
     }
     else {
       return (
         <router-link to="/upload">
-          <v-btn /*color="#a02a3d"*/ variant="tonal">Upload Flower!</v-btn>
+          <v-btn variant="tonal">Upload Flower!</v-btn>
         </router-link>
       );
     }

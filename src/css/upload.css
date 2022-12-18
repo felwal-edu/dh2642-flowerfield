@@ -45,15 +45,15 @@
 }
 
 .drag-area.active {
-  border: 2px solid #1683ff;
+  border: 2px solid var(--color-blue-light);
 }
 
 .drag-area.error {
-  border: 2px solid #a02a3d;
+  border: 2px solid var(--color-red-dark);
 }
 
 .drag-area.error .cancel-text-button {
-  color: #a02a3d;
+  color: var(--color-red-dark);
   cursor: pointer;
   text-decoration: underline;
 }
@@ -67,7 +67,7 @@
   font-family: 'Ubuntu', sans-serif;
   margin-bottom: 20px;
   font-weight: 1000;
-  color: #000efe;
+  color: var(--color-blue);
 }
 
 .drag-area .header {
@@ -85,7 +85,7 @@
 .drag-area .browse-button {
   font-size: 20px;
   font-weight: 1000;
-  color: #1683ff;
+  color: var(--color-blue-light);
   cursor: pointer;
   text-decoration: underline;
 }
@@ -127,7 +127,7 @@
 }
 
 .btn.upload {
-  background-color: #1683ff;
+  background-color: var(--color-blue-light);
   border-color: #0a95ff;
   color: #e0eafc;
 }

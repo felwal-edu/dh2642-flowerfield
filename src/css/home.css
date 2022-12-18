@@ -57,7 +57,7 @@
 }
 
 .subheader {
-  color: #96c29f;
+  color: var(--color-green-light);
 }
 
 .information-page {
@@ -67,12 +67,12 @@
 
 .information-page h1 {
   font-family: 'Ubuntu', sans-serif;
-  color: #000efe;
+  color: var(--color-blue);
   font-size: 2.6em;
 }
 
 .information-page h1 span {
-  color: #33db69;
+  color: var(--color-green);
 }
 
 .information-page p {
@@ -91,12 +91,12 @@
 }
 
 .information-end h1 {
-  color: #000efe;
+  color: var(--color-blue);
 }
 
 .information-end p {
   font-family: 'Ubuntu', sans-serif;
-  color: #000efe;
+  color: var(--color-blue);
   font-size: 1.8em;
 }
 
@@ -105,7 +105,7 @@
 }
 
 .highlighted {
-  color: #0d0963;
+  color: var(--color-blue-dark);
   text-shadow: #b3b3b3 1px 1px 2px;
   font-weight: 1000;
 }

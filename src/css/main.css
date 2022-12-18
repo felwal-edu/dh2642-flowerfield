@@ -7,20 +7,34 @@
   font-family: 'Poppins', sans-serif;
 }
 
+:root {
+  --color-blue: #000efe;
+  --color-blue-dark: #0d0963;
+  --color-blue-light: #1683ff;
+  --color-green: #33db69;
+  --color-green-dark: #558b2f; /*light-green-darken-3*/
+  --color-green-light: #96c29f;
+  --color-turqoise-light: #b0d2cf;
+  --color-red-dark: #a02a3d;
+}
+
 /* pushes windows down so they are not covered by navbar */
 body {
   margin-top: 60px;
 }
 
 .nav-title {
-  color: #0d0963;
+  color: var(--color-blue-dark);
   font-family: 'Pacifico', cursive;
+}
+
+.v-toolbar-title a {
   text-decoration: none;
 }
 
 .v-toolbar-items a {
   margin-right: 15px;
-  color: #0d0963;
+  color: var(--color-blue-dark);
   opacity: 0.7;
   font-family: 'Pacifico', cursive;
   text-decoration: none;
@@ -33,11 +47,11 @@ body {
 }
 
 .active-route {
-  background-color: #0d0963;
+  background-color: var(--color-blue-dark);
 }
 
 .active-route span {
-  color: #ffffff;
+  color: white;
 }
 
 .optical-center {

@@ -28,7 +28,7 @@ const CollectionPresenter = {
   computed: {
     ...mapState(useFlowerStore, {
       userStatus: "currentUser",
-      username: "userName"
+      userName: "userName"
     })
   },
 
@@ -81,7 +81,7 @@ const CollectionPresenter = {
     return (
       <div>
         <ToolBarView
-            username={this.username}
+            userName={this.userName}
             sortStatus={this.sortStatus}
             updateQuery={updateQueryACB.bind(this)}
             onSearch={searchACB.bind(this)}
@@ -99,7 +99,7 @@ const CollectionPresenter = {
                     searchStatus={this.searchStatus}
                     searchQuery={this.searchQuery}
                     searchQueryPlants={this.searchResult}
-                    username={this.username}
+                    userName={this.userName}
                     sort={this.sortStatus}
                     openPopup={openPopupACB.bind(this)} />
                   {

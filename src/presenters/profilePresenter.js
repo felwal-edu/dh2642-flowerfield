@@ -31,7 +31,7 @@ const ProfilePresenter = {
       }
     }
 
-    function changeUsernameACB(newName) {
+    function changeUserNameACB(newName) {
       log.d("update name:", newName);
       useFlowerStore().setUserName(newName)
     }
@@ -43,7 +43,7 @@ const ProfilePresenter = {
         onDeleteAccount={deleteAccountACB.bind(this)}
         currentRank={rankDisplay(useFlowerStore().ranks, useFlowerStore().experience)}
         experienceBar={progressBarValue(useFlowerStore().ranks, useFlowerStore().experience)}
-        onChangeUsername={changeUsernameACB.bind(this)}
+        onChangeUserName={changeUserNameACB.bind(this)}
         userName={useFlowerStore().userName} />
     );
   }

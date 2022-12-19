@@ -168,7 +168,7 @@ Clone / download the project from the main branch, open the project folder using
 To start development, run the following commands in order:
 ```
 npm install
-npm run serv
+npm run serve
 ```
 Now you can access the webiste using localhost.
 

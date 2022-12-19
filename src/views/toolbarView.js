@@ -23,6 +23,14 @@ function ToolbarView(props) {
       <v-toolbar-title>
         <h2 class="header-font-collection">{props.userName == "" ? "Your Collection" : props.userName + "'s Collection"}</h2>
       </v-toolbar-title>
+      <router-link to="/upload" min-height="1000px">
+        <v-btn
+          prepend-icon="mdi-plus"
+          class="mt-2 mr-4"
+        >
+          Add plant
+        </v-btn>
+      </router-link>
       <SearchView
         updateQuery={onQueryChangeACB}
         onSearch={onEnterACB}

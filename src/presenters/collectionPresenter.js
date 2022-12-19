@@ -57,8 +57,6 @@ const CollectionPresenter = {
     }
 
     function searchACB() {
-      log.d(this.searchQuery);
-
       if (this.searchQuery !== "") {
         this.searchStatus = true;
         this.searchResult = useFlowerStore().searchPlants(this.searchQuery);

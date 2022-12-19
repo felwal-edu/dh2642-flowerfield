@@ -61,7 +61,7 @@ const UploadPresenter = {
 
         if (this.plantPromiseState.data?.suggestions) {
           // extract relevant information
-          let plant = this.plantPromiseState.data?.suggestions[0];
+          const plant = this.plantPromiseState.data?.suggestions[0];
           log.i("probability: " + plant.probability);
 
           // we want to reject pictures which are unlikely to be flowers
@@ -73,8 +73,6 @@ const UploadPresenter = {
             };
 
             this.buttonPopupCallback = abortUploadACB.bind(this);
-
-            // TODO: add error in box?
 
             // jump out of function to not set plant
             return;
@@ -108,8 +106,6 @@ const UploadPresenter = {
 
             this.buttonPopupCallback = uploadAcceptToCollectionACB.bind(this);
           }
-
-          // TODO: DISPLAY ERROR-box
         }
       }
 

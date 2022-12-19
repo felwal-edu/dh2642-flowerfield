@@ -44,18 +44,17 @@ function LoginView(props) {
               </v-row>
               <v-row justify="center">
                 <v-col sm="8">
-                  <v-text-field clearable onChange={emailInputChangeACB} label="Email" placeholder="example@mail.com"></v-text-field>
+                  <v-text-field clearable onChange={emailInputChangeACB} label="Email" placeholder="example@mail.com" />
                 </v-col>
               </v-row>
               <v-row justify="center">
                 <v-col sm="8">
-                  <v-text-field type="password" clearable onChange={passwordInputChangeACB} label="Password"></v-text-field>
+                  <v-text-field type="password" clearable onChange={passwordInputChangeACB} label="Password" />
                 </v-col>
               </v-row>
               <v-row justify="center" class="my-4">
                 {
                   props.isWaitingForAuth
-                    // TODO: använd promiseNoData?
                     ? <v-progress-circular indeterminate color="white" class="mt-1" />
                     : <v-btn onClick={signInClickACB}>Sign in</v-btn>
                 }

@@ -32,6 +32,10 @@ body {
   text-decoration: none;
 }
 
+.v-toolbar a {
+  text-decoration: none;
+}
+
 .v-toolbar-items a {
   margin-right: 15px;
   color: var(--color-blue-dark);

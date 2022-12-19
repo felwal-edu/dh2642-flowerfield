@@ -3,7 +3,6 @@ import CollectionView from "../views/collectionView.js";
 import EmptyPageView from "@/views/emptyPageView.js";
 import ToolbarView from "@/views/toolbarView.js";
 import { waitingForUserToBeSignedIn } from "@/utils/userUtils.js";
-import log from "@/utils/logUtils.js";
 import { mapState } from "pinia";
 import LoadingView from "@/views/loadingView.js";
 import DetailPresenter from "./detailPresenter.js";

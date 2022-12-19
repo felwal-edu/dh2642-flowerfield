@@ -20,9 +20,9 @@ function callAPI(data) {
 }
 
 export function treatHTTPResponseACB(response) {
-  if (response.ok) {
-    return response.json();
+  if (!response.ok) {
+    throw new Error("API problem: " + response.status);
   }
 
-  throw new Error("API problem: " + response.status);
+  return response.json();
 }

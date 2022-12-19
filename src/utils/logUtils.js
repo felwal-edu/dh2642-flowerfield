@@ -1,5 +1,5 @@
 // we want a clean console when not developing
-const DEBUG = true;
+const DEBUG = false;
 
 const log = {
   // info

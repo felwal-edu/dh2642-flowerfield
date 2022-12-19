@@ -10,9 +10,7 @@ Group 42: Elliot Darth, Felix Wallin, Linus Wallin, Matias Eriksson
 
 Flowerfield is an application where the user is able to collect _flowers_ by taking pictures of them.
 
-When a picture is taken, it can then be uploaded to the app, where the picture is processed and identified by an external image-identification API – [Plant.id](https://web.plant.id/plant-identification-api/).
-
-If the picture is successfully identified, it will add the flower to the user's collection.
+When a picture is taken, it can then be uploaded to the app, where the picture is processed and identified by an external image-identification API – [Plant.id](https://web.plant.id/plant-identification-api/). If the picture is successfully identified, it will add the flower to the user's collection.
 
 The collection of flowers is divided into subcategories based on the families/species, which makes the user able to collect sets of types of vegetation.
 

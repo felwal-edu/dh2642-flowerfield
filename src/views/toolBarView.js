@@ -24,7 +24,6 @@ function ToolBarView(props) {
             <v-toolbar-title>
                 <h2 class="header-font-collection">{props.userName == "" ? "Your Collection" : props.userName + "'s Collection"}</h2>
             </v-toolbar-title>
-            <v-spacer></v-spacer>
             <SearchView
                 updateQuery={onInputACB}
                 onSearch={onEnterACB}

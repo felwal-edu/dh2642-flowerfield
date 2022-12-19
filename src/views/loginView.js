@@ -12,7 +12,6 @@ function LoginView(props) {
   }
 
   function emailInputChangeACB(evt) {
-    log.d("email input target:", evt.target.value);
     props.onEmailChange(evt.target.value);
   }
 

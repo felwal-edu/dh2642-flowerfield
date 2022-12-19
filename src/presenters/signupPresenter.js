@@ -52,7 +52,6 @@ const SignUpPresenter = {
       if (this.password !== this.passwordCheck) {
         this.snackbar = true;
         this.errorMessage = "Passwords do not match, please double check.";
-        log.d(this.passwordCheck);
 
         return;
       }

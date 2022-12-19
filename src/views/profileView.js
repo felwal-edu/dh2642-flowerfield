@@ -102,6 +102,7 @@ function ProfileView(props) {
                       color="red"
                       class="ml-4" />
                     <h4 class="header-description mt-1">delete account</h4>
+
                   </v-col>
                 </v-row>
               </v-row>
@@ -109,6 +110,9 @@ function ProfileView(props) {
           </v-row>
         </v-img>
       </v-card>
+      <v-snackbar model-value={props.snackbar} class="d-flex" color="#0d0963">
+        {props.updateName}
+      </v-snackbar>
     </div>
   );
 }

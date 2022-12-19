@@ -45,7 +45,7 @@ function LoginView(props) {
               </v-row>
               <v-row justify="center">
                 <v-col sm="8">
-                  <v-text-field hint="Must be 6 characters long" type="password" clearable onChange={passwordInputChangeACB} label="Password" />
+                  <v-text-field type="password" clearable onChange={passwordInputChangeACB} label="Password" />
                 </v-col>
               </v-row>
               <v-row justify="center" class="my-4">

@@ -72,6 +72,7 @@ function SignUpView(props) {
                     class="input-text"
                     type="password"
                     clearable
+                    hint="Must be 6 characters long"
                     onChange={passwordInputChangeACB}
                     label="Password" />
                 </v-col>

@@ -91,7 +91,6 @@ function SignUpView(props) {
               <v-row justify="center" class="my-4">
                 {
                   props.isWaitingForAuth
-                  // TODO: använd promiseNoData?
                   ? <v-progress-circular indeterminate color="white" class="mt-1" />
                   : <v-btn onClick={signUpClickACB}>Sign up</v-btn>
                 }

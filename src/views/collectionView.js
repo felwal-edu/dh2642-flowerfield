@@ -1,4 +1,4 @@
-import { sortPlantsIntoObject } from "@/utils/plantUtils";
+import { sortPlantsIntoObject } from "@/utils/plantUtils.js";
 import { capitalize } from "vue";
 import { getRandomLoadingImage } from "@/utils/loadingUtils.js";
 import "../css/collection.css";

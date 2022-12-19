@@ -1,4 +1,4 @@
-import UploadView from "../views/uploadView";
+import UploadView from "../views/uploadView.js";
 import { commitFile } from "../utils/uploadUtils.js";
 import "../css/upload.css";
 import resolvePromise from "@/utils/resolvePromise";

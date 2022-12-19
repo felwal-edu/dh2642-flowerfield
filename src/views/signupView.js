@@ -5,9 +5,8 @@ function SignUpView(props) {
 
 
     function signUpClickACB(evt) {
-        if (!props.currentUser) {
-            log.w("already signed up");
-
+        if (props.currentUser) {
+            log.w("already signed in");
         }
 
         props.onSignUp();

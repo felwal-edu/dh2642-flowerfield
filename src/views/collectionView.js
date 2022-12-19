@@ -41,7 +41,7 @@ function CollectionView(props) {
                 </div>
               </v-container>
               <v-icon large class="ma-1 card-info-icon">
-                mdi-information-outline
+                mdi-information
               </v-icon>
             </v-img>
             <v-card-title class="text-center">

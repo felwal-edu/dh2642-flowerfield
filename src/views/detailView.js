@@ -1,5 +1,5 @@
 import { getRandomLoadingImage } from "@/utils/loadingUtils.js";
-import promiseNoData from "./promiseNoData";
+import promiseNoData from "./promiseNoData1";
 import "../css/details.css";
 
 function DetailView(props) {

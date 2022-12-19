@@ -1,7 +1,9 @@
 import background from "@/assets/loginbackground.jpg";
 import log from "@/utils/logUtils";
+import LoadingView from "./loadingView";
 
 function LoginView(props) {
+
   function signInClickACB(evt) {
     if (props.currentUser) {
       log.w("already signed in");
@@ -11,16 +13,17 @@ function LoginView(props) {
     props.onSignIn();
   }
 
+
   function emailInputChangeACB(evt) {
-    log.d("email input target:", evt.target.value);
     props.onEmailChange(evt.target.value);
   }
+
 
   function passwordInputChangeACB(evt) {
     props.onPasswordChange(evt.target.value);
   }
 
-  function goToSignUpClickACB() {
+  function goToSignUpACB() {
     props.onGoToSignUp();
   }
 
@@ -41,12 +44,12 @@ function LoginView(props) {
               </v-row>
               <v-row justify="center">
                 <v-col sm="8">
-                  <v-text-field clearable onChange={emailInputChangeACB} label="Email" placeholder="example@mail.com" />
+                  <v-text-field clearable onChange={emailInputChangeACB} label="Email" placeholder="example@mail.com"></v-text-field>
                 </v-col>
               </v-row>
               <v-row justify="center">
                 <v-col sm="8">
-                  <v-text-field hint="Must be 6 characters long" type="password" clearable onChange={passwordInputChangeACB} label="Password" />
+                  <v-text-field type="password" clearable onChange={passwordInputChangeACB} label="Password"></v-text-field>
                 </v-col>
               </v-row>
               <v-row justify="center" class="my-4">
@@ -58,16 +61,16 @@ function LoginView(props) {
                 }
               </v-row>
               <v-row justify="center" class="my-4 mb-12">
-                <p class="link-text">Don't have an account? <span onClick={goToSignUpClickACB}>Sign up</span></p>
+                <p class="link-text">Don't have an account? <span onClick={goToSignUpACB}>Sign up</span></p>
               </v-row>
             </v-col>
           </v-card>
-          <v-snackbar model-value={props.snackbar} class="d-flex" color="#0d0963" timeout="-1">
+          <v-snackbar model-value={props.snackbar} class="d-flex" color="#0d0963">
             {props.errorMessage}
           </v-snackbar>
         </v-parallax>
       </v-app>
-    </div>
+    </div >
   );
 }
 

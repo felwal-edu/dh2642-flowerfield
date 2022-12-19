@@ -5,8 +5,9 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  background: linear-gradient(185deg, rgba(255, 255, 255, 0.672) 0%, rgba(255, 255, 255, 0.624) 25%, rgb(176, 210, 207) 100%),
-  url("/src/assets/grass_field.jpg") no-repeat center center fixed;
+  background:
+    linear-gradient(185deg, rgba(255, 255, 255, 0.672) 0%, rgba(255, 255, 255, 0.624) 25%, rgb(176, 210, 207) 100%),
+    url("/src/assets/grass_field.jpg") no-repeat center center fixed;
 
   /* Full height */
   height: 100vh;

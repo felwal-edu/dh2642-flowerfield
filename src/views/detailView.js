@@ -1,5 +1,5 @@
 import { getRandomLoadingImage } from "@/utils/loadingUtils.js";
-import promiseNoData from "./promiseNodata";
+import promiseNoData from "./promiseNoData";
 import "../css/details.css";
 
 function DetailView(props) {
@@ -13,7 +13,7 @@ function DetailView(props) {
 
   function renderDetails() {
     function renderError() {
-      return <div><span>No description for plant was found.</span></div>
+      return <div><span>No description for plant was found.</span></div>;
     }
 
     return (
@@ -28,7 +28,6 @@ function DetailView(props) {
           src={props.currentPlant.url}
           max-height="300"
           class="bg-grey-lighten-4" />
-
         <v-card-text class="details-upload-text">Uploaded: {props.currentPlant.date}</v-card-text>
         <v-card-text class="details-header">Information about the plant</v-card-text>
         <v-container class="mt-n8" id="plantdetails" justify="center">

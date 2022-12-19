@@ -12,8 +12,6 @@ let unsubscribers = [];
 
 // set
 
-
-
 export function createUserData(user, userName) {
   set(ref(db, REF + "/users/" + user.uid + "/email"), user.email);
   set(ref(db, REF + "/users/" + user.uid + "/name"), userName);
@@ -104,7 +102,7 @@ function updateFirebaseFromStore(store) {
 
   function plantsChangedInStoreACB(newPlants) {
     function toNameKeyedObjectCB(obj, plant) {
-      return { ...obj, [plant.scientificName]: plant };
+      return {...obj, [plant.scientificName]: plant};
     }
 
     const plantsObj = newPlants.reduce(toNameKeyedObjectCB, {});

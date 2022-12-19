@@ -17,7 +17,6 @@ export default function App() {
             <v-btn text size="80">SignUp</v-btn>
           </router-link>
         </v-toolbar-items>
-
       );
     }
 
@@ -48,11 +47,11 @@ export default function App() {
               <p class="nav-title">Flowerfield</p>
             </router-link>
           </v-toolbar-title>
-          <v-spacer></v-spacer>
+          <v-spacer />
           {renderApp()}
         </v-app-bar>
         <div>
-          <router-view></router-view>
+          <router-view />
         </div>
       </v-app>
     </div>

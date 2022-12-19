@@ -13,7 +13,7 @@ function compareGenusCB(plantA, plantB) {
 function sortPlantsIntoObject(plants) {
   // 1. take plants and for each plant do a callback
   // 2. The callback should append the plant to a new list in the callback.
-  //   a.If the plant has a genus which isnt part of the new list, create a sub-list and put the plant into that.
+  //   a. If the plant has a genus which isnt part of the new list, create a sub-list and put the plant into that.
   //   b. If there already exists a sub-list with that genus put the plant into that.
 
   function getGenusKeyedObject(plants) {
@@ -39,25 +39,19 @@ function sortPlantsIntoObject(plants) {
   return getGenusKeyedObject([...plants].sort(compareGenusCB));
 }
 
-function rankDisplay(ranks, experience) {
+function getRank(ranks, experience) {
+  let currentRank = ranks[0];
 
-  function getCurrentRank(ranks, experience) {
-    let currentRank = ranks[0]
-
-    for (let i = 0; i < ranks.length; i++) {
-      if (experience >= ranks[i][1]) {
-        currentRank = ranks[i];
-      }
+  for (let i = 0; i < ranks.length; i++) {
+    if (experience >= ranks[i][1]) {
+      currentRank = ranks[i];
     }
-
-    return currentRank;
   }
 
-  let currentRank = getCurrentRank(ranks, experience)[0];
-  return currentRank;
+  return currentRank[0];
 }
 
-function progressBarValue(ranks, experience) {
+function getProgressBarValue(ranks, experience) {
   function getNextRank(ranks, experience) {
     // get largest rank as default next
     let nextRank = ranks[ranks.length - 1];
@@ -72,13 +66,11 @@ function progressBarValue(ranks, experience) {
     return nextRank;
   }
 
-  let nextRank = getNextRank(ranks, experience)[1];
-  let ratio = Math.round((experience / nextRank) * 100);
+  const nextRank = getNextRank(ranks, experience)[1];
+  if (nextRank === 0) return 0;
 
-  if (isNaN(ratio))
-    return 0;
-
+  const ratio = Math.round((experience / nextRank) * 100);
   return ratio;
 }
 
-export { sortPlantsIntoObject, rankDisplay, progressBarValue };
+export { sortPlantsIntoObject, getRank, getProgressBarValue };

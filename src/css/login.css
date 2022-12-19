@@ -20,9 +20,11 @@
   background-color: var(--color-green);
   opacity: 1;
   background-image:
-  linear-gradient(135deg, var(--color-green) 25%, transparent 25%),
-  linear-gradient(225deg, var(--color-green) 25%, transparent 25%),
-  linear-gradient(45deg, var(--color-green) 25%, transparent 25%),
-  linear-gradient(315deg, var(--color-green) 25%, #2ed463 25%);
-  background-position:  40px 0, 40px 0, 0 0, 0 0; background-size: 80px 80px; background-repeat: repeat;
+    linear-gradient(135deg, var(--color-green) 25%, transparent 25%),
+    linear-gradient(225deg, var(--color-green) 25%, transparent 25%),
+    linear-gradient(45deg, var(--color-green) 25%, transparent 25%),
+    linear-gradient(315deg, var(--color-green) 25%, #2ed463 25%);
+  background-position: 40px 0, 40px 0, 0 0, 0 0;
+  background-size: 80px 80px;
+  background-repeat: repeat;
 }

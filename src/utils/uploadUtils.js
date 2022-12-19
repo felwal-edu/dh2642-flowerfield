@@ -1,13 +1,14 @@
 function addImageProcess(file) {
   return new Promise((resolve, reject) => {
-    let fileReader = new FileReader();
+    const fileReader = new FileReader();
+
     fileReader.readAsDataURL(file);
     fileReader.onload = () => resolve(fileReader.result);
     fileReader.onerror = reject;
-  })
+  });
 }
 
-export function commitFile(file, _callback) {
+export function commitFile(file, notifyACB) {
   if (file === null) {
     alert("No file selected.");
     return null;
@@ -23,7 +24,7 @@ export function commitFile(file, _callback) {
       document.querySelectorAll(".btn.upload").item(0).hidden = false;
       document.querySelectorAll(".btn.cancel").item(0).hidden = false;
 
-      _callback(url, true);
+      notifyACB(url, true);
     });
   }
   else {
@@ -31,6 +32,7 @@ export function commitFile(file, _callback) {
 
     document.querySelectorAll(".btn.upload").item(0).hidden = true;
     document.querySelectorAll(".btn.cancel").item(0).hidden = true;
-    _callback(null, false);
+
+    notifyACB(null, false);
   }
 }

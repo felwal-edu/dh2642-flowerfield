@@ -1,8 +1,34 @@
-import promiseNoData from "./promiseNodata";
+import promiseNoData from "./promiseNoData";
 import errorIcon from "@/assets/icons/warning.png";
-import DialogueView from "./dialogView";
+import DialogView from "./dialogView";
 
 function UploadView(props) {
+  function browseSpanClickACB(evt) {
+    props.onBrowse();
+  }
+
+  function dragoverFileACB(evt) {
+    evt.preventDefault();
+    props.onDragoverFile();
+  }
+
+  function dragleaveFileACB(evt) {
+    props.onDragleaveFile();
+  }
+
+  function dropFileACB(evt) {
+    evt.preventDefault();
+    props.onDropFile(evt.dataTransfer.files[0]);
+  }
+
+  function inputFileChangeACB(evt) {
+    props.onInputFileChange(evt.target.files[0]);
+  }
+
+  function uploadConfirmationACB() {
+    props.onUploadConfirmation();
+  }
+
   function renderUploadView() {
     function renderInstructions() {
       if (props.imageLoaded) {
@@ -10,7 +36,7 @@ function UploadView(props) {
           <div class="image-container">
             <img src={props.fileURL} alt=""></img>
           </div>
-        )
+        );
       }
       else {
         return (
@@ -36,7 +62,7 @@ function UploadView(props) {
 
     function renderResults() {
       return (
-        <DialogueView
+        <DialogView
           title={props.uploadMessage.title}
           message={props.uploadMessage.subhead}
           buttonPrimaryText={props.uploadMessage.buttonText}
@@ -65,36 +91,12 @@ function UploadView(props) {
       : promiseNoData(props.promiseState, renderError) || renderResults();
   }
 
-  function browseSpanClickACB() {
-    props.onBrowseSpanClick();
-  }
-
   function uploadButtonClickACB() {
     props.onUploadImageToAPI();
   }
 
   function cancelButtonClickACB() {
     props.onAbortUpload();
-  }
-
-  function dragoverFileACB(evt) {
-    props.onDragoverFile(evt);
-  }
-
-  function dragleaveFileACB(evt) {
-    props.onDragleaveFile();
-  }
-
-  function dropFileACB(evt) {
-    props.onDropFile(evt);
-  }
-
-  function inputFileChangeACB(evt) {
-    props.onInputFileChange(evt);
-  }
-
-  function uploadConfirmationACB() {
-    props.onUploadConfirmation();
   }
 
   return (

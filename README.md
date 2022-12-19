@@ -44,9 +44,9 @@ Framework used: Vue
 
 - _utils_
 
-  - `loadingUtils.js`. TODO
+  - `loadingUtils.js`. Some utility function for displaying loading images.
 
-  - `logUtils.js`. TODO
+  - `logUtils.js`. Some utility functions for debugging through the console.
 
   - `plantUtils.js`. Some utility functions for transforming plant arrays.
 
@@ -54,7 +54,7 @@ Framework used: Vue
 
   - `uploadUtils.js`. Handles backend of uploading image, enabling saving to collection (the database) if the upload was successful. Will maybe be moved to another file in the future.
 
-  - `userUtils.js`. TODO
+  - `userUtils.js`. Some utility functions that display errors when user inputs wrong information.
 
 - _plugins_
 
@@ -84,7 +84,7 @@ Framework used: Vue
 
   - `profileView.js`. Displays the user's information, including email, XP, rank and username. Also let's the user log out.
 
-  - `promiseNoData.js`. TODO
+  - `promiseNoData.js`. A function that notifies in a callback when it changes something in the promise state.
 
   - `searchView.js`. Used in `toolBarView.js`. Displays a search bar in the toolbar - allowing users to search for plants in their collections.
 
@@ -126,7 +126,7 @@ Framework used: Vue
 
 - _persistence_
 
-  - `firebaseApp.js`. TODO
+  - `firebaseApp.js`. Initialises firebase.
 
   - `firebaseAuth.js`. Authenticates the user. Contains functions for signing up, in and out; and observing changes to "user login" state.
 

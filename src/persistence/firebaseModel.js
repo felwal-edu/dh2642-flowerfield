@@ -62,12 +62,20 @@ function loadFirebaseData(loadedACB) {
 
   function dataLoadedFromFirebaseACB(data) {
     if (data.exists()) {
+      // load existing user data
       useFlowerStore().userName = data.val().name || "";
       useFlowerStore().plants = Object.values(data.val().plants || {});
       useFlowerStore().experience = data.val().experience || 0;
-
-      log.i("Firebase account loaded");
     }
+    else {
+      // no existing user data.
+
+      // important to set to emtpy array, since null (default)
+      // is interpreted as "loading"
+      useFlowerStore().plants = [];
+    }
+
+    log.i("Firebase account data loaded");
 
     loadedACB();
   }

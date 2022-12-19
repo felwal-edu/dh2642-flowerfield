@@ -195,5 +195,19 @@ Framework used: Vue
   - Contains assets used in the project, including background images, icons, art, logo and loading icons.
 
 ## Getting Started
+Prerequisite: npm or some other package manager.
+
+Before starting, create a `plantIdSecrets.js` under the _network_ folder and a `firebaseSecrets.js` under the _presistence_ folder, all under the _src_ directory. Add your API keys to the respective file.
+
+Clone / download the project from the main branch, open the project folder using an IDE such as VSCode (recommended).
+
+To start development, run the following commands in order:
+```
+npm install
+npm run serv
+```
+Now you can access the webiste using localhost.
 
 ## Deployment
+TODO
+To deploy the project to firebase... 

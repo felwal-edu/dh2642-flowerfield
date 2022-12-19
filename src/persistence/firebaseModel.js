@@ -4,8 +4,6 @@ import log from "@/utils/logUtils";
 import useFlowerStore from "@/store/flowerStore";
 import { observeAuthState } from "./firebaseAuth";
 
-// init
-
 const db = getDatabase();
 const REF = "flowerModel";
 let unsubscribers = [];

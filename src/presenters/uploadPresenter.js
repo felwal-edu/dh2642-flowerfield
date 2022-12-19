@@ -21,7 +21,7 @@ const UploadPresenter = {
       fileURL: null,
       plant: null,
       uploadMessage: {},
-      buttonPopupCallback: undefined
+      dialogButtonCallback: undefined
     };
   },
 
@@ -72,7 +72,7 @@ const UploadPresenter = {
               "buttonText": "OK",
             };
 
-            this.buttonPopupCallback = abortUploadACB.bind(this);
+            this.dialogButtonCallback = abortUploadACB.bind(this);
 
             // jump out of function to not set plant
             return;
@@ -95,7 +95,7 @@ const UploadPresenter = {
               "buttonText": "OK"
             };
 
-            this.buttonPopupCallback = abortUploadACB.bind(this);
+            this.dialogButtonCallback = abortUploadACB.bind(this);
           }
           else {
             this.uploadMessage = {
@@ -104,7 +104,7 @@ const UploadPresenter = {
               "buttonText": "Add to collection"
             };
 
-            this.buttonPopupCallback = uploadAcceptToCollectionACB.bind(this);
+            this.dialogButtonCallback = uploadAcceptToCollectionACB.bind(this);
           }
         }
       }
@@ -159,7 +159,7 @@ const UploadPresenter = {
         onDragleaveFile={disableDragoverHintACB.bind(this)}
         onDropFile={setFileFromDropACB.bind(this)}
         onInputFileChange={setFileFromBrowseACB.bind(this)}
-        onUploadConfirmation={this.buttonPopupCallback}
+        onUploadConfirmation={this.dialogButtonCallback}
         imageLoaded={this.isFileLoaded}
         promiseState={this.plantPromiseState}
         fileURL={this.fileURL}

@@ -1,5 +1,3 @@
-import log from "@/utils/logUtils";
-
 const API_ENDPOINT = "https://en.wikipedia.org/w/api.php";
 const BASE_URL_REST_V1 = "https://en.wikipedia.org/api/rest_v1/";
 

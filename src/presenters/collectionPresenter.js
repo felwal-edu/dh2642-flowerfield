@@ -16,7 +16,7 @@ import DetailPresenter from "./detailPresenter.js";
 const CollectionPresenter = {
   data() {
     return {
-      sortStatus: "Genus A-Z",
+      sortStatus: "Name A-Z",
       searchStatus: false,
       searchQuery: "",
       searchResult: [],

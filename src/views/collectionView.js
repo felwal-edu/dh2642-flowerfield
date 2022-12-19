@@ -66,7 +66,7 @@ function renderCollection(plants, order, openPopup) {
     );
   }
 
-  if (order === "Genus A-Z") {
+  if (order === "Name A-Z") {
     return (
       <div>{Object.entries(sortPlantsIntoObject(plants)).map(createRowsCB)}</div>
     );

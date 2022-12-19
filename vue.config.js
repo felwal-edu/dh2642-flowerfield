@@ -9,5 +9,3 @@ module.exports = defineConfig({
 		}
   }
 });
-
-// TODO: vad är det här? använder vi den?

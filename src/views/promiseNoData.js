@@ -11,10 +11,7 @@ function promiseNoData(promiseState, renderErrorACB, linearProgressBar=false) {
   }
 
   if (promiseState.promise && promiseState.error && !promiseState.data) {
-    // TODO: skicka in custom callback för error display? eller egen funktion bara...
-    // jag gör en egen funktion för error i uploadView, men jag vill prata med Felix om hur man skulle alternativt kunna göra detta
-    // går liksom inte i viewn riktigt eftersom viewn hämtar divven här i från.
-    return renderErrorACB();
+    return renderErrorACB() || <div>{promiseState.error.toString()}</div>;
   }
   if (promiseState.promise && !promiseState.error && promiseState.data) {
     return false;

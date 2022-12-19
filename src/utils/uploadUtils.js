@@ -14,11 +14,9 @@ export function commitFile(file, notifyACB) {
     return null;
   }
 
-  // TODO: remove metadata?
-  let fileType = file.type;
-  let validExtensions = ["image/png", "image/jpg", "image/jpeg"];
+  const fileType = file.type;
+  const validExtensions = ["image/png", "image/jpg", "image/jpeg"];
 
-  // TODO: expand error to more then alert?
   if (validExtensions.includes(fileType)) {
     addImageProcess(file).then(url => {
       document.querySelectorAll(".btn.upload").item(0).hidden = false;

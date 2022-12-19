@@ -24,7 +24,7 @@ async function getFlowerArticle(flowerName) {
   const article = data.query.search[0];
 
   // Encode article title of the flower, will result in the common name (the correct article name) for the flower
-  let title = encodeURIComponent(article.title.toLowerCase());
+  const title = encodeURIComponent(article.title.toLowerCase());
 
   // Make a request to the wikipedia article to get the exact article based on the common flower name.
   // Using rest_v1 for better formatting on fetch

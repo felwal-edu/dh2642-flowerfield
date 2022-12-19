@@ -18,7 +18,7 @@ function ProfileView(props) {
 
   function updateName() {
     // get value and assign it as new username
-    let newName = document.getElementById("user-name-inputfield").value;
+    const newName = document.getElementById("user-name-inputfield").value;
     props.onChangeUserName(newName);
 
     // deselects input box for input feedback

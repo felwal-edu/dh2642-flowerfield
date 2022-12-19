@@ -8,7 +8,7 @@ const useFlowerStore = defineStore({
 
   state: () => ({
     currentUser: undefined, // undefined if not loaded, null if not logged in
-    plants: null,
+    plants: null, // null if not loaded
     experience: 0,
     userName: "",
     ranks: [["Dirt", 0], ["Seed", 1], ["Sprout", 50], ["Sapling", 100], ["Bush", 250], ["Birch", 500], ["Oak", 1000]]

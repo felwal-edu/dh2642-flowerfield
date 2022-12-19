@@ -28,12 +28,12 @@ export function removeUser() {
   deleteUser(auth.currentUser).then(() => {
     log.i("user removed");
   }).catch((error) => {
-    log.e("couldn't remove user", error);
+    log.w("couldn't remove user", error);
 
     // NOTE: we might get an error here if the user
     // signed in a long time ago. In that case we would
-    // need to re-authenticate the user.
-    // This falls outside the scope of the project.
+    // need to re-authenticate the user. However,
+    // this falls outside the scope of the project.
     // Instead we just delete user data (already done)
     // and then sign out.
 

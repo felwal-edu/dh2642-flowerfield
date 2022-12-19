@@ -81,16 +81,14 @@ function loadFirebaseData(loadedACB) {
 }
 
 function enableFirebaseSync() {
-  log.i("starting Firebase sync ...")
-
   // set up sync after first load
   updateFirebaseFromStore(useFlowerStore());
   updateStoreFromFirebase(useFlowerStore());
+
+  log.i("Firebase synced");
 }
 
 function disableFirebaseSync() {
-  log.i("desyncing Firebase ...");
-
   unsubscribers.forEach(unsubscribe => unsubscribe());
   unsubscribers = [];
 

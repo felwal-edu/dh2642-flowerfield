@@ -1,4 +1,4 @@
-import promiseNoData from "./promiseNoData";
+import promiseNoData from "./promiseNoData.js";
 import errorIcon from "@/assets/icons/warning.png";
 import DialogView from "./dialogView";
 

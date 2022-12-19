@@ -8,8 +8,15 @@ import log from "@/utils/logUtils";
 import { deleteUserData } from "@/persistence/firebaseModel";
 import { mapState } from "pinia";
 import LoadingView from "@/views/loadingView";
+import DialogView from "@/views/dialogView";
 
 const ProfilePresenter = {
+  data() {
+    return {
+      showDeleteAccountDialog: false,
+    };
+  },
+
   computed: {
     ...mapState(useFlowerStore, { userStatus: "currentUser" })
   },
@@ -22,13 +29,18 @@ const ProfilePresenter = {
       this.$router.push({ name: "home" });
     }
 
-    function deleteAccountACB() {
-      if (window.confirm("Are you sure that you want to delete your account?")) {
-        deleteUserData(useFlowerStore().currentUser);
-        removeUser();
+    function showDeleteAccountDialogACB() {
+      this.showDeleteAccountDialog = true;
+    }
 
-        this.$router.push({ name: "home" });
-      }
+    function hideDeleteAccountDialogACB() {
+      this.showDeleteAccountDialog = false;
+    }
+
+    function deleteAccountACB() {
+      deleteUserData(useFlowerStore().currentUser);
+      removeUser();
+      this.$router.push({ name: "home" });
     }
 
     function changeUserNameACB(newName) {
@@ -37,14 +49,27 @@ const ProfilePresenter = {
     }
 
     return (
-      <ProfileView
-        currentUser={useFlowerStore().currentUser}
-        onSignOut={signOutACB.bind(this)}
-        onDeleteAccount={deleteAccountACB.bind(this)}
-        currentRank={rankDisplay(useFlowerStore().ranks, useFlowerStore().experience)}
-        experienceBar={progressBarValue(useFlowerStore().ranks, useFlowerStore().experience)}
-        onChangeUserName={changeUserNameACB.bind(this)}
-        userName={useFlowerStore().userName} />
+      <div>
+        <ProfileView
+          currentUser={useFlowerStore().currentUser}
+          onSignOut={signOutACB.bind(this)}
+          onDeleteAccount={showDeleteAccountDialogACB.bind(this)}
+          currentRank={rankDisplay(useFlowerStore().ranks, useFlowerStore().experience)}
+          experienceBar={progressBarValue(useFlowerStore().ranks, useFlowerStore().experience)}
+          onChangeUserName={changeUserNameACB.bind(this)}
+          userName={useFlowerStore().userName} />
+        {
+          this.showDeleteAccountDialog
+            ? <DialogView
+              title="Delete account?"
+              message="This action cannot be undone."
+              buttonPrimaryText="Delete"
+              onButtonPrimaryClick={deleteAccountACB.bind(this)}
+              cancel
+              onDismiss={hideDeleteAccountDialogACB.bind(this)} />
+            : undefined
+        }
+      </div>
     );
   }
 };

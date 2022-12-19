@@ -8,7 +8,7 @@ Group 42: Elliot Darth, Felix Wallin, Linus Wallin, Matias Eriksson
 
 ## Project description
 
-Flowerfield is an application where the user is able to collect _flowers_ (and other plants) by taking pictures of them.
+Flowerfield is an application where the user is able to collect flowers (and other plants) by taking pictures of them.
 
 When a picture is taken, it can then be uploaded to the app, where the picture is processed and identified by an external image-identification API – [Plant.id](https://web.plant.id/plant-identification-api/). If the picture is successfully identified, it will add the flower to the user's collection.
 
@@ -16,7 +16,7 @@ The collection of flowers is divided into subcategories based on the families/sp
 
 The user can then view additional information about a plant in the user's collection. This information is sourced through the [Wikipedia API](https://www.mediawiki.org/wiki/API:Main_page) & [Wikipedia RESTV1 API](https://en.wikipedia.org/api/rest_v1/).
 
-XP is gained for collecting flowers as well as completing entire sets, leveling up in the process and getting a cosmetic rank.
+XP is gained for collecting flowers, leveling up in the process and getting a cosmetic rank.
 
 The app targets towards users intressted in botany, outside exploration or general gardenkeeping – encouraging slowing down, and appreciating one's own surroundings.
 
@@ -24,25 +24,29 @@ The app targets towards users intressted in botany, outside exploration or gener
 
 Framework used: Vue
 
-### `public/` - Contains some files used in build.
+### public/
+
+Contains some files used in build.
 
   - `index.html`. Base HTML file for the project, app is inserted there on runtime.
 
   - `favicon.ico`. Favicon used for website
 
-### `src/` - Contains all the code as well as lots of assets used in the project.
+### src/
+
+Contains all the code as well as lots of assets used in the project.
 
 - `main.js`. Creates the app and sets up router, Pinia, Vuetify, and loads fonts.
 
-- _router_
+- router/
 
   - `index.js`. Routes different paths to different pages.
 
-- _store_
+- store/
 
   - `flowerStore.js`. A Pinia store holding the user data: user id, email, and collected plans. Initialises data by calling the appropriate functions in fiebaseModel.
 
-- _utils_
+- utils/
 
   - `loadingUtils.js`. Some utility function for displaying loading images.
 
@@ -56,21 +60,21 @@ Framework used: Vue
 
   - `userUtils.js`. Some utility functions that display errors when user inputs wrong information.
 
-- _plugins_
+- plugins/
 
   - `veutify.js`. Creates a Veutify instance.
 
   - `webfontloader.js`. Defines a function for loading web fonts.
 
-- _views_
+- views/
 
   - `app.js`. Defines the base HTML to be injected into `index.html`. It uses router links to show the right page.
-  
+
   - `collectionView.js`. Displays the user's collected plants, sorted by name and grouped by genus.
 
   - `detailView.js`. Used in `collectionView.js`. Displays a selected plant in the collection as an overlay, showing some additional information about the plant via the Wikipedia API.
 
-  - `dialogueView.js`. Used in `uploadView.js`, displays an overlay with information and a message about the upload status of an image. 
+  - `dialogView.js`. Displays a classic dialog, with title, message and buttons.
 
   - `emptyPageView.js`. Used in `collectionPresenter.js`. Displays a empty page for users with nothing in their collections.
 
@@ -78,7 +82,7 @@ Framework used: Vue
 
   - `homeView.js`. Welcomes and onboards the user.
 
-  - `loadingView.js`. TODO 
+  - `loadingView.js`. Displays an ("optically") centered loading progress bar. Takes a prop for making it linear instead of circular.
 
   - `loginView.js`. Let's the user log in to the website.
 
@@ -96,7 +100,7 @@ Framework used: Vue
 
   - `uploadView.js`. Allows for uploading of an image to be classified as a specific plant via Plant.id's API. You can then add it to your collection.
 
-- _presenters_
+- presenters/
 
   - `collectionPresenter.js`. Presents collectionView.
 
@@ -114,7 +118,7 @@ Framework used: Vue
 
   - `uploadPresenter.js`. Presents uploadView.
 
-- _network_
+- network/
 
   - `plantIdExample.js`. Cached API-results, used to not have to make excessive API calls while developing.
 
@@ -124,7 +128,7 @@ Framework used: Vue
 
   - `wikipediaService.js`. Interface for calling the Wikipedia API. Firstly, a latin name of a flower is sent as a param to OpenSearch and the first matching article result. From this, the true article name is extracted and then used to retrieve a summary of said article (with additional information such as HTML-styling, images etc. formated to JSON).
 
-- _persistence_
+- persistence/
 
   - `firebaseApp.js`. Initialises firebase.
 
@@ -134,7 +138,7 @@ Framework used: Vue
 
   - `firebaseSecrets.js`. Config for Firebase, includes API key.
 
-- _css_
+- css/
 
   - `collection.css`. CSS-styling for the collectionView, mainly some extra styling for cards.
 
@@ -154,11 +158,12 @@ Framework used: Vue
 
   - `upload.css`. CSS-styling for the uploadView, adding feedback and clarification to the upload page.
 
-- _Assets_
+- assets/
 
-  - Contains assets used in the project, including background images, icons, art, logo and loading icons.
+  Contains assets used in the project, including background images, icons, art, logo and loading icons.
 
 ## Getting Started
+
 Prerequisite: npm or some other package manager.
 
 Clone / download the project from the main branch, open the project folder using an IDE such as VSCode (recommended).
@@ -166,12 +171,20 @@ Clone / download the project from the main branch, open the project folder using
 Before starting, create a `plantIdSecrets.js` under the _network_ folder and a `firebaseSecrets.js` under the _presistence_ folder, all under the _src_ directory. Add your API keys to the respective file.
 
 To start development, run the following commands in order:
-```
+
+```shell
 npm install
 npm run serve
 ```
-Now you can access the webiste using localhost.
+
+Now you can access the website using localhost.
 
 ## Deployment
-TODO
-To deploy the project to firebase... 
+
+To deploy the project to firebase, follow [Vue's guide](https://cli.vuejs.org/guide/deployment.html#firebase). In short:
+
+```shell
+firebase init
+npm run build
+firebase deploy
+```

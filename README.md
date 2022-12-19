@@ -161,9 +161,9 @@ Framework used: Vue
 ## Getting Started
 Prerequisite: npm or some other package manager.
 
-Before starting, create a `plantIdSecrets.js` under the _network_ folder and a `firebaseSecrets.js` under the _presistence_ folder, all under the _src_ directory. Add your API keys to the respective file.
-
 Clone / download the project from the main branch, open the project folder using an IDE such as VSCode (recommended).
+
+Before starting, create a `plantIdSecrets.js` under the _network_ folder and a `firebaseSecrets.js` under the _presistence_ folder, all under the _src_ directory. Add your API keys to the respective file.
 
 To start development, run the following commands in order:
 ```

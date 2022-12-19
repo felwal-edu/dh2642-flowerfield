@@ -54,8 +54,8 @@ function renderCollection(plants, order, openPopup) {
                 Click for info
               </div>
             </v-container>
-            <v-icon large color="white darken-2" class="ma-1 card-info-icon">
-              mdi-information
+            <v-icon large class="ma-1 card-info-icon">
+              mdi-information-outline
             </v-icon>
           </v-img>
           <v-card-title class="text-center">

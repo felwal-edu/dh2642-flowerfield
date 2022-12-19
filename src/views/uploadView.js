@@ -1,6 +1,6 @@
 import promiseNoData from "./promiseNodata";
 import errorIcon from "@/assets/icons/warning.png";
-import DialogueView from "./dialogueView";
+import DialogueView from "./dialogView";
 
 function UploadView(props) {
   function renderUploadView() {
@@ -40,7 +40,8 @@ function UploadView(props) {
           title={props.uploadMessage.title}
           message={props.uploadMessage.subhead}
           buttonPrimaryText={props.uploadMessage.buttonText}
-          onButtonPrimaryClick={uploadConfirmationACB} />
+          onButtonPrimaryClick={uploadConfirmationACB}
+          onDismiss={uploadConfirmationACB} />
       );
     }
 

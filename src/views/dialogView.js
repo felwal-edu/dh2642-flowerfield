@@ -1,7 +1,11 @@
 export default function DialogView(props) {
   return (
     <div>
-      <v-overlay model-value={true} class="d-flex justify-center align-center">
+      <v-overlay
+        model-value={true}
+        onUpdate:modelValue={props.onDismiss}
+        class="d-flex justify-center align-center">
+
         <v-row align="center" justify="center">
           <v-card>
             <v-card-title class="justify-center">{props.title}</v-card-title>
@@ -16,6 +20,11 @@ export default function DialogView(props) {
                 {
                   props.buttonSecondaryText
                     ? <v-btn color="primary" onClick={props.onButtonSecondaryClick}>{props.buttonSecondaryText}</v-btn>
+                    : undefined
+                }
+                {
+                  props.cancel
+                    ? <v-btn color="primary" onClick={props.onDismiss}>{"Cancel"}</v-btn>
                     : undefined
                 }
               </v-row>

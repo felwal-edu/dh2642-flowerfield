@@ -2,6 +2,7 @@ import { getArticleByPlantName } from "@/network/wikipediaService";
 import useFlowerStore from "@/store/flowerStore";
 import resolvePromise from "@/utils/resolvePromise";
 import DetailView from "@/views/detailView";
+import DialogView from "@/views/dialogView";
 
 const DetailPresenter = {
   props: ["plant", "onClose"],
@@ -9,6 +10,7 @@ const DetailPresenter = {
   data() {
     return {
       plantDescriptionPromiseState: {},
+      showDeletePlantDialog: false,
     };
   },
 
@@ -22,19 +24,38 @@ const DetailPresenter = {
       this.onClose();
     }
 
+    function showDeletePlantDialogACB() {
+      this.showDeletePlantDialog = true;
+    }
+
+    function hideDeletePlantDialogACB() {
+      this.showDeletePlantDialog = false;
+    }
+
     function deletePlantACB() {
-      if (window.confirm("Do you want to remove this plant?")) {
-        useFlowerStore().removePlant(this.plant);
-        closePopupACB.bind(this)();
-      }
+      useFlowerStore().removePlant(this.plant);
+      closePopupACB.bind(this)();
     }
 
     return (
-      <DetailView
-        onClosePopup={closePopupACB.bind(this)}
-        onDelete={deletePlantACB.bind(this)}
-        currentPlant={this.plant}
-        descriptionState={this.plantDescriptionPromiseState} />
+      <div>
+        <DetailView
+          onClosePopup={closePopupACB.bind(this)}
+          onDelete={showDeletePlantDialogACB.bind(this)}
+          currentPlant={this.plant}
+          descriptionState={this.plantDescriptionPromiseState} />
+        {
+          this.showDeletePlantDialog
+            ? <DialogView
+              title="Delete plant?"
+              message="This action can't be undone."
+              buttonPrimaryText="Delete"
+              onButtonPrimaryClick={deletePlantACB.bind(this)}
+              cancel
+              onDismiss={hideDeletePlantDialogACB.bind(this)} />
+            : undefined
+        }
+      </div>
     );
   }
 }

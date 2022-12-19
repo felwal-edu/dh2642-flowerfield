@@ -22,40 +22,6 @@ XP is gained for collecting flowers as well as completing entire sets, leveling 
 
 The app targets towards users intressted in botany, outside exploration or general gardenkeeping – encouraging slowing down, and appreciating one's own surroundings.
 
-## What we have done
-
-We created the project using Vue CLI.
-
-We have set up a Pinia store and a Firebase database, and sync data between these.
-
-We fetch data (a plant) from an image using Plant.id's API, and have also created a way to "mock" the result in order to not waste quota.
-
-We load images by letting the user upload these, either via drag-and-drop or by browsing.
-
-We have created the different presenters and views which make up the website.
-
-Let the user wait while Firebase is loading data – and block pages only available to logged in users.
-
-## What we still plan to do
-
-Make the website look even better. 
-
-Standaradise use of colours and fonts.
-
-A better way of blocking and redirecting the user if not logged in.
-
-Clearly show 'loading' status.
-
-Probably implement a `detailPresenter` and -`View`, allowing the user to click on a plant and view more detailed info.
-
-_Visability of system status_. Make the navbar clearly display which page the user is on.
-
-Adapt to mobile.
-
-Experience points (XP) for collecting flowers, added to one's profile. Ranks for leveling up.
-
-Maybe use a second API for fetching more detailed plant info, and fetching all plants within a species – to let the user 'fill out' their collection and see what they are missing.
-
 ## Project file structure
 
 Framework used: Vue

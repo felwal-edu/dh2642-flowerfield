@@ -63,7 +63,7 @@ function LoginView(props) {
                 {
                   props.isWaitingForAuth
                     // TODO: använd promiseNoData?
-                    ? <v-progress-circular indeterminate="true" color="white" class="mt-1" />
+                    ? <v-progress-circular indeterminate color="white" class="mt-1" />
                     : <v-btn onClick={signInClickACB}>Sign in</v-btn>
                 }
               </v-row>

@@ -1,16 +1,10 @@
 import useFlowerStore from "@/store/flowerStore.js";
 import CollectionView from "../views/collectionView.js";
-import DetailView from "@/views/detailView.js";
 import EmptyPageView from "@/views/emptyPageView.js";
 import ToolBarView from "@/views/toolBarView.js";
-
 import { waitingForUserToBeSignedIn } from "@/utils/userUtils.js";
-import log from "@/utils/logUtils.js";
 import { mapState } from "pinia";
-import promiseNoData from "@/views/promiseNodata.js";
 import LoadingView from "@/views/loadingView.js";
-import { getArticleByPlantName } from "@/network/wikipediaService.js";
-import resolvePromise from "@/utils/resolvePromise.js";
 import DetailPresenter from "./detailPresenter.js";
 
 const CollectionPresenter = {
@@ -63,7 +57,7 @@ const CollectionPresenter = {
     }
 
     function searchACB() {
-      log.d(this.searchQuery);
+
 
       if (this.searchQuery !== "") {
         this.searchStatus = true;
@@ -81,12 +75,12 @@ const CollectionPresenter = {
     return (
       <div>
         <ToolBarView
-            userName={this.userName}
-            sortStatus={this.sortStatus}
-            updateQuery={updateQueryACB.bind(this)}
-            onSearch={searchACB.bind(this)}
-            resetSearch={resetSearchACB.bind(this)}
-            onSort={sortACB.bind(this)} />
+          userName={this.userName}
+          sortStatus={this.sortStatus}
+          updateQuery={updateQueryACB.bind(this)}
+          onSearch={searchACB.bind(this)}
+          resetSearch={resetSearchACB.bind(this)}
+          onSort={sortACB.bind(this)} />
         {
           useFlowerStore().plants.length === 0
             ? <EmptyPageView message={"You have not added any plants to your collection!"} />

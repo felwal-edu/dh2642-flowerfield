@@ -15,7 +15,6 @@ function LoginView(props) {
 
 
   function emailInputChangeACB(evt) {
-    log.d("email input target:", evt.target.value);
     props.onEmailChange(evt.target.value);
   }
 
@@ -23,12 +22,6 @@ function LoginView(props) {
   function passwordInputChangeACB(evt) {
     props.onPasswordChange(evt.target.value);
   }
-
-
-  function closeErrorSnackbarACB() {
-    props.onCloseErrorSnackbar();
-  }
-
 
   function goToSignUpACB() {
     props.onGoToSignUp();

@@ -69,7 +69,6 @@ const useFlowerStore = defineStore({
       function includesQueryCB(plant) {
         return plant.scientificName.toLowerCase().includes(query.toLowerCase());
       }
-      log.d("TESSSSWTSTSTSTSADJAJNDANDN", [...this.plants].filter(includesQueryCB))
       return ([...this.plants].filter(includesQueryCB) || undefined);
     }
   }

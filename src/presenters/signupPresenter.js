@@ -54,7 +54,6 @@ const SignUpPresenter = {
 
                 this.snackbar = true
                 this.errorMessage = "Passwords do not match, please double check."
-                log.d(this.passwordCheck)
                 return;
             }
             this.snackbar = false

@@ -38,7 +38,7 @@ async function getFlowerArticle(flowerName) {
   // Using rest_v1 for better formatting on fetch
   const articlePage = await fetch(`${BASE_URL_REST_V1}page/summary/${title}?origin=*`);
   const articleData = await articlePage.json();
-  log.d("articleData", articleData);
+
 
   const content = articleData.extract_html;
   const url = articleData.content_urls.desktop.page;
@@ -47,7 +47,7 @@ async function getFlowerArticle(flowerName) {
   const contentWithUrl = content.replace("<p>", "").replace("</p>", "")
     + " <a target='_blank' rel='noopener noreferrer' href='" + url + "'>read more</a>";
 
-    return contentWithUrl;
+  return contentWithUrl;
 }
 
 export function getArticleByPlantName(scientificName) {

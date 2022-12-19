@@ -44,7 +44,6 @@ const ProfilePresenter = {
     }
 
     function changeUserNameACB(newName) {
-      log.d("update name:", newName);
       useFlowerStore().setUserName(newName)
     }
 

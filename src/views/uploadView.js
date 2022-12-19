@@ -1,6 +1,6 @@
 import promiseNoData from "./promiseNodata";
 import errorIcon from "@/assets/icons/warning.png";
-import DialogView from "./dialogView";
+import DialogueView from "./dialogueView";
 
 function UploadView(props) {
   function renderUploadView() {
@@ -36,7 +36,7 @@ function UploadView(props) {
 
     function renderResults() {
       return (
-        <DialogView
+        <DialogueView
           title={props.uploadMessage.title}
           message={props.uploadMessage.subhead}
           buttonPrimaryText={props.uploadMessage.buttonText}

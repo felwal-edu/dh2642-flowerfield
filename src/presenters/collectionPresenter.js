@@ -83,7 +83,7 @@ const CollectionPresenter = {
           onSort={sortACB.bind(this)} />
         {
           useFlowerStore().plants.length === 0
-            ? <EmptyPageView message={"You have not added any plants to your collection!"} />
+            ? <EmptyPageView message={"You have not added any plants to your collection! Try pressing ADD PLANT or visit the Upload page."} />
             : (this.searchStatus === true && this.searchResult.length === 0)
               ? <EmptyPageView message={"No results!"} />
               : (

@@ -49,7 +49,7 @@ function HomeView(props) {
             </v-row>
             <v-row justify="center" align="center">
               <img class="home-photo" src={home_photo} alt="Logo" />
-              <p>Take pictures of flowers and plants - Flowerfield can automatically identify them, <br></br>
+              <p>Take pictures of flowers and plants - Flowerfield can automatically identify them, <br />
                 providing you with new information about your surroundings.</p>
             </v-row>
           </v-col>
@@ -61,7 +61,7 @@ function HomeView(props) {
                 <h1> A digital assortment. </h1>
               </v-row>
               <v-row justify="center" align="center" class="mt-14 pt-14">
-                <p class="highlighted">Store your discoveries in a digital collection, hosted on Flowerfield. <br></br>
+                <p class="highlighted">Store your discoveries in a digital collection, hosted on Flowerfield. <br />
                   View your progress and collect sets of flowers and plants.</p>
               </v-row>
             </v-col>
@@ -74,7 +74,7 @@ function HomeView(props) {
             </v-row>
             <v-row justify="center" align="center" class="mt-4">
               <img class="home-plant" src={home_growth} alt="Logo" />
-              <p class="mt-10">As your collection grows, so do you! <br></br>
+              <p class="mt-10">As your collection grows, so do you! <br />
                 Gain experience from collecting flowers, and grow your botanical expertise.</p>
             </v-row>
           </v-col>

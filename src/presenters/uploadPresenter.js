@@ -2,9 +2,7 @@ import UploadView from "../views/uploadView";
 import { commitFile } from "../utils/uploadUtils.js";
 import "../css/upload.css";
 import resolvePromise from "@/utils/resolvePromise";
-//import { resolvePromiseMock } from "@/utils/resolvePromise";
 import { getPlantByImage } from "@/network/plantIdService";
-//import { exampleResponse } from "@/network/plantIdExample";
 import useFlowerStore from "@/store/flowerStore";
 import { waitingForUserToBeSignedIn } from "@/utils/userUtils";
 import log from "@/utils/logUtils";
@@ -18,7 +16,7 @@ const UploadPresenter = {
     return {
       plantPromiseState: {},
       isFileLoaded: false,
-      isActive: false,
+      isDragAreaHintActive: false,
       file: null,
       fileURL: null,
       plant: null,
@@ -43,21 +41,21 @@ const UploadPresenter = {
     function abortUploadACB() {
       // reset data
       this.file = null;
-      this.isActive = false;
+      this.isDragAreaHintActive = false;
       this.isFileLoaded = false;
-      this.plantPromiseState = {};  // reset here for if API call fails
+      this.plantPromiseState = {}; // reset here for if API call fails
 
       document.querySelectorAll(".btn.upload").item(0).hidden = true;
       document.querySelectorAll(".btn.cancel").item(0).hidden = true;
     }
 
-    function browseSpanClickACB() {
+    function browseACB() {
       this.input = document.querySelector("input");
       this.input.click();
     }
 
     function uploadImageToAPI() {
-      function processApiResultACB() {
+      function processAPIResultACB() {
         // reset message
         this.uploadMessage = {};
 
@@ -66,6 +64,7 @@ const UploadPresenter = {
           let plant = this.plantPromiseState.data?.suggestions[0];
           log.i("probability: " + plant.probability);
 
+          // we want to reject pictures which are unlikely to be flowers
           if (plant.probability < PROBABLILITY_REJECTION_LIMIT) {
             this.uploadMessage = {
               "title": "Flower could not identified",
@@ -114,58 +113,43 @@ const UploadPresenter = {
         }
       }
 
-      if (this.fileURL == null || this.fileURL == "") {
-        return;
-      }
+      if (this.fileURL === null || this.fileURL === "") return;
 
-      let base64 = this.fileURL.replace("data:", "").replace(/^.+,/, "");
-
-      // REAL CALL:
-      resolvePromise(getPlantByImage(base64), this.plantPromiseState, processApiResultACB.bind(this));
-      // FAKE CALL:
-      //resolvePromiseMock(exampleResponse, this.plantPromiseState, processApiResultACB.bind(this));
+      const base64EncodedImage = this.fileURL.replace("data:", "").replace(/^.+,/, "");
+      resolvePromise(getPlantByImage(base64EncodedImage), this.plantPromiseState, processAPIResultACB.bind(this));
     }
 
     // create listeners
 
-    function dragoverListenerACB(evt) {
-      evt.preventDefault();
-      this.isActive = true;
+    function enableDragoverHintACB() {
+      this.isDragAreaHintActive = true;
     }
 
-    function dragleaveListenerACB() {
-      this.isActive = false;
+    function disableDragoverHintACB() {
+      this.isDragAreaHintActive = false;
     }
 
-    function dropListenerACB(evt) {
-      evt.preventDefault();
-      this.file = evt.dataTransfer.files[0];
+    function setFileFromDropACB(file) {
+      this.file = file;
 
       commitFile(this.file, function (f, success) {
         this.fileURL = f;
         this.isFileLoaded = success;
-        this.isActive = success; // usefull if we fail
+        this.isDragAreaHintActive = success; // usefull if we fail
       }.bind(this));
     }
 
-    function inputChangeListenerACB(evt) {
-      this.file = evt.target.files[0];
-      // add so the border is "active"
-      this.isActive = true;
-
-      commitFile(this.file, function (f, success) {
-        this.fileURL = f;
-        this.isFileLoaded = success;
-        this.isActive = success;
-      }.bind(this));
+    function setFileFromBrowseACB(file) {
+      this.isDragAreaHintActive = true; // add so the border is "active"
+      setFileFromDropACB.bind(this)(file);
     }
 
     function uploadAcceptToCollectionACB() {
       // don't try to accept new flower if none was found from the image
-      if (this.plant != null && !useFlowerStore().hasPlant(this.plant.scientificName)) {
-        // only add to store if not already exists
+      // or the flower already exists
+      if (this.plant !== null && !useFlowerStore().hasPlant(this.plant.scientificName)) {
         useFlowerStore().addPlant(this.plant);
-        this.$router.push({ name: "collection" });
+        this.$router.push({name: "collection"});
       }
     }
 
@@ -173,12 +157,12 @@ const UploadPresenter = {
       <UploadView
         onUploadImageToAPI={uploadImageToAPI.bind(this)}
         onAbortUpload={abortUploadACB.bind(this)}
-        onBrowseSpanClick={browseSpanClickACB.bind(this)}
-        dragareaActive={this.isActive}
-        onDragoverFile={dragoverListenerACB.bind(this)}
-        onDragleaveFile={dragleaveListenerACB.bind(this)}
-        onDropFile={dropListenerACB.bind(this)}
-        onInputFileChange={inputChangeListenerACB.bind(this)}
+        onBrowse={browseACB.bind(this)}
+        dragareaActive={this.isDragAreaHintActive}
+        onDragoverFile={enableDragoverHintACB.bind(this)}
+        onDragleaveFile={disableDragoverHintACB.bind(this)}
+        onDropFile={setFileFromDropACB.bind(this)}
+        onInputFileChange={setFileFromBrowseACB.bind(this)}
         onUploadConfirmation={this.buttonPopupCallback}
         imageLoaded={this.isFileLoaded}
         promiseState={this.plantPromiseState}

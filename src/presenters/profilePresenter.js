@@ -1,7 +1,7 @@
 import { removeUser, signOutUser } from "@/persistence/firebaseAuth";
 import useFlowerStore from "@/store/flowerStore";
 import ProfileView from "../views/profileView";
-import { rankDisplay, progressBarValue } from "@/utils/plantUtils";
+import { getRank, getProgressBarValue } from "@/utils/plantUtils";
 import { waitingForUserToBeSignedIn } from "@/utils/userUtils";
 import "../css/profile.css"
 import log from "@/utils/logUtils";
@@ -18,7 +18,7 @@ const ProfilePresenter = {
   },
 
   computed: {
-    ...mapState(useFlowerStore, { userStatus: "currentUser" })
+    ...mapState(useFlowerStore, {userStatus: "currentUser"})
   },
 
   render() {
@@ -26,7 +26,7 @@ const ProfilePresenter = {
 
     function signOutACB() {
       signOutUser();
-      this.$router.push({ name: "home" });
+      this.$router.push({name: "home"});
     }
 
     function showDeleteAccountDialogACB() {
@@ -40,10 +40,10 @@ const ProfilePresenter = {
     function deleteAccountACB() {
       deleteUserData(useFlowerStore().currentUser);
       removeUser();
-      this.$router.push({ name: "home" });
+      this.$router.push({name: "home"});
     }
 
-    function changeUserNameACB(newName) {
+    function setUserNameACB(newName) {
       log.d("update name:", newName);
       useFlowerStore().setUserName(newName)
     }
@@ -54,9 +54,9 @@ const ProfilePresenter = {
           currentUser={useFlowerStore().currentUser}
           onSignOut={signOutACB.bind(this)}
           onDeleteAccount={showDeleteAccountDialogACB.bind(this)}
-          currentRank={rankDisplay(useFlowerStore().ranks, useFlowerStore().experience)}
-          experienceBar={progressBarValue(useFlowerStore().ranks, useFlowerStore().experience)}
-          onChangeUserName={changeUserNameACB.bind(this)}
+          currentRank={getRank(useFlowerStore().ranks, useFlowerStore().experience)}
+          experienceBar={getProgressBarValue(useFlowerStore().ranks, useFlowerStore().experience)}
+          onChangeUserName={setUserNameACB.bind(this)}
           userName={useFlowerStore().userName} />
         {
           this.showDeleteAccountDialog

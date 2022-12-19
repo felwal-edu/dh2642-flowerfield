@@ -1,8 +1,7 @@
-// the data container for the flower information gathered from the API
-
 import log from "@/utils/logUtils";
 import { defineStore } from "pinia";
 
+// the data container for the flower information gathered from the API
 const useFlowerStore = defineStore({
   id: "user",
 
@@ -12,7 +11,6 @@ const useFlowerStore = defineStore({
     experience: 0,
     userName: "",
     ranks: [["Dirt", 0], ["Seed", 1], ["Sprout", 50], ["Sapling", 100], ["Bush", 250], ["Birch", 500], ["Oak", 1000]]
-
   }),
 
   actions: {
@@ -26,7 +24,6 @@ const useFlowerStore = defineStore({
       }
 
       return this.plants.find(hasSamePlantIdCB);
-
     },
 
     addPlant(plant) {
@@ -59,7 +56,6 @@ const useFlowerStore = defineStore({
       }
 
       this.experience -= 10 * this.plants.filter(hasSameGenusCB).length;
-
       this.plants = this.plants.filter(hasDifferentIdCB);
 
       log.i(plant.id + " has been removed");
@@ -69,8 +65,8 @@ const useFlowerStore = defineStore({
       function includesQueryCB(plant) {
         return plant.scientificName.toLowerCase().includes(query.toLowerCase());
       }
-      log.d("TESSSSWTSTSTSTSADJAJNDANDN", [...this.plants].filter(includesQueryCB))
-      return ([...this.plants].filter(includesQueryCB) || undefined);
+
+      return [...this.plants].filter(includesQueryCB) || undefined;
     }
   }
 });

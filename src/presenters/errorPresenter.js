@@ -1,23 +1,19 @@
 import ErrorView from "@/views/errorView";
 
-
 const ErrorPresenter = {
-    data() {
-        return {
-            errorMessage: ""
-        };
-    },
-    created() {
-    },
-    render() {
+  data() {
+    return {
+      errorMessage: ""
+    };
+  },
 
-        function toHomePage() {
-            this.$router.push({ name: "home" })
-        }
-
-        return (<ErrorView
-            goToHomePage={toHomePage.bind(this)} />)
+  render() {
+    function goToHomeACB() {
+      this.$router.push({name: "home"});
     }
+
+    return <ErrorView onGoToHome={goToHomeACB.bind(this)} />;
+  }
 };
 
 export default ErrorPresenter;

@@ -22,7 +22,7 @@ const LoginPresenter = {
   },
 
   computed: {
-    ...mapState(useFlowerStore, { userStatus: "currentUser" })
+    ...mapState(useFlowerStore, {userStatus: "currentUser"})
   },
 
   render() {
@@ -31,49 +31,45 @@ const LoginPresenter = {
     function authResultACB() {
       if (this.authPromiseState.error) {
         log.e(this.authPromiseState.error.message);
-        this.errorMessage = InvalidInfoMessage(this.authPromiseState.error.message);
 
+        this.errorMessage = InvalidInfoMessage(this.authPromiseState.error.message);
         this.snackbar = true;
       }
-      // return to home if login was successful!
       else if (this.authPromiseState.data !== null) {
         log.i("logged in!");
-        this.$router.push({ name: "home" });
 
+        // return to home if login was successful!
+        this.$router.push({name: "home"});
       }
-
     }
 
-
     function signInACB() {
-      this.snackbar = false
+      this.snackbar = false;
       resolvePromise(signInUser(this.email, this.password), this.authPromiseState, authResultACB.bind(this));
     }
 
-    function emailChangeACB(email) {
+    function setEmailACB(email) {
       this.email = email;
     }
 
-    function passwordChangeACB(password) {
+    function setPasswordACB(password) {
       this.password = password;
     }
 
-
-    function toSignUpACB() {
-      this.$router.push({ name: "signup" })
+    function goToSignUpACB() {
+      this.$router.push({name: "signup"})
     }
-
 
     return (
       <LoginView
         currentUser={useFlowerStore().currentUser}
-        onEmailChange={emailChangeACB.bind(this)}
-        onPasswordChange={passwordChangeACB.bind(this)}
+        onEmailChange={setEmailACB.bind(this)}
+        onPasswordChange={setPasswordACB.bind(this)}
         onSignIn={signInACB.bind(this)}
         isWaitingForAuth={isPromiseLoading(this.authPromiseState)}
         snackbar={this.snackbar}
         errorMessage={this.errorMessage}
-        onGoToSignUp={toSignUpACB.bind(this)} />
+        onGoToSignUp={goToSignUpACB.bind(this)} />
     );
   }
 };

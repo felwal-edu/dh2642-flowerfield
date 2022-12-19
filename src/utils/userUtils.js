@@ -5,7 +5,7 @@ export function waitingForUserToBeSignedIn(userStatus, router) {
   }
   else if (userStatus === null) {
     // this page is only available in logged-in state
-    router.push({ name: "login" });
+    router.push({name: "login"});
     return true;
   }
 }
@@ -17,7 +17,7 @@ export function waitingForUserToBeSignedOut(userStatus, router) {
   }
   else if (userStatus !== null) {
     // this page is only available in logged-out state
-    router.push({ name: "profile" });
+    router.push({name: "profile"});
     return true;
   }
 }
@@ -48,5 +48,4 @@ export function InvalidInfoMessage(fireBaseMessage) {
   else {
     return fireBaseMessage;
   }
-
 }

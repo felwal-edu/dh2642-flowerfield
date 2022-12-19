@@ -1,16 +1,11 @@
 import useFlowerStore from "@/store/flowerStore.js";
 import CollectionView from "../views/collectionView.js";
-import DetailView from "@/views/detailView.js";
 import EmptyPageView from "@/views/emptyPageView.js";
-import ToolBarView from "@/views/toolBarView.js";
-
+import ToolbarView from "@/views/toolbarView.js";
 import { waitingForUserToBeSignedIn } from "@/utils/userUtils.js";
 import log from "@/utils/logUtils.js";
 import { mapState } from "pinia";
-import promiseNoData from "@/views/promiseNodata.js";
 import LoadingView from "@/views/loadingView.js";
-import { getArticleByPlantName } from "@/network/wikipediaService.js";
-import resolvePromise from "@/utils/resolvePromise.js";
 import DetailPresenter from "./detailPresenter.js";
 
 const CollectionPresenter = {
@@ -26,10 +21,8 @@ const CollectionPresenter = {
   },
 
   computed: {
-    ...mapState(useFlowerStore, {
-      userStatus: "currentUser",
-      userName: "userName"
-    })
+    ...mapState(useFlowerStore, {userStatus: "currentUser"}),
+    ...mapState(useFlowerStore, ["userName"])
   },
 
   created() {
@@ -47,16 +40,17 @@ const CollectionPresenter = {
       this.sortStatus = order;
     }
 
-    function openPopupACB(plant) {
+    function openDetailsACB(plant) {
       this.selectedPlant = plant;
     }
 
-    function closePopupACB() {
+    function closeDetailsACB() {
       this.selectedPlant = null;
     }
 
-    function updateQueryACB(query) {
+    function setQueryACB(query) {
       this.searchQuery = query;
+
       if (this.searchQuery === "") {
         this.searchStatus = false;
       }
@@ -80,13 +74,13 @@ const CollectionPresenter = {
 
     return (
       <div>
-        <ToolBarView
-            userName={this.userName}
-            sortStatus={this.sortStatus}
-            updateQuery={updateQueryACB.bind(this)}
-            onSearch={searchACB.bind(this)}
-            resetSearch={resetSearchACB.bind(this)}
-            onSort={sortACB.bind(this)} />
+        <ToolbarView
+          userName={this.userName}
+          sortStatus={this.sortStatus}
+          onQueryChange={setQueryACB.bind(this)}
+          onSearch={searchACB.bind(this)}
+          resetSearch={resetSearchACB.bind(this)}
+          onSort={sortACB.bind(this)} />
         {
           useFlowerStore().plants.length === 0
             ? <EmptyPageView message={"You have not added any plants to your collection!"} />
@@ -101,10 +95,12 @@ const CollectionPresenter = {
                     searchQueryPlants={this.searchResult}
                     userName={this.userName}
                     sort={this.sortStatus}
-                    openPopup={openPopupACB.bind(this)} />
+                    onOpenDetails={openDetailsACB.bind(this)} />
                   {
                     this.selectedPlant
-                      ? <DetailPresenter plant={this.selectedPlant} onClose={closePopupACB.bind(this)} />
+                      ? <DetailPresenter
+                        plant={this.selectedPlant}
+                        onClose={closeDetailsACB.bind(this)} />
                       : undefined
                   }
                 </div>

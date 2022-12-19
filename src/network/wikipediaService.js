@@ -1,7 +1,7 @@
 import log from "@/utils/logUtils";
 
 const API_ENDPOINT = "https://en.wikipedia.org/w/api.php";
-const BASE_URL_REST_V1 = "https://en.wikipedia.org/api/rest_v1/"
+const BASE_URL_REST_V1 = "https://en.wikipedia.org/api/rest_v1/";
 
 async function getFlowerArticle(flowerName) {
   function containsWhitespace(str) {
@@ -26,14 +26,6 @@ async function getFlowerArticle(flowerName) {
   // Encode article title of the flower, will result in the common name (the correct article name) for the flower
   let title = encodeURIComponent(article.title.toLowerCase());
 
-  /*
-  const articleResponse = await fetch(`${API_ENDPOINT}?format=json&action=query&prop=revisions&titles=${title}
-    &rvslots=*&rvprop=content&formatversion=2&origin=*&redirects=1`);
-  // Extract the information we are interested in from the API response
-  const pageId = Object.keys(articleData.query.pages)[0];
-  const content = articleData.query.pages[pageId].revisions[0].slots.main.content;
-  */
-
   // Make a request to the wikipedia article to get the exact article based on the common flower name.
   // Using rest_v1 for better formatting on fetch
   const articlePage = await fetch(`${BASE_URL_REST_V1}page/summary/${title}?origin=*`);
@@ -47,7 +39,7 @@ async function getFlowerArticle(flowerName) {
   const contentWithUrl = content.replace("<p>", "").replace("</p>", "")
     + " <a target='_blank' rel='noopener noreferrer' href='" + url + "'>read more</a>";
 
-    return contentWithUrl;
+  return contentWithUrl;
 }
 
 export function getArticleByPlantName(scientificName) {

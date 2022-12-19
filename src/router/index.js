@@ -1,5 +1,5 @@
 import { createRouter, createWebHashHistory } from "vue-router";
-import Home from "@/presenters/homePresenter.js";
+import HomePresenter from "@/presenters/homePresenter.js";
 import Collection from "@/presenters/collectionPresenter.js";
 import LoginPresenter from "@/presenters/loginPresenter.js";
 import ProfilePresenter from "@/presenters/profilePresenter";
@@ -11,7 +11,7 @@ const routes = [
   {
     path: "/",
     name: "home",
-    component: Home
+    component: HomePresenter
   },
   {
     path: "/login",

@@ -112,10 +112,10 @@
 
 /* SCROLL ICON CSS */
 @keyframes scroll_animation {
-  0%   { transform: translateY(0); opacity: 0; }
-  20%   { transform: translateY(.05em); opacity: 1; }
-  25%  { opacity: 1; }
-  75%  { transform: translateY(.75em); opacity: 0; }
+  0% { transform: translateY(0); opacity: 0; }
+  20% { transform: translateY(.05em); opacity: 1; }
+  25% { opacity: 1; }
+  75% { transform: translateY(.75em); opacity: 0; }
   100% { transform: translateY(0); opacity: 0; }
 }
 

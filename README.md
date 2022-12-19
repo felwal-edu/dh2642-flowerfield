@@ -70,53 +70,54 @@ Contains all the code as well as lots of assets used in the project.
 
   - `app.js`. Defines the base HTML to be injected into `index.html`. It uses router links to show the right page.
 
+  - `homeView.js`. Welcomes and onboards the user.
+
+  - `signupView.js`. Let's the user register an account on the website.
+
+  - `loginView.js`. Let's the user log in to the website.
+
+  - `uploadView.js`. Allows for uploading of an image to be classified as a specific plant via Plant.id's API. You can then add it to your collection.
+
   - `collectionView.js`. Displays the user's collected plants, sorted by name and grouped by genus.
 
   - `detailView.js`. Used in `collectionView.js`. Displays a selected plant in the collection as an overlay, showing some additional information about the plant via the Wikipedia API.
 
+  - `profileView.js`. Displays the user's information, including email, XP, rank and username. Also let's the user log out.
+
+  - `toolbarView.js`. Used in `collectionPresenter.js`. Displays a toolbar at the top of the collection page, allowing for some filtering actions.
+
+  - `searchView.js`. Used in `toolbarView.js`. Displays a search bar in the toolbar - allowing users to search for plants in their collections.
+
+  - `sortView.js`. Used in `toolBarView.js`. Displays a dropdown menu in the toolbar - allowing users to sort their plants in the collections.
+
   - `dialogView.js`. Displays a classic dialog, with title, message and buttons.
+
+  - `loadingView.js`. Displays an ("optically") centered loading progress bar. Takes a prop for making it linear instead of circular.
 
   - `emptyPageView.js`. Used in `collectionPresenter.js`. Displays a empty page for users with nothing in their collections.
 
   - `errorView.js`. Displays a 404-page if trying to navigate to a route that does not exist. Contains a button that direct user back to home page.
 
-  - `homeView.js`. Welcomes and onboards the user.
-
-  - `loadingView.js`. Displays an ("optically") centered loading progress bar. Takes a prop for making it linear instead of circular.
-
-  - `loginView.js`. Let's the user log in to the website.
-
-  - `profileView.js`. Displays the user's information, including email, XP, rank and username. Also let's the user log out.
-
   - `promiseNoData.js`. A function that notifies in a callback when it changes something in the promise state.
 
-  - `searchView.js`. Used in `toolBarView.js`. Displays a search bar in the toolbar - allowing users to search for plants in their collections.
-
-  - `signupView.js`. Let's the user register an account on the website.
-
-  - `sortView.js`. Used in `toolBarView.js`. Displays a dropdown menu in the toolbar - allowing users to sort their plants in the collections.
-
-  - `toolBarView.js`. Used in `collectionPresenter.js`. Displays a toolbar at the top of the collection page, allowing for some filtering actions.
-
-  - `uploadView.js`. Allows for uploading of an image to be classified as a specific plant via Plant.id's API. You can then add it to your collection.
 
 - presenters/
+
+  - `homePresenter.js`. Presents homeView.
+
+  - `signupPresenter.js`. Presents signupView.
+
+  - `loginPresenter.js`. Presents loginView.
+
+  - `uploadPresenter.js`. Presents uploadView.
 
   - `collectionPresenter.js`. Presents collectionView.
 
   - `detailPresenter.js`. Presents detailView.
 
-  - `errorPresenter.js`. Presents errorView.
-
-  - `homePresenter.js`. Presents homeView.
-
-  - `loginPresenter.js`. Presents loginView.
-
   - `profilePresenter.js`. Presents profileView.
 
-  - `signupPresenter.js`. Presents signupView.
-
-  - `uploadPresenter.js`. Presents uploadView.
+  - `errorPresenter.js`. Presents errorView.
 
 - network/
 
@@ -172,7 +173,7 @@ Before starting, create a `plantIdSecrets.js` under the _network_ folder and a `
 
 To start development, run the following commands in order:
 
-```shell
+```
 npm install
 npm run serve
 ```
@@ -183,7 +184,7 @@ Now you can access the website using localhost.
 
 To deploy the project to firebase, follow [Vue's guide](https://cli.vuejs.org/guide/deployment.html#firebase). In short:
 
-```shell
+```
 firebase init
 npm run build
 firebase deploy

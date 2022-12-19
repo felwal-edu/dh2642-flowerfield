@@ -50,7 +50,10 @@ const ProfilePresenter = {
       useFlowerStore().setUserName(newName);
       this.snackbar = true;
       this.updateName = "Profile name has been updated to " + newName;
+    }
 
+    function disableSnackbarACB() {
+      this.snackbar = false;
     }
 
     return (
@@ -62,6 +65,7 @@ const ProfilePresenter = {
           currentRank={getRank(useFlowerStore().ranks, useFlowerStore().experience)}
           experienceBar={getProgressBarValue(useFlowerStore().ranks, useFlowerStore().experience)}
           onChangeUserName={setUserNameACB.bind(this)}
+          onFocusUsername={disableSnackbarACB.bind(this)}
           userName={useFlowerStore().userName}
           snackbar={this.snackbar}
           updateName={this.updateName} />

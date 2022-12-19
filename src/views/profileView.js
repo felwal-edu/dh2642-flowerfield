@@ -36,6 +36,10 @@ function ProfileView(props) {
     updateName();
   }
 
+  function changeUserNameOnFocusACB(evt) {
+    props.onFocusUsername();
+  }
+
   return (
     <div>
       <v-card shaped class="mx-auto mt-16 profile-background" max-width="900" height="450">
@@ -67,7 +71,8 @@ function ProfileView(props) {
                     model-value={props.userName}
                     hint="Press 'enter' to confirm."
                     onKeydown={changeUserNameOnEnterACB}
-                    onFocusout={changeUserNameOnUnfocusACB} />
+                    onFocusout={changeUserNameOnUnfocusACB}
+                    onFocus={changeUserNameOnFocusACB} />
                 </v-col>
               </v-row>
               <v-row class="my-5 mx-8" justify="center">

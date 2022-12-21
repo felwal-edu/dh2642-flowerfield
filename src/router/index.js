@@ -40,7 +40,7 @@ const routes = [
   },
   {
     // catch missing pages 404 - define at the very end (VUE 3 Version)
-    path: '/:pathMatch(.*)*',
+    path: "/:pathMatch(.*)*",
     component: ErrorPresenter
   }
 ]

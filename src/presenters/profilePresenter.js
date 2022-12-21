@@ -4,7 +4,6 @@ import ProfileView from "../views/profileView";
 import { getRank, getProgressBarValue } from "@/utils/plantUtils";
 import { waitingForUserToBeSignedIn } from "@/utils/userUtils";
 import "../css/profile.css"
-import log from "@/utils/logUtils";
 import { deleteUserData } from "@/persistence/firebaseModel";
 import { mapState } from "pinia";
 import LoadingView from "@/views/loadingView";
@@ -20,7 +19,7 @@ const ProfilePresenter = {
   },
 
   computed: {
-    ...mapState(useFlowerStore, { userStatus: "currentUser" })
+    ...mapState(useFlowerStore, {userStatus: "currentUser"})
   },
 
   render() {
@@ -28,7 +27,7 @@ const ProfilePresenter = {
 
     function signOutACB() {
       signOutUser();
-      this.$router.push({ name: "home" });
+      this.$router.push({name: "home"});
     }
 
     function showDeleteAccountDialogACB() {
@@ -42,11 +41,10 @@ const ProfilePresenter = {
     function deleteAccountACB() {
       deleteUserData(useFlowerStore().currentUser);
       removeUser();
-      this.$router.push({ name: "home" });
+      this.$router.push({name: "home"});
     }
 
     function setUserNameACB(newName) {
-      log.d("update name:", newName);
       useFlowerStore().setUserName(newName);
       this.snackbar = true;
       this.updateName = "Profile name has been updated to " + newName;

@@ -36,9 +36,7 @@ const LoginPresenter = {
         this.snackbar = true;
       }
       else if (this.authPromiseState.data !== null) {
-        log.i("logged in!");
-
-        // return to home if login was successful!
+        // return to home if login was successful
         this.$router.push({name: "home"});
       }
     }

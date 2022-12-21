@@ -13,6 +13,7 @@ function promiseNoData(promiseState, renderErrorACB, linearProgressBar=false) {
   if (promiseState.promise && promiseState.error && !promiseState.data) {
     return renderErrorACB() || <div>{promiseState.error.toString()}</div>;
   }
+
   if (promiseState.promise && !promiseState.error && promiseState.data) {
     return false;
   }

@@ -1,6 +1,5 @@
 import background from "@/assets/loginbackground.jpg";
 import log from "@/utils/logUtils";
-import LoadingView from "./loadingView";
 
 function LoginView(props) {
 
@@ -12,7 +11,6 @@ function LoginView(props) {
 
     props.onSignIn();
   }
-
 
   function emailInputChangeACB(evt) {
     props.onEmailChange(evt.target.value);
@@ -37,9 +35,7 @@ function LoginView(props) {
             <v-col align-self="start" class="justify-center align-center pa-0" cols="12">
               <v-row justify="center">
                 <v-card-title class="mt-12">
-                  <h1 class="header-font-login">
-                    Welcome back to Flowerfield
-                  </h1>
+                  <h1 class="header-font-login">Welcome back to Flowerfield</h1>
                 </v-card-title>
               </v-row>
               <v-row justify="center">
@@ -69,7 +65,7 @@ function LoginView(props) {
           </v-snackbar>
         </v-parallax>
       </v-app>
-    </div >
+    </div>
   );
 }
 

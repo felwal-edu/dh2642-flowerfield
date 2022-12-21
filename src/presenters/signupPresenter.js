@@ -43,7 +43,7 @@ const SignUpPresenter = {
         createUserData(useFlowerStore().currentUser, this.userName);
         log.i("Firebase account created");
 
-        // return to home if login was successful!
+        // return to home if login was successful
         this.$router.push({name: "home"});
       }
     }

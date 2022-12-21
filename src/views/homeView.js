@@ -34,7 +34,7 @@ function HomeView(props) {
             {renderLandingPageButton()}
             <section class="scroll-container">
               <span class="scroll-icon">
-                <span class="scroll-icon-dot"></span>
+                <span class="scroll-icon-dot" />
               </span>
               <h4 class="mt-3">Scroll for information</h4>
             </section>
@@ -45,7 +45,7 @@ function HomeView(props) {
         <v-container justify="center">
           <v-col align-self="start" class="justify-center align-center pa-0" cols="12">
             <v-row justify="center" align="center" class="mt-14">
-              <h1> A relaxing experience. </h1>
+              <h1>A relaxing experience.</h1>
             </v-row>
             <v-row justify="center" align="center">
               <img class="home-photo" src={home_photo} alt="Logo" />
@@ -58,7 +58,7 @@ function HomeView(props) {
           <v-parallax height="500" src={home_flower}>
             <v-col align-self="start" class="justify-center align-center pa-0" cols="12">
               <v-row justify="center" align="center" class="mt-14">
-                <h1> A digital assortment. </h1>
+                <h1>A digital assortment.</h1>
               </v-row>
               <v-row justify="center" align="center" class="mt-14 pt-14">
                 <p class="highlighted">Store your discoveries in a digital collection, hosted on Flowerfield. <br />
@@ -70,12 +70,14 @@ function HomeView(props) {
         <v-container justify="center">
           <v-col align-self="start" class="justify-center align-center pa-0" cols="12">
             <v-row justify="center" class="mt-14">
-              <h1> A journey of <span>growth.</span> </h1>
+              <h1>A journey of <span>growth.</span></h1>
             </v-row>
             <v-row justify="center" align="center" class="mt-4">
               <img class="home-plant" src={home_growth} alt="Logo" />
-              <p class="mt-10">As your collection grows, so do you! <br />
-                Gain experience from collecting flowers, and grow your botanical expertise.</p>
+              <p class="mt-10">
+                As your collection grows, so do you!<br />
+                Gain experience from collecting flowers, and grow your botanical expertise.
+              </p>
             </v-row>
           </v-col>
         </v-container>
@@ -85,7 +87,7 @@ function HomeView(props) {
               <img class="home-camera" src={home_camera} alt="Logo" />
             </v-row>
             <v-row justify="center" class="mt-8 mb-8">
-              <h1> Capture the moment! </h1>
+              <h1>Capture the moment!</h1>
             </v-row>
             <v-row justify="center" class="mb-14">
               <p>Start using Flowerfield today for free</p>

@@ -34,14 +34,14 @@ function UploadView(props) {
       if (props.imageLoaded) {
         return (
           <div class="image-container">
-            <img src={props.fileURL} alt=""></img>
+            <img src={props.fileURL} alt="" />
           </div>
         );
       }
       else {
         return (
           <div
-            class={props.dragareaActive === true ? "drag-area active" : "drag-area"}
+            class={props.dragareaActive ? "drag-area active" : "drag-area"}
             onDragover={dragoverFileACB}
             onDragleave={dragleaveFileACB}
             onDrop={dropFileACB}>
@@ -49,14 +49,14 @@ function UploadView(props) {
             <div class="icon">
               <img draggable="false" src="https://img.icons8.com/color/96/null/stack-of-photos--v1.png"/>
             </div>
-            <span class="header">{props.dragareaActive == true ? "Release to Upload" : "Drag & Drop"}</span>
+            <span class="header">{props.dragareaActive ? "Release to Upload" : "Drag & Drop"}</span>
             <span class="header">
               or <span class="browse-button" onClick={browseSpanClickACB}>browse files</span>
             </span>
             <input type="file" accept="image/png, image/jpg, image/jpeg" hidden onChange={inputFileChangeACB} />
             <span class="tip-support">PNG, JPG, JPEG</span>
           </div>
-        )
+        );
       }
     }
 
@@ -75,7 +75,7 @@ function UploadView(props) {
       return (
         <div class="drag-area error">
           <div class="icon">
-              <img src={errorIcon}/>
+              <img src={errorIcon} />
             </div>
             <span class="header">{"Something went wrong!"}</span>
             <span class="header">

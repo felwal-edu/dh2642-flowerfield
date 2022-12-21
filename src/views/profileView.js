@@ -26,13 +26,12 @@ function ProfileView(props) {
   }
 
   function changeUserNameOnEnterACB(evt) {
-    if (evt.key === 'Enter') {
+    if (evt.key === "Enter") {
       updateName();
     }
   }
 
   function changeUserNameOnUnfocusACB(evt) {
-    log.i("focusout");
     updateName();
   }
 
@@ -107,7 +106,6 @@ function ProfileView(props) {
                       color="red"
                       class="ml-4" />
                     <h4 class="header-description mt-1">delete account</h4>
-
                   </v-col>
                 </v-row>
               </v-row>
